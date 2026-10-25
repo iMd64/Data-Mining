@@ -1,0 +1,1118 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<!-- KaTeX Mathematics Rendering Engine -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    function initKaTeX() {
+      if (typeof renderMathInElement === 'function') {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '\\[', right: '\\]', display: true},
+            {left: '\\(', right: '\\)', display: false}
+          ],
+          throwOnError: false
+        });
+      } else {
+        setTimeout(initKaTeX, 80);
+      }
+    }
+    initKaTeX();
+  });
+</script>
+
+<style>
+/* ==========================================================================
+   DRILL CORE: COLLAPSIBLE LEFT NAVIGATION SYSTEM & KATEX STYLING
+   ========================================================================== */
+:root {
+  --sidebar-w: 295px;
+  --sb-bg: #0b0f17;
+  --sb-surface: #111827;
+  --sb-border: rgba(255, 255, 255, 0.08);
+  --sb-text: #e2e8f0;
+  --sb-dim: #94a3b8;
+  --sb-amber: #e5a93c;
+  --sb-amber-glow: rgba(229, 169, 60, 0.15);
+}
+
+#core-sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: var(--sidebar-w);
+  background: var(--sb-bg);
+  border-right: 1px solid var(--sb-border);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 6px 0 28px rgba(0, 0, 0, 0.5);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--sb-text);
+  overflow: hidden;
+}
+
+body.sidebar-open #core-sidebar {
+  transform: translateX(0);
+}
+
+#sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 7, 12, 0.7);
+  backdrop-filter: blur(3px);
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+body.sidebar-open #sidebar-backdrop {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (min-width: 1200px) {
+  #sidebar-backdrop {
+    display: none !important;
+  }
+  body.sidebar-open {
+    padding-left: var(--sidebar-w) !important;
+    transition: padding-left 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  body:not(.sidebar-open) {
+    padding-left: 0 !important;
+    transition: padding-left 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  body.sidebar-open .deck {
+    left: var(--sidebar-w) !important;
+    width: calc(100% - var(--sidebar-w)) !important;
+    transition: left 0.24s cubic-bezier(0.16, 1, 0.3, 1), width 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  body:not(.sidebar-open) .deck {
+    left: 0 !important;
+    width: 100% !important;
+    transition: left 0.24s cubic-bezier(0.16, 1, 0.3, 1), width 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+.sb-head {
+  padding: 1rem 0.9rem 0.85rem;
+  border-bottom: 1px solid var(--sb-border);
+  background: var(--sb-surface);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sb-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  color: inherit;
+}
+.sb-drill-icon {
+  font-size: 1.25rem;
+  color: var(--sb-amber);
+  line-height: 1;
+}
+.sb-brand-meta {
+  display: flex;
+  flex-direction: column;
+}
+.sb-brand-sub {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--sb-amber);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.sb-brand-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+.sb-close-btn {
+  background: transparent;
+  border: 1px solid var(--sb-border);
+  color: var(--sb-dim);
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.15rem;
+  line-height: 1;
+  transition: all 0.15s;
+}
+.sb-close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.sb-telemetry {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0.65rem 0.9rem;
+  background: #0d121c;
+  border-bottom: 1px solid var(--sb-border);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  gap: 0.5rem;
+}
+.sb-tele-col {
+  display: flex;
+  flex-direction: column;
+}
+.sb-tele-lbl {
+  font-size: 0.58rem;
+  color: var(--sb-dim);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.sb-tele-val {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #38bdf8;
+}
+
+.sb-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.75rem 0.65rem;
+}
+.sb-nav-lbl {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--sb-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.5rem 0.55rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sb-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.sb-item {
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  background: rgba(255, 255, 255, 0.02);
+}
+.sb-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.sb-item.active {
+  background: rgba(229, 169, 60, 0.08);
+  border-color: var(--sb-amber);
+}
+.sb-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.6rem 0.65rem;
+  text-decoration: none;
+  color: inherit;
+}
+.sb-wk-badge {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 0.2rem 0.35rem;
+  background: #1e293b;
+  color: #94a3b8;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+.sb-item.active .sb-wk-badge {
+  background: var(--sb-amber);
+  color: #0b0f17;
+  border-color: var(--sb-amber);
+}
+.sb-wk-badge.pending {
+  background: #1a2232;
+  color: #64748b;
+  border-style: dashed;
+}
+.sb-wk-body {
+  flex: 1;
+  min-width: 0;
+}
+.sb-wk-title {
+  font-size: 0.77rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #f1f5f9;
+  display: block;
+}
+.sb-item.active .sb-wk-title {
+  color: var(--sb-amber);
+}
+.sb-wk-meta {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.63rem;
+  color: var(--sb-dim);
+  margin-top: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.sb-strata-bar {
+  display: flex;
+  height: 2px;
+  border-radius: 1px;
+  overflow: hidden;
+  margin-top: 0.35rem;
+  background: rgba(255, 255, 255, 0.08);
+}
+.sb-seg {
+  flex: 1;
+}
+
+.sb-sublist {
+  list-style: none;
+  margin: 0;
+  padding: 0.35rem 0.4rem 0.55rem 2.1rem;
+  border-top: 1px solid rgba(229, 169, 60, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.sb-sublink {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: none;
+  font-size: 0.71rem;
+  color: #cbd5e1;
+  padding: 0.2rem 0.35rem;
+  border-radius: 3px;
+  transition: all 0.12s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sb-sublink:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+.sb-marker {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  width: 13px;
+  text-align: center;
+  color: var(--sb-amber);
+  flex-shrink: 0;
+}
+
+.sb-footer {
+  padding: 0.75rem 0.9rem;
+  border-top: 1px solid var(--sb-border);
+  background: var(--sb-surface);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.sb-portal-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--sb-border);
+  color: #f1f5f9;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.45rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.15s;
+}
+.sb-portal-link:hover {
+  background: var(--sb-border);
+  border-color: #64748b;
+  color: #fff;
+}
+.sb-keyhint {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.6rem;
+  color: var(--sb-dim);
+  text-align: center;
+}
+.sb-keyhint kbd {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 2px;
+  padding: 0.1rem 0.25rem;
+  font-size: 0.6rem;
+  color: #cbd5e1;
+}
+
+.deck-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155;
+  padding: 0.32rem 0.65rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.deck-nav-btn:hover {
+  background: var(--sb-amber);
+  color: #0b0f17;
+  border-color: var(--sb-amber);
+  box-shadow: 0 0 10px rgba(229, 169, 60, 0.4);
+}
+.deck-nav-btn svg {
+  display: block;
+}
+
+/* KaTeX Formatting & Scroll Isolation */
+.katex {
+  font-size: 1.05em !important;
+  color: inherit !important;
+}
+.katex-display {
+  margin: 1rem 0 !important;
+  padding: 0.65rem 0.85rem !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: 4px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+</style>
+</head><body>
+<title>Data Mining Week 1 Log</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Spline+Sans:wght@300..700&family=Spline+Sans+Mono:wght@400..600&display=swap">
+<style>
+/* Layout concept: the lecture as a drill core. A sticky depth gauge on top, a vertical core sample
+   in the hero (one stratum per chapter, height = minutes), and each entry hung off a dashed rail
+   with its recording timecode and slide reference in the margin. One minute of recording = one metre of core. */
+:root{
+  --paper:#E6EBE4; --paper-2:#D8E0D7; --ink:#0E1A17; --ink-2:#4A5C56; --rule:#B2C0B8;
+  --acc:#0A6F63; --hl:#F5C945; --gold:#F5C945;
+  --band-bg:#0E1A17; --band-fg:#E6EBE4; --band-mute:#7ED6C8;
+  --f-display:"Bricolage Grotesque","Trebuchet MS",Arial,sans-serif;
+  --f-body:"Spline Sans","Segoe UI",Arial,sans-serif;
+  --f-mono:"Spline Sans Mono",ui-monospace,Menlo,Consolas,monospace;
+  --h1:repeating-linear-gradient(135deg,rgba(14,26,23,.30) 0 1.5px,transparent 1.5px 7px);
+  --h2:repeating-linear-gradient(45deg,rgba(14,26,23,.30) 0 1.5px,transparent 1.5px 7px);
+  --h3:repeating-linear-gradient(0deg,rgba(14,26,23,.26) 0 1.5px,transparent 1.5px 6px);
+  --h4:repeating-linear-gradient(90deg,rgba(14,26,23,.26) 0 1.5px,transparent 1.5px 6px);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0C1512; --paper-2:#15221E; --ink:#E4EDE8; --ink-2:#9DB3AB; --rule:#25352F;
+  --acc:#52D6C3; --hl:#6E5600; --band-bg:#1B2F29; --band-fg:#E4EDE8; --band-mute:#7ED6C8; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0C1512; --paper-2:#15221E; --ink:#E4EDE8; --ink-2:#9DB3AB; --rule:#25352F;
+  --acc:#52D6C3; --hl:#6E5600; --band-bg:#1B2F29; --band-fg:#E4EDE8; --band-mute:#7ED6C8; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1rem/1.68 var(--f-body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--paper)}
+a{color:inherit}
+a:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.wrap{width:100%;max-width:72rem;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+mark{background:linear-gradient(transparent 52%,var(--hl) 52% 92%,transparent 92%);color:inherit;padding:0 .1em}
+.tm{font:500 .76rem/1 var(--f-mono);font-variant-numeric:tabular-nums;color:var(--acc);white-space:nowrap}
+.hx1{--hatch:var(--h1)}.hx2{--hatch:var(--h2)}.hx3{--hatch:var(--h3)}.hx4{--hatch:var(--h4)}
+.hx5{--hatch:var(--h1),var(--h2)}.hx6{--hatch:var(--h3),var(--h4)}.hx7{--hatch:var(--h2),var(--h3)}.hx8{--hatch:var(--h1),var(--h4)}
+
+/* depth gauge */
+.deck{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--paper);border-bottom:2px solid var(--ink)}
+.deck .wrap{display:flex;align-items:center;gap:.9rem;padding-block:.65rem}
+.clock{font:500 1.05rem/1 var(--f-mono);font-variant-numeric:tabular-nums;color:var(--acc);min-width:5.4rem}
+.dpt{font:400 .74rem/1 var(--f-mono);color:var(--ink-2);min-width:4.6rem;font-variant-numeric:tabular-nums}
+.tape{position:relative;display:flex;gap:2px;min-width:0}
+.deck .tape{flex:1;height:14px}
+.seg{flex:var(--d) 1 0%;min-width:0;background:var(--hatch),var(--st);background-color:var(--st);color:#0E1A17;text-decoration:none;text-align:center;overflow:hidden;font:800 .72rem/14px var(--f-display)}
+.deck .seg{font-size:0}
+.seg.on{outline:2px solid var(--ink);outline-offset:1px;position:relative;z-index:1}
+.play{position:absolute;top:50%;left:0;width:13px;height:13px;margin:-6.5px 0 0 -6.5px;background:var(--gold);border:2px solid var(--ink);transform:rotate(45deg);pointer-events:none;z-index:2}
+.total{font:400 .74rem/1 var(--f-mono);color:var(--ink-2)}
+
+/* hero */
+.hero{padding-block:2.4rem 1rem}
+.eyebrow{font:500 .76rem/1.5 var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2)}
+h1{margin:.5rem 0 0;font:800 clamp(3.5rem,14.2vw,11rem)/.8 var(--f-display);letter-spacing:-.05em;text-transform:lowercase;text-wrap:balance}
+h1 .c{color:var(--acc)}
+.dia{display:inline-block;width:.2em;height:.2em;margin-left:.07em;background:var(--gold);border:.02em solid var(--ink);transform:rotate(45deg)}
+.lead{margin-top:2rem}
+.lead p{margin:0;font:400 1.4rem/1.45 var(--f-body);max-width:40rem}
+.lead p small{display:block;margin-top:.7rem;font:400 .92rem/1.55 var(--f-body);color:var(--ink-2)}
+dl.glance{margin:0;align-self:start;border-top:4px solid var(--ink);padding-top:.7rem;align-content:start;display:grid;grid-template-columns:auto minmax(0,1fr);gap:.4rem 1rem;font:400 .8rem/1.5 var(--f-mono)}
+dl.glance dt{color:var(--ink-2)} dl.glance dd{margin:0}
+
+.survey{display:grid;grid-template-columns:5.2rem minmax(0,1.2fr) minmax(0,.9fr);gap:0 2.4rem;margin-top:2.4rem;align-items:stretch}
+.corewrap{position:relative}
+.core{display:flex;flex-direction:column;min-height:30rem;height:100%;border:2px solid var(--ink);background:var(--ink)}
+.core .seg{flex:var(--d) 1 0;min-height:1.7rem;display:grid;place-items:center;font-size:.95rem;line-height:1}
+.core .seg+.seg{margin-top:2px}
+.legend{list-style:none;margin:0;padding:0;display:grid;gap:.15rem;grid-template-columns:minmax(0,1fr);align-content:space-between}
+.legend a{display:grid;grid-template-columns:1.9rem minmax(0,1fr);gap:.7rem;text-decoration:none;padding:.45rem 0;border-top:1px solid var(--rule)}
+.legend .l{display:grid;place-items:center;width:1.9rem;height:1.9rem;background:var(--hatch),var(--st);background-color:var(--st);border:1.5px solid var(--ink);color:#0E1A17;font:800 1rem/1 var(--f-display)}
+.legend b{display:block;font:650 1.02rem/1.25 var(--f-display)}
+.legend small{display:block;margin-top:.15rem;font:400 .72rem/1.45 var(--f-mono);color:var(--ink-2)}
+.legend a:hover b{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+
+/* chapter bands */
+.band{background:var(--band-bg);color:var(--band-fg);margin-top:3.6rem}
+.band::before{content:"";display:block;height:16px;background:var(--hatch),var(--st);background-color:var(--st)}
+.band-in{display:grid;grid-template-columns:auto minmax(0,1fr);gap:1.8rem;align-items:end;padding-block:1.7rem 1.8rem}
+.pl{font:800 8.2rem/.72 var(--f-display);letter-spacing:-.05em;color:var(--st)}
+.pr{font:500 .74rem/1.5 var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--band-mute)}
+.band h2{margin:.4rem 0 .5rem;font:800 clamp(2rem,5vw,3.4rem)/1 var(--f-display);letter-spacing:-.03em;text-wrap:balance}
+.band p{margin:0;max-width:46rem;opacity:.9;font-size:1.02rem}
+
+/* entries & rail */
+.entries{--pt:1.7rem}
+.e{display:grid;grid-template-columns:7.8rem 14px minmax(0,1fr);column-gap:1.1rem}
+.ts{text-align:right;font:500 .92rem/1.2 var(--f-mono);font-variant-numeric:tabular-nums;color:var(--acc);padding-top:calc(var(--pt) + .22rem)}
+.ts span{display:block;margin-top:.3rem;font-size:.68rem;font-weight:400;color:var(--ink-2)}
+.ref-slide{display:block;margin-top:.45rem;font:600 .68rem/1.2 var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--ink);background:var(--paper-2);border:1.5px solid var(--ink);padding:.22rem .4rem;width:fit-content;margin-left:auto}
+.rail{position:relative;background:repeating-linear-gradient(to bottom,var(--ink-2) 0 6px,transparent 6px 10px) right top/2px 100% no-repeat}
+.rail::before{content:"";position:absolute;top:calc(var(--pt) + .3rem);right:-6px;width:14px;height:14px;background:var(--hatch),var(--st);background-color:var(--st);border:1.5px solid var(--ink);box-shadow:0 0 0 3px var(--paper);transform:rotate(45deg)}
+.b{padding-top:var(--pt);padding-bottom:.2rem}
+.e:last-child .b{padding-bottom:1.8rem}
+.b h3{margin:0 0 .6rem;font:700 1.6rem/1.1 var(--f-display);letter-spacing:-.02em;text-wrap:balance}
+.b p{margin:0 0 .75rem;max-width:64ch}
+.x{margin:1.1rem 0 .6rem}
+.cap{margin:.5rem 0 0;font-size:.84rem;line-height:1.5;color:var(--ink-2);max-width:64ch}
+
+/* inline video / slide badges */
+.yt-badge{display:inline-flex;align-items:center;gap:.45rem;margin-top:.6rem;font:600 .75rem/1.2 var(--f-mono);color:#B3202E;background:rgba(179,32,46,.08);border:1.5px solid #B3202E;padding:.32rem .6rem;text-decoration:none;transition:background .15s}
+.yt-badge:hover{background:rgba(179,32,46,.18);text-decoration:underline}
+.yt-badge::before{content:"▶";font-size:.7rem}
+
+/* components */
+.cmp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem 1.6rem}
+.cmp .col{border-top:4px solid var(--ink);padding-top:.5rem;min-width:0}
+.cmp h4,.fam h4{margin:0 0 .5rem;font:700 1.1rem/1.1 var(--f-display);letter-spacing:-.01em}
+.cmp p{margin:0;font-size:.95rem;line-height:1.55}
+.rows{list-style:none;margin:0;padding:0;display:grid;gap:.1rem}
+.rows li{display:grid;grid-template-columns:5.6rem minmax(0,1fr);gap:.7rem;padding:.4rem 0;border-top:1px solid var(--rule);font-size:.93rem;line-height:1.5}
+.rows li:first-child{border-top:0}
+.rows .tm{padding-top:.28rem}
+
+.pyr{display:grid;gap:5px}
+.tier{display:grid;grid-template-columns:min(12rem,36%) minmax(0,1fr);gap:1.4rem;align-items:center}
+.slice{height:5.2rem;background:var(--hatch2,none),var(--c);background-color:var(--c);
+  clip-path:polygon(calc(50% - 12.5% * var(--k)) 0,calc(50% + 12.5% * var(--k)) 0,calc(50% + 12.5% * (var(--k) + 1)) 100%,calc(50% - 12.5% * (var(--k) + 1)) 100%);
+  --hatch2:repeating-linear-gradient(135deg,rgba(14,26,23,.22) 0 1.5px,transparent 1.5px 7px)}
+.tt{display:grid;gap:.2rem;align-content:center;min-width:0}
+.tt b{font:700 1.5rem/1.05 var(--f-display);letter-spacing:-.02em}
+.tt em{font:400 .85rem/1.2 var(--f-mono);font-style:normal;color:var(--ink-2)}
+.tt span:last-child{font-size:.93rem;line-height:1.45}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(7.2rem,1fr));gap:.6rem}
+.stat{border:1.5px solid var(--ink);padding:.7rem .8rem .8rem;display:grid;gap:.25rem;align-content:start;background:var(--paper-2)}
+.stat b{font:800 2.2rem/1 var(--f-display);letter-spacing:-.04em}
+.stat span{font-size:.88rem;line-height:1.35}
+.stat em{font:500 .68rem/1 var(--f-mono);font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin-top:.3rem}
+.stat.theory{border-top:6px solid #A9825A}.stat.energy{border-top:6px solid #D9607A}.stat.scale{border-top:6px solid #3FB5A5}
+
+.dir{display:grid;gap:.7rem}
+.lane{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:.4rem 1.4rem;align-items:center;border-top:1px solid var(--rule);padding-top:.7rem}
+.who{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;padding-block:.5rem}
+.who b{font:700 1.05rem/1.2 var(--f-display)}
+.ar{position:relative;flex:1 1 3.5rem;min-width:3.5rem;margin-right:.9rem;height:0;border-top:2px solid var(--ink)}
+.ar::after{content:"";position:absolute;right:-1px;top:-8px;border:solid var(--ink);border-width:2px 2px 0 0;width:13px;height:13px;transform:translateY(0) rotate(45deg) scale(1)}
+.ar.thick{border-top-width:8px;margin-block:0;margin-right:1.4rem}
+.ar.thick::after{top:-12px;width:18px;height:18px;border-width:8px 8px 0 0}
+.lane p{margin:0;font-size:.95rem;line-height:1.5}
+
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.7rem}
+.opt{border:1.5px solid var(--ink);background:var(--paper-2);padding:.7rem .85rem .9rem;display:grid;gap:.4rem;align-content:start}
+.opt b{font:800 1.8rem/1 var(--f-display)}
+.opt span{font-size:.92rem;line-height:1.4}
+.opt em{font:500 .72rem/1.3 var(--f-mono);font-style:normal;letter-spacing:.04em;text-transform:uppercase;color:#0E1A17;background:var(--gold);padding:.3rem .45rem;justify-self:start}
+.opt.win{border:3px solid var(--ink);background:var(--paper)}
+
+.kdd{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(10.5rem,1fr));gap:.45rem}
+.kdd li{background:var(--paper-2);border-top:7px solid var(--c);padding:.7rem 1.5rem .85rem 1.3rem;display:grid;gap:.3rem;align-content:start;
+  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%,14px 50%)}
+.kdd li:first-child{clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%)}
+.kdd b{font:700 1.12rem/1.1 var(--f-display)}
+.kdd span:last-child{font-size:.86rem;line-height:1.4}
+
+.pairs,.apps{display:grid;grid-template-columns:repeat(auto-fit,minmax(13.5rem,1fr));gap:.6rem}
+.pair,.app{border-top:4px solid var(--ink);background:var(--paper-2);padding:.65rem .8rem .8rem;display:grid;gap:.35rem;align-content:start}
+.pair b,.app b{font:700 1.1rem/1.15 var(--f-display)}
+.pair span:last-child,.app span:last-child{font-size:.88rem;line-height:1.4;color:var(--ink-2)}
+
+.chains{display:grid;gap:1.1rem}
+.chain h4{margin:0 0 .2rem;font:700 1.05rem/1.2 var(--f-display);display:flex;gap:.7rem;align-items:baseline;flex-wrap:wrap}
+.chain p{margin:0 0 .5rem;font-size:.93rem}
+.nodes{display:flex;flex-wrap:wrap;gap:.4rem .2rem}
+.nodes span{font:500 .82rem/1.3 var(--f-mono);border:1.5px solid var(--ink);padding:.35rem .6rem;background:var(--paper-2)}
+.nodes span+span::before{content:"\2192";display:inline-block;margin-right:.55rem;color:var(--acc);font-weight:600}
+.nodes span+span{border-left-width:1.5px}
+
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.93rem}
+th{text-align:left;font:500 .68rem/1.2 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);padding:.4rem .8rem .4rem 0;border-bottom:2px solid var(--ink)}
+td{padding:.5rem .8rem .5rem 0;border-bottom:1px solid var(--rule);vertical-align:middle}
+.lb{display:inline-block;font:500 .78rem/1 var(--f-mono);padding:.3rem .5rem;border:1.5px solid var(--ink)}
+.lb.yes{background:var(--ink);color:var(--paper)}
+.lb.no{background:transparent;color:var(--ink)}
+
+/* Reading & Watching Lab Cards */
+.lab-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:1rem}
+.lab-card{border:2px solid var(--ink);background:var(--paper-2);padding:1rem 1.1rem 1.1rem;display:grid;gap:.5rem;align-content:start}
+.lab-card.featured{border-top:8px solid #B3202E;background:var(--paper)}
+.lab-badge{font:600 .68rem/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#B3202E;display:flex;align-items:center;gap:.35rem}
+.lab-card h3{margin:.2rem 0 0;font:700 1.25rem/1.15 var(--f-display)}
+.lab-card p{margin:0;font-size:.92rem;line-height:1.45;color:var(--ink-2)}
+.lab-link{display:inline-flex;align-items:center;gap:.4rem;margin-top:.4rem;font:600 .78rem/1 var(--f-mono);color:#B3202E;text-decoration:none;border-bottom:1.5px solid #B3202E;padding-bottom:2px;width:fit-content}
+.lab-link:hover{background:#B3202E;color:var(--paper);padding-inline:4px}
+
+.plain{margin:0 0 1.2rem;padding-bottom:.5rem;border-bottom:4px solid var(--ink);font:800 clamp(1.9rem,4.8vw,3rem)/1 var(--f-display);letter-spacing:-.03em}
+.ref{margin-top:4rem}
+.lede{margin:0 0 1.2rem;max-width:46rem;color:var(--ink-2)}
+.terms{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:0 2.4rem}
+.term{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.15rem .8rem;padding:.65rem 0;border-top:1px solid var(--rule)}
+.term b{font:650 1.05rem/1.2 var(--f-display)}
+.term span:last-child{grid-column:1/-1;font-size:.92rem;line-height:1.45;color:var(--ink-2)}
+.tl{list-style:none;padding:0;margin:0;display:grid}
+.tl li{display:grid;grid-template-columns:5.6rem minmax(0,1fr);gap:.8rem;padding:.6rem 0;border-top:1px solid var(--rule)}
+.tl li:first-child{border-top:2px solid var(--ink)}
+.end{margin-top:3.2rem;padding-block:1.4rem 2.6rem;border-top:2px solid var(--ink);font:500 .76rem/1.5 var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2)}
+
+@media (max-width:900px){.survey{grid-template-columns:4.2rem minmax(0,1fr);gap:0 1.2rem}.glance{grid-column:1/-1;margin-top:1.6rem}}
+@media (max-width:760px){
+  .lead{grid-template-columns:minmax(0,1fr)}
+  .band-in{grid-template-columns:minmax(0,1fr);gap:.3rem}
+  .pl{font-size:4.6rem}
+  .cmp{grid-template-columns:minmax(0,1fr)}
+  .lane{grid-template-columns:minmax(0,1fr)}
+  .e{grid-template-columns:14px minmax(0,1fr);grid-template-areas:"rail ts" "rail b";column-gap:.8rem}
+  .rail{grid-area:rail}
+  .ts{grid-area:ts;text-align:left;display:flex;flex-wrap:wrap;gap:.6rem;align-items:baseline;padding-top:var(--pt)}
+  .ts span{display:inline;margin:0}
+  .ref-slide{margin-left:0;margin-top:0}
+  .b{grid-area:b;padding-top:.35rem}
+  .rail::before{top:calc(var(--pt) + .1rem)}
+  .b h3{font-size:1.4rem}
+  .tl li{grid-template-columns:minmax(0,1fr);gap:.2rem}
+}
+@media (max-width:480px){.total,.dpt{display:none}.clock{min-width:4.9rem;font-size:.95rem}}
+
+@media print{
+  @page{size:A4;margin:13mm 0}
+  html{font-size:13.5px}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body::before,.deck{display:none}
+  .wrap{padding-left:14mm;padding-right:14mm;max-width:none}
+  .band{margin-top:2rem;break-after:avoid;break-inside:avoid}
+  .e{break-inside:avoid}
+  .b h3{break-after:avoid}
+  .x,.stat,.opt,.pair,.app,.lab-card,.rows li,.tl li,.term,tr,.lane,.chain{break-inside:avoid}
+  .hero{padding-top:0}
+  .ref{break-before:page}
+  .survey{break-inside:avoid}
+}
+</style>
+
+<header class="deck"><div class="wrap">
+<button id="sidebar-toggle-btn" class="deck-nav-btn" aria-label="Toggle Lecture Directory" title="Toggle Navigation Menu (Shortcut: [ or \)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg><span>LECTURES</span></button>
+<span class="clock" id="clock">00:00:00</span><span class="dpt" id="dpt">0.0 m</span><div class="tape" aria-hidden="true"><a class="seg hx1" href="#part-a" style="--d:1380;--st:#A9825A" data-s="0" data-e="1380" title="Orientation, Ethics, and the Digital Lab"></a><a class="seg hx2" href="#part-b" style="--d:1056;--st:#D0814F" data-s="1380" data-e="2436" title="Industry 4.0 and Smart Autonomous Systems"></a><a class="seg hx3" href="#part-c" style="--d:801;--st:#E0B04A" data-s="2436" data-e="3237" title="Data as the New Oil and the Carbon Cost"></a><a class="seg hx4" href="#part-d" style="--d:1066;--st:#3FB5A5" data-s="3237" data-e="4303" title="Decision Support Systems and Machine Learning"></a><a class="seg hx5" href="#part-e" style="--d:599;--st:#6F9ADB" data-s="4303" data-e="4902" title="The Illusion of Trust and AI Hallucinations"></a><a class="seg hx6" href="#part-f" style="--d:387;--st:#A98BD6" data-s="4902" data-e="5289" title="The Art of the Prompt and Cambridge Curricula"></a><a class="seg hx7" href="#part-g" style="--d:471;--st:#8FBF7A" data-s="5289" data-e="5760" title="The Billion-Dollar Prompt: 5 Models Tested"></a><a class="seg hx8" href="#part-h" style="--d:644;--st:#D9607A" data-s="5760" data-e="6404" title="The 1986 Calculator Panic and the Lab Rats"></a><span class="play" id="play"></span></div><span class="total">/ 01:46:44</span></div></header>
+
+<main><section class="hero"><div class="wrap">
+<div class="eyebrow">Data mining &middot; Week 1 &middot; Recording 15.09.26 &middot; 01:46:44</div>
+<h1>the digital<br><span class="c">oil rush</span><span class="dia" aria-hidden="true"></span></h1>
+<div class="lead"><p><span class="tm">00:40:36</span> From the soot of coal to cyber-physical dark factories, data has become the crude fuel powering artificial intelligence. Dr. Faruk Bulut charts the technological shift, the energy demand, and whether humanity is still holding the controls.<small>Each entry displays the recording timestamp and direct slide/note reference. The depth gauge at top tracks the core as you scroll: 1 minute = 1 metre of core.</small></p>
+</div>
+
+<div class="survey"><div class="corewrap"><div class="core" aria-hidden="true"><a class="seg hx1" href="#part-a" style="--d:1380;--st:#A9825A" data-s="0" data-e="1380" title="Orientation, Ethics, and the Digital Lab">A</a><a class="seg hx2" href="#part-b" style="--d:1056;--st:#D0814F" data-s="1380" data-e="2436" title="Industry 4.0 and Smart Autonomous Systems">B</a><a class="seg hx3" href="#part-c" style="--d:801;--st:#E0B04A" data-s="2436" data-e="3237" title="Data as the New Oil and the Carbon Cost">C</a><a class="seg hx4" href="#part-d" style="--d:1066;--st:#3FB5A5" data-s="3237" data-e="4303" title="Decision Support Systems and Machine Learning">D</a><a class="seg hx5" href="#part-e" style="--d:599;--st:#6F9ADB" data-s="4303" data-e="4902" title="The Illusion of Trust and AI Hallucinations">E</a><a class="seg hx6" href="#part-f" style="--d:387;--st:#A98BD6" data-s="4902" data-e="5289" title="The Art of the Prompt and Cambridge Curricula">F</a><a class="seg hx7" href="#part-g" style="--d:471;--st:#8FBF7A" data-s="5289" data-e="5760" title="The Billion-Dollar Prompt: 5 Models Tested">G</a><a class="seg hx8" href="#part-h" style="--d:644;--st:#D9607A" data-s="5760" data-e="6404" title="The 1986 Calculator Panic and the Lab Rats">H</a></div></div><ol class="legend">
+<li><a href="#part-a" class="hx1" style="--st:#A9825A"><span class="l">A</span><span><b>Orientation, Ethics, and the Digital Lab</b><small>00:00:00 &ndash; 00:23:00 &middot; 23 min 00 s &middot; 0.0 m deep</small></span></a></li>
+<li><a href="#part-b" class="hx2" style="--st:#D0814F"><span class="l">B</span><span><b>Industry 4.0 and Smart Autonomous Systems</b><small>00:23:00 &ndash; 00:40:36 &middot; 17 min 36 s &middot; 23.0 m deep</small></span></a></li>
+<li><a href="#part-c" class="hx3" style="--st:#E0B04A"><span class="l">C</span><span><b>Data as the New Oil and the Carbon Cost</b><small>00:40:36 &ndash; 00:53:57 &middot; 13 min 21 s &middot; 40.6 m deep</small></span></a></li>
+<li><a href="#part-d" class="hx4" style="--st:#3FB5A5"><span class="l">D</span><span><b>Decision Support Systems and Machine Learning</b><small>00:53:57 &ndash; 01:11:43 &middot; 17 min 46 s &middot; 54.0 m deep</small></span></a></li>
+<li><a href="#part-e" class="hx5" style="--st:#6F9ADB"><span class="l">E</span><span><b>The Illusion of Trust and AI Hallucinations</b><small>01:11:43 &ndash; 01:21:42 &middot; 9 min 59 s &middot; 71.7 m deep</small></span></a></li>
+<li><a href="#part-f" class="hx6" style="--st:#A98BD6"><span class="l">F</span><span><b>The Art of the Prompt and Cambridge Curricula</b><small>01:21:42 &ndash; 01:28:09 &middot; 6 min 27 s &middot; 81.7 m deep</small></span></a></li>
+<li><a href="#part-g" class="hx7" style="--st:#8FBF7A"><span class="l">G</span><span><b>The Billion-Dollar Prompt: 5 Models Tested</b><small>01:28:09 &ndash; 01:36:00 &middot; 7 min 51 s &middot; 88.2 m deep</small></span></a></li>
+<li><a href="#part-h" class="hx8" style="--st:#D9607A"><span class="l">H</span><span><b>The 1986 Calculator Panic and the Lab Rats</b><small>01:36:00 &ndash; 01:46:44 &middot; 10 min 44 s &middot; 96.0 m deep</small></span></a></li>
+</ol>
+<dl class="glance"><dt>Recording</dt><dd>15.09.26, 01:46:44</dd><dt>Course</dt><dd>SEN 431 Data Mining, Week 1</dd><dt>Class cohort</dt><dd>170+ registered students, conducted online</dd><dt>Frameworks</dt><dd>Industry 4.0, CDSS, PRISM prompt architecture, Decision Trees</dd><dt>Core models</dt><dd>ChatGPT, Claude, Gemini, Copilot, Perplexity</dd><dt>Curated lab</dt><dd>5 official video lectures & benchmark dataset links</dd></dl>
+</div></div></section>
+
+<!-- CHAPTER A -->
+<section class="part hx1" id="part-a" style="--st:#A9825A"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">A</div><div><div class="pr">Layer 1 of 8 &middot; 00:00:00 &ndash; 00:23:00 &middot; 23 min 00 s &middot; core depth 0.0 &ndash; 23.0 m</div><h2>Orientation, Ethics, and the Digital Lab</h2><p>Course administration, why 170+ students meet online, IAU attendance regulations, and professional etiquette.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="0" data-e="336"><div class="ts">00:00:00<span>to 00:05:36</span><span class="ref-slide">Intro Slides 1&ndash;2</span></div><div class="rail"></div><div class="b"><h3>The online laboratory and dual-screen workflow</h3>
+<p>Associate Professor Dr. Faruk Bulut introduces the semester. Rather than a conventional classroom subject, data mining represents an expansive ecosystem powering modern industries. With more than <mark>170 students registered</mark>, a physical university computer lab cannot comfortably accommodate everyone. Moving online allows each student to work directly on their laptop or PC, running algorithms and analyzing datasets simultaneously with the lecturer.</p>
+<p>He recommends setting up a <mark>dual-monitor environment</mark>: one screen dedicated to watching the live stream and slides, and the second screen open for typing code, executing scripts, and running data mining experiments in real time.</p>
+<div class="x stats"><div class="stat theory"><span class="tm">00:00:51</span><b>170+</b><span>registered students</span><em>Cohort size</em></div><div class="stat scale"><span class="tm">00:01:23</span><b>2</b><span>monitors recommended</span><em>Setup</em></div><div class="stat theory"><span class="tm">00:02:15</span><b>70%</b><span>minimum theory attendance</span><em>Senate rule</em></div></div>
+</div></article>
+
+<article class="e" data-t="336" data-e="640"><div class="ts">00:05:36<span>to 00:10:40</span><span class="ref-slide">Intro Slides 3&ndash;5</span></div><div class="rail"></div><div class="b"><h3>Attendance logging and professional communication</h3>
+<p>IAU senate regulations require a strict 70% attendance threshold for theoretical sessions and 80% for labs. The online conferencing platform registers attendance automatically based on connection logs. For students unable to join synchronously, recorded sessions must be listened to on the <mark>very same day</mark> to count toward university attendance quotas.</p>
+<p>He issues a direct mandate on student communication: <mark>“Your academics are not your maids.”</mark> Students must use official institutional email addresses (<code>@stu.aydin.edu.tr</code>), state their department, student ID, and polite greeting, and avoid casual or demanding text phrasing.</p>
+<div class="x cmp"><div class="col"><h4>Unprofessional conduct</h4><ul class="rows"><li><span class="tm">00:10:07</span><span>Asking professors to predict sports matches or personal gossip.</span></li><li><span class="tm">00:10:42</span><span>Vague messages without student identity, department, or course code.</span></li></ul></div><div class="col"><h4>Professional standard</h4><ul class="rows"><li><span class="tm">00:10:52</span><span>Official student email, polite salutation, student ID, and specific technical inquiry.</span></li></ul></div></div>
+</div></article>
+
+<article class="e" data-t="640" data-e="1380"><div class="ts">00:10:40<span>to 00:23:00</span><span class="ref-slide">Intro Slides 6&ndash;12</span></div><div class="rail"></div><div class="b"><h3>Academic integrity and examination ethics</h3>
+<p>Cheating or copying code across assignments is strictly forbidden. While data science communities thrive on open-source repositories and code sharing, students must personally write, understand, and defend their code. Coursework comprises hands-on assignments, independent data projects, quizzes, a formal midterm, and a final examination.</p>
+<p>He emphasizes active curiosity over rote memorization: ask challenging technical questions, explore real-world datasets, and build self-directed learning habits.</p>
+</div></article>
+
+</div></section>
+
+<!-- CHAPTER B -->
+<section class="part hx2" id="part-b" style="--st:#D0814F"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">B</div><div><div class="pr">Layer 2 of 8 &middot; 00:23:00 &ndash; 00:40:36 &middot; 17 min 36 s &middot; core depth 23.0 &ndash; 40.6 m</div><h2>Industry 4.0 and Smart Autonomous Systems</h2><p>The four technological waves, lights-out dark factories, emergency IoT green waves, medical diagnosis, and CCTV surveillance.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="1380" data-e="1603"><div class="ts">00:23:00<span>to 00:26:43</span><span class="ref-slide">Lecture Slides 2&ndash;4</span></div><div class="rail"></div><div class="b"><h3>The four revolutions and dark factories</h3>
+<p>Dr. Bulut walks the class through the progression of industrial eras: Industry 1.0 harnessed steam and water power; Industry 2.0 introduced electricity, mass assembly lines, and Henry Ford’s production model; Industry 3.0 brought electronics, microprocessors, and early automated manufacturing. Today, <mark>Industry 4.0</mark> blends IoT, cloud computing, cognitive AI, and cyber-physical systems.</p>
+<p>This culminates in <mark>“Dark Factories”</mark> (lights-out manufacturing). In these facilities, autonomous robots, automated guided vehicles (AGVs), and computer vision handle every step of production. Because no human workers occupy the floor, internal lights are extinguished entirely to conserve energy, operating 24/7 in total darkness.</p>
+<div class="x chains"><div class="chain"><h4>Technological progression</h4><div class="nodes"><span>1.0 Steam &amp; Coal</span><span>2.0 Electricity &amp; Assembly</span><span>3.0 Computers &amp; PLC</span><span>4.0 Cyber-Physical &amp; AI</span></div></div></div>
+<a class="yt-badge" href="https://www.youtube.com/watch?v=y8NtMZ7VGmU" target="_blank" rel="noopener">Curated Video: Fei-Fei Li on Spatial Intelligence &amp; Autonomous Systems</a>
+</div></article>
+
+<article class="e" data-t="1603" data-e="1805"><div class="ts">00:26:43<span>to 00:30:05</span><span class="ref-slide">Lecture Slide 5</span></div><div class="rail"></div><div class="b"><h3>Traffic-free emergency health corridors</h3>
+<p>Urban congestion frequently costs lives when ambulances are trapped in gridlock. By pairing GPS location streaming on emergency vehicles with IoT sensors and municipal traffic management systems, an automated <mark>“health corridor”</mark> can be forged. As an ambulance approaches an intersection, the system turns cross-traffic signals red and triggers a continuous green wave for the emergency vehicle, ensuring the fastest path to the hospital.</p>
+<div class="x dir"><div class="lane"><div class="who"><b>Ambulance GPS Signal</b><i class="ar thick"></i><b>Smart Traffic Lights</b></div><p><span class="tm">00:28:42</span> IoT sensor detects vehicle trajectory; holds civilian lanes at red and holds hospital route at green wave.</p></div></div>
+</div></article>
+
+<article class="e" data-t="1805" data-e="2160"><div class="ts">00:30:05<span>to 00:36:00</span><span class="ref-slide">Lecture Slides 6&ndash;7</span></div><div class="rail"></div><div class="b"><h3>Knee osteoarthritis prediction and assistive eye-tracking</h3>
+<p>Medical data mining provides direct diagnostic support. Dr. Bulut details his research on <mark>Knee Osteoarthritis Severity Grade Prediction</mark> (Turkish: <em>diz eklem kireçlenmesi</em>). By feeding digital X-rays and MRI scans into an e-doctor software pipeline using Granular Computing, the system categorizes joint degeneration across five standard grades (Grade 0: healthy, up to Grade 4: severe cartilage loss) and generates automated diagnostic remarks.</p>
+<p>A second biomedical application features <mark>eye-tracking computer control for quadriplegic individuals</mark>. Using infrared cameras mounted on spectacle frames, patients paralyzed by ALS or spinal injuries control a software mouse cursor purely through ocular movements, restoring their independence.</p>
+<ol class="x kdd"><li style="--c:#2E9E5B"><span class="tm">00:30:40</span><b>X-Ray / MRI</b><span>Patient knee joint capture</span></li><li style="--c:#7FA63A"><span class="tm">00:31:00</span><b>Granular Engine</b><span>Feature extraction &amp; rules</span></li><li style="--c:#C9A21B"><span class="tm">00:31:18</span><b>Grading (0&ndash;4)</b><span>From healthy to severe</span></li><li style="--c:#DB8429"><span class="tm">00:31:35</span><b>E-Doctor</b><span>Automatic medical commentary</span></li></ol>
+</div></article>
+
+<article class="e" data-t="2160" data-e="2436"><div class="ts">00:36:00<span>to 00:40:36</span><span class="ref-slide">Lecture Slides 8&ndash;10</span></div><div class="rail"></div><div class="b"><h3>CCTV pattern mining for suspicious behavior</h3>
+<p>Security cameras in modern smart cities no longer merely record passive video. Machine learning models analyze live video streams to uncover behavioral anomalies. By extracting movement vectors and dwell times, security algorithms detect suspicious persons loitering near restricted perimeters, abandoning luggage, or pacing back and forth, flagging security personnel before an incident occurs.</p>
+</div></article>
+
+</div></section>
+
+<!-- CHAPTER C -->
+<section class="part hx3" id="part-c" style="--st:#E0B04A"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">C</div><div><div class="pr">Layer 3 of 8 &middot; 00:40:36 &ndash; 00:53:57 &middot; 13 min 21 s &middot; core depth 40.6 &ndash; 54.0 m</div><h2>Data as the New Oil and the Carbon Cost</h2><p>Why data is crude petroleum, the 180 Zettabyte flood, personal data footprints, and the heavy energy drain of cloud data centers.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="2436" data-e="2720"><div class="ts">00:40:36<span>to 00:45:20</span><span class="ref-slide">Lecture Slides 11&ndash;13</span></div><div class="rail"></div><div class="b"><h3>The 180 Zettabyte flood: data as crude oil</h3>
+<p>Oil drove the economic and industrial machinery of the nineteenth and twentieth centuries; today, <mark>data is the crude petroleum of the digital era</mark>. In its raw form, data consists of binary digits (1s and 0s)—text, GPS coordinates, purchase receipts, sensor pings, and medical images. On its own, raw data has limited utility; it must be refined through statistical and machine learning algorithms to produce high-value actionable intelligence.</p>
+<p>By 2026, global annual data creation is estimated at <mark>180 Zettabytes</mark> (180,000,000,000 Terabytes). When distributed across 8.3 billion people over 365 days, humanity generates approximately <mark>60 Gigabytes of digital data per person every single day</mark>.</p>
+<div class="x stats"><div class="stat scale"><span class="tm">00:44:27</span><b>180 ZB</b><span>generated globally in 2026</span><em>Global volume</em></div><div class="stat theory"><span class="tm">00:45:10</span><b>60 GB</b><span>per human per day</span><em>Individual creation</em></div></div>
+<a class="yt-badge" href="https://www.youtube.com/watch?v=7rs0i-9nOjo" target="_blank" rel="noopener">Curated Video: IBM Technology on What is Data Mining?</a>
+</div></article>
+
+<article class="e" data-t="2720" data-e="2980"><div class="ts">00:45:20<span>to 00:49:40</span><span class="ref-slide">Lecture Slide 14</span></div><div class="rail"></div><div class="b"><h3>The individual daily digital footprint</h3>
+<p>Dr. Bulut breaks down how an ordinary citizen effortlessly generates dozens of gigabytes without realizing it. Photos, high-definition videos, social media uploads, messaging logs, and streaming services compound into vast data stores that tech giants index, aggregate, and monetize.</p>
+<div class="x tw"><table><thead><tr><th>Personal Activity</th><th>Daily Volume</th><th>Approximate Data Generated</th></tr></thead><tbody><tr><td>Smartphone photography</td><td>20 photos &times; ~3 MB</td><td>60 MB</td></tr><tr><td>Video capture &amp; clips</td><td>5 minutes of 4K/HD video</td><td>100 &ndash; 500+ MB</td></tr><tr><td>Social media feeds &amp; stories</td><td>Instagram, TikTok, X posts</td><td>200 &ndash; 800 MB</td></tr><tr><td>Audio &amp; video streaming</td><td>Spotify, YouTube, Netflix</td><td>1.5 &ndash; 4.0 GB</td></tr><tr><td>IoT, GPS &amp; background telemetry</td><td>Location pings, smart watch sync</td><td>50 &ndash; 150 MB</td></tr></tbody></table></div>
+</div></article>
+
+<article class="e" data-t="2980" data-e="3237"><div class="ts">00:49:40<span>to 00:53:57</span><span class="ref-slide">Lecture Slides 15&ndash;18</span></div><div class="rail"></div><div class="b"><h3>Hyperscale data centers and environmental pollution</h3>
+<p>Where does this endless deluge of data live? In hyperscale cloud facilities operated by Google, Microsoft, and Amazon AWS. Thousands of CPUs, GPUs, and TPUs run continuously at near-capacity, converting immense electrical currents into intense heat. Cooling these server warehouses requires massive chiller complexes and cooling towers.</p>
+<p>Dr. Bulut highlights the environmental dilemma: a single large hyperscale data center consumes more electricity in 24 hours than <mark>Pristina</mark> (the capital of Kosovo). In many parts of the world, including the Gulf, electricity is generated by burning fossil fuels and natural gas. Thus, storing digital data and training large AI models directly burns petroleum and expels thousands of tons of atmospheric carbon dioxide.</p>
+<div class="x dir"><div class="lane"><div class="who"><b>Hyperscale Data Center</b><i class="ar thick"></i><b>Fossil Power Stations</b></div><p><span class="tm">00:52:52</span> Enormous GPU power &amp; cooling demand forces utilities to burn natural gas and petroleum, amplifying emissions.</p></div></div>
+</div></article>
+
+</div></section>
+
+<!-- CHAPTER D -->
+<section class="part hx4" id="part-d" style="--st:#3FB5A5"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">D</div><div><div class="pr">Layer 4 of 8 &middot; 00:53:57 &ndash; 01:11:43 &middot; 17 min 46 s &middot; core depth 54.0 &ndash; 71.7 m</div><h2>Decision Support Systems and Machine Learning</h2><p>CDSS in healthcare, the definition of machine learning, training sets, and tree-based decision boundaries.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="3237" data-e="3580"><div class="ts">00:53:57<span>to 00:59:40</span><span class="ref-slide">Lecture Slide 19</span></div><div class="rail"></div><div class="b"><h3>Health informatics and CDSS</h3>
+<p>Data stored in servers is leveraged to construct <mark>Artificial Decision Support Systems (ADSS)</mark>. In healthcare, these are called <mark>CDSS (Clinical Decision Support Systems)</mark>. A CDSS is a specialized expert software system that evaluates electronic health records, lab biomarkers, and imaging scans, cross-referencing them against medical literature to assist clinicians in diagnosing complex pathologies and preventing medication errors.</p>
+<p>Dr. Bulut emphasizes: write this acronym down. CDSS is an essential industry pillar frequently tested in technical interviews and examinations.</p>
+</div></article>
+
+<article class="e" data-t="3580" data-e="4020"><div class="ts">00:59:40<span>to 01:07:00</span><span class="ref-slide">Lecture Slide 20</span></div><div class="rail"></div><div class="b"><h3>What is machine learning?</h3>
+<p>Dr. Bulut distinguishes classical rule-based programming from machine learning. In traditional software engineering, developers write hardcoded rules (if-else logic). In <mark>Machine Learning</mark>, the system is fed a dataset of historical examples and automatically discovers the underlying patterns and mathematical functions.</p>
+<p>He breaks down the core methodology: take a predefined dataset, clean it, split it into training and test partitions, build a mathematical model that extracts knowledge, and deploy it to make reliable predictions on unseen records.</p>
+<a class="yt-badge" href="https://www.youtube.com/watch?v=Gv9_4yMHFhI" target="_blank" rel="noopener">Curated Video: StatQuest — A Gentle Introduction to Machine Learning</a>
+</div></article>
+
+<article class="e" data-t="4020" data-e="4303"><div class="ts">01:07:00<span>to 01:11:43</span><span class="ref-slide">Lecture Slide 20</span></div><div class="rail"></div><div class="b"><h3>The decision tree intuition</h3>
+<p>To ground the concept, he introduces the famous weather and tennis dataset (with attributes Outlook, Temperature, Humidity, and Wind). With a training dataset of 14 historical days, a <mark>Decision Tree</mark> algorithm evaluates information gain to determine which condition splits the outcomes best, forming an intuitive hierarchical flowchart.</p>
+<div class="x cmp"><div class="col"><h4>Classical programming</h4><p><span class="tm">01:00:20</span> Programmers write explicit if-else rules. If input conditions change, the logic breaks.</p></div><div class="col"><h4>Machine learning</h4><p><span class="tm">01:01:34</span> The machine ingests labeled data and mathematically learns the classification boundary itself.</p></div></div>
+</div></article>
+
+</div></section>
+
+<!-- CHAPTER E -->
+<section class="part hx5" id="part-e" style="--st:#6F9ADB"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">E</div><div><div class="pr">Layer 5 of 8 &middot; 01:11:43 &ndash; 01:21:42 &middot; 9 min 59 s &middot; core depth 71.7 &ndash; 81.7 m</div><h2>The Illusion of Trust and AI Hallucinations</h2><p>Can we fully trust AI? The psychology of blind faith, chat polls, and the mechanics of generative hallucinations.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="4303" data-e="4530"><div class="ts">01:11:43<span>to 01:15:30</span><span class="ref-slide">Lecture Slide 21</span></div><div class="rail"></div><div class="b"><h3>Class poll: can we fully trust AI?</h3>
+<p>Dr. Bulut asks the class: <mark>“Can we fully trust the answers provided by AI?”</mark> Students respond in the chat. Several students claim they trust Claude or ChatGPT completely, treating AI outputs as authoritative ground truth.</p>
+<p>The professor firmly refutes blind trust. While contemporary Large Language Models write with persuasive tone and articulate grammar, they do not possess innate awareness or empirical fact-checking faculties. Uncritical reliance on AI outputs poses severe hazards for engineers, medical staff, and financial analysts.</p>
+<div class="x opts"><div class="opt"><span class="tm">01:12:13</span><b>No</b><span>The professor’s stance: never trust unconditionally</span><em>Engineering discipline</em></div><div class="opt win"><span class="tm">01:13:07</span><b>Yes</b><span>Student misconception: “Claude is always right”</span><em>The illusion of authority</em></div></div>
+</div></article>
+
+<article class="e" data-t="4530" data-e="4902"><div class="ts">01:15:30<span>to 01:21:42</span><span class="ref-slide">Lecture Slide 22</span></div><div class="rail"></div><div class="b"><h3>The anatomy of a hallucination</h3>
+<p>Why do models invent information? Dr. Bulut breaks down <mark>hallucinations</mark>. An LLM is an autoregressive token predictor trained to produce the most statistically probable continuation of a text prompt. When faced with missing data or an ambiguous premise, it does not stop and admit ignorance; instead, it crafts fabricated facts, bogus citations, and fictitious research papers with total confidence.</p>
+<p>While industry benchmarks show hallucination frequencies declining year-over-year as reinforcement learning from human feedback (RLHF) and retrieval-augmented generation (RAG) advance, verification remains mandatory.</p>
+<a class="yt-badge" href="https://www.youtube.com/watch?v=5p248yoa3oE" target="_blank" rel="noopener">Curated Video: Andrew Ng — Opportunities and Realities in AI</a>
+</div></article>
+
+</div></section>
+
+<!-- CHAPTER F -->
+<section class="part hx6" id="part-f" style="--st:#A98BD6"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">F</div><div><div class="pr">Layer 6 of 8 &middot; 01:21:42 &ndash; 01:28:09 &middot; 6 min 27 s &middot; core depth 81.7 &ndash; 88.2 m</div><h2>The Art of the Prompt and Cambridge Curricula</h2><p>Vague inputs yield hallucinations, the meta-prompt revision trick, the PRISM architecture, and unanswerable questions.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="4902" data-e="5110"><div class="ts">01:21:42<span>to 01:25:10</span><span class="ref-slide">Lecture Slides 23&ndash;25</span></div><div class="rail"></div><div class="b"><h3>The meta-prompt trick and Cambridge modules</h3>
+<p>Vague prompts guarantee poor answers. Dr. Bulut recommends a simple, potent habit: <mark>“A simple prompt before giving a prompt.”</mark> Tell the AI: <em>“Please revise and optimize my draft prompt below to maximize accuracy and eliminate ambiguity before generating the final answer.”</em></p>
+<p>He highlights how top universities have formalized prompt design into accredited degree courses—such as Cambridge University’s 2 ECTS module on <em>Designing Human-AI Systems</em>. Prompt engineering is not casual typing; it is rigorous specification of role, context, modifiers, and output formats.</p>
+<ol class="x kdd"><li style="--c:#2E9E5B"><span class="tm">01:20:23</span><b>Persona &amp; Role</b><span>Define who the AI acts as</span></li><li style="--c:#7FA63A"><span class="tm">01:20:31</span><b>Context &amp; Limits</b><span>Boundaries &amp; domain scope</span></li><li style="--c:#C9A21B"><span class="tm">01:20:46</span><b>Exclusions</b><span>Explicit forbidden assumptions</span></li><li style="--c:#DB8429"><span class="tm">01:21:25</span><b>Meta-Revision</b><span>Ask AI to refine the prompt</span></li></ol>
+</div></article>
+
+<article class="e" data-t="5110" data-e="5289"><div class="ts">01:25:10<span>to 01:28:09</span><span class="ref-slide">Lecture Slide 26</span></div><div class="rail"></div><div class="b"><h3>What AI still cannot answer</h3>
+<p>Despite trillions of parameters, fundamental frontiers remain permanently beyond the reach of AI systems:</p>
+<div class="x cmp"><div class="col"><h4>Unanswerable questions</h4><ul class="rows"><li><span class="tm">01:26:00</span><span>What will Elon Musk post on X tomorrow? (Random human volition).</span></li><li><span class="tm">01:26:20</span><span>When is the exact day of the apocalypse? (Metaphysical).</span></li><li><span class="tm">01:26:45</span><span>Do you genuinely experience emotions? (Sentience vs calculation).</span></li></ul></div><div class="col"><h4>Why LLMs fail here</h4><p><span class="tm">01:27:10</span> LLMs interpolate past data patterns; they cannot predict non-deterministic personal whims or genuine consciousness.</p></div></div>
+</div></article>
+
+</div></section>
+
+<!-- CHAPTER G -->
+<section class="part hx7" id="part-g" style="--st:#8FBF7A"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">G</div><div><div class="pr">Layer 7 of 8 &middot; 01:28:09 &ndash; 01:36:00 &middot; 7 min 51 s &middot; core depth 88.2 &ndash; 96.0 m</div><h2>The Billion-Dollar Prompt: 5 Models Tested</h2><p>Testing top LLMs with the ultimate ambition prompt, Nasreddin Hoca’s economic rule, and why models hallucinate science fiction.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="5289" data-e="5490"><div class="ts">01:28:09<span>to 01:31:30</span><span class="ref-slide">Lecture Slides 27&ndash;29</span></div><div class="rail"></div><div class="b"><h3>The richest person experiment and Nasreddin Hoca</h3>
+<p>Dr. Bulut conducted an experiment across the five leading frontier LLMs. He crafted an expertly structured prompt: <mark>“Please give me a brand-new, highly innovative, realistic idea that has the potential to make me the richest person in the world.”</mark></p>
+<p>Referencing the Turkish folk sage Nasreddin Hoca—<em>“Parayı veren düdüğü çalar”</em> (he who pays the coin blows the whistle)—he notes that commercial frontier models offer deeper reasoning only to subscribers. He submitted the prompt to ChatGPT, Gemini, Claude, Copilot, and Perplexity.</p>
+</div></article>
+
+<article class="e" data-t="5490" data-e="5760"><div class="ts">01:31:30<span>to 01:36:00</span><span class="ref-slide">Lecture Slides 29&ndash;33</span></div><div class="rail"></div><div class="b"><h3>The five model pitches</h3>
+<p>The models generated grand, high-concept speculative platforms:</p>
+<div class="x apps"><div class="app"><span class="tm">01:30:57</span><b>ChatGPT: MINDOS</b><span>An operating system for human nature and biology, mirroring Bill Gates and MS-DOS in 1975.</span></div><div class="app"><span class="tm">01:32:03</span><b>Gemini: ChronoSync</b><span>A decentralized biotech platform that continuously rewinds human epigenetic aging.</span></div><div class="app"><span class="tm">01:33:00</span><b>Claude: AquaSky</b><span>A planetary atmospheric water-harvesting grid powered by IoT weather sensors.</span></div><div class="app"><span class="tm">01:34:00</span><b>Copilot: MindBank</b><span>A global marketplace allowing humans to tokenize and sell their cognitive expertise.</span></div><div class="app"><span class="tm">01:35:05</span><b>Perplexity: The Echo Asset</b><span>A blockchain-based digital afterlife economy monetizing post-mortem consciousness avatars.</span></div></div>
+<p class="cap">The professor’s takeaway: LLMs possess boundless narrative imagination, but cannot evaluate realistic engineering feasibility or supply chains.</p>
+</div></article>
+
+</div></section>
+
+<!-- CHAPTER H -->
+<section class="part hx8" id="part-h" style="--st:#D9607A"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">H</div><div><div class="pr">Layer 8 of 8 &middot; 01:36:00 &ndash; 01:46:44 &middot; 10 min 44 s &middot; core depth 96.0 &ndash; 106.7 m</div><h2>The 1986 Calculator Panic and the Lab Rats</h2><p>Historical tech panic in Washington D.C., toddlers navigating without literacy, and who is truly in control.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="5760" data-e="5980"><div class="ts">01:36:00<span>to 01:39:40</span><span class="ref-slide">Lecture Slides 34&ndash;35</span></div><div class="rail"></div><div class="b"><h3>The 1986 Washington calculator protest</h3>
+<p>Dr. Bulut reminds the class that moral panic over technology is not novel. In <mark>1986 in Washington, D.C.</mark>, mathematics teachers marched in vocal street protests holding placards demanding bans on hand-held pocket calculators in schools, claiming calculators would destroy children's cognitive abilities and leave them incapable of doing basic arithmetic.</p>
+<p>Today, academia expresses the exact same panic regarding LLMs and automated coding assistants. He contrasts this with the new media literacy: a two-year-old toddler who cannot read or write text can effortlessly navigate YouTube and voice assistants purely using auditory prompts and icons.</p>
+<div class="x stats"><div class="stat energy"><span class="tm">01:37:07</span><b>1986</b><span>calculator street protest</span><em>Historical panic</em></div><div class="stat theory"><span class="tm">01:37:55</span><b>0 yrs</b><span>literacy required</span><em>Voice UI shift</em></div></div>
+</div></article>
+
+<article class="e" data-t="5980" data-e="6404"><div class="ts">01:39:40<span>to 01:46:44</span><span class="ref-slide">Lecture Slide 36</span></div><div class="rail"></div><div class="b"><h3>Who are the real lab rats?</h3>
+<p>He closes week one with three philosophical challenges for the aspiring computer and software engineers:</p>
+<div class="x pairs"><div class="pair"><span class="tm">01:38:20</span><b>Who are the real lab rats?</b><span>Every time we prompt free AI models, we serve as unpaid test subjects, supplying tech corporations with fresh human cognitive data to train future models.</span></div><div class="pair"><span class="tm">01:40:51</span><b>Who is shaping whom?</b><span>Humans believe they command AI tools; in practice, AI algorithms shape human phrasing, attention spans, and decision routines.</span></div></div>
+<p>He concludes the broadcast, welcoming students to stay on the line for personalized career guidance and next week’s deep dive into data preprocessing.</p>
+</div></article>
+
+</div></section>
+
+<!-- CURATED LAB RESOURCES (New Feature) -->
+<section class="ref wrap" id="recommended-lab"><h2 class="plain">Curated Video &amp; Exploration Lab</h2><p class="lede">Assigned study resources from the instructor’s curriculum guide (Reading and Listening Tasks, Weeks 1&ndash;3) connecting lecture concepts to premier research talks and benchmark repositories.</p>
+<div class="lab-cards">
+<div class="lab-card featured"><div class="lab-badge">Stanford Online &middot; AI Foundations</div><h3>Opportunities in AI &ndash; 2023</h3><p>Andrew Ng provides a masterclass on supervised learning, generative AI adoption across global enterprises, opportunities, and realistic risk boundaries.</p><a class="lab-link" href="https://www.youtube.com/watch?v=5p248yoa3oE" target="_blank" rel="noopener">Watch on YouTube (42 min) &rarr;</a></div>
+<div class="lab-card featured"><div class="lab-badge">TED &middot; Computer Vision</div><h3>With Spatial Intelligence, AI Will Understand the Real World</h3><p>Dr. Fei-Fei Li explores how artificial intelligence evolves from language to 3D spatial intelligence, empowering autonomous robotics and cyber-physical factories.</p><a class="lab-link" href="https://www.youtube.com/watch?v=y8NtMZ7VGmU" target="_blank" rel="noopener">Watch on YouTube (18 min) &rarr;</a></div>
+<div class="lab-card"><div class="lab-badge">StatQuest &middot; Core Algorithms</div><h3>A Gentle Introduction to Machine Learning</h3><p>Josh Starmer illustrates classification, regression, model evaluation, and the intuition of learning predictive boundaries directly from data.</p><a class="lab-link" href="https://www.youtube.com/watch?v=Gv9_4yMHFhI" target="_blank" rel="noopener">Watch on YouTube (16 min) &rarr;</a></div>
+<div class="lab-card"><div class="lab-badge">IBM Technology &middot; Data Science</div><h3>What is Data Mining?</h3><p>A concise overview bridging raw database records, pattern extraction, and the commercial discovery of high-value intelligence.</p><a class="lab-link" href="https://www.youtube.com/watch?v=7rs0i-9nOjo" target="_blank" rel="noopener">Watch on YouTube (7 min) &rarr;</a></div>
+<div class="lab-card"><div class="lab-badge">UC Irvine &middot; Benchmark Datasets</div><h3>UCI Machine Learning Repository</h3><p>The standard benchmark repository for empirical machine learning research. Explore classical datasets like Iris, Heart Disease, and Bank Marketing.</p><a class="lab-link" href="https://archive.ics.uci.edu/about" target="_blank" rel="noopener">Explore Repository &rarr;</a></div>
+</div></section>
+
+<!-- GLOSSARY SECTION -->
+<section class="ref wrap"><h2 class="plain">Terms, in order of appearance</h2><p class="lede">Key technical terms stamped with the exact minute and second Dr. Bulut first defined them.</p><div class="terms">
+<div class="term"><b>Industry 4.0</b><span class="tm">00:23:00</span><span>The current industrial era combining IoT, cyber-physical systems, cloud computing, and AI.</span></div>
+<div class="term"><b>Dark Factory</b><span class="tm">00:26:43</span><span>A fully automated manufacturing facility operating with robots and without human presence, needing no light.</span></div>
+<div class="term"><b>Health Corridor</b><span class="tm">00:27:22</span><span>An IoT-enabled traffic system dynamically holding red lights to grant ambulances a continuous green wave.</span></div>
+<div class="term"><b>Osteoarthritis</b><span class="tm">00:30:05</span><span>Joint cartilage degeneration (kireçlenme), classified by the e-doctor model from Grade 0 to 4.</span></div>
+<div class="term"><b>Granular Computing</b><span class="tm">00:31:00</span><span>A methodology of information processing that groups data into granules to generate interpretable medical comments.</span></div>
+<div class="term"><b>Eye-Tracking Mouse</b><span class="tm">00:34:16</span><span>Assistive interface using spectacle-mounted infrared cameras to steer a computer cursor via ocular gaze.</span></div>
+<div class="term"><b>Digital Petroleum</b><span class="tm">00:40:36</span><span>The concept that data is the fundamental raw crude resource fueling modern artificial intelligence.</span></div>
+<div class="term"><b>Data</b><span class="tm">00:42:00</span><span>Any sequence of symbols or digital binary representations (1s and 0s) recorded on a computational device.</span></div>
+<div class="term"><b>Zettabyte (ZB)</b><span class="tm">00:44:27</span><span>One sextillion bytes (\(10^{21}\) bytes, or one trillion gigabytes). 180 ZB estimated in 2026.</span></div>
+<div class="term"><b>Hyperscale Data Center</b><span class="tm">00:49:50</span><span>Massive centralized cloud server facilities operated by Google, Microsoft, and Amazon requiring megawatts of cooling.</span></div>
+<div class="term"><b>CDSS</b><span class="tm">00:54:47</span><span>Clinical Decision Support System; an expert software framework assisting physicians in clinical decisions.</span></div>
+<div class="term"><b>Machine Learning</b><span class="tm">00:59:43</span><span>Systems that learn mathematical classification and regression functions directly from historical data.</span></div>
+<div class="term"><b>Decision Tree</b><span class="tm">01:07:28</span><span>A hierarchical tree-based predictive model splitting dataset features by maximum information gain.</span></div>
+<div class="term"><b>Hallucination</b><span class="tm">01:15:29</span><span>When a generative language model invents plausible but completely false facts, sources, or citations.</span></div>
+<div class="term"><b>Meta-Prompt</b><span class="tm">01:17:50</span><span>Instructing an AI model to revise, optimize, and interrogate a draft prompt before final execution.</span></div>
+<div class="term"><b>PRISM Framework</b><span class="tm">01:20:23</span><span>Prompt architecture specifying Persona, Role, Input boundaries, Structural format, and Modifiers.</span></div>
+<div class="term"><b>ECTS</b><span class="tm">01:21:58</span><span>European Credit Transfer and Accumulation System; cited regarding Cambridge prompt engineering courses.</span></div>
+<div class="term"><b>Digital Lab Rats</b><span class="tm">01:38:20</span><span>The notion that free software users unknowingly provide cognitive behavioral training data to tech giants.</span></div>
+</div></section>
+
+<!-- ERRATA SECTION -->
+<section class="ref wrap" style="margin-top:3rem"><h2 class="plain">Transcript clean-up</h2><p class="lede">The recording was auto-transcribed from audio, and several phonetic misrecognitions occurred. This log reads them as follows.</p><ul class="tl">
+<li><span class="tm">00:00:10</span><span>The transcript writes &ldquo;Farrukh Kulut&rdquo;; the lecturer is Associate Professor Dr. Faruk Bulut (Istanbul Aydin University).</span></li>
+<li><span class="tm">00:00:43</span><span>&ldquo;and man shoes&rdquo; is a phonetic slip for &ldquo;and nuances&rdquo; / &ldquo;many issues&rdquo;.</span></li>
+<li><span class="tm">00:20:54</span><span>&ldquo;concerted class&rdquo; refers to attending the live online lecture (<em>canl&#305; derse kat&#305;lmak</em>).</span></li>
+<li><span class="tm">00:28:42</span><span>&ldquo;shoving the red lights ... shoving the green light&rdquo; is read as showing red lights to traffic and showing green lights to ambulances.</span></li>
+<li><span class="tm">00:30:12</span><span>&ldquo;this kapa&#287;&#305;mdaki kire&ccedil;lenme&rdquo; is the Turkish medical complaint for knee joint osteoarthritis (<em>diz kapa&#287;&#305; kire&ccedil;lenmesi</em>).</span></li>
+<li><span class="tm">00:44:34</span><span>The transcript states &ldquo;108 zeta bytes&rdquo;; lecture slide 13 explicitly specifies 180 Zettabytes (\(180\text{ ZB} = 180,000,000,000\text{ GB}\)).</span></li>
+<li><span class="tm">00:50:58</span><span>&ldquo;Pristina&rdquo; refers to Prishtina, the capital city of Kosovo, used as an electrical consumption benchmark.</span></li>
+<li><span class="tm">00:55:00</span><span>&ldquo;CDSS&rdquo; stands for Clinical Decision Support Systems (health informatics).</span></li>
+<li><span class="tm">01:21:58</span><span>&ldquo;DCTS, ACATES&rdquo; is read as ECTS credits (European Credit Transfer and Accumulation System).</span></li>
+<li><span class="tm">01:29:20</span><span>&ldquo;Chatchi P.T., Cloud Air&rdquo; is read as ChatGPT and Claude AI.</span></li>
+<li><span class="tm">01:30:34</span><span>&ldquo;Nazfettinoja&rdquo; refers to the historic Turkish folk satirist Nasreddin Hoca (specifically the adage <em>&ldquo;Paray&#305; veren d&uuml;d&uuml;&#287;&uuml; &ccedil;alar&rdquo;</em>).</span></li>
+<li><span class="tm">01:30:57</span><span>&ldquo;NINDOS&rdquo; is read as MINDOS (slide 29: <em>&ldquo;MINDOS &mdash; The AI Operating System for Humanity&rdquo;</em>).</span></li>
+<li><span class="tm">01:32:03</span><span>&ldquo;coronosing&rdquo; is read as ChronoSync (slide 30: <em>&ldquo;ChronoSync: The Global Epigenetic Rewinding Network&rdquo;</em>).</span></li>
+<li><span class="tm">01:35:05</span><span>&ldquo;digital afterlife echo number&rdquo; is read as digital afterlife economy (slide 33: <em>&ldquo;The Echo Asset &ndash; Your Digital Afterlife Economy&rdquo;</em>).</span></li>
+<li><span class="tm">01:37:11</span><span>&ldquo;Mac teachers were protesting ... work of the test&rdquo; is read as the 1986 Washington D.C. mathematics teachers' vocal protest against pocket calculators.</span></li>
+</ul><div class="end">End of recording &middot; 01:46:44</div></section></main>
+
+<!-- Interactive Scrubber JS -->
+<script>
+(function(){
+  var es=[].slice.call(document.querySelectorAll('.e'));
+  var deck=document.querySelector('.deck');
+  var segs=[].slice.call(deck.querySelectorAll('.seg'));
+  var clock=document.getElementById('clock'), play=document.getElementById('play'), dp=document.getElementById('dpt');
+  var starts=segs.map(function(s){return +s.getAttribute('data-s')});
+  var ends=segs.map(function(s){return +s.getAttribute('data-e')});
+  function f(s){s=Math.round(s);var a=[Math.floor(s/3600),Math.floor(s%3600/60),s%60];return a.map(function(n){return (n<10?'0':'')+n}).join(':')}
+  var busy=false;
+  function upd(){
+    busy=false;
+    var line=deck.getBoundingClientRect().bottom+28, t=0;
+    for(var i=0;i<es.length;i++){
+      var r=es[i].getBoundingClientRect();
+      if(r.top<=line){
+        var a=+es[i].getAttribute('data-t'), b=+es[i].getAttribute('data-e');
+        var p=Math.max(0,Math.min(1,(line-r.top)/Math.max(1,r.height)));
+        t=a+p*(b-a);
+      } else break;
+    }
+    clock.textContent=f(t); dp.textContent=(t/60).toFixed(1)+' m';
+    var k=0;for(var j=0;j<starts.length;j++){if(t>=starts[j])k=j}
+    segs.forEach(function(s,n){s.classList.toggle('on',n===k&&t>0)});
+    var sg=segs[k], fr=Math.max(0,Math.min(1,(t-starts[k])/Math.max(1,ends[k]-starts[k])));
+    play.style.left=(sg.offsetLeft+fr*sg.offsetWidth)+'px';
+  }
+  function req(){if(!busy){busy=true;requestAnimationFrame(upd)}}
+  window.addEventListener('scroll',req,{passive:true});
+  window.addEventListener('resize',req);
+  upd();
+})();
+</script>
+
+<!-- COLLAPSIBLE LEFT NAVIGATION SIDEBAR -->
+<aside id="core-sidebar" aria-label="Course Lecture Archive">
+  <div class="sb-head">
+    <a href="index.html" class="sb-brand">
+      <span class="sb-drill-icon">&#x2BD0;</span>
+      <div class="sb-brand-meta">
+        <span class="sb-brand-sub">SEN 431 &middot; IAU</span>
+        <span class="sb-brand-title">Study Core Log</span>
+      </div>
+    </a>
+    <button id="sidebar-close-btn" class="sb-close-btn" aria-label="Close Navigation">&times;</button>
+  </div>
+
+  <div class="sb-telemetry">
+    <div class="sb-tele-col">
+      <span class="sb-tele-lbl">CORE DRILLED</span>
+      <span class="sb-tele-val">560.1 m</span>
+    </div>
+    <div class="sb-tele-col">
+      <span class="sb-tele-lbl">STRATA INDEXED</span>
+      <span class="sb-tele-val">40 Layers</span>
+    </div>
+  </div>
+
+  <div class="sb-scroll">
+    <div class="sb-nav-lbl">
+      <span>LECTURE ARCHIVE</span>
+      <span>5 / 14 WKS</span>
+    </div>
+    <ul class="sb-list">
+      
+        <li class="sb-item active">
+          <a href="Data Mining Week 1 Log.html" class="sb-link" data-week="1">
+            <span class="sb-wk-badge">W01</span>
+            <div class="sb-wk-body">
+              <span class="sb-wk-title">Orientation, AI Dilemma & Foundations</span>
+              <span class="sb-wk-meta">106.7 m &middot; 01:46:44</span>
+              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+            </div>
+          </a>
+          <ul class="sb-sublist"><li><a href="#part-a" class="sb-sublink"><span class="sb-marker">A</span><span>Orientation, Ethics, and the Digital Lab</span></a></li><li><a href="#part-b" class="sb-sublink"><span class="sb-marker">B</span><span>Industry 4.0 and Smart Autonomous Systems</span></a></li><li><a href="#part-c" class="sb-sublink"><span class="sb-marker">C</span><span>Data as the New Oil and the Carbon Cost</span></a></li><li><a href="#part-d" class="sb-sublink"><span class="sb-marker">D</span><span>Decision Support Systems and Machine Learning</span></a></li><li><a href="#part-e" class="sb-sublink"><span class="sb-marker">E</span><span>The Illusion of Trust and AI Hallucinations</span></a></li><li><a href="#part-f" class="sb-sublink"><span class="sb-marker">F</span><span>The Art of the Prompt and Cambridge Curricula</span></a></li><li><a href="#part-g" class="sb-sublink"><span class="sb-marker">G</span><span>The Billion-Dollar Prompt: 5 Models Tested</span></a></li><li><a href="#part-h" class="sb-sublink"><span class="sb-marker">H</span><span>The 1986 Calculator Panic and the Lab Rats</span></a></li><li><a href="#errata" class="sb-sublink"><span class="sb-marker">&para;</span><span>Speech Errata</span></a></li><li><a href="#video-lab" class="sb-sublink"><span class="sb-marker">&#9654;</span><span>Curated Video Lab</span></a></li></ul>
+        </li>
+        
+        <li class="sb-item">
+          <a href="Data Mining Week 2 Log.html" class="sb-link" data-week="2">
+            <span class="sb-wk-badge">W02</span>
+            <div class="sb-wk-body">
+              <span class="sb-wk-title">KDD Process, DIKW Hierarchy & Taxonomy</span>
+              <span class="sb-wk-meta">128.5 m &middot; 02:08:32</span>
+              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+            </div>
+          </a>
+          
+        </li>
+        
+        <li class="sb-item">
+          <a href="Data Mining Week 3 Log.html" class="sb-link" data-week="3">
+            <span class="sb-wk-badge">W03</span>
+            <div class="sb-wk-body">
+              <span class="sb-wk-title">Data Types, Dirty Data & Normalization</span>
+              <span class="sb-wk-meta">106.6 m &middot; 01:46:36</span>
+              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+            </div>
+          </a>
+          
+        </li>
+        
+        <li class="sb-item">
+          <a href="Data Mining Week 4 Log.html" class="sb-link" data-week="4">
+            <span class="sb-wk-badge">W04</span>
+            <div class="sb-wk-body">
+              <span class="sb-wk-title">Classification, Lazy vs Eager, ZeroR & OneR</span>
+              <span class="sb-wk-meta">115.7 m &middot; 01:55:40</span>
+              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+            </div>
+          </a>
+          
+        </li>
+        
+        <li class="sb-item">
+          <a href="Data Mining Week 5 Log.html" class="sb-link" data-week="5">
+            <span class="sb-wk-badge">W05</span>
+            <div class="sb-wk-body">
+              <span class="sb-wk-title">Distance Metrics, k-NN & Voronoi</span>
+              <span class="sb-wk-meta">102.6 m &middot; 01:42:33</span>
+              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+            </div>
+          </a>
+          
+        </li>
+        
+        <li class="sb-item upcoming">
+          <div class="sb-link" style="opacity:0.6; cursor:not-allowed">
+            <span class="sb-wk-badge pending">W06</span>
+            <div class="sb-wk-body">
+              <span class="sb-wk-title">Decision Trees & Entropy</span>
+              <span class="sb-wk-meta">Audio Transcribed &middot; Pending</span>
+            </div>
+          </div>
+        </li>
+    
+    </ul>
+  </div>
+
+  <div class="sb-footer">
+    <a href="index.html" class="sb-portal-link">
+      <span>&#x25C7;</span> Master Portal Index
+    </a>
+    <div class="sb-keyhint">
+      Shortcut: Press <kbd>[</kbd> to toggle
+    </div>
+  </div>
+</aside>
+<div id="sidebar-backdrop"></div>
+
+
+<!-- SIDEBAR INTERACTIVITY SCRIPT -->
+<script>
+(function() {
+  var STORAGE_KEY = 'sen431_core_sidebar_open';
+  var body = document.body;
+  var toggleBtn = document.getElementById('sidebar-toggle-btn');
+  var closeBtn = document.getElementById('sidebar-close-btn');
+  var backdrop = document.getElementById('sidebar-backdrop');
+
+  function isDesktop() {
+    return window.innerWidth >= 1200;
+  }
+
+  function setSidebar(open) {
+    if (open) {
+      body.classList.add('sidebar-open');
+    } else {
+      body.classList.remove('sidebar-open');
+    }
+    try {
+      localStorage.setItem(STORAGE_KEY, open ? '1' : '0');
+    } catch(e) {}
+  }
+
+  // Restore state
+  var saved = null;
+  try { saved = localStorage.getItem(STORAGE_KEY); } catch(e) {}
+  if (saved !== null) {
+    if (saved === '1') body.classList.add('sidebar-open');
+    else body.classList.remove('sidebar-open');
+  } else {
+    if (isDesktop()) body.classList.add('sidebar-open');
+  }
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      setSidebar(!body.classList.contains('sidebar-open'));
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function() {
+      setSidebar(false);
+    });
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener('click', function() {
+      setSidebar(false);
+    });
+  }
+
+  // Keyboard shortcut: [ or \ or Alt+M toggles; Escape closes
+  document.addEventListener('keydown', function(e) {
+    if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+    if (e.key === '[' || e.key === '\\' || (e.altKey && (e.key === 'm' || e.key === 'M'))) {
+      e.preventDefault();
+      setSidebar(!body.classList.contains('sidebar-open'));
+    } else if (e.key === 'Escape' && body.classList.contains('sidebar-open')) {
+      setSidebar(false);
+    }
+  });
+
+  // Adapt links based on current file naming convention
+  var currentPath = window.location.pathname;
+  var isLegacyNaming = currentPath.indexOf('Data%20Mining%20Week') !== -1 || currentPath.indexOf('Data Mining Week') !== -1;
+  if (isLegacyNaming) {
+    var links = document.querySelectorAll('.sb-link[data-week]');
+    links.forEach(function(a) {
+      var wk = a.getAttribute('data-week');
+      a.setAttribute('href', 'Data Mining Week ' + wk + ' Log.html');
+    });
+  }
+
+  // Auto close on small screens when a strata link is clicked
+  var subLinks = document.querySelectorAll('.sb-sublist a');
+  subLinks.forEach(function(link) {
+    link.addEventListener('click', function() {
+      if (!isDesktop()) setSidebar(false);
+    });
+  });
+})();
+</script>
+
+</body></html>

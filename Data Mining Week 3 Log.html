@@ -1,0 +1,1101 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<!-- KaTeX Mathematics Rendering Engine -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    function initKaTeX() {
+      if (typeof renderMathInElement === 'function') {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '\\[', right: '\\]', display: true},
+            {left: '\\(', right: '\\)', display: false}
+          ],
+          throwOnError: false
+        });
+      } else {
+        setTimeout(initKaTeX, 80);
+      }
+    }
+    initKaTeX();
+  });
+</script>
+
+<style>
+/* ==========================================================================
+   DRILL CORE: COLLAPSIBLE LEFT NAVIGATION SYSTEM & KATEX STYLING
+   ========================================================================== */
+:root {
+  --sidebar-w: 295px;
+  --sb-bg: #0b0f17;
+  --sb-surface: #111827;
+  --sb-border: rgba(255, 255, 255, 0.08);
+  --sb-text: #e2e8f0;
+  --sb-dim: #94a3b8;
+  --sb-amber: #e5a93c;
+  --sb-amber-glow: rgba(229, 169, 60, 0.15);
+}
+
+#core-sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: var(--sidebar-w);
+  background: var(--sb-bg);
+  border-right: 1px solid var(--sb-border);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 6px 0 28px rgba(0, 0, 0, 0.5);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--sb-text);
+  overflow: hidden;
+}
+
+body.sidebar-open #core-sidebar {
+  transform: translateX(0);
+}
+
+#sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 7, 12, 0.7);
+  backdrop-filter: blur(3px);
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+body.sidebar-open #sidebar-backdrop {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (min-width: 1200px) {
+  #sidebar-backdrop {
+    display: none !important;
+  }
+  body.sidebar-open {
+    padding-left: var(--sidebar-w) !important;
+    transition: padding-left 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  body:not(.sidebar-open) {
+    padding-left: 0 !important;
+    transition: padding-left 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  body.sidebar-open .deck {
+    left: var(--sidebar-w) !important;
+    width: calc(100% - var(--sidebar-w)) !important;
+    transition: left 0.24s cubic-bezier(0.16, 1, 0.3, 1), width 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  body:not(.sidebar-open) .deck {
+    left: 0 !important;
+    width: 100% !important;
+    transition: left 0.24s cubic-bezier(0.16, 1, 0.3, 1), width 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+.sb-head {
+  padding: 1rem 0.9rem 0.85rem;
+  border-bottom: 1px solid var(--sb-border);
+  background: var(--sb-surface);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sb-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  color: inherit;
+}
+.sb-drill-icon {
+  font-size: 1.25rem;
+  color: var(--sb-amber);
+  line-height: 1;
+}
+.sb-brand-meta {
+  display: flex;
+  flex-direction: column;
+}
+.sb-brand-sub {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--sb-amber);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.sb-brand-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+.sb-close-btn {
+  background: transparent;
+  border: 1px solid var(--sb-border);
+  color: var(--sb-dim);
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.15rem;
+  line-height: 1;
+  transition: all 0.15s;
+}
+.sb-close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.sb-telemetry {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0.65rem 0.9rem;
+  background: #0d121c;
+  border-bottom: 1px solid var(--sb-border);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  gap: 0.5rem;
+}
+.sb-tele-col {
+  display: flex;
+  flex-direction: column;
+}
+.sb-tele-lbl {
+  font-size: 0.58rem;
+  color: var(--sb-dim);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.sb-tele-val {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #38bdf8;
+}
+
+.sb-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.75rem 0.65rem;
+}
+.sb-nav-lbl {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--sb-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.5rem 0.55rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sb-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.sb-item {
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  background: rgba(255, 255, 255, 0.02);
+}
+.sb-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.sb-item.active {
+  background: rgba(229, 169, 60, 0.08);
+  border-color: var(--sb-amber);
+}
+.sb-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.6rem 0.65rem;
+  text-decoration: none;
+  color: inherit;
+}
+.sb-wk-badge {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 0.2rem 0.35rem;
+  background: #1e293b;
+  color: #94a3b8;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+.sb-item.active .sb-wk-badge {
+  background: var(--sb-amber);
+  color: #0b0f17;
+  border-color: var(--sb-amber);
+}
+.sb-wk-badge.pending {
+  background: #1a2232;
+  color: #64748b;
+  border-style: dashed;
+}
+.sb-wk-body {
+  flex: 1;
+  min-width: 0;
+}
+.sb-wk-title {
+  font-size: 0.77rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #f1f5f9;
+  display: block;
+}
+.sb-item.active .sb-wk-title {
+  color: var(--sb-amber);
+}
+.sb-wk-meta {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.63rem;
+  color: var(--sb-dim);
+  margin-top: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.sb-strata-bar {
+  display: flex;
+  height: 2px;
+  border-radius: 1px;
+  overflow: hidden;
+  margin-top: 0.35rem;
+  background: rgba(255, 255, 255, 0.08);
+}
+.sb-seg {
+  flex: 1;
+}
+
+.sb-sublist {
+  list-style: none;
+  margin: 0;
+  padding: 0.35rem 0.4rem 0.55rem 2.1rem;
+  border-top: 1px solid rgba(229, 169, 60, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.sb-sublink {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: none;
+  font-size: 0.71rem;
+  color: #cbd5e1;
+  padding: 0.2rem 0.35rem;
+  border-radius: 3px;
+  transition: all 0.12s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sb-sublink:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+.sb-marker {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  width: 13px;
+  text-align: center;
+  color: var(--sb-amber);
+  flex-shrink: 0;
+}
+
+.sb-footer {
+  padding: 0.75rem 0.9rem;
+  border-top: 1px solid var(--sb-border);
+  background: var(--sb-surface);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.sb-portal-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--sb-border);
+  color: #f1f5f9;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.45rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.15s;
+}
+.sb-portal-link:hover {
+  background: var(--sb-border);
+  border-color: #64748b;
+  color: #fff;
+}
+.sb-keyhint {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.6rem;
+  color: var(--sb-dim);
+  text-align: center;
+}
+.sb-keyhint kbd {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 2px;
+  padding: 0.1rem 0.25rem;
+  font-size: 0.6rem;
+  color: #cbd5e1;
+}
+
+.deck-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155;
+  padding: 0.32rem 0.65rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.deck-nav-btn:hover {
+  background: var(--sb-amber);
+  color: #0b0f17;
+  border-color: var(--sb-amber);
+  box-shadow: 0 0 10px rgba(229, 169, 60, 0.4);
+}
+.deck-nav-btn svg {
+  display: block;
+}
+
+/* KaTeX Formatting & Scroll Isolation */
+.katex {
+  font-size: 1.05em !important;
+  color: inherit !important;
+}
+.katex-display {
+  margin: 1rem 0 !important;
+  padding: 0.65rem 0.85rem !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: 4px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+</style>
+</head><body>
+<title>Data Mining Week 3 Log</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Spline+Sans:wght@300..700&family=Spline+Sans+Mono:wght@400..600&display=swap">
+<style>
+/* Layout concept: the lecture as a drill core. A sticky depth gauge on top, a vertical core sample
+   in the hero (one stratum per chapter, height = minutes), and each entry hung off a dashed rail
+   with its recording timecode and slide reference in the margin. One minute of recording = one metre of core. */
+:root{
+  --paper:#E6EBE4; --paper-2:#D8E0D7; --ink:#0E1A17; --ink-2:#4A5C56; --rule:#B2C0B8;
+  --acc:#0A6F63; --hl:#F5C945; --gold:#F5C945;
+  --band-bg:#0E1A17; --band-fg:#E6EBE4; --band-mute:#7ED6C8;
+  --f-display:"Bricolage Grotesque","Trebuchet MS",Arial,sans-serif;
+  --f-body:"Spline Sans","Segoe UI",Arial,sans-serif;
+  --f-mono:"Spline Sans Mono",ui-monospace,Menlo,Consolas,monospace;
+  --h1:repeating-linear-gradient(135deg,rgba(14,26,23,.30) 0 1.5px,transparent 1.5px 7px);
+  --h2:repeating-linear-gradient(45deg,rgba(14,26,23,.30) 0 1.5px,transparent 1.5px 7px);
+  --h3:repeating-linear-gradient(0deg,rgba(14,26,23,.26) 0 1.5px,transparent 1.5px 6px);
+  --h4:repeating-linear-gradient(90deg,rgba(14,26,23,.26) 0 1.5px,transparent 1.5px 6px);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0C1512; --paper-2:#15221E; --ink:#E4EDE8; --ink-2:#9DB3AB; --rule:#25352F;
+  --acc:#52D6C3; --hl:#6E5600; --band-bg:#1B2F29; --band-fg:#E4EDE8; --band-mute:#7ED6C8; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0C1512; --paper-2:#15221E; --ink:#E4EDE8; --ink-2:#9DB3AB; --rule:#25352F;
+  --acc:#52D6C3; --hl:#6E5600; --band-bg:#1B2F29; --band-fg:#E4EDE8; --band-mute:#7ED6C8; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1rem/1.68 var(--f-body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--paper)}
+a{color:inherit}
+a:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.wrap{width:100%;max-width:72rem;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+mark{background:linear-gradient(transparent 52%,var(--hl) 52% 92%,transparent 92%);color:inherit;padding:0 .1em}
+.tm{font:500 .76rem/1 var(--f-mono);font-variant-numeric:tabular-nums;color:var(--acc);white-space:nowrap}
+.hx1{--hatch:var(--h1)}.hx2{--hatch:var(--h2)}.hx3{--hatch:var(--h3)}.hx4{--hatch:var(--h4)}
+.hx5{--hatch:var(--h1),var(--h2)}.hx6{--hatch:var(--h3),var(--h4)}.hx7{--hatch:var(--h2),var(--h3)}.hx8{--hatch:var(--h1),var(--h4)}
+
+/* depth gauge */
+.deck{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--paper);border-bottom:2px solid var(--ink)}
+.deck .wrap{display:flex;align-items:center;gap:.9rem;padding-block:.65rem}
+.clock{font:500 1.05rem/1 var(--f-mono);font-variant-numeric:tabular-nums;color:var(--acc);min-width:5.4rem}
+.dpt{font:400 .74rem/1 var(--f-mono);color:var(--ink-2);min-width:4.6rem;font-variant-numeric:tabular-nums}
+.tape{position:relative;display:flex;gap:2px;min-width:0}
+.deck .tape{flex:1;height:14px}
+.seg{flex:var(--d) 1 0%;min-width:0;background:var(--hatch),var(--st);background-color:var(--st);color:#0E1A17;text-decoration:none;text-align:center;overflow:hidden;font:800 .72rem/14px var(--f-display)}
+.deck .seg{font-size:0}
+.seg.on{outline:2px solid var(--ink);outline-offset:1px;position:relative;z-index:1}
+.play{position:absolute;top:50%;left:0;width:13px;height:13px;margin:-6.5px 0 0 -6.5px;background:var(--gold);border:2px solid var(--ink);transform:rotate(45deg);pointer-events:none;z-index:2}
+.total{font:400 .74rem/1 var(--f-mono);color:var(--ink-2)}
+
+/* hero */
+.hero{padding-block:2.4rem 1rem}
+.eyebrow{font:500 .76rem/1.5 var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2)}
+h1{margin:.5rem 0 0;font:800 clamp(3.5rem,14.2vw,11rem)/.8 var(--f-display);letter-spacing:-.05em;text-transform:lowercase;text-wrap:balance}
+h1 .c{color:var(--acc)}
+.dia{display:inline-block;width:.2em;height:.2em;margin-left:.07em;background:var(--gold);border:.02em solid var(--ink);transform:rotate(45deg)}
+.lead{margin-top:2rem}
+.lead p{margin:0;font:400 1.4rem/1.45 var(--f-body);max-width:40rem}
+.lead p small{display:block;margin-top:.7rem;font:400 .92rem/1.55 var(--f-body);color:var(--ink-2)}
+dl.glance{margin:0;align-self:start;border-top:4px solid var(--ink);padding-top:.7rem;align-content:start;display:grid;grid-template-columns:auto minmax(0,1fr);gap:.4rem 1rem;font:400 .8rem/1.5 var(--f-mono)}
+dl.glance dt{color:var(--ink-2)} dl.glance dd{margin:0}
+
+.survey{display:grid;grid-template-columns:5.2rem minmax(0,1.2fr) minmax(0,.9fr);gap:0 2.4rem;margin-top:2.4rem;align-items:stretch}
+.corewrap{position:relative}
+.core{display:flex;flex-direction:column;min-height:30rem;height:100%;border:2px solid var(--ink);background:var(--ink)}
+.core .seg{flex:var(--d) 1 0;min-height:1.7rem;display:grid;place-items:center;font-size:.95rem;line-height:1}
+.core .seg+.seg{margin-top:2px}
+.legend{list-style:none;margin:0;padding:0;display:grid;gap:.15rem;grid-template-columns:minmax(0,1fr);align-content:space-between}
+.legend a{display:grid;grid-template-columns:1.9rem minmax(0,1fr);gap:.7rem;text-decoration:none;padding:.45rem 0;border-top:1px solid var(--rule)}
+.legend .l{display:grid;place-items:center;width:1.9rem;height:1.9rem;background:var(--hatch),var(--st);background-color:var(--st);border:1.5px solid var(--ink);color:#0E1A17;font:800 1rem/1 var(--f-display)}
+.legend b{display:block;font:650 1.02rem/1.25 var(--f-display)}
+.legend small{display:block;margin-top:.15rem;font:400 .72rem/1.45 var(--f-mono);color:var(--ink-2)}
+.legend a:hover b{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+
+/* chapter bands */
+.band{background:var(--band-bg);color:var(--band-fg);margin-top:3.6rem}
+.band::before{content:"";display:block;height:16px;background:var(--hatch),var(--st);background-color:var(--st)}
+.band-in{display:grid;grid-template-columns:auto minmax(0,1fr);gap:1.8rem;align-items:end;padding-block:1.7rem 1.8rem}
+.pl{font:800 8.2rem/.72 var(--f-display);letter-spacing:-.05em;color:var(--st)}
+.pr{font:500 .74rem/1.5 var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--band-mute)}
+.band h2{margin:.4rem 0 .5rem;font:800 clamp(2rem,5vw,3.4rem)/1 var(--f-display);letter-spacing:-.03em;text-wrap:balance}
+.band p{margin:0;max-width:46rem;opacity:.9;font-size:1.02rem}
+
+/* entries & rail */
+.entries{--pt:1.7rem}
+.e{display:grid;grid-template-columns:7.8rem 14px minmax(0,1fr);column-gap:1.1rem}
+.ts{text-align:right;font:500 .92rem/1.2 var(--f-mono);font-variant-numeric:tabular-nums;color:var(--acc);padding-top:calc(var(--pt) + .22rem)}
+.ts span{display:block;margin-top:.3rem;font-size:.68rem;font-weight:400;color:var(--ink-2)}
+.ref-slide{display:block;margin-top:.45rem;font:600 .68rem/1.2 var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--ink);background:var(--paper-2);border:1.5px solid var(--ink);padding:.22rem .4rem;width:fit-content;margin-left:auto}
+.rail{position:relative;background:repeating-linear-gradient(to bottom,var(--ink-2) 0 6px,transparent 6px 10px) right top/2px 100% no-repeat}
+.rail::before{content:"";position:absolute;top:calc(var(--pt) + .3rem);right:-6px;width:14px;height:14px;background:var(--hatch),var(--st);background-color:var(--st);border:1.5px solid var(--ink);box-shadow:0 0 0 3px var(--paper);transform:rotate(45deg)}
+.b{padding-top:var(--pt);padding-bottom:.2rem}
+.e:last-child .b{padding-bottom:1.8rem}
+.b h3{margin:0 0 .6rem;font:700 1.6rem/1.1 var(--f-display);letter-spacing:-.02em;text-wrap:balance}
+.b p{margin:0 0 .75rem;max-width:64ch}
+.x{margin:1.1rem 0 .6rem}
+.cap{margin:.5rem 0 0;font-size:.84rem;line-height:1.5;color:var(--ink-2);max-width:64ch}
+
+/* inline video / curated badges */
+.yt-badge{display:inline-flex;align-items:center;gap:.45rem;margin-top:.6rem;font:600 .75rem/1.2 var(--f-mono);color:#B3202E;background:rgba(179,32,46,.08);border:1.5px solid #B3202E;padding:.32rem .6rem;text-decoration:none;transition:background .15s}
+.yt-badge:hover{background:rgba(179,32,46,.18);text-decoration:underline}
+.yt-badge::before{content:"▶";font-size:.7rem}
+
+/* components */
+.cmp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem 1.6rem}
+.cmp .col{border-top:4px solid var(--ink);padding-top:.5rem;min-width:0}
+.cmp h4,.fam h4{margin:0 0 .5rem;font:700 1.1rem/1.1 var(--f-display);letter-spacing:-.01em}
+.cmp p{margin:0;font-size:.95rem;line-height:1.55}
+.rows{list-style:none;margin:0;padding:0;display:grid;gap:.1rem}
+.rows li{display:grid;grid-template-columns:5.6rem minmax(0,1fr);gap:.7rem;padding:.4rem 0;border-top:1px solid var(--rule);font-size:.93rem;line-height:1.5}
+.rows li:first-child{border-top:0}
+.rows .tm{padding-top:.28rem}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(7.2rem,1fr));gap:.6rem}
+.stat{border:1.5px solid var(--ink);padding:.7rem .8rem .8rem;display:grid;gap:.25rem;align-content:start;background:var(--paper-2)}
+.stat b{font:800 2.2rem/1 var(--f-display);letter-spacing:-.04em}
+.stat span{font-size:.88rem;line-height:1.35}
+.stat em{font:500 .68rem/1 var(--f-mono);font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin-top:.3rem}
+.stat.theory{border-top:6px solid #A9825A}.stat.energy{border-top:6px solid #D9607A}.stat.scale{border-top:6px solid #3FB5A5}
+
+.dir{display:grid;gap:.7rem}
+.lane{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:.4rem 1.4rem;align-items:center;border-top:1px solid var(--rule);padding-top:.7rem}
+.who{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;padding-block:.5rem}
+.who b{font:700 1.05rem/1.2 var(--f-display)}
+.ar{position:relative;flex:1 1 3.5rem;min-width:3.5rem;margin-right:.9rem;height:0;border-top:2px solid var(--ink)}
+.ar::after{content:"";position:absolute;right:-1px;top:-8px;border:solid var(--ink);border-width:2px 2px 0 0;width:13px;height:13px;transform:translateY(0) rotate(45deg) scale(1)}
+.ar.thick{border-top-width:8px;margin-block:0;margin-right:1.4rem}
+.ar.thick::after{top:-12px;width:18px;height:18px;border-width:8px 8px 0 0}
+.lane p{margin:0;font-size:.95rem;line-height:1.5}
+
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.7rem}
+.opt{border:1.5px solid var(--ink);background:var(--paper-2);padding:.7rem .85rem .9rem;display:grid;gap:.4rem;align-content:start}
+.opt b{font:800 1.8rem/1 var(--f-display)}
+.opt span{font-size:.92rem;line-height:1.4}
+.opt em{font:500 .72rem/1.3 var(--f-mono);font-style:normal;letter-spacing:.04em;text-transform:uppercase;color:#0E1A17;background:var(--gold);padding:.3rem .45rem;justify-self:start}
+.opt.win{border:3px solid var(--ink);background:var(--paper)}
+
+.kdd{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(10.5rem,1fr));gap:.45rem}
+.kdd li{background:var(--paper-2);border-top:7px solid var(--c);padding:.7rem 1.5rem .85rem 1.3rem;display:grid;gap:.3rem;align-content:start;
+  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%,14px 50%)}
+.kdd li:first-child{clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%)}
+.kdd b{font:700 1.12rem/1.1 var(--f-display)}
+.kdd span:last-child{font-size:.86rem;line-height:1.4}
+
+.pairs,.apps{display:grid;grid-template-columns:repeat(auto-fit,minmax(13.5rem,1fr));gap:.6rem}
+.pair,.app{border-top:4px solid var(--ink);background:var(--paper-2);padding:.65rem .8rem .8rem;display:grid;gap:.35rem;align-content:start}
+.pair b,.app b{font:700 1.1rem/1.15 var(--f-display)}
+.pair span:last-child,.app span:last-child{font-size:.88rem;line-height:1.4;color:var(--ink-2)}
+
+.chains{display:grid;gap:1.1rem}
+.chain h4{margin:0 0 .2rem;font:700 1.05rem/1.2 var(--f-display);display:flex;gap:.7rem;align-items:baseline;flex-wrap:wrap}
+.chain p{margin:0 0 .5rem;font-size:.93rem}
+.nodes{display:flex;flex-wrap:wrap;gap:.4rem .2rem}
+.nodes span{font:500 .82rem/1.3 var(--f-mono);border:1.5px solid var(--ink);padding:.35rem .6rem;background:var(--paper-2)}
+.nodes span+span::before{content:"\2192";display:inline-block;margin-right:.55rem;color:var(--acc);font-weight:600}
+.nodes span+span{border-left-width:1.5px}
+
+.types .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.6rem,1fr));gap:.5rem;margin-top:.5rem}
+.ty{border:1.5px solid var(--ink);padding:.6rem .7rem .7rem;display:grid;gap:.25rem;align-content:start;background:var(--paper-2)}
+.ty b{font:600 1.05rem/1.1 var(--f-mono)}
+.ty span:nth-child(2){font-size:.85rem;line-height:1.35;color:var(--ink-2)}
+
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.93rem}
+th{text-align:left;font:500 .68rem/1.2 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);padding:.4rem .8rem .4rem 0;border-bottom:2px solid var(--ink)}
+td{padding:.5rem .8rem .5rem 0;border-bottom:1px solid var(--rule);vertical-align:middle}
+.lb{display:inline-block;font:500 .78rem/1 var(--f-mono);padding:.3rem .5rem;border:1.5px solid var(--ink)}
+.lb.yes{background:var(--ink);color:var(--paper)}
+.lb.no{background:transparent;color:var(--ink)}
+.lb.q{border-style:dashed}
+
+/* Reading & Watching Lab Cards */
+.lab-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:1rem}
+.lab-card{border:2px solid var(--ink);background:var(--paper-2);padding:1rem 1.1rem 1.1rem;display:grid;gap:.5rem;align-content:start}
+.lab-card.featured{border-top:8px solid #B3202E;background:var(--paper)}
+.lab-badge{font:600 .68rem/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#B3202E;display:flex;align-items:center;gap:.35rem}
+.lab-card h3{margin:.2rem 0 0;font:700 1.25rem/1.15 var(--f-display)}
+.lab-card p{margin:0;font-size:.92rem;line-height:1.45;color:var(--ink-2)}
+.lab-link{display:inline-flex;align-items:center;gap:.4rem;margin-top:.4rem;font:600 .78rem/1 var(--f-mono);color:#B3202E;text-decoration:none;border-bottom:1.5px solid #B3202E;padding-bottom:2px;width:fit-content}
+.lab-link:hover{background:#B3202E;color:var(--paper);padding-inline:4px}
+
+.plain{margin:0 0 1.2rem;padding-bottom:.5rem;border-bottom:4px solid var(--ink);font:800 clamp(1.9rem,4.8vw,3rem)/1 var(--f-display);letter-spacing:-.03em}
+.ref{margin-top:4rem}
+.lede{margin:0 0 1.2rem;max-width:46rem;color:var(--ink-2)}
+.terms{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:0 2.4rem}
+.term{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.15rem .8rem;padding:.65rem 0;border-top:1px solid var(--rule)}
+.term b{font:650 1.05rem/1.2 var(--f-display)}
+.term span:last-child{grid-column:1/-1;font-size:.92rem;line-height:1.45;color:var(--ink-2)}
+.tl{list-style:none;padding:0;margin:0;display:grid}
+.tl li{display:grid;grid-template-columns:5.6rem minmax(0,1fr);gap:.8rem;padding:.6rem 0;border-top:1px solid var(--rule)}
+.tl li:first-child{border-top:2px solid var(--ink)}
+.end{margin-top:3.2rem;padding-block:1.4rem 2.6rem;border-top:2px solid var(--ink);font:500 .76rem/1.5 var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2)}
+
+@media (max-width:900px){.survey{grid-template-columns:4.2rem minmax(0,1fr);gap:0 1.2rem}.glance{grid-column:1/-1;margin-top:1.6rem}}
+@media (max-width:760px){
+  .lead{grid-template-columns:minmax(0,1fr)}
+  .band-in{grid-template-columns:minmax(0,1fr);gap:.3rem}
+  .pl{font-size:4.6rem}
+  .cmp{grid-template-columns:minmax(0,1fr)}
+  .lane{grid-template-columns:minmax(0,1fr)}
+  .e{grid-template-columns:14px minmax(0,1fr);grid-template-areas:"rail ts" "rail b";column-gap:.8rem}
+  .rail{grid-area:rail}
+  .ts{grid-area:ts;text-align:left;display:flex;flex-wrap:wrap;gap:.6rem;align-items:baseline;padding-top:var(--pt)}
+  .ts span{display:inline;margin:0}
+  .ref-slide{margin-left:0;margin-top:0}
+  .b{grid-area:b;padding-top:.35rem}
+  .rail::before{top:calc(var(--pt) + .1rem)}
+  .b h3{font-size:1.4rem}
+  .tl li{grid-template-columns:minmax(0,1fr);gap:.2rem}
+}
+@media (max-width:480px){.total,.dpt{display:none}.clock{min-width:4.9rem;font-size:.95rem}}
+
+@media print{
+  @page{size:A4;margin:13mm 0}
+  html{font-size:13.5px}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body::before,.deck{display:none}
+  .wrap{padding-left:14mm;padding-right:14mm;max-width:none}
+  .band{margin-top:2rem;break-after:avoid;break-inside:avoid}
+  .e{break-inside:avoid}
+  .b h3{break-after:avoid}
+  .x,.stat,.opt,.pair,.app,.lab-card,.rows li,.tl li,.term,tr,.lane,.chain{break-inside:avoid}
+  .hero{padding-top:0}
+  .ref{break-before:page}
+  .survey{break-inside:avoid}
+}
+</style>
+
+<header class="deck"><div class="wrap">
+<button id="sidebar-toggle-btn" class="deck-nav-btn" aria-label="Toggle Lecture Directory" title="Toggle Navigation Menu (Shortcut: [ or \)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg><span>LECTURES</span></button>
+<span class="clock" id="clock">00:00:00</span><span class="dpt" id="dpt">0.0 m</span><div class="tape" aria-hidden="true"><a class="seg hx1" href="#part-a" style="--d:930;--st:#A9825A" data-s="0" data-e="930" title="The Shape of a Dataset and Attribute Types"></a><a class="seg hx2" href="#part-b" style="--d:1380;--st:#D0814F" data-s="930" data-e="2310" title="Matrices, Terminology, and Play Tennis"></a><a class="seg hx3" href="#part-c" style="--d:600;--st:#E0B04A" data-s="2310" data-e="2910" title="Density, Sparsity, and Class Imbalance"></a><a class="seg hx4" href="#part-d" style="--d:690;--st:#3FB5A5" data-s="2910" data-e="3600" title="Benchmark Repositories: UCI vs. Kaggle"></a><a class="seg hx5" href="#part-e" style="--d:600;--st:#6F9ADB" data-s="3600" data-e="4200" title="Dataset File Formats: CSV, ARFF, and Weka"></a><a class="seg hx6" href="#part-f" style="--d:720;--st:#A98BD6" data-s="4200" data-e="4920" title="Data Quality: Missing Values, Noise, and Outliers"></a><a class="seg hx7" href="#part-g" style="--d:930;--st:#8FBF7A" data-s="4920" data-e="5850" title="GIGO and Occam’s Razor"></a><a class="seg hx8" href="#part-h" style="--d:546;--st:#D9607A" data-s="5850" data-e="6396" title="Feature Normalization: Min–Max vs. Z-Score"></a><span class="play" id="play"></span></div><span class="total">/ 01:46:36</span></div></header>
+
+<main><section class="hero"><div class="wrap">
+<div class="eyebrow">Data mining &middot; Week 3 &middot; Recording 29.09.26 &middot; 01:46:36</div>
+<h1>cleaning the<br><span class="c">crude matrix</span><span class="dia" aria-hidden="true"></span></h1>
+<div class="lead"><p><span class="tm">01:23:39</span> “If you provide garbage data, the output will be exactly garbage.” Dr. Faruk Bulut unpacks the geometry of data tables, benchmark repositories, file syntaxes, missing value imputation, Occam’s philosophical razor, and the mathematical mechanics of feature normalization.<small>Each entry displays the recording timestamp and corresponding slide reference. The depth gauge at top tracks the core as you scroll: 1 minute = 1 metre of core.</small></p>
+</div>
+
+<div class="survey"><div class="corewrap"><div class="core" aria-hidden="true"><a class="seg hx1" href="#part-a" style="--d:930;--st:#A9825A" data-s="0" data-e="930" title="The Shape of a Dataset and Attribute Types">A</a><a class="seg hx2" href="#part-b" style="--d:1380;--st:#D0814F" data-s="930" data-e="2310" title="Matrices, Terminology, and Play Tennis">B</a><a class="seg hx3" href="#part-c" style="--d:600;--st:#E0B04A" data-s="2310" data-e="2910" title="Density, Sparsity, and Class Imbalance">C</a><a class="seg hx4" href="#part-d" style="--d:690;--st:#3FB5A5" data-s="2910" data-e="3600" title="Benchmark Repositories: UCI vs. Kaggle">D</a><a class="seg hx5" href="#part-e" style="--d:600;--st:#6F9ADB" data-s="3600" data-e="4200" title="Dataset File Formats: CSV, ARFF, and Weka">E</a><a class="seg hx6" href="#part-f" style="--d:720;--st:#A98BD6" data-s="4200" data-e="4920" title="Data Quality: Missing Values, Noise, and Outliers">F</a><a class="seg hx7" href="#part-g" style="--d:930;--st:#8FBF7A" data-s="4920" data-e="5850" title="GIGO and Occam’s Razor">G</a><a class="seg hx8" href="#part-h" style="--d:546;--st:#D9607A" data-s="5850" data-e="6396" title="Feature Normalization: Min–Max vs. Z-Score">H</a></div></div><ol class="legend">
+<li><a href="#part-a" class="hx1" style="--st:#A9825A"><span class="l">A</span><span><b>The Shape of a Dataset and Attribute Types</b><small>00:00:00 &ndash; 00:15:30 &middot; 15 min 30 s &middot; 0.0 m deep</small></span></a></li>
+<li><a href="#part-b" class="hx2" style="--st:#D0814F"><span class="l">B</span><span><b>Matrices, Terminology, and Play Tennis</b><small>00:15:30 &ndash; 00:38:30 &middot; 23 min 00 s &middot; 15.5 m deep</small></span></a></li>
+<li><a href="#part-c" class="hx3" style="--st:#E0B04A"><span class="l">C</span><span><b>Density, Sparsity, and Class Imbalance</b><small>00:38:30 &ndash; 00:48:30 &middot; 10 min 00 s &middot; 38.5 m deep</small></span></a></li>
+<li><a href="#part-d" class="hx4" style="--st:#3FB5A5"><span class="l">D</span><span><b>Benchmark Repositories: UCI vs. Kaggle</b><small>00:48:30 &ndash; 01:00:00 &middot; 11 min 30 s &middot; 48.5 m deep</small></span></a></li>
+<li><a href="#part-e" class="hx5" style="--st:#6F9ADB"><span class="l">E</span><span><b>Dataset File Formats: CSV, ARFF, and Weka</b><small>01:00:00 &ndash; 01:10:00 &middot; 10 min 00 s &middot; 60.0 m deep</small></span></a></li>
+<li><a href="#part-f" class="hx6" style="--st:#A98BD6"><span class="l">F</span><span><b>Data Quality: Missing Values, Noise, and Outliers</b><small>01:10:00 &ndash; 01:22:00 &middot; 12 min 00 s &middot; 70.0 m deep</small></span></a></li>
+<li><a href="#part-g" class="hx7" style="--st:#8FBF7A"><span class="l">G</span><span><b>GIGO and Occam’s Razor</b><small>01:22:00 &ndash; 01:37:30 &middot; 15 min 30 s &middot; 82.0 m deep</small></span></a></li>
+<li><a href="#part-h" class="hx8" style="--st:#D9607A"><span class="l">H</span><span><b>Feature Normalization: Min–Max vs. Z-Score</b><small>01:37:30 &ndash; 01:46:36 &middot; 9 min 06 s &middot; 97.5 m deep</small></span></a></li>
+</ol>
+<dl class="glance"><dt>Recording</dt><dd>29.09.26, 01:46:36</dd><dt>Course</dt><dd>SEN 431 Data Mining, Week 3</dd><dt>Slide deck</dt><dd>Week 3: 67 slides on Datasets &amp; Preprocessing</dd><dt>Core models</dt><dd>Play Tennis (14 instances), Occam’s Razor (5 vs 57 rules)</dd><dt>Scaling tests</dt><dd>Min-Max vs. Z-Score Standardization with Outlier (Age 100)</dd><dt>Curated lab</dt><dd>6 recommended video channels, courses &amp; repositories</dd></dl>
+</div></div></section>
+
+<!-- CHAPTER A -->
+<section class="part hx1" id="part-a" style="--st:#A9825A"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">A</div><div><div class="pr">Layer 1 of 8 &middot; 00:00:00 &ndash; 00:15:30 &middot; 15 min 30 s &middot; core depth 0.0 &ndash; 15.5 m</div><h2>The Shape of a Dataset and Attribute Types</h2><p>From raw observations to a structured dataset, numerical vs real-valued, nominal categories, booleans, and discrete vs continuous features.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="0" data-e="480"><div class="ts">00:00:00<span>to 00:08:00</span><span class="ref-slide">Slides 1&ndash;4</span></div><div class="rail"></div><div class="b"><h3>From raw data to a structured matrix</h3>
+<p>Dr. Faruk Bulut opens the third week by bridging last week’s DIKW pyramid to actual data engineering. Raw data is unstructured and chaotic; before an algorithm can touch it, it must be gathered into a <mark>dataset</mark>—an organized, tabular collection of observations structured as an \(n \times m\) matrix.</p>
+<p>In this matrix geometry, horizontal rows represent individual observations (samples, records, instances, or tuples), while vertical columns represent distinct characteristics (attributes, features, or variables).</p>
+<div class="x chains"><div class="chain"><h4>The Data Structuring Chain</h4><div class="nodes"><span>Raw Unstructured Data</span><span>Tabular Matrix (n × m)</span><span>Preprocessing &amp; Cleaning</span><span>Algorithm Input</span></div></div></div>
+</div></article>
+
+<article class="e" data-t="480" data-e="930"><div class="ts">00:08:00<span>to 00:15:30</span><span class="ref-slide">Slides 5&ndash;12</span></div><div class="rail"></div><div class="b"><h3>The taxonomy of attribute types</h3>
+<p>Dr. Bulut walks the class through the fundamental data types. Understanding attribute types is not an academic formality; it dictates every preprocessing transformation, distance metric, and mathematical operation permitted on the column.</p>
+<div class="x types"><div class="grid">
+<div class="ty"><b>Numerical</b><span>Numbers with meaningful arithmetic (Age = 24, Income = $65,000).</span></div>
+<div class="ty"><b>Real-Valued</b><span>Continuous floating-point scales (Temperature = 18.5°C, Voltage = 3.3V).</span></div>
+<div class="ty"><b>Nominal</b><span>Names or categories with zero intrinsic ordering (Blue/Green/Red, London/Berlin).</span></div>
+<div class="ty"><b>Boolean / Logical</b><span>Binary two-state flags: True/False, Yes/No, 1/0 (Passed, Fraudulent).</span></div>
+</div></div>
+<div class="x cmp"><div class="col"><h4>Discrete features</h4><p><span class="tm">00:10:35</span> Countable, separate values. E.g., number of customer purchases, children in a family (1, 2, 3), hospital admissions.</p></div><div class="col"><h4>Continuous features</h4><p><span class="tm">00:11:15</span> Unbroken intervals where infinitely many intermediate values exist. E.g., customer account balances, temperature readings, sensor voltages.</p></div></div>
+</div></article>
+
+</div></section>
+
+<!-- CHAPTER B -->
+<section class="part hx2" id="part-b" style="--st:#D0814F"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">B</div><div><div class="pr">Layer 2 of 8 &middot; 00:15:30 &ndash; 00:38:30 &middot; 23 min 00 s &middot; core depth 15.5 &ndash; 38.5 m</div><h2>Matrices, Terminology, and Play Tennis</h2><p>Cross-disciplinary vocabulary, rows vs columns, class labels, and an exhaustive examination of the classic 14-day Play Tennis benchmark.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="930" data-e="1410"><div class="ts">00:15:30<span>to 00:23:30</span><span class="ref-slide">Slides 13&ndash;14</span></div><div class="rail"></div><div class="b"><h3>Same concept, three communities</h3>
+<p>Dr. Bulut explains why beginners often get confused: database engineers, classical statisticians, and machine learning researchers use completely different words for the exact same table dimensions. When talking about rows, a database administrator says <mark>tuple or record</mark>, a statistician says <mark>sample or observation</mark>, and a machine learning engineer says <mark>instance</mark>. For columns, they interchange <mark>attribute, variable, and feature</mark>.</p>
+<div class="x cmp"><div class="col"><h4>Horizontal axis (Rows)</h4><ul class="rows"><li><span class="tm">00:16:45</span><span><strong>Tuple:</strong> Relational database theory.</span></li><li><span class="tm">00:16:50</span><span><strong>Record:</strong> Storage and data warehousing.</span></li><li><span class="tm">00:17:02</span><span><strong>Instance / Sample:</strong> Machine learning algorithms.</span></li></ul></div><div class="col"><h4>Vertical axis (Columns)</h4><ul class="rows"><li><span class="tm">00:17:15</span><span><strong>Attribute:</strong> Relational schema properties.</span></li><li><span class="tm">00:17:20</span><span><strong>Variable:</strong> Statistical regression models.</span></li><li><span class="tm">00:17:35</span><span><strong>Feature:</strong> Predictive machine learning inputs.</span></li></ul></div></div>
+</div></article>
+
+<article class="e" data-t="1410" data-e="2310"><div class="ts">00:23:30<span>to 00:38:30</span><span class="ref-slide">Slides 15&ndash;20</span></div><div class="rail"></div><div class="b"><h3>Dissecting the Play Tennis dataset</h3>
+<p>To ground the matrix concepts, Dr. Bulut introduces the standard classification benchmark: <mark>Play Tennis</mark> (Tom Mitchell’s classic machine learning dataset). Comprising 14 historical days (D1 to D14), the dataset features four predictive environmental attributes and one binary target column:</p>
+<div class="x tw"><table><thead><tr><th>Day</th><th>Outlook</th><th>Temperature</th><th>Humidity</th><th>Wind</th><th>Play Tennis? (Class Label)</th></tr></thead><tbody><tr><td>D1</td><td>Sunny</td><td>Hot</td><td>High</td><td>Weak</td><td><span class="lb no">No</span></td></tr><tr><td>D2</td><td>Sunny</td><td>Hot</td><td>High</td><td>Strong</td><td><span class="lb no">No</span></td></tr><tr><td>D3</td><td>Overcast</td><td>Hot</td><td>High</td><td>Weak</td><td><span class="lb yes">Yes</span></td></tr><tr><td>D4</td><td>Rain</td><td>Mild</td><td>High</td><td>Weak</td><td><span class="lb yes">Yes</span></td></tr><tr><td>D5</td><td>Rain</td><td>Cool</td><td>Normal</td><td>Weak</td><td><span class="lb yes">Yes</span></td></tr><tr><td>D6</td><td>Rain</td><td>Cool</td><td>Normal</td><td>Strong</td><td><span class="lb no">No</span></td></tr><tr><td>D7</td><td>Overcast</td><td>Cool</td><td>Normal</td><td>Strong</td><td><span class="lb yes">Yes</span></td></tr><tr><td>D8</td><td>Sunny</td><td>Mild</td><td>High</td><td>Weak</td><td><span class="lb no">No</span></td></tr><tr><td>D9</td><td>Sunny</td><td>Cool</td><td>Normal</td><td>Weak</td><td><span class="lb yes">Yes</span></td></tr><tr><td>D10</td><td>Rain</td><td>Mild</td><td>Normal</td><td>Weak</td><td><span class="lb yes">Yes</span></td></tr><tr><td>D11</td><td>Sunny</td><td>Mild</td><td>Normal</td><td>Strong</td><td><span class="lb yes">Yes</span></td></tr><tr><td>D12</td><td>Overcast</td><td>Mild</td><td>High</td><td>Strong</td><td><span class="lb yes">Yes</span></td></tr><tr><td>D13</td><td>Overcast</td><td>Hot</td><td>Normal</td><td>Weak</td><td><span class="lb yes">Yes</span></td></tr><tr><td>D14</td><td>Rain</td><td>Mild</td><td>High</td><td>Strong</td><td><span class="lb no">No</span></td></tr></tbody></table></div>
+<p>He examines the class distribution: <mark>9 Yes instances versus 5 No instances</mark>. The target distribution is slightly skewed but sufficiently populated for training a decision tree.</p>
+<div class="x stats"><div class="stat theory"><span class="tm">00:37:09</span><b>14</b><span>instances (days)</span><em>Sample size</em></div><div class="stat scale"><span class="tm">00:37:48</span><b>4</b><span>predictive features</span><em>Inputs</em></div><div class="stat energy"><span class="tm">00:37:56</span><b>9 / 5</b><span>Yes vs No ratio</span><em>Class distribution</em></div></div>
+</div></article>
+
+</div></section>
+
+<!-- CHAPTER C -->
+<section class="part hx3" id="part-c" style="--st:#E0B04A"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">C</div><div><div class="pr">Layer 3 of 8 &middot; 00:38:30 &ndash; 00:48:30 &middot; 10 min 00 s &middot; core depth 38.5 &ndash; 48.5 m</div><h2>Density, Sparsity, and Class Imbalance</h2><p>Dense matrices vs zero-swamped sparse spaces, recommender vectors, balanced distributions, and why skewed classes deceive accuracy metrics.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="2310" data-e="2610"><div class="ts">00:38:30<span>to 00:43:30</span><span class="ref-slide">Slides 21&ndash;23</span></div><div class="rail"></div><div class="b"><h3>Dense data vs. sparse matrices</h3>
+<p>Dr. Bulut translates the concepts directly into Turkish: <mark>Dense is <em>yoğun</em></mark>, and <mark>Sparse is <em>seyrek</em></mark>. In a dense dataset, almost every cell contains an active, non-zero measurement (like standard tabular spreadsheets). In contrast, in a sparse dataset, the vast majority of matrix entries are empty, null, or zero.</p>
+<p>Prime examples of sparse data include <mark>recommender systems</mark> (where an e-commerce platform tracks 100,000 products, but an individual shopper has purchased only 3) and <mark>text document-term matrices</mark> in natural language processing (where vocabulary dictionaries span 50,000 words, but an email contains only 40 unique tokens). Storing sparse data in conventional tabular grids wastes massive computational memory.</p>
+<div class="x cmp"><div class="col"><h4>Dense data (Yoğun)</h4><p><span class="tm">00:39:46</span> Most matrix cells hold non-zero values. Standard in small tabular datasets, clinical lab panels, and sensor logs.</p></div><div class="col"><h4>Sparse data (Seyrek)</h4><p><span class="tm">00:40:44</span> Dominated by zeroes or absent entries. Ubiquitous in text tokenization, one-hot encodings, and streaming user clickstreams.</p></div></div>
+</div></article>
+
+<article class="e" data-t="2610" data-e="2910"><div class="ts">00:43:30<span>to 00:48:30</span><span class="ref-slide">Slides 24&ndash;26</span></div><div class="rail"></div><div class="b"><h3>Balanced vs. imbalanced datasets</h3>
+<p>In a balanced dataset, target classes are equally represented (e.g. 50% Positive / 50% Negative). However, the real world is drastically <mark>imbalanced</mark>. In credit card fraud detection, 99.8% of daily transactions are legitimate and only 0.2% are fraudulent; in cancer screening, 99% of biopsies are benign.</p>
+<p>Dr. Bulut demonstrates the <mark>Accuracy Paradox</mark>: a naive algorithm that always guesses “Legitimate” achieves 99.8% raw accuracy, yet it is completely useless because it misses every single fraudulent theft. In imbalanced domains, accuracy is a deceptive metric; engineers must employ precision, recall, and F1-score.</p>
+<a class="yt-badge" href="https://www.youtube.com/@statquest" target="_blank" rel="noopener">Curated Channel: StatQuest with Josh Starmer &mdash; Model Evaluation &amp; Metrics</a>
+</div></article>
+
+</div></section>
+
+<!-- CHAPTER D -->
+<section class="part hx4" id="part-d" style="--st:#3FB5A5"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">D</div><div><div class="pr">Layer 4 of 8 &middot; 00:48:30 &ndash; 01:00:00 &middot; 11 min 30 s &middot; core depth 48.5 &ndash; 60.0 m</div><h2>Benchmark Repositories: UCI vs. Kaggle</h2><p>Why benchmark datasets matter for scientific verification, navigating the UC Irvine repository, and contrasting it with Kaggle competitions.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="2910" data-e="3300"><div class="ts">00:48:30<span>to 00:55:00</span><span class="ref-slide">Slides 27&ndash;28</span></div><div class="rail"></div><div class="b"><h3>The UCI Machine Learning Repository</h3>
+<p>Dr. Bulut opens his browser and live-demonstrates the <mark>UCI Machine Learning Repository</mark> (maintained by the University of California, Irvine). Created in 1987, UCI is the gold standard benchmark library for empirical computer science. When a researcher invents a new classifier, they test it against benchmark datasets (like Iris, Heart Disease, Wine Quality, and Adult Income) so peers can reproduce and verify their performance claims under identical conditions.</p>
+<p>He inspects dataset attributes on screen: number of instances, feature dimensions, missing values, and whether the learning task is classification or regression.</p>
+<a class="yt-badge" href="https://archive.ics.uci.edu/datasets" target="_blank" rel="noopener">Benchmark Lab: Browse UCI Machine Learning Repository</a>
+</div></article>
+
+<article class="e" data-t="3300" data-e="3600"><div class="ts">00:55:00<span>to 01:00:00</span><span class="ref-slide">Slides 29&ndash;31</span></div><div class="rail"></div><div class="b"><h3>UCI vs. Kaggle: how to use them</h3>
+<p>He compares UCI with <mark>Kaggle</mark>. While UCI houses clean, curated, classical benchmarks ideal for academic learning and algorithmic proofs, Kaggle provides vast, messy, real-world industry datasets, enterprise data challenges, and collaborative Python Jupyter notebooks.</p>
+<div class="x cmp"><div class="col"><h4>UCI Repository</h4><ul class="rows"><li><span class="tm">00:57:07</span><span>Academic benchmarks (Iris, Wine, Adult Census).</span></li><li><span class="tm">00:57:40</span><span>Stable, unchanging feature sets for algorithmic comparison.</span></li><li><span class="tm">00:58:10</span><span>Best for understanding algorithm foundations and homework.</span></li></ul></div><div class="col"><h4>Kaggle Platform</h4><ul class="rows"><li><span class="tm">00:58:30</span><span>Commercial industry datasets (churn, fraud, e-commerce).</span></li><li><span class="tm">00:59:15</span><span>Community notebooks, feature engineering discussions.</span></li><li><span class="tm">00:59:45</span><span>Best for portfolio projects and machine learning competitions.</span></li></ul></div></div>
+</div></article>
+
+</div></section>
+
+<!-- CHAPTER E -->
+<section class="part hx5" id="part-e" style="--st:#6F9ADB"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">E</div><div><div class="pr">Layer 5 of 8 &middot; 01:00:00 &ndash; 01:10:00 &middot; 10 min 00 s &middot; core depth 60.0 &ndash; 70.0 m</div><h2>Dataset File Formats: CSV, ARFF, and Weka</h2><p>Flat comma-separated files, Weka’s structured ARFF syntax, delimiter caveats, and why a file format is not yet understanding.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="3600" data-e="3900"><div class="ts">01:00:00<span>to 01:05:00</span><span class="ref-slide">Slides 32&ndash;34</span></div><div class="rail"></div><div class="b"><h3>CSV (Comma-Separated Values)</h3>
+<p>The universal standard of tabular data storage is <mark>CSV</mark>. Dr. Bulut explains its simplicity: plain text, where the first row acts as the schema header (naming attributes) and each subsequent line represents one instance, with features separated by commas. However, he warns about delimiter collisions: if text columns contain internal commas or quote marks, naive CSV parsers corrupt the column alignment.</p>
+</div></article>
+
+<article class="e" data-t="3900" data-e="4200"><div class="ts">01:05:00<span>to 01:10:00</span><span class="ref-slide">Slides 35&ndash;37</span></div><div class="rail"></div><div class="b"><h3>ARFF files in Weka</h3>
+<p>Next he introduces <mark>ARFF (Attribute-Relation File Format)</mark>, the native file syntax used by the Weka machine learning platform (from the University of Waikato). Unlike bare CSV, ARFF files contain formal metadata headers defining the relation name, explicit attribute types, and permissible nominal categories before the raw data rows:</p>
+<div class="x chains"><div class="chain"><h4>ARFF File Anatomy</h4><div class="nodes"><span>@relation play_tennis</span><span>@attribute outlook {sunny, overcast, rain}</span><span>@attribute play {yes, no}</span><span>@data (Records)</span></div></div></div>
+<p>Slide 37 delivers the crucial reminder: <mark>“A file format is not yet understanding.”</mark> Knowing how to open a CSV or ARFF file does not mean you understand the underlying distributions, missingness patterns, or data validity.</p>
+<a class="yt-badge" href="https://www.youtube.com/@freecodecamp" target="_blank" rel="noopener">Curated Video: freeCodeCamp &mdash; Python Pandas &amp; CSV Preprocessing</a>
+</div></article>
+
+</div></section>
+
+<!-- CHAPTER F -->
+<section class="part hx6" id="part-f" style="--st:#A98BD6"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">F</div><div><div class="pr">Layer 6 of 8 &middot; 01:10:00 &ndash; 01:22:00 &middot; 12 min 00 s &middot; core depth 70.0 &ndash; 82.0 m</div><h2>Data Quality: Missing Values, Noise, and Outliers</h2><p>Real-world datasets are flawed: detecting missing cells, filtering sensor noise, isolating extreme outliers, and the data cleaning triad.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="4200" data-e="4560"><div class="ts">01:10:00<span>to 01:16:00</span><span class="ref-slide">Slides 38&ndash;40</span></div><div class="rail"></div><div class="b"><h3>Missing values and imputation</h3>
+<p>In industry datasets, records are rarely complete. Customers refuse to disclose their salary, medical patients skip diagnostic tests, or sensors drop internet packets. This produces <mark>Missing Values</mark>, manifested as empty cells, <code>?</code> in ARFF files, or <code>NaN</code> in Python Pandas.</p>
+<p>Dr. Bulut stresses: you cannot simply delete every incomplete row. In high-dimensional datasets, discarding every row with one missing feature might wipe out 70% of your total data. Data scientists must apply imputation techniques: replacing missing values with the column mean, median, mode, or predicting them with regression.</p>
+<div class="x tw"><table><thead><tr><th>Age</th><th>Income</th><th>Purchased?</th><th>Imputation Strategy</th></tr></thead><tbody><tr><td>24</td><td>$32,000</td><td>Yes</td><td>Complete record</td></tr><tr><td>31</td><td><span class="lb q">?</span></td><td>No</td><td>Impute with median income ($41,000)</td></tr><tr><td><span class="lb q">?</span></td><td>$41,000</td><td>Yes</td><td>Impute with mean age (33.3)</td></tr><tr><td>45</td><td>$52,000</td><td>No</td><td>Complete record</td></tr></tbody></table></div>
+</div></article>
+
+<article class="e" data-t="4560" data-e="4920"><div class="ts">01:16:00<span>to 01:22:00</span><span class="ref-slide">Slides 41&ndash;47</span></div><div class="rail"></div><div class="b"><h3>The triad: missing vs. noise vs. outlier</h3>
+<p>Dr. Bulut clarifies the distinctions between the three major data defects:</p>
+<div class="x cmp"><div class="col"><h4>Noise (Gürültü)</h4><p><span class="tm">01:17:05</span> Random measurement error or unwanted signal fluctuation. E.g., thermal sensor jitter, audio static, microphone humming, typing transpositions. Smoothable with moving averages.</p></div><div class="col"><h4>Outliers (Aykırı Değer)</h4><p><span class="tm">01:20:20</span> Data points lying unusually far from the cluster. E.g., an individual aged 100 in a student cohort, or a credit transaction of $1,000,000 among $20 coffees. May be errors or high-value signals (fraud).</p></div></div>
+<ol class="x kdd"><li style="--c:#2E9E5B"><span class="tm">01:21:20</span><b>Missing</b><span>Value absent (empty / ?)</span></li><li style="--c:#DB8429"><span class="tm">01:21:33</span><b>Noise</b><span>Value disturbed / jittered</span></li><li style="--c:#C42B45"><span class="tm">01:21:48</span><b>Outlier</b><span>Observation far from pattern</span></li></ol>
+<p class="cap">Slide 47 warning: <mark>“Preprocessing is not optional.”</mark> A sophisticated deep neural network cannot rescue meaningless or polluted inputs.</p>
+</div></article>
+
+</div></section>
+
+<!-- CHAPTER G -->
+<section class="part hx7" id="part-g" style="--st:#8FBF7A"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">G</div><div><div class="pr">Layer 7 of 8 &middot; 01:22:00 &ndash; 01:37:30 &middot; 15 min 30 s &middot; core depth 82.0 &ndash; 97.5 m</div><h2>GIGO and Occam’s Razor</h2><p>The cardinal law of data engineering, biased sampling traps, and William of Ockham’s principle of algorithmic parsimony.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="4920" data-e="5310"><div class="ts">01:22:00<span>to 01:28:30</span><span class="ref-slide">Slides 48&ndash;52</span></div><div class="rail"></div><div class="b"><h3>GIGO: Garbage In, Garbage Out</h3>
+<p>Dr. Bulut writes the acronym across the screen: <mark>GIGO (Garbage In, Garbage Out)</mark>. If your training dataset contains incorrect class labels, biased demographic sampling, or corrupted features, the machine learning model will faithfully learn those exact errors and generate garbage predictions in production.</p>
+<p>He provides the cardinal checklist: <mark>“Do not start by selecting an algorithm; start by inspecting data quality.”</mark> Better data consistently beats more complex algorithms.</p>
+<div class="x dir"><div class="lane"><div class="who"><b>Garbage Data In</b><i class="ar thick"></i><b>Machine Learning Model</b></div><p><span class="tm">01:23:44</span> Model memorizes noise, learns biased correlations, and outputs corrupted decisions.</p></div></div>
+</div></article>
+
+<article class="e" data-t="5310" data-e="5850"><div class="ts">01:28:30<span>to 01:37:30</span><span class="ref-slide">Slides 53&ndash;56</span></div><div class="rail"></div><div class="b"><h3>Occam’s Razor and model parsimony</h3>
+<p>Next, he introduces fourteenth-century philosopher William of Ockham’s rule of parsimony: <mark>Occam’s Razor</mark>. In science, given multiple competing hypotheses that explain the observations equally well, <em>prefer the simplest one</em>.</p>
+<p>In machine learning, this translates directly to <mark>avoiding overfitting</mark>. Imagine training two classifiers on the same dataset: Model A uses <mark>5 clean rules</mark> and achieves 95% training accuracy; Model B uses <mark>57 convoluted rules</mark> and also achieves 95% training accuracy. Model B has memorized individual random noise and outliers. When exposed to new, unseen data, Model A will generalize smoothly, while Model B will fail catastrophically.</p>
+<div class="x opts"><div class="opt win"><span class="tm">01:31:36</span><b>Model A: 5 Rules</b><span>Clean decision boundaries; ignores noise; generalizes reliably to future test data.</span><em>Occam’s Winner</em></div><div class="opt"><span class="tm">01:32:15</span><b>Model B: 57 Rules</b><span>Overfitted to random training jitter; memorizes noise; fragile in production.</span><em>Overfitting</em></div></div>
+<div class="x cmp"><div class="col"><h4>GIGO asks:</h4><p><span class="tm">01:36:20</span> <strong>Is the input data trustworthy?</strong> Addresses data quality, labels, sampling integrity, and noise cleaning.</p></div><div class="col"><h4>Occam’s Razor asks:</h4><p><span class="tm">01:36:45</span> <strong>Is the learned model unnecessarily complex?</strong> Addresses hypothesis simplicity, parsimony, and generalization capacity.</p></div></div>
+</div></article>
+
+</div></section>
+
+<!-- CHAPTER H -->
+<section class="part hx8" id="part-h" style="--st:#D9607A"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">H</div><div><div class="pr">Layer 8 of 8 &middot; 01:37:30 &ndash; 01:46:36 &middot; 9 min 06 s &middot; core depth 97.5 &ndash; 106.6 m</div><h2>Feature Normalization: Min–Max vs. Z-Score</h2><p>Why unscaled features distort distance metrics, step-by-step age vector transformations, the outlier stress test, and algorithmic selection rules.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="5850" data-e="6090"><div class="ts">01:37:30<span>to 01:41:30</span><span class="ref-slide">Slides 57&ndash;60</span></div><div class="rail"></div><div class="b"><h3>The mathematics of Min–Max normalization</h3>
+<p>Why do we scale features? In distance-based algorithms (like K-Nearest Neighbors, K-Means clustering, and Artificial Neural Networks), distance is computed via Euclidean geometry (\(\sqrt{\sum (x_i - y_i)^2}\)). If Salary ranges from $10,000 to $100,000 while Age ranges from 20 to 60, the salary difference of $10,000 completely dwarfs the age difference of 10 years, rendering age mathematically invisible!</p>
+<p><mark>Min–Max Normalization</mark> scales every numerical value linearly into the bounded interval \([0, 1]\):</p>
+<p>$$x' = \frac{x - \min}{\max - \min}$$</p>
+<p>Dr. Bulut works out the step-by-step math on the age vector \(A = [20, 28, 35, 40, 45, 52, 60]\) where \(\min = 20\), \(\max = 60\), and the range is \(\max - \min = 40\):</p>
+<div class="x tw"><table><thead><tr><th>Age (\(x\))</th><th>Formula: \((x - 20) / 40\)</th><th>Normalized Value (\(x'\))</th></tr></thead><tbody><tr><td>20</td><td>\((20 - 20) / 40 = 0 / 40\)</td><td><strong>0.000</strong></td></tr><tr><td>28</td><td>\((28 - 20) / 40 = 8 / 40\)</td><td><strong>0.200</strong></td></tr><tr><td>35</td><td>\((35 - 20) / 40 = 15 / 40\)</td><td><strong>0.375</strong></td></tr><tr><td>40</td><td>\((40 - 20) / 40 = 20 / 40\)</td><td><strong>0.500</strong></td></tr><tr><td>45</td><td>\((45 - 20) / 40 = 25 / 40\)</td><td><strong>0.625</strong></td></tr><tr><td>52</td><td>\((52 - 20) / 40 = 32 / 40\)</td><td><strong>0.800</strong></td></tr><tr><td>60</td><td>\((60 - 20) / 40 = 40 / 40\)</td><td><strong>1.000</strong></td></tr></tbody></table></div>
+</div></article>
+
+<article class="e" data-t="6090" data-e="6396"><div class="ts">01:41:30<span>to 01:46:36</span><span class="ref-slide">Slides 61&ndash;67</span></div><div class="rail"></div><div class="b"><h3>Z-Score standardization and the outlier stress test</h3>
+<p><mark>Z-Score Standardization</mark> transforms features to have a mean \(\mu = 0\) and a standard deviation \(\sigma = 1\):</p>
+<p>$$z = \frac{x - \mu}{\sigma}$$</p>
+<p>For the same age vector, with mean \(\mu = 40.0\) and \(\sigma \approx 12.75\), the values become \(20 \to -1.569\), \(40 \to 0.000\), and \(60 \to +1.569\).</p>
+<p>Dr. Bulut asks: <mark>What happens when an extreme outlier is introduced? (Age = 100)</mark></p>
+<div class="x cmp"><div class="col"><h4>Min–Max with Outlier (Age 100)</h4><p><span class="tm">01:44:10</span> \(\max\) becomes 100, range becomes 80. The entire original population (ages 20 to 60) is squashed into the lower half \([0.0, 0.50]\), destroying feature resolution. Highly fragile to outliers!</p></div><div class="col"><h4>Z-Score with Outlier (Age 100)</h4><p><span class="tm">01:45:00</span> Mean shifts slightly (\(\mu=47.5\)), but the scale is unbounded. Normal instances retain proportional standard deviation distances. <mark>Significantly more robust to outliers!</mark></p></div></div>
+<div class="x opts"><div class="opt"><span class="tm">01:45:45</span><b>Use Min–Max When:</b><span>Algorithms require bounded ranges (Neural network activation functions like sigmoid/tanh, image pixel scales 0–255, distance metrics without extreme outliers).</span></div><div class="opt win"><span class="tm">01:46:10</span><b>Use Z-Score When:</b><span>Data contains unknown or extreme outliers, or algorithms assume Gaussian normal distributions (PCA, Support Vector Machines, Linear Regression).</span><em>Practical Rule</em></div></div>
+<p class="cap">Dr. Bulut concludes Week 3: next week, the class advances to formal distance calculations, Euclidean and Manhattan metrics, and classification boundaries!</p>
+</div></article>
+
+</div></section>
+
+<!-- CURATED LAB RESOURCES (Assigned from Curriculum Guide) -->
+<section class="ref wrap" id="recommended-lab"><h2 class="plain">Curated Video &amp; Exploration Lab</h2><p class="lede">Assigned study resources from the instructor’s curriculum guide (Reading and Listening Tasks, Weeks 1&ndash;3) connecting Week 3 dataset preprocessing, data quality, and normalization to premier video tutorials and hands-on courses.</p>
+<div class="lab-cards">
+<div class="lab-card featured"><div class="lab-badge">StatQuest &middot; YouTube Channel</div><h3>StatQuest with Josh Starmer</h3><p>Essential video learning for clear visual explanations of feature scaling, normalization, standard deviation, and later classification algorithms.</p><a class="lab-link" href="https://www.youtube.com/@statquest" target="_blank" rel="noopener">Open StatQuest Channel &rarr;</a></div>
+<div class="lab-card featured"><div class="lab-badge">Kaggle Learn &middot; Hands-on Course</div><h3>Data Cleaning Course &mdash; Kaggle Learn</h3><p>Interactive practical micro-course covering handling missing values, scaling and normalization, date parsing, character encodings, and fuzzy matching.</p><a class="lab-link" href="https://www.kaggle.com/learn/data-cleaning" target="_blank" rel="noopener">Open Kaggle Course &rarr;</a></div>
+<div class="lab-card"><div class="lab-badge">IBM Technology &middot; Video Learning</div><h3>IBM Technology YouTube Channel</h3><p>Professional explanations of data science pipelines, data preparation workflows, and enterprise AI data management.</p><a class="lab-link" href="https://www.youtube.com/@IBMTechnology" target="_blank" rel="noopener">Open IBM Channel &rarr;</a></div>
+<div class="lab-card"><div class="lab-badge">freeCodeCamp &middot; Practical Tutorials</div><h3>freeCodeCamp.org YouTube Channel</h3><p>Long-form video tutorials on Python Pandas, CSV preprocessing, data cleaning, and machine learning feature engineering.</p><a class="lab-link" href="https://www.youtube.com/@freecodecamp" target="_blank" rel="noopener">Open freeCodeCamp &rarr;</a></div>
+<div class="lab-card"><div class="lab-badge">IBM SPSS Modeler &middot; Documentation</div><h3>Understanding and Preparing Data</h3><p>Explains why data understanding and preparation are essential before modeling and connects these activities to the industry CRISP-DM lifecycle.</p><a class="lab-link" href="https://www.ibm.com/docs/en/ws-and-kc?topic=modeler-understanding-preparing-data" target="_blank" rel="noopener">Read Documentation &rarr;</a></div>
+<div class="lab-card"><div class="lab-badge">UC Irvine &middot; Benchmark Datasets</div><h3>Browse Benchmark Datasets &mdash; UCI</h3><p>Explore canonical datasets such as Iris, Heart Disease, Wine Quality, and Bank Marketing. Inspect instances, attributes, and missing values.</p><a class="lab-link" href="https://archive.ics.uci.edu/datasets" target="_blank" rel="noopener">Explore Datasets &rarr;</a></div>
+</div></section>
+
+<!-- GLOSSARY SECTION -->
+<section class="ref wrap"><h2 class="plain">Terms, in order of appearance</h2><p class="lede">Key technical terms stamped with the exact minute and second Dr. Bulut first defined them.</p><div class="terms">
+<div class="term"><b>Dataset</b><span class="tm">00:03:00</span><span>An organized collection of observations structured as a matrix of rows and columns.</span></div>
+<div class="term"><b>Nominal Data</b><span class="tm">00:08:45</span><span>Categorical attributes with names but no intrinsic order (e.g. colors, cities).</span></div>
+<div class="term"><b>Discrete Data</b><span class="tm">00:10:35</span><span>Attributes that take countable, separate values (e.g. number of items).</span></div>
+<div class="term"><b>Continuous Data</b><span class="tm">00:11:15</span><span>Attributes that take infinitely many intermediate real-valued measurements.</span></div>
+<div class="term"><b>Instance (Tuple / Record)</b><span class="tm">00:16:45</span><span>A single horizontal observation row in a dataset.</span></div>
+<div class="term"><b>Feature (Attribute)</b><span class="tm">00:17:15</span><span>A single vertical property or measurable variable across instances.</span></div>
+<div class="term"><b>Class Label</b><span class="tm">00:21:49</span><span>The target outcome attribute in a supervised classification task (e.g. Play Tennis).</span></div>
+<div class="term"><b>Dense Data (Yoğun)</b><span class="tm">00:39:11</span><span>A dataset where the majority of matrix positions contain non-zero measurements.</span></div>
+<div class="term"><b>Sparse Data (Seyrek)</b><span class="tm">00:40:41</span><span>A matrix dominated by zeroes or absent values, common in text and recommender systems.</span></div>
+<div class="term"><b>Imbalanced Dataset</b><span class="tm">00:43:30</span><span>A dataset where one class drastically outnumbers another, rendering accuracy misleading.</span></div>
+<div class="term"><b>Benchmark Dataset</b><span class="tm">00:48:42</span><span>A standardized historical dataset used to scientifically compare and replicate algorithm performance.</span></div>
+<div class="term"><b>CSV</b><span class="tm">01:00:20</span><span>Comma-Separated Values; a plain text format storing tabular rows separated by commas.</span></div>
+<div class="term"><b>ARFF</b><span class="tm">01:01:41</span><span>Attribute-Relation File Format; Weka’s structured format containing formal @attribute headers.</span></div>
+<div class="term"><b>Missing Value</b><span class="tm">01:10:15</span><span>An unavailable, unrecorded, or null feature cell in an observation.</span></div>
+<div class="term"><b>Noise (Gürültü)</b><span class="tm">01:17:05</span><span>Random error, transmission jitter, or unwanted variance disturbing true measurements.</span></div>
+<div class="term"><b>Outlier (Aykırı Değer)</b><span class="tm">01:20:20</span><span>An observation lying abnormally far from the general distribution of the data.</span></div>
+<div class="term"><b>GIGO</b><span class="tm">01:23:39</span><span>Garbage In, Garbage Out. Corrupted input data produces corrupted algorithmic models.</span></div>
+<div class="term"><b>Occam’s Razor</b><span class="tm">01:28:54</span><span>Principle of parsimony: prefer the simplest model that adequately explains the data.</span></div>
+<div class="term"><b>Min–Max Normalization</b><span class="tm">01:39:47</span><span>Linear transformation rescaling numerical features into the bounded interval [0, 1].</span></div>
+<div class="term"><b>Z-Score Standardization</b><span class="tm">01:41:55</span><span>Statistical transformation centering features at mean 0 and scaling by standard deviation 1.</span></div>
+</div></section>
+
+<!-- ERRATA SECTION -->
+<section class="ref wrap" style="margin-top:3rem"><h2 class="plain">Transcript clean-up</h2><p class="lede">The recording was auto-transcribed from audio, and several phonetic misrecognitions occurred. This log reads them as follows.</p><ul class="tl">
+<li><span class="tm">00:06:56</span><span>The transcript writes &ldquo;GJO is garbage in garbage out&rdquo;; this is read as the universal acronym GIGO.</span></li>
+<li><span class="tm">00:39:22</span><span>&ldquo;Yo&#287;un, yes, yo&#287;un, density&rdquo; is the Turkish word <em>yo&#287;un</em> for dense data.</span></li>
+<li><span class="tm">00:39:36</span><span>&ldquo;Sparse means say, like&rdquo; is read as the Turkish word <em>seyrek</em> (sparse).</span></li>
+<li><span class="tm">00:42:19</span><span>&ldquo;plate tennis data set&rdquo; is read as Tom Mitchell's classic Play Tennis benchmark dataset.</span></li>
+<li><span class="tm">01:01:41</span><span>&ldquo;ARFF, a little bit rare&rdquo; is the Attribute-Relation File Format developed for the Weka data mining suite.</span></li>
+<li><span class="tm">01:17:00</span><span>&ldquo;Noise in Turkish, we say g&uuml;r&uuml;lt&uuml;&rdquo; translates noise as random error or signal distortion.</span></li>
+<li><span class="tm">01:20:20</span><span>&ldquo;Outlier is different&rdquo; refers to statistical outliers (Turkish: <em>ayk&#305;r&#305; de&#287;er</em>).</span></li>
+<li><span class="tm">01:28:54</span><span>The transcript transcribes &ldquo;OK, comes Razor&rdquo; and &ldquo;outcomes razor&rdquo;; this is William of Ockham's famous philosophical principle of parsimony, Occam's Razor.</span></li>
+<li><span class="tm">01:29:12</span><span>The lecturer's analogy comparing a shaving razor cutting hair to removing useless model complexity was phonetically transcribed as &ldquo;OK, comes Razor removes unwanted data&rdquo;.</span></li>
+<li><span class="tm">01:40:12</span><span>&ldquo;X prime equal to X minus min over max minus min&rdquo; is the standard Min-Max normalization formula: \(x' = \frac{x - \min}{\max - \min}\).</span></li>
+<li><span class="tm">01:41:55</span><span>&ldquo;Z score is more reliable&rdquo; refers to standard score standardization using mean (\(\mu\)) and standard deviation (\(\sigma\)).</span></li>
+</ul><div class="end">End of recording &middot; 01:46:36</div></section></main>
+
+<!-- Interactive Scrubber JS -->
+<script>
+(function(){
+  var es=[].slice.call(document.querySelectorAll('.e'));
+  var deck=document.querySelector('.deck');
+  var segs=[].slice.call(deck.querySelectorAll('.seg'));
+  var clock=document.getElementById('clock'), play=document.getElementById('play'), dp=document.getElementById('dpt');
+  var starts=segs.map(function(s){return +s.getAttribute('data-s')});
+  var ends=segs.map(function(s){return +s.getAttribute('data-e')});
+  function f(s){s=Math.round(s);var a=[Math.floor(s/3600),Math.floor(s%3600/60),s%60];return a.map(function(n){return (n<10?'0':'')+n}).join(':')}
+  var busy=false;
+  function upd(){
+    busy=false;
+    var line=deck.getBoundingClientRect().bottom+28, t=0;
+    for(var i=0;i<es.length;i++){
+      var r=es[i].getBoundingClientRect();
+      if(r.top<=line){
+        var a=+es[i].getAttribute('data-t'), b=+es[i].getAttribute('data-e');
+        var p=Math.max(0,Math.min(1,(line-r.top)/Math.max(1,r.height)));
+        t=a+p*(b-a);
+      } else break;
+    }
+    clock.textContent=f(t); dp.textContent=(t/60).toFixed(1)+' m';
+    var k=0;for(var j=0;j<starts.length;j++){if(t>=starts[j])k=j}
+    segs.forEach(function(s,n){s.classList.toggle('on',n===k&&t>0)});
+    var sg=segs[k], fr=Math.max(0,Math.min(1,(t-starts[k])/Math.max(1,ends[k]-starts[k])));
+    play.style.left=(sg.offsetLeft+fr*sg.offsetWidth)+'px';
+  }
+  function req(){if(!busy){busy=true;requestAnimationFrame(upd)}}
+  window.addEventListener('scroll',req,{passive:true});
+  window.addEventListener('resize',req);
+  upd();
+})();
+</script>
+
+<!-- COLLAPSIBLE LEFT NAVIGATION SIDEBAR -->
+<aside id="core-sidebar" aria-label="Course Lecture Archive">
+  <div class="sb-head">
+    <a href="index.html" class="sb-brand">
+      <span class="sb-drill-icon">&#x2BD0;</span>
+      <div class="sb-brand-meta">
+        <span class="sb-brand-sub">SEN 431 &middot; IAU</span>
+        <span class="sb-brand-title">Study Core Log</span>
+      </div>
+    </a>
+    <button id="sidebar-close-btn" class="sb-close-btn" aria-label="Close Navigation">&times;</button>
+  </div>
+
+  <div class="sb-telemetry">
+    <div class="sb-tele-col">
+      <span class="sb-tele-lbl">CORE DRILLED</span>
+      <span class="sb-tele-val">560.1 m</span>
+    </div>
+    <div class="sb-tele-col">
+      <span class="sb-tele-lbl">STRATA INDEXED</span>
+      <span class="sb-tele-val">40 Layers</span>
+    </div>
+  </div>
+
+  <div class="sb-scroll">
+    <div class="sb-nav-lbl">
+      <span>LECTURE ARCHIVE</span>
+      <span>5 / 14 WKS</span>
+    </div>
+    <ul class="sb-list">
+      
+        <li class="sb-item">
+          <a href="Data Mining Week 1 Log.html" class="sb-link" data-week="1">
+            <span class="sb-wk-badge">W01</span>
+            <div class="sb-wk-body">
+              <span class="sb-wk-title">Orientation, AI Dilemma & Foundations</span>
+              <span class="sb-wk-meta">106.7 m &middot; 01:46:44</span>
+              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+            </div>
+          </a>
+          
+        </li>
+        
+        <li class="sb-item">
+          <a href="Data Mining Week 2 Log.html" class="sb-link" data-week="2">
+            <span class="sb-wk-badge">W02</span>
+            <div class="sb-wk-body">
+              <span class="sb-wk-title">KDD Process, DIKW Hierarchy & Taxonomy</span>
+              <span class="sb-wk-meta">128.5 m &middot; 02:08:32</span>
+              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+            </div>
+          </a>
+          
+        </li>
+        
+        <li class="sb-item active">
+          <a href="Data Mining Week 3 Log.html" class="sb-link" data-week="3">
+            <span class="sb-wk-badge">W03</span>
+            <div class="sb-wk-body">
+              <span class="sb-wk-title">Data Types, Dirty Data & Normalization</span>
+              <span class="sb-wk-meta">106.6 m &middot; 01:46:36</span>
+              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+            </div>
+          </a>
+          <ul class="sb-sublist"><li><a href="#part-a" class="sb-sublink"><span class="sb-marker">A</span><span>The Shape of a Dataset and Attribute Types</span></a></li><li><a href="#part-b" class="sb-sublink"><span class="sb-marker">B</span><span>Matrices, Terminology, and Play Tennis</span></a></li><li><a href="#part-c" class="sb-sublink"><span class="sb-marker">C</span><span>Density, Sparsity, and Class Imbalance</span></a></li><li><a href="#part-d" class="sb-sublink"><span class="sb-marker">D</span><span>Benchmark Repositories: UCI vs. Kaggle</span></a></li><li><a href="#part-e" class="sb-sublink"><span class="sb-marker">E</span><span>Dataset File Formats: CSV, ARFF, and Weka</span></a></li><li><a href="#part-f" class="sb-sublink"><span class="sb-marker">F</span><span>Data Quality: Missing Values, Noise & Outliers</span></a></li><li><a href="#part-g" class="sb-sublink"><span class="sb-marker">G</span><span>GIGO and Occam’s Razor</span></a></li><li><a href="#part-h" class="sb-sublink"><span class="sb-marker">H</span><span>Feature Normalization: Min–Max vs. Z-Score</span></a></li><li><a href="#errata" class="sb-sublink"><span class="sb-marker">&para;</span><span>Speech Errata</span></a></li><li><a href="#video-lab" class="sb-sublink"><span class="sb-marker">&#9654;</span><span>Curated Video Lab</span></a></li></ul>
+        </li>
+        
+        <li class="sb-item">
+          <a href="Data Mining Week 4 Log.html" class="sb-link" data-week="4">
+            <span class="sb-wk-badge">W04</span>
+            <div class="sb-wk-body">
+              <span class="sb-wk-title">Classification, Lazy vs Eager, ZeroR & OneR</span>
+              <span class="sb-wk-meta">115.7 m &middot; 01:55:40</span>
+              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+            </div>
+          </a>
+          
+        </li>
+        
+        <li class="sb-item">
+          <a href="Data Mining Week 5 Log.html" class="sb-link" data-week="5">
+            <span class="sb-wk-badge">W05</span>
+            <div class="sb-wk-body">
+              <span class="sb-wk-title">Distance Metrics, k-NN & Voronoi</span>
+              <span class="sb-wk-meta">102.6 m &middot; 01:42:33</span>
+              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+            </div>
+          </a>
+          
+        </li>
+        
+        <li class="sb-item upcoming">
+          <div class="sb-link" style="opacity:0.6; cursor:not-allowed">
+            <span class="sb-wk-badge pending">W06</span>
+            <div class="sb-wk-body">
+              <span class="sb-wk-title">Decision Trees & Entropy</span>
+              <span class="sb-wk-meta">Audio Transcribed &middot; Pending</span>
+            </div>
+          </div>
+        </li>
+    
+    </ul>
+  </div>
+
+  <div class="sb-footer">
+    <a href="index.html" class="sb-portal-link">
+      <span>&#x25C7;</span> Master Portal Index
+    </a>
+    <div class="sb-keyhint">
+      Shortcut: Press <kbd>[</kbd> to toggle
+    </div>
+  </div>
+</aside>
+<div id="sidebar-backdrop"></div>
+
+
+<!-- SIDEBAR INTERACTIVITY SCRIPT -->
+<script>
+(function() {
+  var STORAGE_KEY = 'sen431_core_sidebar_open';
+  var body = document.body;
+  var toggleBtn = document.getElementById('sidebar-toggle-btn');
+  var closeBtn = document.getElementById('sidebar-close-btn');
+  var backdrop = document.getElementById('sidebar-backdrop');
+
+  function isDesktop() {
+    return window.innerWidth >= 1200;
+  }
+
+  function setSidebar(open) {
+    if (open) {
+      body.classList.add('sidebar-open');
+    } else {
+      body.classList.remove('sidebar-open');
+    }
+    try {
+      localStorage.setItem(STORAGE_KEY, open ? '1' : '0');
+    } catch(e) {}
+  }
+
+  // Restore state
+  var saved = null;
+  try { saved = localStorage.getItem(STORAGE_KEY); } catch(e) {}
+  if (saved !== null) {
+    if (saved === '1') body.classList.add('sidebar-open');
+    else body.classList.remove('sidebar-open');
+  } else {
+    if (isDesktop()) body.classList.add('sidebar-open');
+  }
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      setSidebar(!body.classList.contains('sidebar-open'));
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function() {
+      setSidebar(false);
+    });
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener('click', function() {
+      setSidebar(false);
+    });
+  }
+
+  // Keyboard shortcut: [ or \ or Alt+M toggles; Escape closes
+  document.addEventListener('keydown', function(e) {
+    if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+    if (e.key === '[' || e.key === '\\' || (e.altKey && (e.key === 'm' || e.key === 'M'))) {
+      e.preventDefault();
+      setSidebar(!body.classList.contains('sidebar-open'));
+    } else if (e.key === 'Escape' && body.classList.contains('sidebar-open')) {
+      setSidebar(false);
+    }
+  });
+
+  // Adapt links based on current file naming convention
+  var currentPath = window.location.pathname;
+  var isLegacyNaming = currentPath.indexOf('Data%20Mining%20Week') !== -1 || currentPath.indexOf('Data Mining Week') !== -1;
+  if (isLegacyNaming) {
+    var links = document.querySelectorAll('.sb-link[data-week]');
+    links.forEach(function(a) {
+      var wk = a.getAttribute('data-week');
+      a.setAttribute('href', 'Data Mining Week ' + wk + ' Log.html');
+    });
+  }
+
+  // Auto close on small screens when a strata link is clicked
+  var subLinks = document.querySelectorAll('.sb-sublist a');
+  subLinks.forEach(function(link) {
+    link.addEventListener('click', function() {
+      if (!isDesktop()) setSidebar(false);
+    });
+  });
+})();
+</script>
+
+</body></html>
