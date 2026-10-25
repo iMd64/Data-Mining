@@ -1,4 +1,161 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
+
+/* ==========================================================================
+   THEME SWITCHER STYLES (MATCHING MIS PORTAL) & SCROLL MARGINS
+   ========================================================================== */
+#errata, #video-lab, #recommended-lab, .part {
+  scroll-margin-top: 65px !important;
+}
+
+/* Force body and deck to respect theme variables */
+body {
+  background: var(--paper, var(--bg, #080B11)) !important;
+  color: var(--ink, var(--text, #E2E8F0)) !important;
+}
+
+/* Dark Theme Variables */
+:root[data-theme="dark"], :root:not([data-theme="light"]) {
+  --paper: #0C1512 !important;
+  --paper-2: #15221E !important;
+  --ink: #E4EDE8 !important;
+  --ink-2: #9DB3AB !important;
+  --rule: #25352F !important;
+  --acc: #52D6C3 !important;
+  --hl: #6E5600 !important;
+  --band-bg: #1B2F29 !important;
+  --band-fg: #E4EDE8 !important;
+  --band-mute: #7ED6C8 !important;
+  --sidebar-w: 295px;
+  --sb-bg: #0b0f17;
+  --sb-surface: #111827;
+  --sb-border: rgba(255, 255, 255, 0.08);
+  --sb-text: #e2e8f0;
+  --sb-dim: #94a3b8;
+  --sb-amber: #e5a93c;
+  --sb-amber-glow: rgba(229, 169, 60, 0.15);
+  color-scheme: dark;
+}
+
+/* Light Theme Variables */
+:root[data-theme="light"] {
+  --paper: #E6EBE4 !important;
+  --paper-2: #D8E0D7 !important;
+  --ink: #0E1A17 !important;
+  --ink-2: #4A5C56 !important;
+  --rule: #B2C0B8 !important;
+  --acc: #0A6F63 !important;
+  --hl: #F5C945 !important;
+  --gold: #F5C945 !important;
+  --band-bg: #0E1A17 !important;
+  --band-fg: #E6EBE4 !important;
+  --band-mute: #7ED6C8 !important;
+  --sidebar-w: 295px;
+  --sb-bg: #EAEFE8 !important;
+  --sb-surface: #DDE4DC !important;
+  --sb-border: rgba(14, 26, 23, 0.15) !important;
+  --sb-text: #0E1A17 !important;
+  --sb-dim: #4A5C56 !important;
+  --sb-amber: #0A6F63 !important;
+  --sb-amber-glow: rgba(10, 111, 99, 0.15) !important;
+  color-scheme: light;
+}
+
+/* Sidebar Dark Mode Styling */
+:root[data-theme="dark"] #core-sidebar, :root:not([data-theme="light"]) #core-sidebar {
+  background: var(--sb-bg) !important;
+  color: var(--sb-text) !important;
+  border-right: 1px solid var(--sb-border) !important;
+}
+
+/* Sidebar Light Mode Styling */
+:root[data-theme="light"] #core-sidebar {
+  background: #EAEFE8 !important;
+  color: #0E1A17 !important;
+  border-right: 1px solid rgba(14, 26, 23, 0.15) !important;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1) !important;
+}
+:root[data-theme="light"] .sb-head {
+  background: #DDE4DC !important;
+  border-bottom: 1px solid rgba(14, 26, 23, 0.15) !important;
+}
+:root[data-theme="light"] .sb-brand-title { color: #0E1A17 !important; }
+:root[data-theme="light"] .sb-wk-title { color: #0E1A17 !important; }
+:root[data-theme="light"] .sb-item { background: rgba(14, 26, 23, 0.03) !important; }
+:root[data-theme="light"] .sb-item:hover { background: rgba(14, 26, 23, 0.08) !important; }
+:root[data-theme="light"] .sb-item.active { background: rgba(10, 111, 99, 0.12) !important; border-color: #0A6F63 !important; }
+:root[data-theme="light"] .sb-item.active .sb-wk-title { color: #0A6F63 !important; }
+:root[data-theme="light"] .sb-sublink { color: #2D3E38 !important; }
+:root[data-theme="light"] .sb-sublink:hover { color: #0A6F63 !important; background: rgba(10, 111, 99, 0.08) !important; }
+:root[data-theme="light"] .sb-wk-badge { background: #D0DDD6 !important; color: #1E2D27 !important; border-color: rgba(14, 26, 23, 0.15) !important; }
+:root[data-theme="light"] .sb-item.active .sb-wk-badge { background: #0A6F63 !important; color: #FFFFFF !important; }
+:root[data-theme="light"] .sb-telemetry { background: #E1E8E0 !important; border-color: rgba(14, 26, 23, 0.1) !important; }
+:root[data-theme="light"] .sb-tele-val { color: #0A6F63 !important; }
+:root[data-theme="light"] .sb-footer { background: #DDE4DC !important; border-top: 1px solid rgba(14, 26, 23, 0.15) !important; }
+:root[data-theme="light"] .sb-portal-link { background: rgba(14, 26, 23, 0.04) !important; border-color: rgba(14, 26, 23, 0.15) !important; color: #0E1A17 !important; }
+:root[data-theme="light"] .sb-portal-link:hover { background: #D0DDD6 !important; color: #0A6F63 !important; }
+:root[data-theme="light"] .deck-nav-btn { background: #E6EBE4 !important; color: #0E1A17 !important; border-color: #B2C0B8 !important; }
+:root[data-theme="light"] .deck-nav-btn:hover { background: #0A6F63 !important; color: #E6EBE4 !important; border-color: #0A6F63 !important; }
+
+/* Theme Toggle Button in Sidebar Footer */
+.sb-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: 1px solid var(--sb-border);
+  padding: 0.45rem 0.65rem;
+  border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--sb-text);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  width: 100%;
+}
+.sb-theme-toggle:hover {
+  border-color: var(--sb-amber);
+  background: var(--sb-surface);
+  color: var(--sb-amber);
+}
+:root[data-theme="light"] .sb-theme-toggle {
+  border-color: rgba(14, 26, 23, 0.2) !important;
+  color: #0E1A17 !important;
+}
+:root[data-theme="light"] .sb-theme-toggle:hover {
+  border-color: #0A6F63 !important;
+  background: #D0DDD6 !important;
+  color: #0A6F63 !important;
+}
+
+/* Master Portal Light Theme Overrides */
+:root[data-theme="light"] .portal-wrap {
+  color: #0E1A17 !important;
+}
+:root[data-theme="light"] .portal-title { color: #0E1A17 !important; }
+:root[data-theme="light"] .portal-sub { color: #4A5C56 !important; }
+:root[data-theme="light"] .idx-card-title a { color: #0E1A17 !important; }
+:root[data-theme="light"] .idx-card-title a:hover { color: #0A6F63 !important; }
+:root[data-theme="light"] .idx-card { background: #FFFFFF !important; border-color: #C4D1C9 !important; }
+:root[data-theme="light"] .idx-card-top { border-color: rgba(14, 26, 23, 0.08) !important; }
+:root[data-theme="light"] .idx-card-actions { background: #F3F7F2 !important; border-color: #C4D1C9 !important; }
+:root[data-theme="light"] .idx-strata-container { background: #F8FAF7 !important; }
+:root[data-theme="light"] .idx-stratum-row { color: #2D3E38 !important; }
+:root[data-theme="light"] .idx-stratum-row:hover { background: rgba(10, 111, 99, 0.08) !important; color: #0A6F63 !important; }
+:root[data-theme="light"] .idx-btn.secondary, :root[data-theme="light"] .idx-btn.tertiary { background: #FFFFFF !important; border-color: #C4D1C9 !important; color: #0E1A17 !important; }
+:root[data-theme="light"] .idx-btn.secondary:hover, :root[data-theme="light"] .idx-btn.tertiary:hover { background: #E1E8E0 !important; color: #0A6F63 !important; }
+:root[data-theme="light"] .search-box input { background: #FFFFFF !important; border-color: #C4D1C9 !important; color: #0E1A17 !important; }
+:root[data-theme="light"] .search-box input:focus { background: #FFFFFF !important; border-color: #0A6F63 !important; box-shadow: 0 0 0 3px rgba(10, 111, 99, 0.2) !important; }
+:root[data-theme="light"] .guide-box { background: #FFFFFF !important; border-color: #C4D1C9 !important; }
+:root[data-theme="light"] .guide-item p { color: #2D3E38 !important; }
+:root[data-theme="light"] .guide-item pre { background: #F3F7F2 !important; border-color: #C4D1C9 !important; color: #0A6F63 !important; }
+:root[data-theme="light"] .portal-footer { background: #E1E8E0 !important; border-color: #C4D1C9 !important; color: #4A5C56 !important; }
+:root[data-theme="light"] .deck { background: #E6EBE4 !important; border-bottom-color: #0A6F63 !important; color: #0E1A17 !important; }
+:root[data-theme="light"] .deck span, :root[data-theme="light"] .deck-metric-val { color: #0E1A17 !important; }
+:root[data-theme="light"] .portal-meta-strip { background: #FFFFFF !important; border-color: #C4D1C9 !important; color: #2D3E38 !important; }
+
+</style>
 <!-- KaTeX Mathematics Rendering Engine -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
@@ -411,6 +568,15 @@ body.sidebar-open #sidebar-backdrop {
   overflow-y: hidden !important;
 }
 </style>
+
+<script>
+(function() {
+  var saved = null;
+  try { saved = localStorage.getItem('sen431_theme') || localStorage.getItem('mis_theme'); } catch(e) {}
+  var theme = saved || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+})();
+</script>
 </head><body>
 <title>Data Mining Week 2 Log</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -871,7 +1037,7 @@ tr.added td{color:var(--ink-2)}
 </div></article>
 </div></section>
 <!-- CURATED LAB RESOURCES (Added from Reading & Listening Tasks W1-3) -->
-<section class="ref wrap" id="recommended-lab"><h2 class="plain">Curated Video &amp; Exploration Lab</h2><p class="lede">Assigned study resources from the instructor’s curriculum guide (Reading and Listening Tasks, Weeks 1&ndash;3) connecting Week 2 KDD and DIKW concepts to premier video tutorials and industry process models.</p>
+<section class="ref wrap" id="video-lab"><span id="recommended-lab"></span><h2 class="plain">Curated Video &amp; Exploration Lab</h2><p class="lede">Assigned study resources from the instructor’s curriculum guide (Reading and Listening Tasks, Weeks 1&ndash;3) connecting Week 2 KDD and DIKW concepts to premier video tutorials and industry process models.</p>
 <div class="lab-cards">
 <div class="lab-card featured"><div class="lab-badge">IBM Technology &middot; Data Science</div><h3>What is Data Mining?</h3><p>A concise, professional overview connecting raw database records, the KDD process, and commercial pattern discovery.</p><a class="lab-link" href="https://www.youtube.com/watch?v=7rs0i-9nOjo" target="_blank" rel="noopener">Watch on YouTube (7 min) &rarr;</a></div>
 <div class="lab-card featured"><div class="lab-badge">FST Study &middot; Conceptual Frameworks</div><h3>Data to Wisdom &ndash; The DIKW Pyramid</h3><p>An accessible visual breakdown of the Data &rarr; Information &rarr; Knowledge &rarr; Wisdom hierarchy with real-world examples.</p><a class="lab-link" href="https://www.youtube.com/watch?v=FBeJNCETs3w" target="_blank" rel="noopener">Watch on YouTube (8 min) &rarr;</a></div>
@@ -905,7 +1071,7 @@ tr.added td{color:var(--ink-2)}
 <div class="term"><b>Unlabeled data</b><span class="tm">01:36:48</span><span>Records without a label. Most digital data.</span></div>
 <div class="term"><b>Future prediction model</b><span class="tm">01:38:31</span><span>What the course is building toward.</span></div>
 </div></section>
-<section class="ref wrap" style="margin-top:3rem"><h2 class="plain">Transcript clean-up</h2><p class="lede">The recording was auto-transcribed, and some words came out wrong. This page reads them as follows.</p><ul class="tl">
+<section class="ref wrap" id="errata" style="margin-top:3rem"><h2 class="plain">Transcript clean-up</h2><p class="lede">The recording was auto-transcribed, and some words came out wrong. This page reads them as follows.</p><ul class="tl">
 <li><span class="tm">00:00:42</span><span>The transcript says half the class would take “an A score” because attendance is low. It is likely a slip for a failing grade, since he calls low attendance a problem.</span></li>
 <li><span class="tm">00:06:09</span><span>“Istanbul University of Aydın” is read as Istanbul Aydın University.</span></li>
 <li><span class="tm">00:09:18</span><span>“Naive bias” is read as naive Bayes, and “confusion metrics” as confusion matrix.</span></li>
@@ -1061,8 +1227,12 @@ tr.added td{color:var(--ink-2)}
     <a href="index.html" class="sb-portal-link">
       <span>&#x25C7;</span> Master Portal Index
     </a>
+    <button class="sb-theme-toggle" id="sb-theme-toggle" type="button" title="Toggle Light / Dark Mode (Shortcut: T)">
+      <span class="theme-icon">&#x25D1;</span>
+      <span class="theme-text">Toggle Theme</span>
+    </button>
     <div class="sb-keyhint">
-      Shortcut: Press <kbd>[</kbd> to toggle
+      Shortcut: Press <kbd>[</kbd> to toggle &middot; <kbd>T</kbd> for theme
     </div>
   </div>
 </aside>
@@ -1151,6 +1321,55 @@ tr.added td{color:var(--ink-2)}
       if (!isDesktop()) setSidebar(false);
     });
   });
+
+  // Theme Switcher Controller (Matching MIS Portal)
+  var themeBtn = document.getElementById('sb-theme-toggle');
+  function updateThemeUI(theme) {
+    if (!themeBtn) return;
+    var icon = themeBtn.querySelector('.theme-icon');
+    var text = themeBtn.querySelector('.theme-text');
+    if (theme === 'dark') {
+      if (icon) icon.innerHTML = '&#x25D1;'; // ◑
+      if (text) text.textContent = 'Theme: Dark';
+    } else {
+      if (icon) icon.innerHTML = '&#x25D0;'; // ◐
+      if (text) text.textContent = 'Theme: Light';
+    }
+  }
+
+  function toggleTheme() {
+    var cur = document.documentElement.getAttribute('data-theme');
+    var isDark = cur === 'dark' || (!cur && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    var next = isDark ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try {
+      localStorage.setItem('sen431_theme', next);
+      localStorage.setItem('mis_theme', next);
+    } catch(e) {}
+    updateThemeUI(next);
+  }
+
+  if (themeBtn) {
+    themeBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleTheme();
+    });
+  }
+
+  // Set initial button label
+  var initialTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+  updateThemeUI(initialTheme);
+
+  // Keyboard shortcut: Press 'T' or 't' to toggle theme
+  document.addEventListener('keydown', function(e) {
+    if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+    if (e.key === 't' || e.key === 'T') {
+      e.preventDefault();
+      toggleTheme();
+    }
+  });
+
 })();
 </script>
 
