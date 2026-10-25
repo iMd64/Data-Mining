@@ -93,7 +93,200 @@ body {
 :root[data-theme="light"] .sb-footer { background: #DDE4DC !important; border-top: 1px solid rgba(14, 26, 23, 0.15) !important; }
 :root[data-theme="light"] .sb-portal-link { background: rgba(14, 26, 23, 0.04) !important; border-color: rgba(14, 26, 23, 0.15) !important; color: #0E1A17 !important; }
 :root[data-theme="light"] .sb-portal-link:hover { background: #D0DDD6 !important; color: #0A6F63 !important; }
-:root[data-theme="light"] .deck-nav-btn { background: #E6EBE4 !important; color: #0E1A17 !important; border-color: #B2C0B8 !important; }
+:root[data-theme="light"] 
+/* ==========================================================================
+   AI PDF NOTES BUTTON & HOVER CARD
+   ========================================================================== */
+.deck-pdf-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.deck-pdf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: none;
+  background: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155;
+  padding: 0.32rem 0.68rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.15s ease;
+  line-height: 1;
+  white-space: nowrap;
+}
+.deck-pdf-btn:hover {
+  background: var(--sb-amber, #e5a93c);
+  color: #0b0f17;
+  border-color: var(--sb-amber, #e5a93c);
+  box-shadow: 0 0 12px rgba(229, 169, 60, 0.4);
+}
+:root[data-theme="light"] .deck-pdf-btn {
+  background: #E6EBE4 !important;
+  color: #0E1A17 !important;
+  border-color: #B2C0B8 !important;
+}
+:root[data-theme="light"] .deck-pdf-btn:hover {
+  background: #0A6F63 !important;
+  color: #FFFFFF !important;
+  border-color: #0A6F63 !important;
+  box-shadow: 0 0 10px rgba(10, 111, 99, 0.25) !important;
+}
+
+.deck-pdf-ext {
+  opacity: 0.7;
+  margin-left: 1px;
+  transition: transform 0.15s ease;
+}
+.deck-pdf-btn:hover .deck-pdf-ext {
+  opacity: 1;
+  transform: translate(1px, -1px);
+}
+
+/* Hover Popover Card */
+.deck-pdf-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 320px;
+  max-width: min(340px, 90vw);
+  background: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 0.85rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.3);
+  color: #e2e8f0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.deck-pdf-wrap:hover .deck-pdf-popover,
+.deck-pdf-wrap:focus-within .deck-pdf-popover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.deck-pdf-popover::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: 22px;
+  width: 10px;
+  height: 10px;
+  background: #0f172a;
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  transform: rotate(45deg);
+}
+
+:root[data-theme="light"] .deck-pdf-popover {
+  background: #FFFFFF !important;
+  border-color: rgba(14, 26, 23, 0.18) !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06) !important;
+  color: #0E1A17 !important;
+}
+:root[data-theme="light"] .deck-pdf-popover::before {
+  background: #FFFFFF !important;
+  border-color: rgba(14, 26, 23, 0.18) !important;
+}
+
+.pop-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+:root[data-theme="light"] .pop-head {
+  border-bottom-color: rgba(14, 26, 23, 0.1) !important;
+}
+.pop-badge {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+  background: rgba(229, 169, 60, 0.15);
+  color: var(--sb-amber, #e5a93c);
+}
+:root[data-theme="light"] .pop-badge {
+  background: rgba(10, 111, 99, 0.12) !important;
+  color: #0A6F63 !important;
+}
+.pop-wk {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #94a3b8;
+}
+:root[data-theme="light"] .pop-wk {
+  color: #64748b !important;
+}
+
+.pop-body {
+  margin: 0 0 0.6rem 0;
+  font-size: 0.74rem;
+  line-height: 1.45;
+  color: #cbd5e1;
+}
+:root[data-theme="light"] .pop-body {
+  color: #334155 !important;
+}
+.pop-body strong {
+  color: #f8fafc;
+}
+:root[data-theme="light"] .pop-body strong {
+  color: #0f172a !important;
+}
+
+.pop-disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 4px;
+  background: rgba(245, 201, 69, 0.08);
+  border: 1px solid rgba(245, 201, 69, 0.22);
+  font-size: 0.67rem;
+  line-height: 1.4;
+  color: #fef08a;
+}
+:root[data-theme="light"] .pop-disclaimer {
+  background: rgba(180, 83, 9, 0.06) !important;
+  border-color: rgba(180, 83, 9, 0.22) !important;
+  color: #78350f !important;
+}
+.pop-disc-icon {
+  font-size: 0.82rem;
+  line-height: 1.1;
+  flex-shrink: 0;
+}
+.pop-disc-text {
+  flex: 1;
+}
+.pop-disc-text strong {
+  font-weight: 700;
+}
+
+.deck-nav-btn { background: #E6EBE4 !important; color: #0E1A17 !important; border-color: #B2C0B8 !important; }
 :root[data-theme="light"] .deck-nav-btn:hover { background: #0A6F63 !important; color: #E6EBE4 !important; border-color: #0A6F63 !important; }
 
 /* Theme Toggle Button in Sidebar Footer */
@@ -810,7 +1003,38 @@ td{padding:.5rem .8rem .5rem 0;border-bottom:1px solid var(--rule);vertical-alig
 
 <header class="deck"><div class="wrap">
 <button id="sidebar-toggle-btn" class="deck-nav-btn" aria-label="Toggle Lecture Directory" title="Toggle Navigation Menu (Shortcut: [ or \)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg><span>LECTURES</span></button>
-<span class="clock" id="clock">00:00:00</span><span class="dpt" id="dpt">0.0 m</span><div class="tape" aria-hidden="true"><a class="seg hx1" href="#part-a" style="--d:900;--st:#A9825A" data-s="0" data-e="900" title="From Data Preparation to the Four Core Tasks"></a><a class="seg hx2" href="#part-b" style="--d:1290;--st:#D0814F" data-s="900" data-e="2190" title="Classifiers vs. Regressors and Learning Paradigms"></a><a class="seg hx3" href="#part-c" style="--d:1050;--st:#E0B04A" data-s="2190" data-e="3240" title="Lazy vs. Eager Learners and the Two Phases"></a><a class="seg hx4" href="#part-d" style="--d:1200;--st:#3FB5A5" data-s="3240" data-e="4440" title="Decision Boundaries in 2D, 3D, and Hyperplanes"></a><a class="seg hx5" href="#part-e" style="--d:720;--st:#6F9ADB" data-s="4440" data-e="5160" title="White-Box Transparency vs. Black-Box Power"></a><a class="seg hx6" href="#part-f" style="--d:480;--st:#A98BD6" data-s="5160" data-e="5640" title="The Baseline Benchmark: Zero Rule (ZeroR)"></a><a class="seg hx7" href="#part-g" style="--d:600;--st:#8FBF7A" data-s="5640" data-e="6240" title="One Rule (OneR) and Single-Feature Testing"></a><a class="seg hx8" href="#part-h" style="--d:700;--st:#D9607A" data-s="6240" data-e="6940" title="Resampling, Bootstrap, and Quantization"></a><span class="play" id="play"></span></div><span class="total">/ 01:55:40</span></div></header>
+<span class="clock" id="clock">00:00:00</span><span class="dpt" id="dpt">0.0 m</span><div class="tape" aria-hidden="true"><a class="seg hx1" href="#part-a" style="--d:900;--st:#A9825A" data-s="0" data-e="900" title="From Data Preparation to the Four Core Tasks"></a><a class="seg hx2" href="#part-b" style="--d:1290;--st:#D0814F" data-s="900" data-e="2190" title="Classifiers vs. Regressors and Learning Paradigms"></a><a class="seg hx3" href="#part-c" style="--d:1050;--st:#E0B04A" data-s="2190" data-e="3240" title="Lazy vs. Eager Learners and the Two Phases"></a><a class="seg hx4" href="#part-d" style="--d:1200;--st:#3FB5A5" data-s="3240" data-e="4440" title="Decision Boundaries in 2D, 3D, and Hyperplanes"></a><a class="seg hx5" href="#part-e" style="--d:720;--st:#6F9ADB" data-s="4440" data-e="5160" title="White-Box Transparency vs. Black-Box Power"></a><a class="seg hx6" href="#part-f" style="--d:480;--st:#A98BD6" data-s="5160" data-e="5640" title="The Baseline Benchmark: Zero Rule (ZeroR)"></a><a class="seg hx7" href="#part-g" style="--d:600;--st:#8FBF7A" data-s="5640" data-e="6240" title="One Rule (OneR) and Single-Feature Testing"></a><a class="seg hx8" href="#part-h" style="--d:700;--st:#D9607A" data-s="6240" data-e="6940" title="Resampling, Bootstrap, and Quantization"></a><span class="play" id="play"></span></div><span class="total">/ 01:55:40</span><div class="deck-pdf-wrap">
+  <a href="https://drive.google.com/file/d/1g0LhkhgEFmlkd7YvmeMYN-UbcfEbj0pV/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="deck-nav-btn deck-pdf-btn" id="pdf-external-btn" aria-label="Open AI PDF Notes in new tab">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+      <polyline points="14 2 14 8 20 8"></polyline>
+      <line x1="16" y1="13" x2="8" y2="13"></line>
+      <line x1="16" y1="17" x2="8" y2="17"></line>
+      <polyline points="10 9 9 9 8 9"></polyline>
+    </svg>
+    <span>AI PDF NOTES</span>
+    <svg class="deck-pdf-ext" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+      <polyline points="15 3 21 3 21 9"></polyline>
+      <line x1="10" y1="14" x2="21" y2="3"></line>
+    </svg>
+  </a>
+  <div class="deck-pdf-popover" role="tooltip">
+    <div class="pop-head">
+      <span class="pop-badge">AI STUDY SYNTHESIS</span>
+      <span class="pop-wk">WEEK 04</span>
+    </div>
+    <p class="pop-body">
+      This PDF study note was synthesized from Dr. Faruk Bulut's official <strong>Week 4 lecture notes/slides</strong> and everything discussed in the <strong>recording of that same week</strong> &mdash; detailing supervised learning, classification taxonomy, lazy vs eager learners, and baseline classifiers (ZeroR, OneR).
+    </p>
+    <div class="pop-disclaimer">
+      <span class="pop-disc-icon">&#x26A0;&#xFE0F;</span>
+      <div class="pop-disc-text">
+        <strong>Disclaimer:</strong> Generated by an AI pair-programming assistant for accelerated student revision. While rigorously cross-referenced with course slides and audio recordings, always verify critical formulas, exam dates, and course policies against official university announcements.
+      </div>
+    </div>
+  </div>
+</div></div></header>
 
 <main><section class="hero"><div class="wrap">
 <div class="eyebrow">Data mining &middot; Week 4 &middot; Recording 06.10.26 &middot; 01:55:40</div>
