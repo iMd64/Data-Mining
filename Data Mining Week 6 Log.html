@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Data Mining Week 6 Log</title>
+
+  <!-- Typography & Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Spline+Sans:wght@300..700&family=Spline+Sans+Mono:wght@400..600&display=swap">
+
+  <!-- KaTeX Mathematics Rendering Engine -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+
+  <!-- Unified Application Stylesheet -->
+  <link rel="stylesheet" href="assets/css/main.css">
+
+  <!-- Instant Theme Initializer (prevents FOUT) -->
+  <script src="assets/js/theme-init.js"></script>
+</head>
+<body>
+<header class="deck"><div class="wrap">
+<button id="sidebar-toggle-btn" class="deck-nav-btn" aria-label="Toggle Lecture Directory" title="Toggle Navigation Menu (Shortcut: [ or \)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg><span>LECTURES</span></button>
+<span class="clock" id="clock">00:00:00</span><span class="dpt" id="dpt">0.0 m</span><div class="tape" aria-hidden="true"><a class="seg hx1" href="#part-a" style="--d:2180;--st:#A9825A" data-s="0" data-e="2180" title="Week 5 Retrospective & Exam Boundaries"></a><a class="seg hx2" href="#part-b" style="--d:1120;--st:#D0814F" data-s="2180" data-e="3300" title="Foundations of Decision Trees & Learner Triad"></a><a class="seg hx3" href="#part-c" style="--d:300;--st:#E0B04A" data-s="3300" data-e="3600" title="Recursive Partitioning & Node Purity"></a><a class="seg hx4" href="#part-d" style="--d:840;--st:#3FB5A5" data-s="3600" data-e="4440" title="Shannon Entropy & Hand Calculations"></a><a class="seg hx5" href="#part-e" style="--d:595;--st:#6F9ADB" data-s="4440" data-e="5035" title="Information Gain & ID3 Greedy Induction"></a><a class="seg hx6" href="#part-f" style="--d:410;--st:#A98BD6" data-s="5035" data-e="5445" title="Gini Impurity, CART & Hybrid Models"></a><a class="seg hx7" href="#part-g" style="--d:465;--st:#8FBF7A" data-s="5445" data-e="5910" title="Tree Depth, Overfitting & Pruning"></a><a class="seg hx8" href="#part-h" style="--d:287;--st:#D9607A" data-s="5910" data-e="6197" title="Alternative Classifiers: Naïve Bayes & SVM"></a><span class="play" id="play"></span></div><span class="total">/ 01:43:17</span><div class="deck-pdf-wrap">
+  <a href="https://drive.google.com/file/d/1ac2mJ1ZVCTdSQQCRHBV5Oa9uAIAQzuuk/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="deck-nav-btn deck-pdf-btn" id="pdf-external-btn" aria-label="Open AI PDF Notes in new tab">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+      <polyline points="14 2 14 8 20 8"></polyline>
+      <line x1="16" y1="13" x2="8" y2="13"></line>
+      <line x1="16" y1="17" x2="8" y2="17"></line>
+      <polyline points="10 9 9 9 8 9"></polyline>
+    </svg>
+    <span>AI PDF NOTES</span>
+    <svg class="deck-pdf-ext" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+      <polyline points="15 3 21 3 21 9"></polyline>
+      <line x1="10" y1="14" x2="21" y2="3"></line>
+    </svg>
+  </a>
+  <div class="deck-pdf-popover" role="tooltip">
+    <div class="pop-head">
+      <span class="pop-badge">AI STUDY SYNTHESIS</span>
+      <span class="pop-wk">WEEK 06</span>
+    </div>
+    <p class="pop-body">
+      This PDF study note was synthesized from Dr. Faruk Bulut's official <strong>Week 6 lecture notes/slides (68 slides)</strong> and the substantive concepts discussed in the <strong>recording of that same week</strong> &mdash; covering Decision Trees, Shannon Entropy, Information Gain, Gini Impurity, CART, tree pruning, Na&iuml;ve Bayes, and Support Vector Machines.
+    </p>
+    <div class="pop-disclaimer">
+      <span class="pop-disc-icon">&#x26A0;&#xFE0F;</span>
+      <div class="pop-disc-text">
+        <strong>Disclaimer:</strong> Generated by an AI pair-programming assistant for accelerated student revision. While rigorously cross-referenced with course slides and audio recordings, always verify critical formulas, exam dates, and course policies against official university announcements.
+      </div>
+    </div>
+  </div>
+</div></div></header>
+
+<main><section class="hero"><div class="wrap">
+<div class="eyebrow">Data mining &middot; Week 6 &middot; Recording 20.10.26 &middot; 01:43:17</div>
+<h1>the logic of<br><span class="c">decisions</span><span class="dia" aria-hidden="true"></span></h1>
+<div class="lead"><p><span class="tm">00:41:25</span> “Decision trees are supervised, eager, and white-box.” Dr. Faruk Bulut opens Week 6 with a retrospective exam clarification on distance metrics, before guiding students through top-down recursive partitioning: from Shannon entropy and Gini impurity to Quinlan’s ID3, Breiman’s CART, the danger of noise memorisation, tree pruning, Na&iuml;ve Bayes, and Support Vector Machines.<small>Each entry displays recording timecode and exact slide references. The depth gauge at top tracks the core as you scroll: 1 minute = 1 metre of core.</small></p>
+</div>
+
+<div class="survey"><div class="corewrap"><div class="core" aria-hidden="true"><a class="seg hx1" href="#part-a" style="--d:2180;--st:#A9825A" data-s="0" data-e="2180" title="Week 5 Retrospective & Exam Boundaries">A</a><a class="seg hx2" href="#part-b" style="--d:1120;--st:#D0814F" data-s="2180" data-e="3300" title="Foundations of Decision Trees & Learner Triad">B</a><a class="seg hx3" href="#part-c" style="--d:300;--st:#E0B04A" data-s="3300" data-e="3600" title="Recursive Partitioning & Node Purity">C</a><a class="seg hx4" href="#part-d" style="--d:840;--st:#3FB5A5" data-s="3600" data-e="4440" title="Shannon Entropy & Hand Calculations">D</a><a class="seg hx5" href="#part-e" style="--d:595;--st:#6F9ADB" data-s="4440" data-e="5035" title="Information Gain & ID3 Greedy Induction">E</a><a class="seg hx6" href="#part-f" style="--d:410;--st:#A98BD6" data-s="5035" data-e="5445" title="Gini Impurity, CART & Hybrid Models">F</a><a class="seg hx7" href="#part-g" style="--d:465;--st:#8FBF7A" data-s="5445" data-e="5910" title="Tree Depth, Overfitting & Pruning">G</a><a class="seg hx8" href="#part-h" style="--d:287;--st:#D9607A" data-s="5910" data-e="6197" title="Alternative Classifiers: Naïve Bayes & SVM">H</a></div></div><ol class="legend">
+<li><a href="#part-a" class="hx1" style="--st:#A9825A"><span class="l">A</span><span><b>Week 5 Retrospective &amp; Exam Boundaries</b><small>00:00:00 &ndash; 00:36:20 &middot; 36 min 20 s &middot; 0.0 m deep</small></span></a></li>
+<li><a href="#part-b" class="hx2" style="--st:#D0814F"><span class="l">B</span><span><b>Foundations &amp; The Learner Triad</b><small>00:36:20 &ndash; 00:55:00 &middot; 18 min 40 s &middot; 36.3 m deep</small></span></a></li>
+<li><a href="#part-c" class="hx3" style="--st:#E0B04A"><span class="l">C</span><span><b>Recursive Partitioning &amp; Node Purity</b><small>00:55:00 &ndash; 01:00:00 &middot; 5 min 00 s &middot; 55.0 m deep</small></span></a></li>
+<li><a href="#part-d" class="hx4" style="--st:#3FB5A5"><span class="l">D</span><span><b>Shannon Entropy &amp; Hand Calculations</b><small>01:00:00 &ndash; 01:14:00 &middot; 14 min 00 s &middot; 60.0 m deep</small></span></a></li>
+<li><a href="#part-e" class="hx5" style="--st:#6F9ADB"><span class="l">E</span><span><b>Information Gain &amp; ID3 Induction</b><small>01:14:00 &ndash; 01:23:55 &middot; 9 min 55 s &middot; 74.0 m deep</small></span></a></li>
+<li><a href="#part-f" class="hx6" style="--st:#A98BD6"><span class="l">F</span><span><b>Gini Impurity, CART &amp; Hybrid Models</b><small>01:23:55 &ndash; 01:30:45 &middot; 6 min 50 s &middot; 83.9 m deep</small></span></a></li>
+<li><a href="#part-g" class="hx7" style="--st:#8FBF7A"><span class="l">G</span><span><b>Tree Depth, Overfitting &amp; Pruning</b><small>01:30:45 &ndash; 01:38:30 &middot; 7 min 45 s &middot; 90.8 m deep</small></span></a></li>
+<li><a href="#part-h" class="hx8" style="--st:#D9607A"><span class="l">H</span><span><b>Alternative Classifiers &amp; Interview Defense</b><small>01:38:30 &ndash; 01:43:17 &middot; 4 min 47 s &middot; 98.5 m deep</small></span></a></li>
+</ol>
+<dl class="glance"><dt>Recording</dt><dd>20.10.26, 01:43:17</dd><dt>Course</dt><dd>SEN 431 Data Mining, Week 6</dd><dt>Slide deck</dt><dd>Week 6: 68 slides on Decision Trees, Impurity, CART &amp; Classifiers</dd><dt>Core models</dt><dd>ID3, CART, C4.5, Na&iuml;ve Bayes, Linear SVM, Kernel SVM</dd><dt>Impurity metrics</dt><dd>Shannon Entropy (bits), Information Gain (IG), Gini Impurity</dd><dt>Exam focus</dt><dd>Hand calculations for Entropy (0.811) and Gini (0.375), 100% training trap, pruning</dd></dl>
+</div></div></section>
+
+<!-- CHAPTER A -->
+<section class="part hx1" id="part-a" style="--st:#A9825A"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">A</div><div><div class="pr">Layer 1 of 8 &middot; 00:00:00 &ndash; 00:36:20 &middot; 36 min 20 s &middot; core depth 0.0 &ndash; 36.3 m</div><h2>Week 5 Retrospective &amp; Exam Boundaries</h2><p>Reviewing distance metrics, k-NN majority voting mechanics, linear regression exam scope, and official exam calculation boundaries.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="0" data-e="840"><div class="ts">00:00:00<span>to 00:14:00</span><span class="ref-slide">Recap W5</span></div><div class="rail"></div><div class="b"><h3>The Mahalanobis formula exam boundary</h3>
+<p>Dr. Faruk Bulut opens the session by addressing student anxiety regarding advanced distance formulas. He delivers an explicit exam clarification: <mark>students are NOT required to memorize or compute the Mahalanobis distance formula by hand</mark> on examinations.</p>
+<div class="exam-callout">
+  <div class="callout-head">
+    <span class="callout-badge">EXAM RADAR &middot; FORMULA SCOPE</span>
+    <span class="callout-time">00:02:20</span>
+  </div>
+  <p><strong>Mahalanobis Distance:</strong> The covariance matrix inversion \(D_M(\mathbf{x}, \mathbf{y}) = \sqrt{(\mathbf{x}-\mathbf{y})^T \mathbf{\Sigma}^{-1} (\mathbf{x}-\mathbf{y})}\) is mathematically intensive. The professor confirmed: <em>&ldquo;You don't have to memorize the Mahalanobis formula, but you can get the gist by watching the video.&rdquo;</em> Grasp its physical meaning: measuring distance in units of standard deviation along correlated axes.</p>
+</div>
+<p>He reinforces that the self-check questions in the uploaded reading materials match standard technical screening prompts used in real data engineering and machine learning job interviews.</p>
+</div></article>
+
+<article class="e" data-t="840" data-e="1560"><div class="ts">00:14:00<span>to 00:26:00</span><span class="ref-slide">Recap W5</span></div><div class="rail"></div><div class="b"><h3>Linear regression exam scope &amp; software tools</h3>
+<p>Continuing the retrospective review, Dr. Bulut addresses linear regression and bounds what is mathematically tested:</p>
+<div class="exam-callout">
+  <div class="callout-head">
+    <span class="callout-badge">EXAM RADAR &middot; REGRESSION BOUNDS</span>
+    <span class="callout-time">00:18:40 &ndash; 00:20:56</span>
+  </div>
+  <p><strong>Tested vs Excluded:</strong> <em>&ldquo;Interpolation and extrapolation... I will not be asking these things to you since this is a technical one.&rdquo;</em> Students will NOT derive matrix least squares or prove asymptotic confidence bands. The error term \(\epsilon\) is negligible (\(e pprox 0\)). What IS tested is straightforward: given an estimated regression equation \(\hat{y} = eta_0 + eta_1 x\) and a query point (e.g. \(x = 8\)), compute the point prediction \(\hat{y}\).</p>
+</div>
+<p>At <span class="tm">00:31:30</span>, he highlights <strong>IBM SPSS</strong> as a dominant commercial software suite used in clinical trials, social research, and enterprise business analytics alongside Python and R.</p>
+</div></article>
+
+<article class="e" data-t="1560" data-e="2180"><div class="ts">00:26:00<span>to 00:36:20</span><span class="ref-slide">Recap W5</span></div><div class="rail"></div><div class="b"><h3>The exact k-NN exam question walkthrough</h3>
+<p>At <span class="tm">00:26:45</span>, Dr. Bulut provides a complete step-by-step model problem demonstrating how \(k\)-Nearest Neighbors will appear on the exam:</p>
+<div class="exam-callout">
+  <div class="callout-head">
+    <span class="callout-badge">EXAM PATTERN &middot; PRE-CALCULATED DISTANCES</span>
+    <span class="callout-time">00:26:45 &ndash; 00:29:45</span>
+  </div>
+  <p><strong>Crucial Examination Insight:</strong> On the exam, distance values between the query point \(F\) and candidate training instances will be <strong>pre-calculated and provided in a table</strong>. You do NOT compute square roots by hand. You are tested on neighbor ranking and majority voting:</p>
+</div>
+<div class="x tw">
+  <table>
+    <thead><tr><th>Neighbor Point</th><th>Pre-Computed Distance to Query F</th><th>Class Label</th><th>Included in k=3?</th></tr></thead>
+    <tbody>
+      <tr><td>Point 1</td><td>0.20</td><td><span class="lb yes">Blue</span></td><td>Yes (Rank 1 &mdash; closest)</td></tr>
+      <tr><td>Point 2</td><td>0.60</td><td><span class="lb no">Red</span></td><td>Yes (Rank 2)</td></tr>
+      <tr><td>Point 3</td><td>0.80</td><td><span class="lb yes">Blue</span></td><td>Yes (Rank 3)</td></tr>
+      <tr style="opacity:0.5"><td>Point 4</td><td>1.10</td><td><span class="lb no">Red</span></td><td>No (Too distant)</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>For \(k=3\), take the 3 smallest distances: {Point 1 (0.2), Point 2 (0.6), Point 3 (0.8)}. Vote tally: <strong>1 Red, 2 Blue</strong>. The predicted class is unambiguously <mark>Blue</mark>.</p>
+</div></article>
+
+</div></section>
+
+<!-- CHAPTER B -->
+<section class="part hx2" id="part-b" style="--st:#D0814F"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">B</div><div><div class="pr">Layer 2 of 8 &middot; 00:36:20 &ndash; 00:55:00 &middot; 18 min 40 s &middot; core depth 36.3 &ndash; 55.0 m</div><h2>Foundations &amp; The Learner Triad</h2><p>Tree anatomy, the classification triad (Supervised, Eager, White-Box), and the 10-applicant bank loan case study.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="2180" data-e="2580"><div class="ts">00:36:20<span>to 00:43:00</span><span class="ref-slide">Slides 1&ndash;7</span></div><div class="rail"></div><div class="b"><h3>The Decision Tree Learner Triad</h3>
+<p>A Decision Tree is an inverted hierarchical flowchart mapping input attributes to predictions. Internal nodes represent feature tests, branches represent test outcomes, and leaves represent final absorbing class predictions.</p>
+<div class="exam-callout">
+  <div class="callout-head">
+    <span class="callout-badge">EXAM RADAR &middot; THE TRIAD</span>
+    <span class="callout-time">00:42:25 &middot; Slide 7</span>
+  </div>
+  <p><strong>The Decision Tree Triad:</strong> Dr. Bulut stressed that every student must categorize decision trees under machine learning taxonomy across three dimensions: <mark>Supervised</mark> (trained on labeled examples), <mark>Eager</mark> (actively compiles a model hypothesis during training, discarding raw data), and <mark>White-Box</mark> (transparent, inspectable, and auditable decision paths).</p>
+</div>
+<div class="x cmp">
+  <div class="col">
+    <h4>Eager Learner (Decision Tree)</h4>
+    <ul class="rows">
+      <li><span class="tm">00:41:35</span><span>Compiles explicit hypothesis during training phase.</span></li>
+      <li><span class="tm">00:55:05</span><span>Original raw dataset is discarded after building tree.</span></li>
+      <li><span class="tm">00:55:10</span><span>Query execution is extremely fast: \(O(	ext{depth})\).</span></li>
+    </ul>
+  </div>
+  <div class="col">
+    <h4>Lazy Learner (k-NN)</h4>
+    <ul class="rows">
+      <li><span class="tm">00:48:40</span><span>No model compiled; delays all computation until query.</span></li>
+      <li><span class="tm">00:48:45</span><span>Must retain the entire raw training dataset in RAM.</span></li>
+      <li><span class="tm">00:48:50</span><span>Query execution is slow: \(O(N \cdot d)\) distance evaluations.</span></li>
+    </ul>
+  </div>
+</div>
+</div></article>
+
+<article class="e" data-t="2580" data-e="3300"><div class="ts">00:43:00<span>to 00:55:00</span><span class="ref-slide">Slides 8&ndash;12</span></div><div class="rail"></div><div class="b"><h3>The bank loan applicant case study (S1&ndash;S10)</h3>
+<p>Dr. Bulut walks through a pedagogical dataset of ten bank loan applicants (\(S_1\) to \(S_{10}\)) described by four attributes (<code class="inline">Age</code>, <code class="inline">Owns home?</code>, <code class="inline">Owns car?</code>, <code class="inline">Same job &ge; 5y?</code>) and a 3-class target decision:</p>
+<div class="x tw">
+  <table>
+    <thead><tr><th>Applicant</th><th>Age</th><th>Owns Home?</th><th>Owns Car?</th><th>Job &ge; 5y?</th><th>Target Decision</th></tr></thead>
+    <tbody>
+      <tr><td>S1</td><td>24</td><td>No</td><td>No</td><td>No</td><td><span class="lb no">REJECT</span></td></tr>
+      <tr><td>S2</td><td>26</td><td>No</td><td>Yes</td><td>No</td><td><span class="lb q">REVIEW</span></td></tr>
+      <tr><td>S3</td><td>27</td><td>Yes</td><td>Yes</td><td>Yes</td><td><span class="lb yes">APPROVE</span></td></tr>
+      <tr><td>S4</td><td>28</td><td>Yes</td><td>No</td><td>No</td><td><span class="lb q">REVIEW</span></td></tr>
+      <tr><td>S5</td><td>33</td><td>No</td><td>No</td><td>No</td><td><span class="lb no">REJECT</span></td></tr>
+      <tr><td>S6</td><td>37</td><td>No</td><td>Yes</td><td>No</td><td><span class="lb q">REVIEW</span></td></tr>
+      <tr><td>S7</td><td>41</td><td>Yes</td><td>Yes</td><td>Yes</td><td><span class="lb yes">APPROVE</span></td></tr>
+      <tr><td>S8</td><td>46</td><td>No</td><td>Yes</td><td>Yes</td><td><span class="lb q">REVIEW</span></td></tr>
+      <tr><td>S9</td><td>35</td><td>Yes</td><td>No</td><td>Yes</td><td><span class="lb yes">APPROVE</span></td></tr>
+      <tr><td>S10</td><td>22</td><td>Yes</td><td>No</td><td>Yes</td><td><span class="lb yes">APPROVE</span></td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Each root-to-leaf path maps directly into an explicit propositional IF-THEN rule:</p>
+<div class="x pairs">
+  <div class="pair"><span class="tm">00:52:10</span><b>Rule 1</b><span>IF Age &lt; 30 AND Home = Yes AND Job &ge; 5y THEN <strong>APPROVE</strong></span></div>
+  <div class="pair"><span class="tm">00:52:45</span><b>Rule 2</b><span>IF Age &lt; 30 AND Home = No AND Car = No THEN <strong>REJECT</strong></span></div>
+  <div class="pair"><span class="tm">00:53:15</span><b>Rule 3</b><span>IF Age &ge; 30 AND Job &ge; 5y AND Home = Yes THEN <strong>APPROVE</strong></span></div>
+  <div class="pair"><span class="tm">00:54:00</span><b>Rule 4</b><span>IF Age &ge; 30 AND Job &lt; 5y AND Car = Yes THEN <strong>REVIEW</strong></span></div>
+</div>
+<p class="cap"><mark>Slide Emphasis:</mark> The &ldquo;REVIEW&rdquo; outcome illustrates that trees can assign provisional risk triage classes rather than forcing strict binary decisions.</p>
+</div></article>
+
+</div></section>
+
+<!-- CHAPTER C -->
+<section class="part hx3" id="part-c" style="--st:#E0B04A"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">C</div><div><div class="pr">Layer 3 of 8 &middot; 00:55:00 &ndash; 01:00:00 &middot; 5 min 00 s &middot; core depth 55.0 &ndash; 60.0 m</div><h2>Recursive Partitioning &amp; Node Purity</h2><p>The 7-step top-down induction algorithm, candidate splitting thresholds, and the definition of node purity.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="3300" data-e="3600"><div class="ts">00:55:00<span>to 01:00:00</span><span class="ref-slide">Slides 13&ndash;15</span></div><div class="rail"></div><div class="b"><h3>The 7-step recursive tree induction algorithm</h3>
+<p>Decision tree induction follows a systematic top-down recursive divide-and-conquer strategy:</p>
+<ol class="x kdd">
+  <li style="--c:#A9825A"><span class="tm">00:55:20</span><b>1. Ingest</b><span>Place all labeled training samples at root node.</span></li>
+  <li style="--c:#D0814F"><span class="tm">00:55:45</span><b>2. Generate</b><span>Generate candidate feature and threshold splits.</span></li>
+  <li style="--c:#E0B04A"><span class="tm">00:56:10</span><b>3. Measure</b><span>Measure impurity of resulting child partitions.</span></li>
+  <li style="--c:#3FB5A5"><span class="tm">00:56:40</span><b>4. Select</b><span>Choose candidate split yielding greatest impurity drop.</span></li>
+  <li style="--c:#6F9ADB"><span class="tm">00:57:15</span><b>5. Dispatch</b><span>Partition dataset and send subsets to child branches.</span></li>
+  <li style="--c:#A98BD6"><span class="tm">00:57:50</span><b>6. Recurse</b><span>Recursively repeat algorithm on non-terminal children.</span></li>
+  <li style="--c:#8FBF7A"><span class="tm">00:58:30</span><b>7. Halt</b><span>Assign majority class to leaves when stopping rule met.</span></li>
+</ol>
+<p><strong>Pure vs Mixed Nodes:</strong> A <mark>Pure Node</mark> contains samples belonging strictly to one class (e.g. 8 YES, 0 NO). In a pure node, uncertainty is zero. A <mark>Mixed Node</mark> contains multiple classes and requires further partitioning.</p>
+</div></article>
+
+</div></section>
+
+<!-- CHAPTER D -->
+<section class="part hx4" id="part-d" style="--st:#3FB5A5"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">D</div><div><div class="pr">Layer 4 of 8 &middot; 01:00:00 &ndash; 01:14:00 &middot; 14 min 00 s &middot; core depth 60.0 &ndash; 74.0 m</div><h2>Shannon Entropy &amp; Hand Calculations</h2><p>Claude Shannon's information disorder, concave binary entropy curves, and step-by-step arithmetic for exam problems.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="3600" data-e="3960"><div class="ts">01:00:00<span>to 01:06:00</span><span class="ref-slide">Slides 16&ndash;18</span></div><div class="rail"></div><div class="b"><h3>Shannon Entropy: Measuring disorder and untidiness</h3>
+<p>Dr. Bulut explains that in data mining, <mark>entropy measures the disorder, untidiness, or uncertainty</mark> of class labels within a subset. For a node \(S\) with \(c\) target classes, Shannon Entropy (measured in bits) is:</p>
+<p>$$H(S) = - \sum_{i=1}^{c} p_i \log_2(p_i)$$</p>
+<p>where \(p_i\) is the proportion of class \(i\). Crucial mathematical convention: <mark>\(0 \cdot \log_2(0) \equiv 0\)</mark>. For balanced classes, entropy scales monotonically with class count:</p>
+<div class="x tw">
+  <table>
+    <thead><tr><th>Number of Classes</th><th>Distribution (100 Items Total)</th><th>Formula Evaluation</th><th>Shannon Entropy</th></tr></thead>
+    <tbody>
+      <tr><td>1 Class</td><td>100 Red</td><td>\(- [1.0 \cdot \log_2(1.0)] = 0\)</td><td>0.000 bits (Pure)</td></tr>
+      <tr><td>2 Classes</td><td>50 Red, 50 White</td><td>\(- [0.5(-1) + 0.5(-1)]\)</td><td>1.000 bit (Max 2-class)</td></tr>
+      <tr><td>3 Classes</td><td>34 Red, 33 White, 33 Green</td><td>\(\log_2(3)\)</td><td>1.585 bits</td></tr>
+      <tr><td>4 Classes</td><td>25 Red, 25 White, 25 Green, 25 Blue</td><td>\(\log_2(4)\)</td><td>2.000 bits</td></tr>
+      <tr><td>5 Classes</td><td>20 of each colour</td><td>\(\log_2(5)\)</td><td>2.322 bits</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>The Binary Curve:</strong> Plotted against \(p\), entropy forms a concave parabola peaking at \(p = 0.5\) with \(H = 1.0\), and dropping to \(0\) at both \(p = 0.0\) and \(p = 1.0\).</p>
+</div></article>
+
+<article class="e" data-t="3960" data-e="4440"><div class="ts">01:06:00<span>to 01:14:00</span><span class="ref-slide">Slides 19&ndash;22, 65</span></div><div class="rail"></div><div class="b"><h3>Worked hand calculations &amp; Slide 65 Question 1</h3>
+<p>Dr. Bulut works through three concrete numerical scenarios that frequently recur on examinations:</p>
+<div class="x pairs">
+  <div class="pair"><span class="tm">01:06:40</span><b>Pure Node (8 YES, 0 NO)</b><span>\(H = - [1.0 \log_2(1.0) + 0] = \mathbf{0.000	ext{ bits}}\)</span></div>
+  <div class="pair"><span class="tm">01:07:20</span><b>50/50 Split (4 YES, 4 NO)</b><span>\(H = - [0.5(-1) + 0.5(-1)] = \mathbf{1.000	ext{ bit}}\)</span></div>
+</div>
+<div class="exam-callout">
+  <div class="callout-head">
+    <span class="callout-badge">EXAM RADAR &middot; SLIDE 65 QUESTION 1</span>
+    <span class="callout-time">Slide 21 &middot; Slide 65</span>
+  </div>
+  <p><strong>Problem:</strong> A node contains 6 YES and 2 NO instances. Calculate its Shannon Entropy.</p>
+  <p><strong>Step 1:</strong> Class proportions: \(p_+ = 6/8 = 0.75\), \(p_- = 2/8 = 0.25\).<br>
+  <strong>Step 2:</strong> Base-2 logarithms: \(\log_2(0.25) = -2.000\); \(\log_2(0.75) = \log_2(3/4) pprox 1.585 - 2.0 = -0.415\).<br>
+  <strong>Step 3:</strong> Multiply: \(0.75 	imes (-0.415) pprox -0.3113\); \(0.25 	imes (-2.0) = -0.5000\).<br>
+  <strong>Step 4:</strong> Apply outer minus: \(H(S) = - (-0.3113 - 0.5000) = \mathbf{0.8113 pprox 0.811	ext{ bits}}\).</p>
+</div>
+</div></article>
+
+</div></section>
+
+<!-- CHAPTER E -->
+<section class="part hx5" id="part-e" style="--st:#6F9ADB"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">E</div><div><div class="pr">Layer 5 of 8 &middot; 01:14:00 &ndash; 01:23:55 &middot; 9 min 55 s &middot; core depth 74.0 &ndash; 83.9 m</div><h2>Information Gain &amp; ID3 Induction</h2><p>Entropy reduction, sample weighting, candidate split comparisons, and Quinlan's classic ID3 algorithm.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="4440" data-e="4740"><div class="ts">01:14:00<span>to 01:19:00</span><span class="ref-slide">Slides 23&ndash;25</span></div><div class="rail"></div><div class="b"><h3>Information Gain (IG) &amp; The Inverse Entropy Fallacy</h3>
+<p><mark>Information Gain (IG)</mark> measures the expected reduction in entropy resulting from splitting dataset \(S\) on attribute \(A\):</p>
+<p>$$IG(S, A) = H(S) - \sum_{v \in 	ext{Values}(A)} rac{|S_v|}{|S|} H(S_v)$$</p>
+<div class="exam-callout">
+  <div class="callout-head">
+    <span class="callout-badge">EXAM RADAR &middot; FALLACY WARNING</span>
+    <span class="callout-time">01:20:10 &middot; Slide 23</span>
+  </div>
+  <p><strong>The Inverse Entropy Fallacy:</strong> Dr. Bulut warned that students sometimes mistake Information Gain for the mathematical inverse of entropy (\(1/H\)). <em>Information Gain is NOT \(1/H\)</em>. It is the subtraction difference between parent entropy and weighted child entropy: \(IG = H(	ext{parent}) - H(	ext{children})\).</p>
+</div>
+<p><strong>Sample Weighting:</strong> Child entropies must be weighted by \(rac{|S_v|}{|S|}\). A child node containing 90% of the dataset must heavily influence the split evaluation, whereas a tiny child containing only 10% must not distort the global split score.</p>
+</div></article>
+
+<article class="e" data-t="4740" data-e="5035"><div class="ts">01:19:00<span>to 01:23:55</span><span class="ref-slide">Slides 26&ndash;30</span></div><div class="rail"></div><div class="b"><h3>Candidate splits comparison &amp; ID3 Greedy Learning</h3>
+<p>Consider a parent node with 8 samples (4 YES, 4 NO) where parent entropy \(H(S) = 1.000\) bit (Slide 27):</p>
+<div class="x tw">
+  <table>
+    <thead><tr><th>Candidate Split</th><th>Left Child Subset</th><th>Right Child Subset</th><th>Weighted Child Entropy</th><th>Information Gain (IG)</th></tr></thead>
+    <tbody>
+      <tr><td>Candidate A</td><td>3 YES, 1 NO (\(H pprox 0.811\))</td><td>1 YES, 3 NO (\(H pprox 0.811\))</td><td>\(rac{4}{8}(0.811) + rac{4}{8}(0.811) = 0.811\)</td><td>\(1.000 - 0.811 = \mathbf{0.189	ext{ bits}}\)</td></tr>
+      <tr><td>Candidate B (Perfect)</td><td>4 YES, 0 NO (\(H = 0.000\))</td><td>0 YES, 4 NO (\(H = 0.000\))</td><td>\(rac{4}{8}(0) + rac{4}{8}(0) = 0.000\)</td><td>\(1.000 - 0.000 = \mathbf{1.000	ext{ bit}}\)</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Candidate B achieves \(IG = 1.000\) bit and is chosen as the root split. Quinlan’s ID3 algorithm repeats this evaluation greedily at every step. <mark>Greedy search does not guarantee a globally optimal tree</mark> (which is NP-complete), but provides a fast, computationally tractable polynomial-time approximation.</p>
+</div></article>
+
+</div></section>
+
+<!-- CHAPTER F -->
+<section class="part hx6" id="part-f" style="--st:#A98BD6"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">F</div><div><div class="pr">Layer 6 of 8 &middot; 01:23:55 &ndash; 01:30:45 &middot; 6 min 50 s &middot; core depth 83.9 &ndash; 90.8 m</div><h2>Gini Impurity, CART &amp; Hybrid Models</h2><p>Gini index formulation, squaring vs logarithms, CART binary splitting invariants, and hybrid leaf regressors.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="5035" data-e="5250"><div class="ts">01:23:55<span>to 01:26:00</span><span class="ref-slide">Slides 31&ndash;35</span></div><div class="rail"></div><div class="b"><h3>Gini Impurity &amp; Slide 65 Question 2</h3>
+<p>Gini Impurity measures the probability of misclassifying a randomly chosen element if labeled according to class distribution. It relies on squaring probabilities rather than computing logarithms:</p>
+<p>$$	ext{Gini}(S) = 1 - \sum_{i=1}^{c} p_i^2$$</p>
+<div class="exam-callout">
+  <div class="callout-head">
+    <span class="callout-badge">EXAM RADAR &middot; SLIDE 65 QUESTION 2</span>
+    <span class="callout-time">Slide 33 &middot; Slide 65</span>
+  </div>
+  <p><strong>Problem:</strong> A node has 75% Class A and 25% Class B. Calculate its Gini Impurity.</p>
+  <p><strong>Step 1:</strong> Square class proportions: \(p_A^2 = (0.75)^2 = 0.5625\); \(p_B^2 = (0.25)^2 = 0.0625\).<br>
+  <strong>Step 2:</strong> Sum squares: \(\sum p_i^2 = 0.5625 + 0.0625 = 0.6250\).<br>
+  <strong>Step 3:</strong> Subtract from 1: \(	ext{Gini}(S) = 1 - 0.6250 = \mathbf{0.375}\).</p>
+</div>
+<div class="x cmp">
+  <div class="col">
+    <h4>Shannon Entropy (H)</h4>
+    <ul class="rows">
+      <li><span class="tm">01:00:00</span><span>Formula: \(-\sum p_i \log_2(p_i)\).</span></li>
+      <li><span class="tm">01:02:00</span><span>Binary Maximum: 1.000 bit (at \(p=0.5\)).</span></li>
+      <li><span class="tm">01:24:40</span><span>High compute cost: transcendental base-2 logarithms.</span></li>
+      <li><span class="tm">01:24:45</span><span>Associated algorithms: ID3, C4.5.</span></li>
+    </ul>
+  </div>
+  <div class="col">
+    <h4>Gini Impurity (Gini)</h4>
+    <ul class="rows">
+      <li><span class="tm">01:23:55</span><span>Formula: \(1 - \sum p_i^2\).</span></li>
+      <li><span class="tm">01:24:10</span><span>Binary Maximum: 0.500 (at \(p=0.5\)).</span></li>
+      <li><span class="tm">01:24:40</span><span>Low compute cost: basic floating-point squaring.</span></li>
+      <li><span class="tm">01:25:00</span><span>Associated algorithm: CART (Classification &amp; Regression).</span></li>
+    </ul>
+  </div>
+</div>
+</div></article>
+
+<article class="e" data-t="5250" data-e="5445"><div class="ts">01:26:00<span>to 01:30:45</span><span class="ref-slide">Slides 36&ndash;41</span></div><div class="rail"></div><div class="b"><h3>CART &amp; The &ldquo;2-in-1 Shampoo&rdquo; hybrid model</h3>
+<p>Developed by Leo Breiman in 1984, <mark>CART strictly produces binary trees</mark> (exactly two child branches per internal node). CART carves feature space into piecewise axis-aligned hyper-rectangles using horizontal and vertical planes.</p>
+<div class="exam-callout">
+  <div class="callout-head">
+    <span class="callout-badge">INSTRUCTOR INSIGHT &middot; HYBRID CART</span>
+    <span class="callout-time">01:26:56 &ndash; 01:28:45</span>
+  </div>
+  <p><strong>The &ldquo;2-in-1 Shampoo&rdquo; Analogy:</strong> Dr. Bulut compared modern CART architectures to 2-in-1 shampoo (cleaner + polisher in one bottle). CART combines a <em>decision tree router</em> with <em>leaf regressors</em>: the tree hierarchically partitions the problem space into distinct regimes, and within each leaf, a dedicated linear regression equation (\(\hat{y} = eta_0 + eta_1 x\)) or local \(k\)-NN model generates continuous predictions.</p>
+</div>
+</div></article>
+
+</div></section>
+
+<!-- CHAPTER G -->
+<section class="part hx7" id="part-g" style="--st:#8FBF7A"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">G</div><div><div class="pr">Layer 7 of 8 &middot; 01:30:45 &ndash; 01:38:30 &middot; 7 min 45 s &middot; core depth 90.8 &ndash; 98.5 m</div><h2>Tree Depth, Overfitting &amp; Pruning</h2><p>Model capacity, decision stumps, the 100% training trap, noise fitting, and pre-pruning vs cost-complexity pruning.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="5445" data-e="5700"><div class="ts">01:30:45<span>to 01:35:00</span><span class="ref-slide">Slides 42&ndash;47</span></div><div class="rail"></div><div class="b"><h3>Tree depth &amp; The 100% training accuracy trap</h3>
+<p>Tree depth is the length of the longest path from the root to any leaf node. Shallow trees (Depth = 1, decision stumps) underfit. Deep trees (Depth &ge; 8) overfit by memorizing accidental noise and single outliers.</p>
+<div class="exam-callout">
+  <div class="callout-head">
+    <span class="callout-badge">EXAM RADAR &middot; SLIDE 65 QUESTION 3</span>
+    <span class="callout-time">01:37:30 &middot; Slide 47 &middot; Slide 65</span>
+  </div>
+  <p><strong>Question:</strong> A decision tree has 100% training accuracy but substantially worse accuracy on unseen data. What is the likely problem?</p>
+  <p><strong>Answer:</strong> <mark>OVERFITTING (or OVERLEARNING)</mark>. 100% training accuracy is a diagnostic symptom of pathology: the tree fragmented its leaves down to single training samples, memorizing measurement noise and errors rather than genuine population patterns.</p>
+</div>
+<div class="x tw">
+  <table>
+    <thead><tr><th>Tree Architecture</th><th>Training Accuracy</th><th>Test Accuracy (Unseen)</th><th>Diagnostic Status</th></tr></thead>
+    <tbody>
+      <tr><td>Unconstrained Deep Tree</td><td>100.0%</td><td>72.0%</td><td>Severe Overfitting (Noise memorised)</td></tr>
+      <tr><td>Pruned Balanced Tree</td><td>96.0%</td><td>87.0%</td><td>Optimal Fit (+15% test generalisation boost)</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>At <span class="tm">01:33:30</span>, Dr. Bulut cites a traditional folk proverb: an over-analyzer examines every trivial detail and becomes paralyzed, whereas a pragmatic thinker avoids drowning in details and moves forward. Over-learned trees suffer the same fate when exposed to real-world noise.</p>
+</div></article>
+
+<article class="e" data-t="5700" data-e="5910"><div class="ts">01:35:00<span>to 01:38:30</span><span class="ref-slide">Slides 48&ndash;50</span></div><div class="rail"></div><div class="b"><h3>Pruning strategies (Budama): Pre-pruning vs Post-pruning</h3>
+<p><mark>Pruning (budama)</mark> removes unnecessary branches and leaves to reduce variance, improve test generalisation, and restore interpretability.</p>
+<div class="exam-callout">
+  <div class="callout-head">
+    <span class="callout-badge">EXAM RADAR &middot; SLIDE 65 QUESTION 4</span>
+    <span class="callout-time">Slide 48 &middot; Slide 50 &middot; Slide 65</span>
+  </div>
+  <p><strong>Question:</strong> What can we do when a Decision Tree is overfitting?</p>
+  <p><strong>Answer:</strong> <mark>PRUNE THE TREE AND REGULARIZE COMPLEXITY</mark>.</p>
+</div>
+<div class="x cmp">
+  <div class="col">
+    <h4>Pre-Pruning (Early Stopping)</h4>
+    <ul class="rows">
+      <li><span class="tm">01:37:00</span><span>Halts growth early during recursive construction.</span></li>
+      <li><span class="tm">01:37:05</span><span>Hyperparameters: <code class="inline">max_depth</code>, <code class="inline">min_samples_split</code>, <code class="inline">min_samples_leaf</code>.</span></li>
+      <li><span class="tm">01:37:10</span><span>Fast, but risks premature stopping before finding multi-feature synergies (horizon effect).</span></li>
+    </ul>
+  </div>
+  <div class="col">
+    <h4>Post-Pruning (Cost-Complexity)</h4>
+    <ul class="rows">
+      <li><span class="tm">01:37:30</span><span>Grows full overfitted tree \(T_0\) first, then prunes backwards.</span></li>
+      <li><span class="tm">01:38:00</span><span>Minimizes cost-complexity objective: \(R_lpha(T) = R(T) + lpha |T|\).</span></li>
+      <li><span class="tm">01:38:05</span><span>Tuning \(lpha\) on validation data systematically collapses weak leaves without horizon risk.</span></li>
+    </ul>
+  </div>
+</div>
+</div></article>
+
+</div></section>
+
+<!-- CHAPTER H -->
+<section class="part hx8" id="part-h" style="--st:#D9607A"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">H</div><div><div class="pr">Layer 8 of 8 &middot; 01:38:30 &ndash; 01:43:17 &middot; 4 min 47 s &middot; core depth 98.5 &ndash; 103.3 m</div><h2>Alternative Classifiers &amp; Interview Defense</h2><p>Classifier robustness, Naïve Bayes probability models, Support Vector Machines (SVM), and technical interview questions.</p></div></div></div><div class="wrap entries">
+
+<article class="e" data-t="5910" data-e="6060"><div class="ts">01:38:30<span>to 01:41:00</span><span class="ref-slide">Slides 51&ndash;58</span></div><div class="rail"></div><div class="b"><h3>Classifier robustness &amp; Probabilistic Naïve Bayes</h3>
+<p><mark>Robustness (gürbüzlük)</mark> measures the stability of decision boundaries when small sample variations or noise occur. Decision trees can be unstable because a minor shift at the root cascades down the entire hierarchy. Furthermore, orthogonal axis-aligned splits struggle to approximate smooth diagonal boundaries, requiring dozens of stair-step partitions.</p>
+<p><strong>Slide 53 Mini-Exercise:</strong> When comparing Split A (3/2 vs 2/3, \(IG pprox 0.029\)) against Split B (5/0 vs 0/5, \(IG = 1.000\)), <mark>Split B is unambiguously superior</mark> because it achieves 100% pure terminal subsets.</p>
+<p><strong>Naïve Bayes (Slides 54&ndash;58):</strong> A supervised probabilistic classifier based on Bayes' Rule:</p>
+<p>$$P(C \mid \mathbf{x}) \propto P(C) \prod_{j=1}^{d} P(x_j \mid C)$$</p>
+<p>It is called &ldquo;Na&iuml;ve&rdquo; because it assumes <mark>all features are conditionally independent given the class label</mark>. In email spam filtering, word likelihoods (e.g. \(P(	ext{'FREE'}|	ext{Spam}) = 0.85\)) are multiplied with the prior spam rate to predict classification.</p>
+</div></article>
+
+<article class="e" data-t="6060" data-e="6197"><div class="ts">01:41:00<span>to 01:43:17</span><span class="ref-slide">Slides 59&ndash;68</span></div><div class="rail"></div><div class="b"><h3>Support Vector Machines &amp; Technical Interview Defense</h3>
+<p>A Support Vector Machine (SVM) finds a linear hyperplane \(\mathbf{w}^T \mathbf{x} + b = 0\) that separates classes while <mark>maximizing the geometric margin \(rac{2}{\|\mathbf{w}\|}\)</mark>. The critical training instances lying directly on the margin planes (\(\mathbf{w}^T \mathbf{x}_i + b = \pm 1\)) are called <strong>Support Vectors</strong>. Non-support vectors can be moved or deleted without altering the decision boundary. For non-linear data, the <em>kernel trick</em> implicitly projects points into a high-dimensional space.</p>
+<div class="x tw">
+  <table>
+    <thead><tr><th>Classifier Architecture</th><th>Learning Strategy</th><th>Model Transparency</th><th>Decision Boundary Geometry</th></tr></thead>
+    <tbody>
+      <tr><td>Decision Tree</td><td>Recursive impurity reduction (Entropy/Gini)</td><td>High (Explicit IF-THEN rules)</td><td>Piecewise axis-aligned rectangles</td></tr>
+      <tr><td>Na&iuml;ve Bayes</td><td>Bayesian posterior probability product</td><td>Moderate (Explicit probability tables)</td><td>Linear or quadric probability surfaces</td></tr>
+      <tr><td>Linear SVM</td><td>Convex margin maximization (\(2/\|\mathbf{w}\|\))</td><td>Moderate (Direct feature weights \(\mathbf{w}\))</td><td>Global straight linear hyperplane</td></tr>
+      <tr><td>Kernel SVM</td><td>Implicit high-dimensional Hilbert mapping</td><td>Low (Black-box kernel distance)</td><td>Smooth, complex non-linear contours</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="exam-callout">
+  <div class="callout-head">
+    <span class="callout-badge">JOB INTERVIEW DEFENSE &middot; 15-MINUTE PROMPTS</span>
+    <span class="callout-time">01:41:30</span>
+  </div>
+  <p><strong>Dr. Bulut's Technical Interview Prompts:</strong> In his closing remarks, Dr. Bulut warned that ML engineering interviews routinely evaluate candidates on two defense questions:</p>
+  <p><strong>1. Why does overfitting occur in decision trees?</strong> <em>Defense:</em> Leaf fragmentation from exponential subset decay; fitting 5% natural noise with dedicated branches; unlimited non-parametric capacity acting as a lookup table.<br>
+  <strong>2. How do you eliminate overfitting in production?</strong> <em>Defense:</em> Enforce pre-pruning constraints (<code class="inline">max_depth</code>, <code class="inline">min_samples_leaf</code>); apply cost-complexity post-pruning (<(lpha\)); deploy Random Forests to average out variance across decorrelated bootstrap trees.</p>
+</div>
+</div></article>
+
+</div></section>
+
+<!-- CURATED LAB RESOURCES -->
+<section class="ref wrap" id="video-lab"><span id="recommended-lab"></span><h2 class="plain">Curated Video &amp; Exploration Lab</h2><p class="lede">Assigned study resources from the instructor’s curriculum guide (Week 6 Recommended Watching and Reading) connecting decision trees, impurity metrics, CART, and alternative classifiers to visual tutorials.</p>
+<div class="lab-cards">
+<div class="lab-card featured"><div class="lab-badge">StatQuest &middot; Core Tree Induction</div><h3>Decision Trees, Clearly Explained</h3><p>Josh Starmer’s visual masterclass breaking down root splits, candidate questions, numerical thresholds, and tree construction from raw data.</p><a class="lab-link" href="https://www.youtube.com/watch?v=7VeUPuFGJHk" target="_blank" rel="noopener">Watch on YouTube (17 min) &rarr;</a></div>
+<div class="lab-card featured"><div class="lab-badge">StatQuest &middot; Impurity Metrics</div><h3>Entropy and Information Gain, Clearly Explained</h3><p>Intuitive geometric breakdown of Claude Shannon’s entropy formula, calculating bits of surprise, and choosing optimal parent splits.</p><a class="lab-link" href="https://www.youtube.com/watch?v=YtebGVx-Fxw" target="_blank" rel="noopener">Watch on YouTube (11 min) &rarr;</a></div>
+<div class="lab-card"><div class="lab-badge">StatQuest &middot; Alternative Purity</div><h3>Gini Impurity, Clearly Explained</h3><p>Visual demonstration showing why CART squares probabilities instead of evaluating logs to measure class mixing rapidly.</p><a class="lab-link" href="https://www.youtube.com/watch?v=wpNl-JHRPlA" target="_blank" rel="noopener">Watch on YouTube (10 min) &rarr;</a></div>
+<div class="lab-card"><div class="lab-badge">StatQuest &middot; Probabilistic Model</div><h3>Naïve Bayes, Clearly Explained</h3><p>Walkthrough of Bayes’ theorem, conditional independence, calculating word likelihoods, and classifying text with prior odds.</p><a class="lab-link" href="https://www.youtube.com/watch?v=O2L2Uv9pdDA" target="_blank" rel="noopener">Watch on YouTube (15 min) &rarr;</a></div>
+<div class="lab-card"><div class="lab-badge">StatQuest &middot; Maximum Margin</div><h3>Support Vector Machines, Clearly Explained</h3><p>Visual explanation of finding the maximum margin hyperplane, identifying support vectors, and using the kernel trick.</p><a class="lab-link" href="https://www.youtube.com/watch?v=efR1C6CvhmE" target="_blank" rel="noopener">Watch on YouTube (20 min) &rarr;</a></div>
+<div class="lab-card"><div class="lab-badge">scikit-learn &middot; Python API</div><h3>Decision Trees User Guide &amp; Cost-Complexity</h3><p>Official scikit-learn documentation covering DecisionTreeClassifier, ccp_alpha pruning, and tree visualization tools.</p><a class="lab-link" href="https://scikit-learn.org/stable/modules/tree.html" target="_blank" rel="noopener">Read Scikit-Learn Docs &rarr;</a></div>
+</div></section>
+
+<!-- GLOSSARY SECTION -->
+<section class="ref wrap"><h2 class="plain">Terms, in order of appearance</h2><p class="lede">Key technical terms stamped with the exact minute and second Dr. Bulut first defined them.</p><div class="terms">
+<div class="term"><b>Mahalanobis Distance</b><span class="tm">00:02:20</span><span>Covariance-aware metric measuring distance in units of standard deviation along correlated axes.</span></div>
+<div class="term"><b>Linear Regression</b><span class="tm">00:18:40</span><span>Parametric model predicting continuous target \(\hat{y} = eta_0 + eta_1 x\) via ordinary least squares.</span></div>
+<div class="term"><b>k-NN Majority Voting</b><span class="tm">00:26:45</span><span>Assigning class label to query point via highest frequency among the k nearest pre-calculated neighbors.</span></div>
+<div class="term"><b>Decision Tree</b><span class="tm">00:36:20</span><span>Hierarchical supervised classifier recursively partitioning feature space using propositional IF-THEN rules.</span></div>
+<div class="term"><b>Root Node</b><span class="tm">00:39:27</span><span>The topmost decision vertex containing the full unpartitioned dataset S before any feature test occurs.</span></div>
+<div class="term"><b>Internal Node</b><span class="tm">00:39:45</span><span>An intermediate decision vertex evaluating a specific feature condition and branching by test outcomes.</span></div>
+<div class="term"><b>Leaf Node</b><span class="tm">00:40:06</span><span>An absorbing terminal state with no outgoing edges that assigns a class label or continuous numerical value.</span></div>
+<div class="term"><b>Supervised Learner</b><span class="tm">00:41:25</span><span>Learning paradigm mapping labeled input-output instances \((\mathbf{x}_i, y_i)\) to separate target classes.</span></div>
+<div class="term"><b>Eager Learner</b><span class="tm">00:41:35</span><span>Algorithm actively compiling an inductive hypothesis upfront during training, discarding raw instances.</span></div>
+<div class="term"><b>White-Box Model</b><span class="tm">00:42:07</span><span>A model whose internal logic is transparent, auditable, and interpretable via human-readable paths.</span></div>
+<div class="term"><b>Rule Extraction</b><span class="tm">00:52:10</span><span>Deriving propositional IF-THEN rules by tracing conjunctions along root-to-leaf paths through a tree.</span></div>
+<div class="term"><b>Recursive Partitioning</b><span class="tm">00:55:00</span><span>Iterative top-down divide-and-conquer strategy dividing training subsets into homogenous subgroups.</span></div>
+<div class="term"><b>Pure Node</b><span class="tm">01:00:15</span><span>A node whose instances all belong exclusively to a single target class (\(H = 0\), \(	ext{Gini} = 0\)).</span></div>
+<div class="term"><b>Shannon Entropy</b><span class="tm">01:00:00</span><span>Measure of information uncertainty and label disorder in bits: \(H(S) = - \sum p_i \log_2(p_i)\).</span></div>
+<div class="term"><b>Bit</b><span class="tm">01:02:00</span><span>Fundamental unit of information entropy representing the uncertainty of a binary 50/50 fair outcome.</span></div>
+<div class="term"><b>Binary Entropy Curve</b><span class="tm">01:07:00</span><span>Concave parabolic curve plotting \(H\) against \(p\), peaking at \(H = 1.0	ext{ bit}\) when \(p = 0.5\).</span></div>
+<div class="term"><b>Information Gain (IG)</b><span class="tm">01:14:00</span><span>Expected reduction in entropy achieved by partitioning on attribute A: \(IG = H(S) - \sum rac{|S_v|}{|S|} H(S_v)\).</span></div>
+<div class="term"><b>ID3 Algorithm</b><span class="tm">01:23:55</span><span>Quinlan’s classic 1986 tree induction algorithm driven by greedy Information Gain maximization.</span></div>
+<div class="term"><b>Greedy Search</b><span class="tm">01:24:18</span><span>Heuristic selecting locally optimal splits without backtracking, risking global suboptimality.</span></div>
+<div class="term"><b>Gini Impurity</b><span class="tm">01:24:40</span><span>Variance-based impurity metric: \(	ext{Gini}(S) = 1 - \sum p_i^2\), representing misclassification probability.</span></div>
+<div class="term"><b>CART</b><span class="tm">01:25:20</span><span>Classification And Regression Trees (Breiman, 1984); strictly binary trees using Gini or MSE.</span></div>
+<div class="term"><b>Binary Split</b><span class="tm">01:26:00</span><span>Partition strictly dividing an internal node into exactly two child branches (defining invariant of CART).</span></div>
+<div class="term"><b>Axis-Aligned Hyperplane</b><span class="tm">01:32:45</span><span>Decision boundary perpendicular to a feature axis, creating orthogonal rectangular decision regions.</span></div>
+<div class="term"><b>Tree Depth</b><span class="tm">01:30:45</span><span>Length of the longest edge path from root to any leaf node; primary hyperparameter of model capacity.</span></div>
+<div class="term"><b>Decision Stump</b><span class="tm">01:31:07</span><span>A 1-level decision tree consisting of a single root split and two leaves (depth = 1; high bias).</span></div>
+<div class="term"><b>Overfitting (Overlearning)</b><span class="tm">01:33:00</span><span>Model pathology where high variance leads the tree to memorize sample noise, degrading test accuracy.</span></div>
+<div class="term"><b>Pruning (Budama)</b><span class="tm">01:36:20</span><span>Removing weak subtrees to control complexity, eliminate noise sensitivity, and boost generalisation.</span></div>
+<div class="term"><b>Pre-Pruning</b><span class="tm">01:37:00</span><span>Halting tree growth prematurely during top-down construction using stopping heuristics (max_depth).</span></div>
+<div class="term"><b>Post-Pruning</b><span class="tm">01:37:30</span><span>Growing a full overfitted tree first, then recursively removing weak subtrees via cost-complexity pruning.</span></div>
+<div class="term"><b>Cost-Complexity Pruning</b><span class="tm">01:38:00</span><span>Regularization objective balancing misclassification error against tree size: \(R_lpha(T) = R(T) + lpha |T|\).</span></div>
+<div class="term"><b>Robustness (Gürbüzlük)</b><span class="tm">01:38:30</span><span>Stability of classifier boundaries against small noise or perturbations in training instances.</span></div>
+<div class="term"><b>Naïve Bayes</b><span class="tm">01:40:10</span><span>Probabilistic classifier assuming conditional feature independence: \(P(C|\mathbf{x}) \propto P(C) \prod P(x_j|C)\).</span></div>
+<div class="term"><b>Support Vector Machine (SVM)</b><span class="tm">01:41:00</span><span>Supervised classifier maximizing geometric separation margin (\(2/\|\mathbf{w}\|\)) between classes.</span></div>
+<div class="term"><b>Support Vectors</b><span class="tm">01:42:00</span><span>Critical subset of training instances lying directly on margin boundaries (\(\mathbf{w}^T \mathbf{x} + b = \pm 1\)).</span></div>
+<div class="term"><b>Kernel Trick</b><span class="tm">01:42:40</span><span>Implicitly mapping data to high-dimensional Hilbert space via kernel function \(K(\mathbf{x}_i, \mathbf{x}_j)\).</span></div>
+</div></section>
+
+<!-- ERRATA SECTION -->
+<section class="ref wrap" id="errata" style="margin-top:3rem"><h2 class="plain">Transcript clean-up</h2><p class="lede">The recording was auto-transcribed from audio, and several phonetic misrecognitions occurred. This log reads them as follows.</p><ul class="tl">
+<li><span class="tm">00:59:21</span><span>&ldquo;Tom Michel is a famous one&rdquo; refers to <strong>Prof. Tom M. Mitchell</strong>, author of the seminal 1997 textbook <em>Machine Learning</em>.</span></li>
+<li><span class="tm">01:01:48</span><span>&ldquo;fatal presentation&rdquo; correctly identified as <strong>fetal presentation</strong> in the obstetric cesarean section dataset.</span></li>
+<li><span class="tm">01:02:37</span><span>&ldquo;primer power&rdquo; refers to the obstetric parity term <strong>primipara / nullipara</strong> (first-time pregnancy).</span></li>
+<li><span class="tm">01:13:14</span><span>&ldquo;Half-man code&rdquo; refers to <strong>Huffman coding</strong> (information theory prefix tree encoding).</span></li>
+<li><span class="tm">01:18:13</span><span>&ldquo;Naive bias&rdquo; is the phonetic transcription slip for the <strong>Na&iuml;ve Bayes</strong> classifier.</span></li>
+<li><span class="tm">01:19:38</span><span>&ldquo;This engine tree&rdquo; is a speech recognition slip for <strong>Decision tree</strong>.</span></li>
+<li><span class="tm">01:21:48</span><span>&ldquo;bilgi kazanc&imath;&rdquo; is the Turkish academic term for <strong>Information Gain (IG)</strong>.</span></li>
+<li><span class="tm">01:24:11</span><span>&ldquo;I.G. tree&rdquo; is read as <strong>ID3 tree</strong> / Information Gain decision tree.</span></li>
+<li><span class="tm">01:25:00</span><span>&ldquo;C45 or C45&rdquo; refers to Quinlan’s <strong>C4.5 algorithm</strong>.</span></li>
+<li><span class="tm">01:30:21</span><span>&ldquo;Queenland is the inventor&rdquo; correctly identified as <strong>J. Ross Quinlan</strong>, creator of ID3, C4.5, and C5.0.</span></li>
+<li><span class="tm">01:36:30</span><span>&ldquo;budama&rdquo; is the Turkish agricultural term for <strong>pruning</strong> tree branches.</span></li>
+<li><span class="tm">01:39:09</span><span>&ldquo;g&uuml;rb&uuml;z&rdquo; is the Turkish descriptor for <strong>robust</strong>, sturdy, and noise-resilient classifiers.</span></li>
+</ul><div class="end">End of recording &middot; 01:43:17</div></section></main>
+
+<!-- COLLAPSIBLE LEFT NAVIGATION SIDEBAR -->
+<aside id="core-sidebar" aria-label="Course Lecture Archive">
+  <div class="sb-head">
+    <a href="index.html" class="sb-brand">
+      <span class="sb-drill-icon">&#x2BD0;</span>
+      <div class="sb-brand-meta">
+        <span class="sb-brand-sub">SEN 431 &middot; IAU</span>
+        <span class="sb-brand-title">Study Core Log</span>
+      </div>
+    </a>
+    <button id="sidebar-close-btn" class="sb-close-btn" aria-label="Close Navigation">&times;</button>
+  </div>
+
+  <div class="sb-telemetry">
+    <div class="sb-tele-col">
+      <span class="sb-tele-lbl">CORE DRILLED</span>
+      <span class="sb-tele-val">663.4 m</span>
+    </div>
+    <div class="sb-tele-col">
+      <span class="sb-tele-lbl">STRATA INDEXED</span>
+      <span class="sb-tele-val">48 Layers</span>
+    </div>
+  </div>
+
+  <div class="sb-scroll">
+    <div class="sb-nav-lbl">
+      <span>LECTURE ARCHIVE</span>
+      <span>6 / 14 WKS</span>
+    </div>
+    <ul class="sb-list">
+      
+        <li class="sb-item">
+          <a href="Data Mining Week 1 Log.html" class="sb-link" data-week="1">
+            <span class="sb-wk-badge">W01</span>
+            <div class="sb-wk-body">
+              <span class="sb-wk-title">Orientation, AI Dilemma & Foundations</span>
+              <span class="sb-wk-meta">106.7 m &middot; 01:46:44</span>
+              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+            </div>
+          </a>
+        </li>
+        
+        <li class="sb-item">
+          <a href="Data Mining Week 2 Log.html" class="sb-link" data-week="2">
+            <span class="sb-wk-badge">W02</span>
+            <div class="sb-wk-body">
+              <span class="sb-wk-title">KDD Process, DIKW Hierarchy & Taxonomy</span>
+              <span class="sb-wk-meta">128.5 m &middot; 02:08:32</span>
+              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+            </div>
+          </a>
+        </li>
+        
+        <li class="sb-item">
+          <a href="Data Mining Week 3 Log.html" class="sb-link" data-week="3">
+            <span class="sb-wk-badge">W03</span>
+            <div class="sb-wk-body">
+              <span class="sb-wk-title">Data Types, Dirty Data & Normalization</span>
+              <span class="sb-wk-meta">106.6 m &middot; 01:46:36</span>
+              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+            </div>
+          </a>
+        </li>
+        
+        <li class="sb-item">
+          <a href="Data Mining Week 4 Log.html" class="sb-link" data-week="4">
+            <span class="sb-wk-badge">W04</span>
+            <div class="sb-wk-body">
+              <span class="sb-wk-title">Classification, Lazy vs Eager, ZeroR & OneR</span>
+              <span class="sb-wk-meta">115.7 m &middot; 01:55:40</span>
+              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+            </div>
+          </a>
+        </li>
+        
+        <li class="sb-item">
+          <a href="Data Mining Week 5 Log.html" class="sb-link" data-week="5">
+            <span class="sb-wk-badge">W05</span>
+            <div class="sb-wk-body">
+              <span class="sb-wk-title">Distance Metrics, k-NN & Voronoi</span>
+              <span class="sb-wk-meta">102.6 m &middot; 01:42:33</span>
+              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+            </div>
+          </a>
+        </li>
+        
+        <li class="sb-item active">
+          <a href="Data Mining Week 6 Log.html" class="sb-link" data-week="6">
+            <span class="sb-wk-badge">W06</span>
+            <div class="sb-wk-body">
+              <span class="sb-wk-title">Decision Trees, Purity, CART & SVM</span>
+              <span class="sb-wk-meta">103.3 m &middot; 01:43:17</span>
+              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+            </div>
+          </a>
+          <ul class="sb-sublist"><li><a href="#part-a" class="sb-sublink"><span class="sb-marker">A</span><span>Week 5 Retrospective &amp; Exam Boundaries</span></a></li><li><a href="#part-b" class="sb-sublink"><span class="sb-marker">B</span><span>Foundations &amp; The Learner Triad</span></a></li><li><a href="#part-c" class="sb-sublink"><span class="sb-marker">C</span><span>Recursive Partitioning &amp; Node Purity</span></a></li><li><a href="#part-d" class="sb-sublink"><span class="sb-marker">D</span><span>Shannon Entropy &amp; Hand Calculations</span></a></li><li><a href="#part-e" class="sb-sublink"><span class="sb-marker">E</span><span>Information Gain &amp; ID3 Induction</span></a></li><li><a href="#part-f" class="sb-sublink"><span class="sb-marker">F</span><span>Gini Impurity, CART &amp; Hybrid Models</span></a></li><li><a href="#part-g" class="sb-sublink"><span class="sb-marker">G</span><span>Tree Depth, Overfitting &amp; Pruning</span></a></li><li><a href="#part-h" class="sb-sublink"><span class="sb-marker">H</span><span>Alternative Classifiers &amp; Interview Defense</span></a></li><li><a href="#errata" class="sb-sublink"><span class="sb-marker">&para;</span><span>Speech Errata</span></a></li><li><a href="#video-lab" class="sb-sublink"><span class="sb-marker">&#9654;</span><span>Curated Video Lab</span></a></li></ul>
+        </li>
+    
+    </ul>
+  </div>
+
+  <div class="sb-footer">
+    <a href="index.html" class="sb-portal-link">
+      <span>&#x25C7;</span> Master Portal Index
+    </a>
+    <button class="sb-theme-toggle" id="sb-theme-toggle" type="button" title="Toggle Light / Dark Mode (Shortcut: T)">
+      <span class="theme-icon">&#x25D1;</span>
+      <span class="theme-text">Toggle Theme</span>
+    </button>
+    <div class="sb-keyhint">
+      Shortcut: Press <kbd>[</kbd> to toggle &middot; <kbd>T</kbd> for theme
+    </div>
+  </div>
+</aside>
+<div id="sidebar-backdrop"></div>
+
+<!-- Unified Client Application Controller -->
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

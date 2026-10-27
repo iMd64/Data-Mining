@@ -126,6 +126,15 @@
 <article class="e" data-t="2280" data-e="2760"><div class="ts">00:38:00<span>to 00:46:00</span><span class="ref-slide">Slides 26&ndash;32</span></div><div class="rail"></div><div class="b"><h3>Mahalanobis distance: covariance-aware geometry</h3>
 <p>Dr. Bulut asks: <em>why can Euclidean distance be dangerously misleading?</em> Euclidean distance treats all feature axes as independent and equally scaled, forming circular spherical distance contours. But what if Feature 1 and Feature 2 are highly correlated (e.g., Height and Weight)?</p>
 <p><mark>Mahalanobis Distance</mark> accounts for feature variance and inter-feature covariance: \(d_M(x, y) = \sqrt{(x - y)^T \Sigma^{-1} (x - y)}\), where \(\Sigma\) is the covariance matrix. Rather than rigid circles, equal Mahalanobis distance contours form <mark>ellipses stretched along the data trend</mark>. A point far along the correlation axis is mathematically closer than an outlier lying off the trend line.</p>
+
+<div class="exam-callout">
+  <div class="callout-head">
+    <span class="callout-badge">EXAM RADAR UPDATE</span>
+    <span class="callout-time">Week 6 Clarification &middot; 00:02:20</span>
+  </div>
+  <p><strong>Mahalanobis Formula Exam Scope:</strong> In the Week 6 retrospective lecture, Dr. Bulut explicitly reassured students that the Mahalanobis matrix distance formula is <em>not tested by manual calculation on the exam</em> (no covariance matrix inversion required). Students are only expected to understand its conceptual principle: measuring distance in units of standard deviation along correlated axes.</p>
+</div>
+
 <a class="yt-badge" href="https://www.youtube.com/results?search_query=mahalanobis+distance+explained+visual" target="_blank" rel="noopener">Curated Video: Mahalanobis Distance &amp; Elliptical Covariance Contours</a>
 </div></article>
 
@@ -142,6 +151,15 @@
 <article class="e" data-t="3360" data-e="3960"><div class="ts">00:56:00<span>to 01:06:00</span><span class="ref-slide">Slides 37&ndash;46</span></div><div class="rail"></div><div class="b"><h3>k-NN classification in one sentence</h3>
 <p>Dr. Bulut summarizes the complete algorithm: <mark>To classify a new query point, find the k closest labeled training instances in feature space and assign the class that wins the majority vote.</mark></p>
 <ol class="x kdd"><li style="--c:#2E9E5B"><span class="tm">00:58:10</span><b>New Query</b><span>Unlabeled feature point arrives</span></li><li style="--c:#7FA63A"><span class="tm">00:59:30</span><b>Distance Scan</b><span>Compute d(Q, x) for all N instances</span></li><li style="--c:#C9A21B"><span class="tm">01:01:15</span><b>Pick k Smallest</b><span>Select the k closest neighbors</span></li><li style="--c:#D9552F"><span class="tm">01:02:40</span><b>Majority Vote</b><span>Tally class labels among the k</span></li><li style="--c:#C42B45"><span class="tm">01:04:10</span><b>Prediction</b><span>Assign winning majority class</span></li></ol>
+
+<div class="exam-callout">
+  <div class="callout-head">
+    <span class="callout-badge">EXAM RADAR UPDATE</span>
+    <span class="callout-time">Week 6 Clarification &middot; 00:26:45</span>
+  </div>
+  <p><strong>Exact k-NN Exam Question Pattern:</strong> In Week 6, Dr. Bulut walked through the exact midterm exam problem structure: Neighbor distance values are <em>pre-calculated and provided</em> in a table. You do not compute square roots by hand under time pressure. You are tested on ranking the nearest neighbors, picking the \(k\) closest instances, and applying majority voting (or regression averaging).</p>
+</div>
+
 <a class="yt-badge" href="https://www.youtube.com/watch?v=HVXime0nQeI" target="_blank" rel="noopener">Curated Video: StatQuest &mdash; K-Nearest Neighbors, Clearly Explained</a>
 </div></article>
 
@@ -188,6 +206,15 @@
 <p>Dr. Bulut transitions from local non-parametric neighbors to global parametric modelling: <mark>Linear Regression</mark>. The model assumes a straight-line trend: \(\hat{y} = \beta_0 + \beta_1 x\), where \(\beta_0\) is the intercept and \(\beta_1\) is the slope.</p>
 <p>The optimal line is discovered via <mark>Ordinary Least Squares (OLS)</mark>, which minimizes the sum of squared vertical residuals: \(\sum (y_i - \hat{y}_i)^2\). He presents the Height vs. Weight study (20 patients), fitting the equation \(\text{Weight} = -90 + 0.90 \times \text{Height}\). A person with height 170 cm has a predicted weight of \(-90 + 0.90(170) = 63\text{ kg}\).</p>
 <div class="x cmp"><div class="col"><h4>Interpolation</h4><p><span class="tm">01:38:40</span> Predicting within the observed domain of training instances (e.g. Heights 150–190 cm). Highly reliable.</p></div><div class="col"><h4>Extrapolation</h4><p><span class="tm">01:39:15</span> Predicting far beyond observed boundaries (e.g. Height 240 cm or 50 cm). Extremely risky; assumes linear trends hold infinitely.</p></div></div>
+
+<div class="exam-callout">
+  <div class="callout-head">
+    <span class="callout-badge">EXAM RADAR UPDATE</span>
+    <span class="callout-time">Week 6 Clarification &middot; 00:18:40 &ndash; 00:20:56</span>
+  </div>
+  <p><strong>Linear Regression Exam Scope &amp; Software:</strong> Dr. Bulut explicitly clarified in Week 6 that technical derivations of interpolation, extrapolation, and matrix OLS formulas will <em>not</em> be tested. The residual error term is negligible (\(e pprox 0\)). What IS tested: evaluating \(\hat{y} = eta_0 + eta_1 x\) for a specific query point \(x\). Additionally, he highlighted <strong>IBM SPSS</strong> as industry standard enterprise statistical software alongside Python/R [00:31:30].</p>
+</div>
+
 </div></article>
 
 <article class="e" data-t="6000" data-e="6153"><div class="ts">01:40:00<span>to 01:42:33</span><span class="ref-slide">Slides 90&ndash;97</span></div><div class="rail"></div><div class="b"><h3>Three exam-style practice questions</h3>
@@ -262,18 +289,18 @@
   <div class="sb-telemetry">
     <div class="sb-tele-col">
       <span class="sb-tele-lbl">CORE DRILLED</span>
-      <span class="sb-tele-val">560.1 m</span>
+      <span class="sb-tele-val">663.4 m</span>
     </div>
     <div class="sb-tele-col">
       <span class="sb-tele-lbl">STRATA INDEXED</span>
-      <span class="sb-tele-val">40 Layers</span>
+      <span class="sb-tele-val">48 Layers</span>
     </div>
   </div>
 
   <div class="sb-scroll">
     <div class="sb-nav-lbl">
       <span>LECTURE ARCHIVE</span>
-      <span>5 / 14 WKS</span>
+      <span>6 / 14 WKS</span>
     </div>
     <ul class="sb-list">
       
@@ -337,14 +364,15 @@
           <ul class="sb-sublist"><li><a href="#part-a" class="sb-sublink"><span class="sb-marker">A</span><span>The Geometry of Distance and Euclidean Metric</span></a></li><li><a href="#part-b" class="sb-sublink"><span class="sb-marker">B</span><span>Manhattan, City-Blocks, and Grid Navigation</span></a></li><li><a href="#part-c" class="sb-sublink"><span class="sb-marker">C</span><span>Minkowski, Chebyshev, and Mahalanobis Spaces</span></a></li><li><a href="#part-d" class="sb-sublink"><span class="sb-marker">D</span><span>k-Nearest Neighbors (k-NN) Foundations</span></a></li><li><a href="#part-e" class="sb-sublink"><span class="sb-marker">E</span><span>Categorical k-NN & Play Tennis Walkthrough</span></a></li><li><a href="#part-f" class="sb-sublink"><span class="sb-marker">F</span><span>The Voting Mechanism: Odd k & Bias–Variance</span></a></li><li><a href="#part-g" class="sb-sublink"><span class="sb-marker">G</span><span>Voronoi Diagrams: 1-NN & Dirichlet Cells</span></a></li><li><a href="#part-h" class="sb-sublink"><span class="sb-marker">H</span><span>Linear Regression, OLS, and Exam Practice</span></a></li><li><a href="#errata" class="sb-sublink"><span class="sb-marker">&para;</span><span>Speech Errata</span></a></li><li><a href="#video-lab" class="sb-sublink"><span class="sb-marker">&#9654;</span><span>Curated Video Lab</span></a></li></ul>
         </li>
         
-        <li class="sb-item upcoming">
-          <div class="sb-link" style="opacity:0.6; cursor:not-allowed">
-            <span class="sb-wk-badge pending">W06</span>
+                <li class="sb-item">
+          <a href="Data Mining Week 6 Log.html" class="sb-link" data-week="6">
+            <span class="sb-wk-badge">W06</span>
             <div class="sb-wk-body">
-              <span class="sb-wk-title">Decision Trees & Entropy</span>
-              <span class="sb-wk-meta">Audio Transcribed &middot; Pending</span>
+              <span class="sb-wk-title">Decision Trees, Purity, CART & SVM</span>
+              <span class="sb-wk-meta">103.3 m &middot; 01:43:17</span>
+              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
             </div>
-          </div>
+          </a>
         </li>
     
     </ul>

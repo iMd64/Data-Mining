@@ -273,7 +273,7 @@
 
       if (countLbl) {
         if (!q) {
-          countLbl.textContent = 'Showing all 5 lecture study logs · 40 strata layers';
+          countLbl.textContent = 'Showing all 6 lecture study logs · 48 strata layers';
         } else {
           countLbl.textContent = 'Found ' + totalMatchingStrata + ' matching strata across ' + visibleCards + ' lecture logs';
         }
