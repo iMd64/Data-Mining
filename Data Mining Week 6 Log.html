@@ -86,7 +86,9 @@
     <span class="callout-badge">EXAM RADAR &middot; FORMULA SCOPE</span>
     <span class="callout-time">00:02:20</span>
   </div>
-  <p><strong>Mahalanobis Distance:</strong> The covariance matrix inversion \(D_M(\mathbf{x}, \mathbf{y}) = \sqrt{(\mathbf{x}-\mathbf{y})^T \mathbf{\Sigma}^{-1} (\mathbf{x}-\mathbf{y})}\) is mathematically intensive. The professor confirmed: <em>&ldquo;You don't have to memorize the Mahalanobis formula, but you can get the gist by watching the video.&rdquo;</em> Grasp its physical meaning: measuring distance in units of standard deviation along correlated axes.</p>
+  <p><strong>Mahalanobis Distance:</strong> The full covariance matrix formula accounts for feature correlation and variance scaling:</p>
+<p>$$D_M(\mathbf{x}, \mathbf{y}) = \sqrt{(\mathbf{x}-\mathbf{y})^T \boldsymbol{\Sigma}^{-1} (\mathbf{x}-\mathbf{y})}$$</p>
+<p>The professor confirmed: <em>&ldquo;You don't have to memorize the Mahalanobis formula, but you can get the gist by watching the video.&rdquo;</em> Students are <strong>not</strong> tested on manual matrix inversion. Grasp its physical meaning: measuring distance in units of standard deviation along correlated axes.</p>
 </div>
 <p>He reinforces that the self-check questions in the uploaded reading materials match standard technical screening prompts used in real data engineering and machine learning job interviews.</p>
 </div></article>
@@ -98,7 +100,7 @@
     <span class="callout-badge">EXAM RADAR &middot; REGRESSION BOUNDS</span>
     <span class="callout-time">00:18:40 &ndash; 00:20:56</span>
   </div>
-  <p><strong>Tested vs Excluded:</strong> <em>&ldquo;Interpolation and extrapolation... I will not be asking these things to you since this is a technical one.&rdquo;</em> Students will NOT derive matrix least squares or prove asymptotic confidence bands. The error term \(\epsilon\) is negligible (\(e pprox 0\)). What IS tested is straightforward: given an estimated regression equation \(\hat{y} = eta_0 + eta_1 x\) and a query point (e.g. \(x = 8\)), compute the point prediction \(\hat{y}\).</p>
+  <p><strong>Tested vs Excluded:</strong> <em>&ldquo;Interpolation and extrapolation... I will not be asking these things to you since this is a technical one.&rdquo;</em> Students will NOT derive matrix least squares or prove asymptotic confidence bands. The error term \(\epsilon\) is negligible (\(e \approx 0\)). What IS tested is straightforward: given an estimated regression equation \(\hat{y} = \beta_0 + \beta_1 x\) and a query point (e.g. \(x = 8\)), compute the point prediction \(\hat{y}\).</p>
 </div>
 <p>At <span class="tm">00:31:30</span>, he highlights <strong>IBM SPSS</strong> as a dominant commercial software suite used in clinical trials, social research, and enterprise business analytics alongside Python and R.</p>
 </div></article>
@@ -146,7 +148,7 @@
     <ul class="rows">
       <li><span class="tm">00:41:35</span><span>Compiles explicit hypothesis during training phase.</span></li>
       <li><span class="tm">00:55:05</span><span>Original raw dataset is discarded after building tree.</span></li>
-      <li><span class="tm">00:55:10</span><span>Query execution is extremely fast: \(O(	ext{depth})\).</span></li>
+      <li><span class="tm">00:55:10</span><span>Query execution is extremely fast: \(O(\text{depth})\).</span></li>
     </ul>
   </div>
   <div class="col">
@@ -214,8 +216,10 @@
 <section class="part hx4" id="part-d" style="--st:#3FB5A5"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">D</div><div><div class="pr">Layer 4 of 8 &middot; 01:00:00 &ndash; 01:14:00 &middot; 14 min 00 s &middot; core depth 60.0 &ndash; 74.0 m</div><h2>Shannon Entropy &amp; Hand Calculations</h2><p>Claude Shannon's information disorder, concave binary entropy curves, and step-by-step arithmetic for exam problems.</p></div></div></div><div class="wrap entries">
 
 <article class="e" data-t="3600" data-e="3960"><div class="ts">01:00:00<span>to 01:06:00</span><span class="ref-slide">Slides 16&ndash;18</span></div><div class="rail"></div><div class="b"><h3>Shannon Entropy: Measuring disorder and untidiness</h3>
-<p>Dr. Bulut explains that in data mining, <mark>entropy measures the disorder, untidiness, or uncertainty</mark> of class labels within a subset. For a node \(S\) with \(c\) target classes, Shannon Entropy (measured in bits) is:</p>
+<p>Dr. Bulut explains that in data mining, <mark>entropy measures the disorder, untidiness, or uncertainty</mark> of class labels within a subset. For a node \(S\) with \(c\) target classes, Shannon Entropy (measured in bits) is defined as:</p>
 <p>$$H(S) = - \sum_{i=1}^{c} p_i \log_2(p_i)$$</p>
+<p>For a binary classification task with positive class proportion \(p_+\) and negative class proportion \(p_-\):</p>
+<p>$$H(S) = - \left[ p_+ \log_2(p_+) + p_- \log_2(p_-) \right]$$</p>
 <p>where \(p_i\) is the proportion of class \(i\). Crucial mathematical convention: <mark>\(0 \cdot \log_2(0) \equiv 0\)</mark>. For balanced classes, entropy scales monotonically with class count:</p>
 <div class="x tw">
   <table>
@@ -235,8 +239,8 @@
 <article class="e" data-t="3960" data-e="4440"><div class="ts">01:06:00<span>to 01:14:00</span><span class="ref-slide">Slides 19&ndash;22, 65</span></div><div class="rail"></div><div class="b"><h3>Worked hand calculations &amp; Slide 65 Question 1</h3>
 <p>Dr. Bulut works through three concrete numerical scenarios that frequently recur on examinations:</p>
 <div class="x pairs">
-  <div class="pair"><span class="tm">01:06:40</span><b>Pure Node (8 YES, 0 NO)</b><span>\(H = - [1.0 \log_2(1.0) + 0] = \mathbf{0.000	ext{ bits}}\)</span></div>
-  <div class="pair"><span class="tm">01:07:20</span><b>50/50 Split (4 YES, 4 NO)</b><span>\(H = - [0.5(-1) + 0.5(-1)] = \mathbf{1.000	ext{ bit}}\)</span></div>
+  <div class="pair"><span class="tm">01:06:40</span><b>Pure Node (8 YES, 0 NO)</b><span>\(H = - [1.0 \log_2(1.0) + 0] = \mathbf{0.000}\text{ bits}\)</span></div>
+  <div class="pair"><span class="tm">01:07:20</span><b>50/50 Split (4 YES, 4 NO)</b><span>\(H = - [0.5(-1) + 0.5(-1)] = \mathbf{1.000}\text{ bit}\)</span></div>
 </div>
 <div class="exam-callout">
   <div class="callout-head">
@@ -244,10 +248,14 @@
     <span class="callout-time">Slide 21 &middot; Slide 65</span>
   </div>
   <p><strong>Problem:</strong> A node contains 6 YES and 2 NO instances. Calculate its Shannon Entropy.</p>
-  <p><strong>Step 1:</strong> Class proportions: \(p_+ = 6/8 = 0.75\), \(p_- = 2/8 = 0.25\).<br>
-  <strong>Step 2:</strong> Base-2 logarithms: \(\log_2(0.25) = -2.000\); \(\log_2(0.75) = \log_2(3/4) pprox 1.585 - 2.0 = -0.415\).<br>
-  <strong>Step 3:</strong> Multiply: \(0.75 	imes (-0.415) pprox -0.3113\); \(0.25 	imes (-2.0) = -0.5000\).<br>
-  <strong>Step 4:</strong> Apply outer minus: \(H(S) = - (-0.3113 - 0.5000) = \mathbf{0.8113 pprox 0.811	ext{ bits}}\).</p>
+  <p><strong>Step 1: Class proportions</strong><br>
+  \(p_+ = \frac{6}{8} = 0.75, \quad p_- = \frac{2}{8} = 0.25\)</p>
+  <p><strong>Step 2: Base-2 logarithms</strong><br>
+  \(\log_2(0.25) = -2.000, \quad \log_2(0.75) = \log_2(3/4) \approx 1.585 - 2.0 = -0.415\)</p>
+  <p><strong>Step 3: Multiply terms</strong><br>
+  \(0.75 \times (-0.415) \approx -0.3113, \quad 0.25 \times (-2.0) = -0.5000\)</p>
+  <p><strong>Step 4: Sum and negate</strong><br>
+  $$H(S) = - (-0.3113 - 0.5000) = \mathbf{0.8113} \approx \mathbf{0.811}\text{ bits}$$</p>
 </div>
 </div></article>
 
@@ -258,15 +266,15 @@
 
 <article class="e" data-t="4440" data-e="4740"><div class="ts">01:14:00<span>to 01:19:00</span><span class="ref-slide">Slides 23&ndash;25</span></div><div class="rail"></div><div class="b"><h3>Information Gain (IG) &amp; The Inverse Entropy Fallacy</h3>
 <p><mark>Information Gain (IG)</mark> measures the expected reduction in entropy resulting from splitting dataset \(S\) on attribute \(A\):</p>
-<p>$$IG(S, A) = H(S) - \sum_{v \in 	ext{Values}(A)} rac{|S_v|}{|S|} H(S_v)$$</p>
+<p>$$IG(S, A) = H(S) - \sum_{v \in \text{Values}(A)} \frac{|S_v|}{|S|} H(S_v)$$</p>
 <div class="exam-callout">
   <div class="callout-head">
     <span class="callout-badge">EXAM RADAR &middot; FALLACY WARNING</span>
     <span class="callout-time">01:20:10 &middot; Slide 23</span>
   </div>
-  <p><strong>The Inverse Entropy Fallacy:</strong> Dr. Bulut warned that students sometimes mistake Information Gain for the mathematical inverse of entropy (\(1/H\)). <em>Information Gain is NOT \(1/H\)</em>. It is the subtraction difference between parent entropy and weighted child entropy: \(IG = H(	ext{parent}) - H(	ext{children})\).</p>
+  <p><strong>The Inverse Entropy Fallacy:</strong> Dr. Bulut warned that students sometimes mistake Information Gain for the mathematical inverse of entropy (\(1/H\)). <em>Information Gain is NOT \(1/H\)</em>. It is the subtraction difference between parent entropy and weighted child entropy: \(IG = H(\text{parent}) - H(\text{children})\).</p>
 </div>
-<p><strong>Sample Weighting:</strong> Child entropies must be weighted by \(rac{|S_v|}{|S|}\). A child node containing 90% of the dataset must heavily influence the split evaluation, whereas a tiny child containing only 10% must not distort the global split score.</p>
+<p><strong>Sample Weighting:</strong> Child entropies must be weighted by \(\frac{|S_v|}{|S|}\). A child node containing 90% of the dataset must heavily influence the split evaluation, whereas a tiny child containing only 10% must not distort the global split score.</p>
 </div></article>
 
 <article class="e" data-t="4740" data-e="5035"><div class="ts">01:19:00<span>to 01:23:55</span><span class="ref-slide">Slides 26&ndash;30</span></div><div class="rail"></div><div class="b"><h3>Candidate splits comparison &amp; ID3 Greedy Learning</h3>
@@ -275,8 +283,8 @@
   <table>
     <thead><tr><th>Candidate Split</th><th>Left Child Subset</th><th>Right Child Subset</th><th>Weighted Child Entropy</th><th>Information Gain (IG)</th></tr></thead>
     <tbody>
-      <tr><td>Candidate A</td><td>3 YES, 1 NO (\(H pprox 0.811\))</td><td>1 YES, 3 NO (\(H pprox 0.811\))</td><td>\(rac{4}{8}(0.811) + rac{4}{8}(0.811) = 0.811\)</td><td>\(1.000 - 0.811 = \mathbf{0.189	ext{ bits}}\)</td></tr>
-      <tr><td>Candidate B (Perfect)</td><td>4 YES, 0 NO (\(H = 0.000\))</td><td>0 YES, 4 NO (\(H = 0.000\))</td><td>\(rac{4}{8}(0) + rac{4}{8}(0) = 0.000\)</td><td>\(1.000 - 0.000 = \mathbf{1.000	ext{ bit}}\)</td></tr>
+      <tr><td>Candidate A</td><td>3 YES, 1 NO (\(H \approx 0.811\))</td><td>1 YES, 3 NO (\(H \approx 0.811\))</td><td>\(\frac{4}{8}(0.811) + \frac{4}{8}(0.811) = 0.811\)</td><td>\(1.000 - 0.811 = \mathbf{0.189}\text{ bits}\)</td></tr>
+      <tr><td>Candidate B (Perfect)</td><td>4 YES, 0 NO (\(H = 0.000\))</td><td>0 YES, 4 NO (\(H = 0.000\))</td><td>\(\frac{4}{8}(0) + \frac{4}{8}(0) = 0.000\)</td><td>\(1.000 - 0.000 = \mathbf{1.000}\text{ bit}\)</td></tr>
     </tbody>
   </table>
 </div>
@@ -290,16 +298,21 @@
 
 <article class="e" data-t="5035" data-e="5250"><div class="ts">01:23:55<span>to 01:26:00</span><span class="ref-slide">Slides 31&ndash;35</span></div><div class="rail"></div><div class="b"><h3>Gini Impurity &amp; Slide 65 Question 2</h3>
 <p>Gini Impurity measures the probability of misclassifying a randomly chosen element if labeled according to class distribution. It relies on squaring probabilities rather than computing logarithms:</p>
-<p>$$	ext{Gini}(S) = 1 - \sum_{i=1}^{c} p_i^2$$</p>
+<p>$$\text{Gini}(S) = 1 - \sum_{i=1}^{c} p_i^2$$</p>
+<p>For a candidate split on attribute \(A\), the weighted child Gini impurity is:</p>
+<p>$$\text{Gini}_{\text{split}}(S, A) = \sum_{v \in \text{Values}(A)} \frac{|S_v|}{|S|} \text{Gini}(S_v)$$</p>
 <div class="exam-callout">
   <div class="callout-head">
     <span class="callout-badge">EXAM RADAR &middot; SLIDE 65 QUESTION 2</span>
     <span class="callout-time">Slide 33 &middot; Slide 65</span>
   </div>
   <p><strong>Problem:</strong> A node has 75% Class A and 25% Class B. Calculate its Gini Impurity.</p>
-  <p><strong>Step 1:</strong> Square class proportions: \(p_A^2 = (0.75)^2 = 0.5625\); \(p_B^2 = (0.25)^2 = 0.0625\).<br>
-  <strong>Step 2:</strong> Sum squares: \(\sum p_i^2 = 0.5625 + 0.0625 = 0.6250\).<br>
-  <strong>Step 3:</strong> Subtract from 1: \(	ext{Gini}(S) = 1 - 0.6250 = \mathbf{0.375}\).</p>
+  <p><strong>Step 1: Square class proportions</strong><br>
+  \(p_A^2 = (0.75)^2 = 0.5625, \quad p_B^2 = (0.25)^2 = 0.0625\)</p>
+  <p><strong>Step 2: Sum squared probabilities</strong><br>
+  \(\sum_{i=1}^{c} p_i^2 = 0.5625 + 0.0625 = 0.6250\)</p>
+  <p><strong>Step 3: Subtract from 1</strong><br>
+  $$\text{Gini}(S) = 1 - 0.6250 = \mathbf{0.375}$$</p>
 </div>
 <div class="x cmp">
   <div class="col">
@@ -330,7 +343,7 @@
     <span class="callout-badge">INSTRUCTOR INSIGHT &middot; HYBRID CART</span>
     <span class="callout-time">01:26:56 &ndash; 01:28:45</span>
   </div>
-  <p><strong>The &ldquo;2-in-1 Shampoo&rdquo; Analogy:</strong> Dr. Bulut compared modern CART architectures to 2-in-1 shampoo (cleaner + polisher in one bottle). CART combines a <em>decision tree router</em> with <em>leaf regressors</em>: the tree hierarchically partitions the problem space into distinct regimes, and within each leaf, a dedicated linear regression equation (\(\hat{y} = eta_0 + eta_1 x\)) or local \(k\)-NN model generates continuous predictions.</p>
+  <p><strong>The &ldquo;2-in-1 Shampoo&rdquo; Analogy:</strong> Dr. Bulut compared modern CART architectures to 2-in-1 shampoo (cleaner + polisher in one bottle). CART combines a <em>decision tree router</em> with <em>leaf regressors</em>: the tree hierarchically partitions the problem space into distinct regimes, and within each leaf, a dedicated linear regression equation (\(\hat{y} = \beta_0 + \beta_1 x\)) or local \(k\)-NN model generates continuous predictions.</p>
 </div>
 </div></article>
 
@@ -384,8 +397,10 @@
     <h4>Post-Pruning (Cost-Complexity)</h4>
     <ul class="rows">
       <li><span class="tm">01:37:30</span><span>Grows full overfitted tree \(T_0\) first, then prunes backwards.</span></li>
-      <li><span class="tm">01:38:00</span><span>Minimizes cost-complexity objective: \(R_lpha(T) = R(T) + lpha |T|\).</span></li>
-      <li><span class="tm">01:38:05</span><span>Tuning \(lpha\) on validation data systematically collapses weak leaves without horizon risk.</span></li>
+      <li><span class="tm">01:38:00</span><span>Minimizes cost-complexity objective:
+        <p style="margin: 0.4rem 0 0.2rem;">$$R_\alpha(T) = R(T) + \alpha |T|$$</p>
+        where \(R(T)\) is misclassification error, \(|T|\) is terminal leaf count, and \(\alpha \ge 0\).</span></li>
+      <li><span class="tm">01:38:05</span><span>Tuning \(\alpha\) on validation data systematically collapses weak leaves without horizon risk.</span></li>
     </ul>
   </div>
 </div>
@@ -398,14 +413,16 @@
 
 <article class="e" data-t="5910" data-e="6060"><div class="ts">01:38:30<span>to 01:41:00</span><span class="ref-slide">Slides 51&ndash;58</span></div><div class="rail"></div><div class="b"><h3>Classifier robustness &amp; Probabilistic Naïve Bayes</h3>
 <p><mark>Robustness (gürbüzlük)</mark> measures the stability of decision boundaries when small sample variations or noise occur. Decision trees can be unstable because a minor shift at the root cascades down the entire hierarchy. Furthermore, orthogonal axis-aligned splits struggle to approximate smooth diagonal boundaries, requiring dozens of stair-step partitions.</p>
-<p><strong>Slide 53 Mini-Exercise:</strong> When comparing Split A (3/2 vs 2/3, \(IG pprox 0.029\)) against Split B (5/0 vs 0/5, \(IG = 1.000\)), <mark>Split B is unambiguously superior</mark> because it achieves 100% pure terminal subsets.</p>
+<p><strong>Slide 53 Mini-Exercise:</strong> When comparing Split A (3/2 vs 2/3, \(IG \approx 0.029\)) against Split B (5/0 vs 0/5, \(IG = 1.000\)), <mark>Split B is unambiguously superior</mark> because it achieves 100% pure terminal subsets.</p>
 <p><strong>Naïve Bayes (Slides 54&ndash;58):</strong> A supervised probabilistic classifier based on Bayes' Rule:</p>
 <p>$$P(C \mid \mathbf{x}) \propto P(C) \prod_{j=1}^{d} P(x_j \mid C)$$</p>
-<p>It is called &ldquo;Na&iuml;ve&rdquo; because it assumes <mark>all features are conditionally independent given the class label</mark>. In email spam filtering, word likelihoods (e.g. \(P(	ext{'FREE'}|	ext{Spam}) = 0.85\)) are multiplied with the prior spam rate to predict classification.</p>
+<p>It is called &ldquo;Na&iuml;ve&rdquo; because it assumes <mark>all features are conditionally independent given the class label</mark>. In email spam filtering, word likelihoods (e.g. \(P(\text{FREE} \mid \text{Spam}) = 0.85\)) are multiplied with the prior spam rate to predict classification.</p>
 </div></article>
 
 <article class="e" data-t="6060" data-e="6197"><div class="ts">01:41:00<span>to 01:43:17</span><span class="ref-slide">Slides 59&ndash;68</span></div><div class="rail"></div><div class="b"><h3>Support Vector Machines &amp; Technical Interview Defense</h3>
-<p>A Support Vector Machine (SVM) finds a linear hyperplane \(\mathbf{w}^T \mathbf{x} + b = 0\) that separates classes while <mark>maximizing the geometric margin \(rac{2}{\|\mathbf{w}\|}\)</mark>. The critical training instances lying directly on the margin planes (\(\mathbf{w}^T \mathbf{x}_i + b = \pm 1\)) are called <strong>Support Vectors</strong>. Non-support vectors can be moved or deleted without altering the decision boundary. For non-linear data, the <em>kernel trick</em> implicitly projects points into a high-dimensional space.</p>
+<p>A Support Vector Machine (SVM) finds a linear hyperplane that separates classes while <mark>maximizing the geometric margin</mark>:</p>
+<p>$$\mathbf{w}^T \mathbf{x} + b = 0 \quad \text{with Margin } M = \frac{2}{\|\mathbf{w}\|}$$</p>
+<p>The critical training instances lying directly on the margin planes (\(\mathbf{w}^T \mathbf{x}_i + b = \pm 1\)) are called <strong>Support Vectors</strong>. Non-support vectors can be moved or deleted without altering the decision boundary. For non-linear data, the <em>kernel trick</em> implicitly projects points into a high-dimensional space.</p>
 <div class="x tw">
   <table>
     <thead><tr><th>Classifier Architecture</th><th>Learning Strategy</th><th>Model Transparency</th><th>Decision Boundary Geometry</th></tr></thead>
@@ -424,7 +441,7 @@
   </div>
   <p><strong>Dr. Bulut's Technical Interview Prompts:</strong> In his closing remarks, Dr. Bulut warned that ML engineering interviews routinely evaluate candidates on two defense questions:</p>
   <p><strong>1. Why does overfitting occur in decision trees?</strong> <em>Defense:</em> Leaf fragmentation from exponential subset decay; fitting 5% natural noise with dedicated branches; unlimited non-parametric capacity acting as a lookup table.<br>
-  <strong>2. How do you eliminate overfitting in production?</strong> <em>Defense:</em> Enforce pre-pruning constraints (<code class="inline">max_depth</code>, <code class="inline">min_samples_leaf</code>); apply cost-complexity post-pruning (<(lpha\)); deploy Random Forests to average out variance across decorrelated bootstrap trees.</p>
+  <strong>2. How do you eliminate overfitting in production?</strong> <em>Defense:</em> Enforce pre-pruning constraints (<code class="inline">max_depth</code>, <code class="inline">min_samples_leaf</code>); apply cost-complexity post-pruning (\(\alpha\)); deploy Random Forests to average out variance across decorrelated bootstrap trees.</p>
 </div>
 </div></article>
 
@@ -444,7 +461,7 @@
 <!-- GLOSSARY SECTION -->
 <section class="ref wrap"><h2 class="plain">Terms, in order of appearance</h2><p class="lede">Key technical terms stamped with the exact minute and second Dr. Bulut first defined them.</p><div class="terms">
 <div class="term"><b>Mahalanobis Distance</b><span class="tm">00:02:20</span><span>Covariance-aware metric measuring distance in units of standard deviation along correlated axes.</span></div>
-<div class="term"><b>Linear Regression</b><span class="tm">00:18:40</span><span>Parametric model predicting continuous target \(\hat{y} = eta_0 + eta_1 x\) via ordinary least squares.</span></div>
+<div class="term"><b>Linear Regression</b><span class="tm">00:18:40</span><span>Parametric model predicting continuous target \(\hat{y} = \beta_0 + \beta_1 x\) via ordinary least squares.</span></div>
 <div class="term"><b>k-NN Majority Voting</b><span class="tm">00:26:45</span><span>Assigning class label to query point via highest frequency among the k nearest pre-calculated neighbors.</span></div>
 <div class="term"><b>Decision Tree</b><span class="tm">00:36:20</span><span>Hierarchical supervised classifier recursively partitioning feature space using propositional IF-THEN rules.</span></div>
 <div class="term"><b>Root Node</b><span class="tm">00:39:27</span><span>The topmost decision vertex containing the full unpartitioned dataset S before any feature test occurs.</span></div>
@@ -455,14 +472,14 @@
 <div class="term"><b>White-Box Model</b><span class="tm">00:42:07</span><span>A model whose internal logic is transparent, auditable, and interpretable via human-readable paths.</span></div>
 <div class="term"><b>Rule Extraction</b><span class="tm">00:52:10</span><span>Deriving propositional IF-THEN rules by tracing conjunctions along root-to-leaf paths through a tree.</span></div>
 <div class="term"><b>Recursive Partitioning</b><span class="tm">00:55:00</span><span>Iterative top-down divide-and-conquer strategy dividing training subsets into homogenous subgroups.</span></div>
-<div class="term"><b>Pure Node</b><span class="tm">01:00:15</span><span>A node whose instances all belong exclusively to a single target class (\(H = 0\), \(	ext{Gini} = 0\)).</span></div>
+<div class="term"><b>Pure Node</b><span class="tm">01:00:15</span><span>A node whose instances all belong exclusively to a single target class (\(H = 0\), \(\text{Gini} = 0\)).</span></div>
 <div class="term"><b>Shannon Entropy</b><span class="tm">01:00:00</span><span>Measure of information uncertainty and label disorder in bits: \(H(S) = - \sum p_i \log_2(p_i)\).</span></div>
 <div class="term"><b>Bit</b><span class="tm">01:02:00</span><span>Fundamental unit of information entropy representing the uncertainty of a binary 50/50 fair outcome.</span></div>
-<div class="term"><b>Binary Entropy Curve</b><span class="tm">01:07:00</span><span>Concave parabolic curve plotting \(H\) against \(p\), peaking at \(H = 1.0	ext{ bit}\) when \(p = 0.5\).</span></div>
-<div class="term"><b>Information Gain (IG)</b><span class="tm">01:14:00</span><span>Expected reduction in entropy achieved by partitioning on attribute A: \(IG = H(S) - \sum rac{|S_v|}{|S|} H(S_v)\).</span></div>
+<div class="term"><b>Binary Entropy Curve</b><span class="tm">01:07:00</span><span>Concave parabolic curve plotting \(H\) against \(p\), peaking at \(H = 1.0\text{ bit}\) when \(p = 0.5\).</span></div>
+<div class="term"><b>Information Gain (IG)</b><span class="tm">01:14:00</span><span>Expected reduction in entropy achieved by partitioning on attribute A: \(IG = H(S) - \sum \frac{|S_v|}{|S|} H(S_v)\).</span></div>
 <div class="term"><b>ID3 Algorithm</b><span class="tm">01:23:55</span><span>Quinlan’s classic 1986 tree induction algorithm driven by greedy Information Gain maximization.</span></div>
 <div class="term"><b>Greedy Search</b><span class="tm">01:24:18</span><span>Heuristic selecting locally optimal splits without backtracking, risking global suboptimality.</span></div>
-<div class="term"><b>Gini Impurity</b><span class="tm">01:24:40</span><span>Variance-based impurity metric: \(	ext{Gini}(S) = 1 - \sum p_i^2\), representing misclassification probability.</span></div>
+<div class="term"><b>Gini Impurity</b><span class="tm">01:24:40</span><span>Variance-based impurity metric: \(\text{Gini}(S) = 1 - \sum p_i^2\), representing misclassification probability.</span></div>
 <div class="term"><b>CART</b><span class="tm">01:25:20</span><span>Classification And Regression Trees (Breiman, 1984); strictly binary trees using Gini or MSE.</span></div>
 <div class="term"><b>Binary Split</b><span class="tm">01:26:00</span><span>Partition strictly dividing an internal node into exactly two child branches (defining invariant of CART).</span></div>
 <div class="term"><b>Axis-Aligned Hyperplane</b><span class="tm">01:32:45</span><span>Decision boundary perpendicular to a feature axis, creating orthogonal rectangular decision regions.</span></div>
@@ -472,7 +489,7 @@
 <div class="term"><b>Pruning (Budama)</b><span class="tm">01:36:20</span><span>Removing weak subtrees to control complexity, eliminate noise sensitivity, and boost generalisation.</span></div>
 <div class="term"><b>Pre-Pruning</b><span class="tm">01:37:00</span><span>Halting tree growth prematurely during top-down construction using stopping heuristics (max_depth).</span></div>
 <div class="term"><b>Post-Pruning</b><span class="tm">01:37:30</span><span>Growing a full overfitted tree first, then recursively removing weak subtrees via cost-complexity pruning.</span></div>
-<div class="term"><b>Cost-Complexity Pruning</b><span class="tm">01:38:00</span><span>Regularization objective balancing misclassification error against tree size: \(R_lpha(T) = R(T) + lpha |T|\).</span></div>
+<div class="term"><b>Cost-Complexity Pruning</b><span class="tm">01:38:00</span><span>Regularization objective balancing misclassification error against tree size: \(R_\alpha(T) = R(T) + \alpha |T|\).</span></div>
 <div class="term"><b>Robustness (Gürbüzlük)</b><span class="tm">01:38:30</span><span>Stability of classifier boundaries against small noise or perturbations in training instances.</span></div>
 <div class="term"><b>Naïve Bayes</b><span class="tm">01:40:10</span><span>Probabilistic classifier assuming conditional feature independence: \(P(C|\mathbf{x}) \propto P(C) \prod P(x_j|C)\).</span></div>
 <div class="term"><b>Support Vector Machine (SVM)</b><span class="tm">01:41:00</span><span>Supervised classifier maximizing geometric separation margin (\(2/\|\mathbf{w}\|\)) between classes.</span></div>

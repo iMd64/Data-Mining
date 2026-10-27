@@ -2055,13 +2055,18 @@ tr.added td { color: var(--ink-2); }
   color: inherit !important;
 }
 .katex-display {
-  margin: 1rem 0 !important;
-  padding: 0.65rem 0.85rem !important;
-  background: rgba(255, 255, 255, 0.02) !important;
-  border: 1px solid rgba(255, 255, 255, 0.06) !important;
-  border-radius: 4px !important;
+  margin: 1.15rem 0 !important;
+  padding: 0.85rem 1.1rem !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 6px !important;
   overflow-x: auto !important;
   overflow-y: hidden !important;
+  text-align: center !important;
+}
+[data-theme="light"] .katex-display {
+  background: rgba(0, 0, 0, 0.03) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
 }
 
 @media (max-width: 900px) {
