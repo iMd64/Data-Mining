@@ -14,21 +14,21 @@
 <script crossorigin="anonymous" defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script crossorigin="anonymous" defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <!-- Unified Application Stylesheet -->
-<link href="assets/css/main.css?v=2.1" rel="stylesheet"/>
+<link href="assets/css/main.css?v=2.2" rel="stylesheet"/>
 <!-- Instant Theme Initializer (prevents FOUT) -->
 <script src="assets/js/theme-init.js"></script>
 </head>
 <body>
 <header class="deck"><div class="wrap">
 <button aria-label="Toggle Lecture Directory" class="deck-nav-btn" id="sidebar-toggle-btn" title="Toggle Navigation Menu (Shortcut: [ or \)"><svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="14"><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg><span>LECTURES</span></button>
-<span class="clock" id="clock">00:00:00</span><span class="dpt" id="dpt">0.0 m</span><div aria-hidden="true" class="tape"><a class="seg hx1" data-e="1222" data-s="0" href="#part-a" style="--d:1222;--st:#A9825A" title="The Geometry of Distance and Euclidean Metric"></a>
-<a class="seg hx2" data-e="1744" data-s="1222" href="#part-b" style="--d:522;--st:#D0814F" title="Manhattan, City-Blocks, and Grid Navigation"></a>
-<a class="seg hx3" data-e="2900" data-s="1744" href="#part-c" style="--d:1156;--st:#E0B04A" title="Minkowski, Chebyshev, and Mahalanobis Spaces"></a>
-<a class="seg hx4" data-e="4546" data-s="2900" href="#part-d" style="--d:1646;--st:#3FB5A5" title="k-Nearest Neighbors (k-NN) Foundations"></a>
+<span class="clock" id="clock">00:00:00</span><span class="dpt" id="dpt">0.0 m</span><div aria-hidden="true" class="tape"><a class="seg hx1" data-e="1222" data-s="0" href="#part-a" style="--d:1222;--st:#A9825A" title="Geometry of Distance &amp; Euclidean Metric"></a>
+<a class="seg hx2" data-e="1744" data-s="1222" href="#part-b" style="--d:522;--st:#D0814F" title="Manhattan, City-Blocks, and Grids"></a>
+<a class="seg hx3" data-e="3390" data-s="1744" href="#part-c" style="--d:1646;--st:#E0B04A" title="Minkowski, Chebyshev, Mahalanobis Spaces &amp; Intermission"></a>
+<a class="seg hx4" data-e="4546" data-s="3390" href="#part-d" style="--d:1156;--st:#3FB5A5" title="k-Nearest Neighbors (k-NN) Foundations"></a>
 <a class="seg hx5" data-e="5200" data-s="4546" href="#part-e" style="--d:654;--st:#6F9ADB" title="Categorical k-NN and the Play Tennis Walkthrough"></a>
-<a class="seg hx6" data-e="5420" data-s="5200" href="#part-f" style="--d:220;--st:#A98BD6" title="The Voting Mechanism: Odd k and Bias–Variance"></a>
-<a class="seg hx7" data-e="5739" data-s="5420" href="#part-g" style="--d:319;--st:#8FBF7A" title="Voronoi Diagrams: 1-NN and Nature’s Tessellations"></a>
-<a class="seg hx8" data-e="6153" data-s="5739" href="#part-h" style="--d:414;--st:#D9607A" title="k-NN Regression, Algorithmic Reality &amp; Exam Practice"></a>
+<a class="seg hx6" data-e="5420" data-s="5200" href="#part-f" style="--d:220;--st:#A98BD6" title="The Voting Mechanism: Odd k, Boundaries &amp; Bias–Variance"></a>
+<a class="seg hx7" data-e="5708" data-s="5420" href="#part-g" style="--d:288;--st:#8FBF7A" title="Voronoi Diagrams: 1-NN and Nature’s Tessellations"></a>
+<a class="seg hx8" data-e="6153" data-s="5708" href="#part-h" style="--d:445;--st:#D9607A" title="k-NN Regression, Algorithmic Reality, Exam Practice &amp; OLS Scope"></a>
 <span class="play" id="play"></span></div><span class="total">/ 01:42:33</span><div class="deck-pdf-wrap">
 <a aria-label="Open AI PDF Notes in new tab" class="deck-nav-btn deck-pdf-btn" href="https://drive.google.com/file/d/1sKZ2Z3OEykkCiDRvGrzlqGmD0heA6HMo/view?usp=drive_link" id="pdf-external-btn" rel="noopener noreferrer" target="_blank">
 <svg fill="none" height="13" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="13">
@@ -66,22 +66,22 @@
 <h1>the geometry of<br/><span class="c">neighbors</span><span aria-hidden="true" class="dia"></span></h1>
 <div class="lead"><p><span class="tm">00:57:47</span> “Tell me who your friends are, and I will tell you who you are.” Dr. Faruk Bulut explores distance as mathematical dissimilarity, transitioning from Euclidean and Manhattan grids to Minkowski spaces, the k-NN majority voting engine, Voronoi tessellations, and Ordinary Least Squares linear regression.<small>Each entry displays recording timecode and exact slide references. The depth gauge at top tracks the core as you scroll: 1 minute = 1 metre of core.</small></p>
 </div>
-<div class="survey"><div class="corewrap"><div aria-hidden="true" class="core"><a class="seg hx1" data-e="1222" data-s="0" href="#part-a" style="--d:1222;--st:#A9825A" title="The Geometry of Distance and Euclidean Metric">A</a>
-<a class="seg hx2" data-e="1744" data-s="1222" href="#part-b" style="--d:522;--st:#D0814F" title="Manhattan, City-Blocks, and Grid Navigation">B</a>
-<a class="seg hx3" data-e="2900" data-s="1744" href="#part-c" style="--d:1156;--st:#E0B04A" title="Minkowski, Chebyshev, and Mahalanobis Spaces">C</a>
-<a class="seg hx4" data-e="4546" data-s="2900" href="#part-d" style="--d:1646;--st:#3FB5A5" title="k-Nearest Neighbors (k-NN) Foundations">D</a>
+<div class="survey"><div class="corewrap"><div aria-hidden="true" class="core"><a class="seg hx1" data-e="1222" data-s="0" href="#part-a" style="--d:1222;--st:#A9825A" title="Geometry of Distance &amp; Euclidean Metric">A</a>
+<a class="seg hx2" data-e="1744" data-s="1222" href="#part-b" style="--d:522;--st:#D0814F" title="Manhattan, City-Blocks, and Grids">B</a>
+<a class="seg hx3" data-e="3390" data-s="1744" href="#part-c" style="--d:1646;--st:#E0B04A" title="Minkowski, Chebyshev, Mahalanobis Spaces &amp; Intermission">C</a>
+<a class="seg hx4" data-e="4546" data-s="3390" href="#part-d" style="--d:1156;--st:#3FB5A5" title="k-Nearest Neighbors (k-NN) Foundations">D</a>
 <a class="seg hx5" data-e="5200" data-s="4546" href="#part-e" style="--d:654;--st:#6F9ADB" title="Categorical k-NN and the Play Tennis Walkthrough">E</a>
-<a class="seg hx6" data-e="5420" data-s="5200" href="#part-f" style="--d:220;--st:#A98BD6" title="The Voting Mechanism: Odd k and Bias–Variance">F</a>
-<a class="seg hx7" data-e="5739" data-s="5420" href="#part-g" style="--d:319;--st:#8FBF7A" title="Voronoi Diagrams: 1-NN and Nature’s Tessellations">G</a>
-<a class="seg hx8" data-e="6153" data-s="5739" href="#part-h" style="--d:414;--st:#D9607A" title="k-NN Regression, Algorithmic Reality &amp; Exam Practice">H</a>
+<a class="seg hx6" data-e="5420" data-s="5200" href="#part-f" style="--d:220;--st:#A98BD6" title="The Voting Mechanism: Odd k, Boundaries &amp; Bias–Variance">F</a>
+<a class="seg hx7" data-e="5708" data-s="5420" href="#part-g" style="--d:288;--st:#8FBF7A" title="Voronoi Diagrams: 1-NN and Nature’s Tessellations">G</a>
+<a class="seg hx8" data-e="6153" data-s="5708" href="#part-h" style="--d:445;--st:#D9607A" title="k-NN Regression, Algorithmic Reality, Exam Practice &amp; OLS Scope">H</a>
 </div></div><ol class="legend"><li><a class="hx1" href="#part-a" style="--st:#A9825A"><span class="l">A</span><span><b>Geometry of Distance &amp; Euclidean Metric</b><small>00:00:00 – 00:20:22 · 20 min 22 s · 0.0 m deep</small></span></a></li>
 <li><a class="hx2" href="#part-b" style="--st:#D0814F"><span class="l">B</span><span><b>Manhattan, City-Blocks, and Grids</b><small>00:20:22 – 00:29:04 · 8 min 42 s · 20.4 m deep</small></span></a></li>
-<li><a class="hx3" href="#part-c" style="--st:#E0B04A"><span class="l">C</span><span><b>Minkowski, Chebyshev, &amp; Mahalanobis</b><small>00:29:04 – 00:48:20 · 19 min 16 s · 29.1 m deep</small></span></a></li>
-<li><a class="hx4" href="#part-d" style="--st:#3FB5A5"><span class="l">D</span><span><b>k-Nearest Neighbors (k-NN) Foundations</b><small>00:48:20 – 01:15:46 · 27 min 26 s · 48.3 m deep</small></span></a></li>
+<li><a class="hx3" href="#part-c" style="--st:#E0B04A"><span class="l">C</span><span><b>Minkowski, Chebyshev, &amp; Mahalanobis</b><small>00:29:04 – 00:54:30 (+ Intermission to 00:56:30) · 27 min 26 s · 29.1 m deep</small></span></a></li>
+<li><a class="hx4" href="#part-d" style="--st:#3FB5A5"><span class="l">D</span><span><b>k-Nearest Neighbors (k-NN) Foundations</b><small>00:56:30 – 01:15:46 · 19 min 16 s · 56.5 m deep</small></span></a></li>
 <li><a class="hx5" href="#part-e" style="--st:#6F9ADB"><span class="l">E</span><span><b>Categorical k-NN &amp; Play Tennis Walkthrough</b><small>01:15:46 – 01:26:40 · 10 min 54 s · 75.8 m deep</small></span></a></li>
-<li><a class="hx6" href="#part-f" style="--st:#A98BD6"><span class="l">F</span><span><b>Odd k Selection &amp; Bias–Variance</b><small>01:26:40 – 01:30:20 · 3 min 40 s · 86.7 m deep</small></span></a></li>
-<li><a class="hx7" href="#part-g" style="--st:#8FBF7A"><span class="l">G</span><span><b>Voronoi Diagrams: 1-NN and Tessellations</b><small>01:30:20 – 01:35:39 · 5 min 19 s · 90.3 m deep</small></span></a></li>
-<li><a class="hx8" href="#part-h" style="--st:#D9607A"><span class="l">H</span><span><b>k-NN Regression, Exam Practice &amp; OLS Scope</b><small>01:35:39 – 01:42:33 · 6 min 54 s · 95.7 m deep</small></span></a></li>
+<li><a class="hx6" href="#part-f" style="--st:#A98BD6"><span class="l">F</span><span><b>Odd k Selection, Boundaries &amp; Bias–Variance</b><small>01:26:40 – 01:30:20 · 3 min 40 s · 86.7 m deep</small></span></a></li>
+<li><a class="hx7" href="#part-g" style="--st:#8FBF7A"><span class="l">G</span><span><b>Voronoi Diagrams: 1-NN and Tessellations</b><small>01:30:20 – 01:35:08 · 4 min 48 s · 90.3 m deep</small></span></a></li>
+<li><a class="hx8" href="#part-h" style="--st:#D9607A"><span class="l">H</span><span><b>k-NN Regression, Exam Practice &amp; OLS Scope</b><small>01:35:08 – 01:42:33 · 7 min 25 s · 95.1 m deep</small></span></a></li>
 </ol>
 <dl class="glance"><dt>Recording</dt><dd>13.10.26, 01:42:33</dd><dt>Course</dt><dd>SEN 431 Data Mining, Week 5</dd><dt>Slide deck</dt><dd>Week 5: 97 slides on Distances, k-NN &amp; Regression</dd><dt>Core models</dt><dd>k-NN Classifier/Regressor, Voronoi Tessellations, OLS Line</dd><dt>Metrics tested</dt><dd>Euclidean (L2), Manhattan (L1), Minkowski, Chebyshev, Mahalanobis</dd><dt>Curated lab</dt><dd>8 assigned video tutorials, scikit-learn docs &amp; search guides</dd></dl>
 </div></div></section>
@@ -115,16 +115,45 @@
 </div></article>
 </div></section>
 <!-- CHAPTER C -->
-<section class="part hx3" id="part-c" style="--st:#E0B04A"><div class="band"><div class="wrap band-in"><div aria-hidden="true" class="pl">C</div><div><div class="pr">Layer 3 of 8 · 00:30:00 – 00:46:00 · 16 min 00 s · core depth 30.0 – 46.0 m</div><h2>Minkowski, Chebyshev, and Mahalanobis Spaces</h2><p>The generalized Lp parameter family, chessboard maximum coordinate differences, and scale-aware elliptical covariance contours.</p></div></div></div><div class="wrap entries">
-<article class="e" data-e="2162" data-t="1744"><div class="ts">00:29:04 <span>to 00:36:02</span><span class="ref-slide">Slides 20–25</span></div><div class="rail"></div><div class="b"><h3>Minkowski and Chebyshev distances</h3>
-<p><mark>Minkowski Distance</mark> is the overarching generalized metric family parameterized by exponent \(p\):</p>
-<p>$$d(x, y) = \left( \sum_{i=1}^{n} |x_i - y_i|^p \right)^{1/p}$$</p>
-<div class="x chains"><div class="chain"><h4>The Minkowski Metric Continuum</h4><div class="nodes"><span>p = 1 (Manhattan L1)</span><span>p = 2 (Euclidean L2)</span><span>p → ∞ (Chebyshev L∞)</span></div></div></div>
-<p><mark>Chebyshev Distance</mark> (\(p \to \infty\), also called Chessboard distance) measures distance strictly by the single largest coordinate difference: \(d_\infty(x, y) = \max_i |x_i - y_i|\). In chess, a king moving diagonally or orthogonally takes exactly \(\max(\Delta x, \Delta y)\) moves to reach any target square.</p>
-</div></article>
-<article class="e" data-e="2900" data-t="2162"><div class="ts">00:36:02 <span>to 00:48:20</span><span class="ref-slide">Slides 26–32</span></div><div class="rail"></div><div class="b"><h3>Mahalanobis distance: covariance-aware geometry</h3>
+<section class="part hx3" id="part-c" style="--st:#E0B04A">
+<div class="band">
+<div class="wrap band-in">
+<div aria-hidden="true" class="pl">C</div>
+<div>
+<div class="pr">Layer 3 of 8 · 00:29:04 – 00:54:30 (+ Intermission to 00:56:30) · 27 min 26 s · core depth 29.1 – 56.5 m</div>
+<h2>Minkowski, Chebyshev, and Mahalanobis Spaces</h2>
+<p>The generalized \(L_p\) parameter family, Chebyshev chessboard infinity metric, covariance-aware Mahalanobis geometry, specialized distance metrics, and the mid-lecture intermission.</p>
+</div>
+</div>
+</div>
+<div class="wrap" style="padding-top:1.2rem;padding-bottom:2rem">
+<article class="e" data-e="2162" data-t="1744">
+<div class="ts">00:29:04<span>to 00:36:02</span><span class="ref-slide">Slides 20–25</span></div>
+<div class="rail"></div>
+<div class="b">
+<h3>Minkowski and Chebyshev distances</h3>
+<p>Dr. Bulut transitions from rigid 2D grids to the generalized <mark>Minkowski Distance</mark> (\(L_p\) Norm): \(d_p(x, y) = \left( \sum_{i=1}^n |x_i - y_i|^p \right)^{1/p}\). He illustrates how varying the exponent \(p\) morphs the geometric space: \(p = 1\) yields Manhattan distance, \(p = 2\) yields Euclidean distance, and as \(p \to \infty\), the formula converges to the <mark>Chebyshev Distance</mark> (\(L_\infty\) Norm): \(d_\infty(x, y) = \max_i |x_i - y_i|\).</p>
+<p>In chessboard geometry, Chebyshev distance represents the exact move cost of a King, which can step horizontally, vertically, or diagonally in a single move. In high-dimensional data spaces, Chebyshev measures the single worst-case coordinate divergence between two entities.</p>
+</div>
+</article>
+
+<article class="e" data-e="3270" data-t="2162">
+<div class="ts">00:36:02<span>to 00:54:30</span><span class="ref-slide">Slides 26–32</span></div>
+<div class="rail"></div>
+<div class="b">
+<h3>Mahalanobis distance &amp; specialized metrics (Cosine, Hamming, Haversine)</h3>
 <p>Dr. Bulut asks: <em>why can Euclidean distance be dangerously misleading?</em> Euclidean distance treats all feature axes as independent and equally scaled, forming circular spherical distance contours. But what if Feature 1 and Feature 2 are highly correlated (e.g., Height and Weight)?</p>
 <p><mark>Mahalanobis Distance</mark> accounts for feature variance and inter-feature covariance: \(d_M(x, y) = \sqrt{(x - y)^T \Sigma^{-1} (x - y)}\), where \(\Sigma\) is the covariance matrix. Rather than rigid circles, equal Mahalanobis distance contours form <mark>ellipses stretched along the data trend</mark>. A point far along the correlation axis is mathematically closer than an outlier lying off the trend line.</p>
+<div class="x cmp">
+<div class="col">
+<h4>Cosine Distance / Similarity</h4>
+<p><span class="tm">00:50:45</span> Measures the angular orientation between feature vectors rather than length: \(1 - \cos(\theta) = 1 - \frac{A \cdot B}{\|A\| \|B\|}\). Essential for text mining and document frequency where document word counts vary dramatically.</p>
+</div>
+<div class="col">
+<h4>Hamming &amp; Haversine Metrics</h4>
+<p><span class="tm">00:52:10</span> <strong>Hamming Distance:</strong> Counts character or bit mismatches across strings (inapplicable to continuous geometric space).<br><strong>Haversine Metric:</strong> Calculates great-circle spherical distance across Earth's surface for GPS and navigational coordinates.</p>
+</div>
+</div>
 <div class="exam-callout">
 <div class="callout-head">
 <span class="callout-badge">EXAM RADAR UPDATE</span>
@@ -132,28 +161,76 @@
 </div>
 <p><strong>Mahalanobis Formula Exam Scope:</strong> In the Week 6 retrospective lecture, Dr. Bulut explicitly reassured students that the Mahalanobis matrix distance formula is <em>not tested by manual calculation on the exam</em> (no covariance matrix inversion required). Students are only expected to understand its conceptual principle: measuring distance in units of standard deviation along correlated axes.</p>
 </div>
-<a class="yt-badge" href="https://www.youtube.com/results?search_query=mahalanobis+distance+explained+visual" rel="noopener" target="_blank">Curated Video: Mahalanobis Distance &amp; Elliptical Covariance Contours</a>
-</div></article>
-</div></section>
-<!-- CHAPTER D -->
-<section class="part hx4" id="part-d" style="--st:#3FB5A5"><div class="band"><div class="wrap band-in"><div aria-hidden="true" class="pl">D</div><div><div class="pr">Layer 4 of 8 · 00:46:00 – 01:06:00 · 20 min 00 s · core depth 46.0 – 66.0 m</div><h2>k-Nearest Neighbors (k-NN) Foundations</h2><p>Rousseau’s social maxim, the hadith of companionship, majority voting mechanics, and lazy instance-based classification.</p></div></div></div><div class="wrap entries">
-<article class="e" data-e="3700" data-t="2900"><div class="ts">00:48:20 <span>to 01:01:40</span><span class="ref-slide">Slides 33–36</span></div><div class="rail"></div><div class="b"><h3>The philosophical intuition of k-NN</h3>
-<p>Dr. Bulut introduces the intuition behind K-Nearest Neighbors through classic wisdom. He quotes Genevan philosopher Jean-Jacques Rousseau: <mark>“Tell me who your friends are, and I will tell you who you are.”</mark> If your circle consists of scholars, you will adopt scholarship; if your friends are billionaires, you will become the sixth.</p>
-<p>He connects this to the prophetic hadith of Hz. Muhammad (PBUH): <mark>“الْمَرْءُ مَعَ مَنْ أَحَب”</mark> (<em>A person will be with whom he loves</em>). In data science, an unknown instance is classified according to the identity of its closest companions in feature space.</p>
-</div></article>
-<article class="e" data-e="4546" data-t="3700"><div class="ts">01:01:40 <span>to 01:15:46</span><span class="ref-slide">Slides 37–46</span></div><div class="rail"></div><div class="b"><h3>k-NN classification in one sentence</h3>
-<p>Dr. Bulut summarizes the complete algorithm: <mark>To classify a new query point, find the k closest labeled training instances in feature space and assign the class that wins the majority vote.</mark></p>
-<ol class="x kdd"><li style="--c:#2E9E5B"><span class="tm">01:01:18</span><b>New Query</b><span>Unlabeled feature point arrives</span></li><li style="--c:#7FA63A"><span class="tm">01:01:52</span><b>Distance Scan</b><span>Compute d(Q, x) for all N instances</span></li><li style="--c:#C9A21B"><span class="tm">01:02:37</span><b>Pick k Smallest</b><span>Select the k closest neighbors</span></li><li style="--c:#D9552F"><span class="tm">01:04:45</span><b>Majority Vote</b><span>Tally class labels among the k</span></li><li style="--c:#C42B45"><span class="tm">01:15:38</span><b>Prediction</b><span>Assign winning majority class</span></li></ol>
-<div class="exam-callout">
+<p>At <span class="tm">00:53:36</span>, Dr. Bulut officially concludes the Distance Metrics unit and calls a 10-minute student recess before introducing k-Nearest Neighbors.</p>
+<a class="yt-badge" href="https://www.youtube.com/results?search_query=mahalanobis+distance+explained+visual" rel="noopener" target="_blank">
+Curated Video: Mahalanobis Distance &amp; Elliptical Covariance Contours
+</a>
+</div>
+</article>
+
+<article class="e" data-e="3390" data-t="3270">
+<div class="ts">00:54:30<span>to 00:56:30</span><span class="ref-slide">Recess</span></div>
+<div class="rail"></div>
+<div class="b">
+<h3>Mid-lecture intermission &amp; Tech Alumni Career Seminar</h3>
+<p>Between <span class="tm">00:54:30</span> and <span class="tm">00:56:30</span>, the recording captures the mid-lecture recess. Dr. Bulut addresses the class in Turkish regarding a special career event: an evening Zoom seminar with an Istanbul Aydın University graduate who built an international engineering career in the United States, working with leading global technology corporations including Google and Microsoft.</p>
+<div class="exam-callout" style="border-left-color:var(--gold)">
 <div class="callout-head">
-<span class="callout-badge">EXAM RADAR UPDATE</span>
-<span class="callout-time">Week 6 Clarification · 00:26:45</span>
+<span class="callout-badge" style="background:var(--gold);color:#1b1b1b">INTERMISSION &amp; CAREER NOTICE</span>
+<span class="callout-time">00:54:30 – 00:56:30</span>
 </div>
-<p><strong>Exact k-NN Exam Question Pattern:</strong> In Week 6, Dr. Bulut walked through the exact midterm exam problem structure: Neighbor distance values are <em>pre-calculated and provided</em> in a table. You do not compute square roots by hand under time pressure. You are tested on ranking the nearest neighbors, picking the \(k\) closest instances, and applying majority voting (or regression averaging).</p>
+<p><strong>Tech Career Seminar Announcement:</strong> Dr. Bulut highlights the practical value of this session for graduating seniors. He encourages students to ask practical questions about international job applications, American visa pathways, compensation realities, workplace culture, and how foundational coursework—such as Data Mining algorithms—is evaluated in Silicon Valley technical interviews. Formal course instruction on k-NN commences immediately following the announcement at <span class="tm">00:56:30</span>.</p>
 </div>
-<a class="yt-badge" href="https://www.youtube.com/watch?v=HVXime0nQeI" rel="noopener" target="_blank">Curated Video: StatQuest — K-Nearest Neighbors, Clearly Explained</a>
-</div></article>
-</div></section>
+</div>
+</article>
+</div>
+</section>
+<!-- CHAPTER D -->
+<section class="part hx4" id="part-d" style="--st:#3FB5A5">
+<div class="band">
+<div class="wrap band-in">
+<div aria-hidden="true" class="pl">D</div>
+<div>
+<div class="pr">Layer 4 of 8 · 00:56:30 – 01:15:46 · 19 min 16 s · core depth 56.5 – 75.8 m</div>
+<h2>k-Nearest Neighbors (k-NN) Foundations</h2>
+<p>Rousseau’s social maxim, the hadith of companionship, binary vs. multi-class classification, hyperparameter \(k\), the odd \(k\) voting heuristic, and instance-based lazy learning.</p>
+</div>
+</div>
+</div>
+<div class="wrap" style="padding-top:1.2rem;padding-bottom:2rem">
+<article class="e" data-e="3960" data-t="3390">
+<div class="ts">00:56:30<span>to 01:06:00</span><span class="ref-slide">Slides 33–38</span></div>
+<div class="rail"></div>
+<div class="b">
+<h3>The philosophical intuition of k-NN &amp; classification taxonomy</h3>
+<p>At <span class="tm">00:56:30</span>, Dr. Bulut introduces the intuition behind K-Nearest Neighbors through classic wisdom. He quotes Genevan philosopher Jean-Jacques Rousseau: <mark>“Tell me who your friends are, and I will tell you who you are.”</mark> If your circle consists of scholars, you will adopt scholarship; if your friends are billionaires, you will become the sixth.</p>
+<p>He connects this to the prophetic hadith of Hz. Muhammad (PBUH): <mark>“الْمَرْءُ مَعَ مَنْ أَحَب”</mark> (<em>A person will be with whom he loves</em>). In data science, an unknown instance is classified according to the identity of its closest companions in feature space.</p>
+<p><mark>Classification</mark> is defined as a supervised task predicting a categorical class label. He contrasts <mark>Binary Classification</mark> (two outcomes, e.g., Yes/No, Defective/Functional) with <mark>Multi-Class Classification</mark> (three or more categories), demonstrating how nearest neighbor query circles expand across 2D and 3D Euclidean feature spaces to locate the closest candidate points.</p>
+</div>
+</article>
+
+<article class="e" data-e="4546" data-t="3960">
+<div class="ts">01:06:00<span>to 01:15:46</span><span class="ref-slide">Slides 39–46</span></div>
+<div class="rail"></div>
+<div class="b">
+<h3>Hyperparameter \(k\), Odd vs. Even \(k\), and Lazy Learning</h3>
+<p>Dr. Bulut emphasizes that \(k\) is an <mark>outer hyperparameter</mark>—a parameter specified by the user from outside the algorithm, not learned automatically from training data. How should \(k\) be chosen?</p>
+<p><mark>The Odd \(k\) Rule:</mark> If \(k\) is an even number in binary classification (e.g., \(k = 4\)), the nearest neighbors may yield a tie (2 for Class A, 2 for Class B), leaving the classifier unable to reach a majority verdict. Selecting an <mark>odd value of \(k\)</mark> (\(k = 3, 5, 7\)) mathematically guarantees an outright majority winner in two-class problems.</p>
+<p>In one summarizing sentence, he crystallizes why k-NN is unique: <mark>k-NN is Supervised and Lazy</mark>. It is supervised because training points possess ground-truth class labels. It is <strong>lazy</strong> (instance-based) because it constructs <em>no global hypothesis or predictive model in advance</em>; it simply stores the dataset in memory and defers all distance calculations until a concrete query point arrives.</p>
+<div class="x cmp">
+<div class="col">
+<h4>Supervised Aspect</h4>
+<p><span class="tm">01:12:31</span> Training points are pre-labeled with historical ground-truth classes (e.g. Heart Attack: Yes/No).</p>
+</div>
+<div class="col">
+<h4>Lazy Aspect</h4>
+<p><span class="tm">01:12:59</span> Zero training time model construction. All computation occurs at query time when distances to every training instance are computed.</p>
+</div>
+</div>
+</div>
+</article>
+</div>
+</section>
 <!-- CHAPTER E -->
 <section class="part hx5" id="part-e" style="--st:#6F9ADB"><div class="band"><div class="wrap band-in"><div aria-hidden="true" class="pl">E</div><div><div class="pr">Layer 5 of 8 · 01:06:00 – 01:19:00 · 13 min 00 s · core depth 66.0 – 79.0 m</div><h2>Categorical k-NN and the Play Tennis Walkthrough</h2><p>Hamming distance for categorical features, ranking distances, and evaluating query Q at k = 1, k = 3, and k = 5.</p></div></div></div><div class="wrap entries">
 <article class="e" data-e="5200" data-t="4546"><div class="ts">01:15:46 <span>to 01:26:40</span><span class="ref-slide">Slides 47–60</span></div><div class="rail"></div><div class="b"><h3>Categorical distances and the Play Tennis query</h3>
@@ -171,38 +248,126 @@
 </div></article>
 </div></section>
 <!-- CHAPTER G -->
-<section class="part hx7" id="part-g" style="--st:#8FBF7A"><div class="band"><div class="wrap band-in"><div aria-hidden="true" class="pl">G</div><div><div class="pr">Layer 7 of 8 · 01:28:00 – 01:36:00 · 8 min 00 s · core depth 88.0 – 96.0 m</div><h2>Voronoi Diagrams: 1-NN and Nature’s Tessellations</h2><p>Perpendicular bisectors dividing space, Voronoi cells in nature, cellular tower zoning, and continuous k-NN regression averages.</p></div></div></div><div class="wrap entries">
-<article class="e" data-e="5739" data-t="5420"><div class="ts">01:30:20 <span>to 01:35:39</span><span class="ref-slide">Slides 65–75</span></div><div class="rail"></div><div class="b"><h3>1-NN is a Voronoi diagram</h3>
+<section class="part hx7" id="part-g" style="--st:#8FBF7A">
+<div class="band">
+<div class="wrap band-in">
+<div aria-hidden="true" class="pl">G</div>
+<div>
+<div class="pr">Layer 7 of 8 · 01:30:20 – 01:35:08 · 4 min 48 s · core depth 90.3 – 95.1 m</div>
+<h2>Voronoi Diagrams: 1-NN and Nature’s Tessellations</h2>
+<p>Perpendicular bisectors dividing space into nearest-neighbor Dirichlet polygons, and the pervasive appearance of Voronoi tessellations across biology and physics.</p>
+</div>
+</div>
+</div>
+<div class="wrap" style="padding-top:1.2rem;padding-bottom:2rem">
+<article class="e" data-e="5708" data-t="5420">
+<div class="ts">01:30:20<span>to 01:35:08</span><span class="ref-slide">Slides 65–75</span></div>
+<div class="rail"></div>
+<div class="b">
+<h3>1-NN is a Voronoi diagram &amp; Nature’s Tessellations</h3>
 <p>When \(k = 1\), what does the decision boundary look like? Dr. Bulut reveals that <mark>1-NN classification produces an exact Voronoi Tessellation</mark>. Every training point acts as a seed generating a polygonal cell; any query landing within that polygon is closer to that seed than to any other training instance.</p>
 <p>He illustrates how Voronoi geometry governs the natural and built world: the vascular venation of plant leaves, the mosaic patterns on giraffe hides, dragonfly wing membranes, and modern telecommunication tower service cells.</p>
-<p>Next, he presents <mark>k-NN Regression</mark>: instead of taking a discrete majority vote, the algorithm computes the continuous average (mean) of the \(k\) nearest neighbors’ target values (\(\hat{y} = \frac{1}{k}\sum y_i\)). For a house query with three neighbors priced at $210k, $225k, and $240k, the prediction is \(\frac{210 + 225 + 240}{3} = \$225\text{k}\).</p>
-<a class="yt-badge" href="https://www.youtube.com/results?search_query=voronoi+diagrams+explained+visual" rel="noopener" target="_blank">Curated Video: Voronoi Diagrams &amp; Spatial Tessellations Explained</a>
-</div></article>
-</div></section>
+<a class="yt-badge" href="https://www.youtube.com/results?search_query=voronoi+diagrams+explained+visual" rel="noopener" target="_blank">
+Curated Video: Voronoi Diagrams &amp; Spatial Tessellations Explained
+</a>
+</div>
+</article>
+</div>
+</section>
 <!-- CHAPTER H -->
-<section class="part hx8" id="part-h" style="--st:#D9607A"><div class="band"><div class="wrap band-in"><div aria-hidden="true" class="pl">H</div><div><div class="pr">Layer 8 of 8 · 01:36:00 – 01:42:33 · 6 min 33 s · core depth 96.0 – 102.6 m</div><h2>Linear Regression, OLS, and Exam Practice</h2><p>Fitting global straight lines through clouds of points, minimizing squared residuals, interpolation limits, and exam-style calculation walkthroughs.</p></div></div></div><div class="wrap entries">
-<article class="e" data-e="6031" data-t="5739"><div class="ts">01:35:39 <span>to 01:40:31</span><span class="ref-slide">Slides 76–89</span></div><div class="rail"></div><div class="b"><h3>Ordinary Least Squares (OLS) linear regression</h3>
-<p>Dr. Bulut transitions from local non-parametric neighbors to global parametric modelling: <mark>Linear Regression</mark>. The model assumes a straight-line trend: \(\hat{y} = \beta_0 + \beta_1 x\), where \(\beta_0\) is the intercept and \(\beta_1\) is the slope.</p>
-<p>The optimal line is discovered via <mark>Ordinary Least Squares (OLS)</mark>, which minimizes the sum of squared vertical residuals: \(\sum (y_i - \hat{y}_i)^2\). He presents the Height vs. Weight study (20 patients), fitting the equation \(\text{Weight} = -90 + 0.90 \times \text{Height}\). A person with height 170 cm has a predicted weight of \(-90 + 0.90(170) = 63\text{ kg}\).</p>
-<div class="x cmp"><div class="col"><h4>Interpolation</h4><p><span class="tm">01:38:40</span> Predicting within the observed domain of training instances (e.g. Heights 150–190 cm). Highly reliable.</p></div><div class="col"><h4>Extrapolation</h4><p><span class="tm">01:39:15</span> Predicting far beyond observed boundaries (e.g. Height 240 cm or 50 cm). Extremely risky; assumes linear trends hold infinitely.</p></div></div>
+<section class="part hx8" id="part-h" style="--st:#D9607A">
+<div class="band">
+<div class="wrap band-in">
+<div aria-hidden="true" class="pl">H</div>
+<div>
+<div class="pr">Layer 8 of 8 · 01:35:08 – 01:42:33 · 7 min 25 s · core depth 95.1 – 102.6 m</div>
+<h2>k-NN Regression, Algorithmic Reality, Exam Practice &amp; OLS Scope</h2>
+<p>Continuous target prediction via neighbor averaging, algorithm strengths and computational scaling limits, pseudocode, the Point Q exam exercise, and Linear Regression scope clarification.</p>
+</div>
+</div>
+</div>
+<div class="wrap" style="padding-top:1.2rem;padding-bottom:2rem">
+<article class="e" data-e="5953" data-t="5708">
+<div class="ts">01:35:08<span>to 01:39:13</span><span class="ref-slide">Slides 76–82</span></div>
+<div class="rail"></div>
+<div class="b">
+<h3>k-NN Classification vs. Regression, Strengths &amp; Limitations</h3>
+<p>At <span class="tm">01:35:08</span>, Dr. Bulut draws a fundamental methodological distinction between <mark>k-NN Classification</mark> and <mark>k-NN Regression</mark>:</p>
+<div class="x cmp">
+<div class="col">
+<h4>k-NN Classification</h4>
+<p><span class="tm">01:35:39</span> Predicts a discrete categorical class label using <mark>majority voting</mark> (e.g. Play Tennis: Yes/No, Loan: Approve/Deny).</p>
+</div>
+<div class="col">
+<h4>k-NN Regression</h4>
+<p><span class="tm">01:35:59</span> Predicts a continuous real numerical target by computing the <mark>arithmetic mean</mark> (average) of the \(k\) nearest neighbors’ values: \(\hat{y} = \frac{1}{k}\sum_{i=1}^k y_i\).</p>
+</div>
+</div>
+<p>He walks through a concrete <strong>Real Estate Valuation Example</strong>: predicting the market price of a query house based on \(k = 3\) nearest neighbor properties (matched on room count, location, square footage, and view). If the three closest properties sold for $210k, $225k, and $240k, k-NN regression estimates the query house value as \(\frac{210 + 225 + 240}{3} = \mathbf{\$225\text{k}}\).</p>
+<p>He analyzes the algorithm’s prominent <strong>Strengths and Limitations</strong> (pros &amp; cons):</p>
+<ul class="rows" style="margin-top:.8rem">
+<li><strong>Strengths:</strong> Highly intuitive, transparent, non-parametric (no rigid distributional assumptions), and effortlessly forms flexible non-linear decision boundaries.</li>
+<li><strong>Limitations:</strong> Computationally slow during the prediction phase on large datasets. If a dataset contains 1,000,000 instances, evaluating a single query requires computing 1,000,000 Euclidean distance evaluations (\(O(N)\) complexity). Furthermore, it is highly sensitive to feature scaling and noisy, irrelevant attributes.</li>
+</ul>
+</div>
+</article>
+
+<article class="e" data-e="6079" data-t="5953">
+<div class="ts">01:39:13<span>to 01:41:19</span><span class="ref-slide">Slides 83–89</span></div>
+<div class="rail"></div>
+<div class="b">
+<h3>k-NN Pseudo-Code &amp; Point Q Class Exercise</h3>
+<p>Dr. Bulut presents the algorithmic implementation of k-NN. He clarifies terminology, noting that students often mispronounce the term: it is correctly pronounced <em>“pseudocode”</em> (Turkish: <mark>sahte kod</mark>). Because k-NN is a foundational algorithm, pre-built implementations are readily accessible across modern data science ecosystems, including GitHub, Python, Keras, TensorFlow, and OpenCV.</p>
+<p>He presents the <strong>Point Q Class Exercise</strong> (assigned as homework and solved on the board in Week 6):</p>
+<div class="x tw">
+<table>
+<thead><tr><th>Case ID</th><th>Feature \(X_1\)</th><th>Feature \(X_2\)</th><th>Class Label</th></tr></thead>
+<tbody>
+<tr><td>Case 1</td><td>1.0</td><td>2.0</td><td><span class="lb yes">Red</span></td></tr>
+<tr><td>Case 2</td><td>2.0</td><td>1.0</td><td><span class="lb yes">Red</span></td></tr>
+<tr><td>Case 3</td><td>4.0</td><td>3.0</td><td><span class="lb no">Blue</span></td></tr>
+<tr><td>Case 4</td><td>5.0</td><td>4.0</td><td><span class="lb no">Blue</span></td></tr>
+<tr class="added"><td>Query Q</td><td>2.0</td><td>2.0</td><td><span class="lb q">Predict with \(k=3\)</span></td></tr>
+</tbody>
+</table>
+</div>
+<p>Students must compute pairwise Euclidean distances from query point \(Q(2.0, 2.0)\) to each training case, sort them to identify the 3 closest neighbors, and determine the predicted class label via majority voting. Dr. Bulut warns: <mark>“This can be an exam question to you!”</mark></p>
+</div>
+</article>
+
+<article class="e" data-e="6153" data-t="6079">
+<div class="ts">01:41:19<span>to 01:42:33</span><span class="ref-slide">Slides 90–97</span></div>
+<div class="rail"></div>
+<div class="b">
+<h3>Linear Regression Preview, Week 6 Postponement &amp; Exam Practice</h3>
+<p>At <span class="tm">01:41:19</span>, Dr. Bulut introduces the final topic on the slide deck: <mark>Linear Regression</mark> (\(\hat{y} = \beta_0 + \beta_1 x\)), transitioning from local non-parametric neighbors to global parametric trend lines using Ordinary Least Squares (OLS).</p>
 <div class="exam-callout">
 <div class="callout-head">
-<span class="callout-badge">EXAM RADAR UPDATE</span>
-<span class="callout-time">Week 6 Clarification · 00:18:40 – 00:20:56</span>
+<span class="callout-badge">LECTURE TIMING &amp; SCOPE NOTICE</span>
+<span class="callout-time">Week 5 Conclusion · 01:41:44</span>
 </div>
-<p><strong>Linear Regression Exam Scope &amp; Software:</strong> Dr. Bulut explicitly clarified in Week 6 that technical derivations of interpolation, extrapolation, and matrix OLS formulas will <em>not</em> be tested. The residual error term is negligible (\(e \approx 0\)). What IS tested: evaluating \(\hat{y} = \beta_0 + \beta_1 x\) for a specific query point \(x\). Additionally, he highlighted <strong>IBM SPSS</strong> as industry standard enterprise statistical software alongside Python/R [00:31:30].</p>
+<p><strong>Linear Regression Postponed to Week 6:</strong> Running out of classroom time at <span class="tm">01:41:44</span>, Dr. Bulut asked whether students wished to stay overtime or defer the lesson. The class opted to conclude, and Dr. Bulut formally postponed the comprehensive treatment of Linear Regression to <strong>Week 6</strong>. The full derivation (Height vs. Weight dataset, \(\hat{y} = -90 + 0.90x\), residual error minimization \(\sum(y_i - \hat{y}_i)^2\), interpolation vs. extrapolation, and SPSS software) was thoroughly delivered in the first 35 minutes of Week 6.</p>
 </div>
-</div></article>
-<article class="e" data-e="6153" data-t="6031"><div class="ts">01:40:31 <span>to 01:42:33</span><span class="ref-slide">Slides 90–97</span></div><div class="rail"></div><div class="b"><h3>Three exam-style practice questions</h3>
-<p>Dr. Bulut closes Week 5 by walking through three typical examination problems:</p>
+<p>He closes the lecture by assigning three typical examination review problems:</p>
 <div class="x pairs">
-<div class="pair"><b>Exam Question 1: Distances</b><span>Given \(A = (2, 1)\) and \(B = (8, 5)\):<br/>• Euclidean: \(\sqrt{(8-2)^2 + (5-1)^2} = \sqrt{36 + 16} = \sqrt{52} \approx \mathbf{7.21}\)<br/>• Manhattan: \(|8-2| + |5-1| = 6 + 4 = \mathbf{10.0}\)</span></div>
-<div class="pair"><b>Exam Question 2: k-NN Vote</b><span>Query with \(k = 3\) nearest neighbors: A (\(d=1.2\), Red), B (\(d=1.8\), Blue), C (\(d=2.0\), Red).<br/>• Votes: 2 Red, 1 Blue.<br/>• <strong>Prediction: RED</strong></span></div>
-<div class="pair"><b>Exam Question 3: Linear Regression</b><span>Fitted line: \(\hat{y} = 10 + 2.5x\). Predict outcome when \(x = 8\):<br/>• \(\hat{y} = 10 + 2.5(8) = 10 + 20 = \mathbf{30}\)</span></div>
+<div class="pair">
+<b>Exam Question 1: Distances</b>
+<span>Given \(A = (2, 1)\) and \(B = (8, 5)\):<br>• Euclidean: \(\sqrt{(8-2)^2 + (5-1)^2} = \sqrt{36 + 16} = \sqrt{52} \approx \mathbf{7.21}\)<br>• Manhattan: \(|8-2| + |5-1| = 6 + 4 = \mathbf{10.0}\)</span>
 </div>
-<p class="cap">Next week, the course dives deep into Decision Trees, Entropy, and Information Gain!</p>
-</div></article>
-</div></section>
+<div class="pair">
+<b>Exam Question 2: k-NN Vote</b>
+<span>Query with \(k = 3\) nearest neighbors: A (\(d=1.2\), Red), B (\(d=1.8\), Blue), C (\(d=2.0\), Red).<br>• Votes: 2 Red, 1 Blue.<br>• <strong>Prediction: RED</strong></span>
+</div>
+<div class="pair">
+<b>Exam Question 3: Linear Regression Preview</b>
+<span>Fitted line: \(\hat{y} = 10 + 2.5x\). Predict outcome when \(x = 8\):<br>• \(\hat{y} = 10 + 2.5(8) = 10 + 20 = \mathbf{30}\)</span>
+</div>
+</div>
+<p class="cap">Next week, the course resumes with the Linear Regression &amp; k-NN recap before launching into Decision Trees, Entropy, and Information Gain!</p>
+</div>
+</article>
+</div>
+</section>
 <!-- CURATED LAB RESOURCES (Assigned from Curriculum Guide) -->
 <section class="ref wrap" id="video-lab"><span id="recommended-lab"></span><h2 class="plain">Curated Video &amp; Exploration Lab</h2><p class="lede">Assigned study resources from the instructor’s curriculum guide (Week 5 Recommended Watching and Reading) connecting distance metrics, k-NN classification/regression, Voronoi geometry, and linear regression to premier tutorials.</p>
 <div class="lab-cards">
@@ -214,7 +379,26 @@
 <div class="lab-card"><div class="lab-badge">scikit-learn · Python API</div><h3>Nearest Neighbors User Guide &amp; Classifier</h3><p>Official scikit-learn documentation covering KNeighborsClassifier, distance metrics, algorithm parameters (kd_tree, ball_tree), and regression.</p><a class="lab-link" href="https://scikit-learn.org/stable/modules/neighbors.html" rel="noopener" target="_blank">Read Scikit-Learn Docs →</a></div>
 </div></section>
 <!-- GLOSSARY SECTION -->
-<section class="ref wrap"><h2 class="plain">Terms, in order of appearance</h2><p class="lede">Key technical terms stamped with the exact minute and second Dr. Bulut first defined them.</p><div class="terms"><div class="term"><b>Distance Metric</b><span class="tm">00:04:36</span><span>A mathematical function quantifying the dissimilarity between two feature vectors in coordinate space.</span></div>
+<section class="ref wrap"><h2 class="plain">Terms, in order of appearance</h2><p class="lede">Key technical terms stamped with the exact minute and second Dr. Bulut first defined them.</p><div class="terms">
+<div class="term"><b>Distance Metric</b><span class="tm">00:04:36</span><span>A mathematical function quantifying the dissimilarity between two feature vectors in coordinate space.</span></div>
+<div class="term"><b>Euclidean Distance</b><span class="tm">00:16:11</span><span>The L2 straight-line distance derived from Pythagoras: the square root of sum of squared differences.</span></div>
+<div class="term"><b>Manhattan Distance</b><span class="tm">00:20:22</span><span>The L1 city-block distance: sum of absolute coordinate differences moving along orthogonal grid axes.</span></div>
+<div class="term"><b>Minkowski Distance</b><span class="tm">00:29:04</span><span>The generalized Lp parameter metric spanning Manhattan (p=1), Euclidean (p=2), and Chebyshev (p=∞).</span></div>
+<div class="term"><b>Chebyshev Distance</b><span class="tm">00:33:01</span><span>The L∞ chessboard maximum-difference metric: single worst-case coordinate divergence.</span></div>
+<div class="term"><b>Mahalanobis Distance</b><span class="tm">00:36:02</span><span>Covariance-aware distance scaling feature differences by the inverted covariance matrix Σ^-1.</span></div>
+<div class="term"><b>Hamming Distance</b><span class="tm">00:51:30</span><span>Coordinate-wise difference count between string or binary vectors.</span></div>
+<div class="term"><b>Cosine Similarity / Distance</b><span class="tm">00:52:15</span><span>Measures angular orientation between feature vectors rather than magnitude: 1 - cos(θ).</span></div>
+<div class="term"><b>k-Nearest Neighbors (k-NN)</b><span class="tm">00:56:30</span><span>Instance-based supervised classification algorithm assigning labels by majority vote of nearest spatial neighbors.</span></div>
+<div class="term"><b>k-NN Classification</b><span class="tm">00:57:30</span><span>Supervised task predicting discrete categorical class labels using majority vote.</span></div>
+<div class="term"><b>Hyperparameter</b><span class="tm">01:06:22</span><span>An outer parameter chosen by the engineer prior to execution, rather than learned from training data.</span></div>
+<div class="term"><b>Odd k Rule</b><span class="tm">01:07:33</span><span>Heuristic selecting odd k values in binary classification to eliminate tie-break deadlocks.</span></div>
+<div class="term"><b>Lazy Learning</b><span class="tm">01:12:38</span><span>Learning paradigm building no explicit global hypothesis in advance; defers computation until query time.</span></div>
+<div class="term"><b>Majority Voting (Argmax)</b><span class="tm">01:20:48</span><span>Decision rule selecting the candidate class with the maximum vote tally among the k neighbors.</span></div>
+<div class="term"><b>Voronoi Diagram</b><span class="tm">01:30:20</span><span>Spatial tessellation partitioning continuous space into Dirichlet polygonal cells surrounding nearest seeds.</span></div>
+<div class="term"><b>k-NN Regression</b><span class="tm">01:35:39</span><span>Predicting continuous real targets by averaging the values of the k nearest neighbors.</span></div>
+<div class="term"><b>Pseudocode (Sahte Kod)</b><span class="tm">01:40:08</span><span>Generic high-level programming logic; readily available in Keras, TensorFlow, and OpenCV.</span></div>
+<div class="term"><b>Linear Regression (Preview)</b><span class="tm">01:41:44</span><span>Global parametric trend line (y = β0 + β1 x) introduced at Week 5 conclusion and postponed to Week 6.</span></div>
+</div>
 <div class="term"><b>Euclidean Distance</b><span class="tm">00:16:11</span><span>The L2 straight-line distance derived from Pythagoras: the square root of sum of squared differences.</span></div>
 <div class="term"><b>Manhattan Distance</b><span class="tm">00:20:22</span><span>The L1 city-block distance: sum of absolute coordinate differences moving along orthogonal grid axes.</span></div>
 <div class="term"><b>Minkowski Distance</b><span class="tm">00:29:04</span><span>Generalized metric family parameterized by p (p=1 Manhattan, p=2 Euclidean, p→∞ Chebyshev).</span></div>
@@ -231,20 +415,22 @@
 <div class="term"><b>Extrapolation</b><span class="tm">01:41:44</span><span>Projecting predictions far outside the observed training feature envelope, risking severe model divergence.</span></div>
 </div></section>
 <!-- ERRATA SECTION -->
-<section class="ref wrap" id="errata" style="margin-top:3rem"><h2 class="plain">Transcript clean-up</h2><p class="lede">The recording was auto-transcribed from audio, and several phonetic misrecognitions occurred. This log reads them as follows.</p><ul class="tl"><li><span class="tm">00:04:50</span> <span>The transcript writes “Cherbyshev, Mahalonov”; correctly identified as <strong>Chebyshev distance</strong> and <strong>Mahalanobis distance</strong>.</span></li>
-<li><span class="tm">00:15:44</span> <span>“Cherbyshev keeps only the largest coordinate difference” describes the Chebyshev \(L_\infty\) metric taking the maximum coordinate difference.</span></li>
-<li><span class="tm">00:21:09</span> <span>“city block distance” and “city block Manhattan” refer to the <strong>Manhattan \(L_1\) norm</strong>.</span></li>
-<li><span class="tm">00:36:02</span> <span>“Mahalo novice / Mahallonobis” is the phonetic speech-to-text slip for Indian statistician P. C. <strong>Mahalanobis</strong>.</span></li>
-<li><span class="tm">00:57:47</span> <span>“John Jacosos saying that tell me who your friends are” is the famous social aphorism by Genevan philosopher <strong>Jean-Jacques Rousseau</strong>.</span></li>
-<li><span class="tm">00:58:26</span> <span>The Arabic religious citation is the hadith of Prophet Muhammad (PBUH): <em>“Al-Mar'u ma'a man ahab”</em> (a person will be with whom he loves).</span></li>
-<li><span class="tm">01:08:03</span> <span>“Who will say if k is an odd number or even number” establishes the heuristic of choosing odd \(k\) values in binary classification.</span></li>
-<li><span class="tm">01:09:38</span> <span>“in k and n options” is read as the <strong>k-NN (k-Nearest Neighbors)</strong> algorithm.</span></li>
-<li><span class="tm">01:20:48</span> <span>“majority voting with argmax... argument maximum” is the formal mathematical classification rule \(\arg\max_{c} \sum_{i=1}^k I(y_i = c)\).</span></li>
-<li><span class="tm">01:27:02</span> <span>“tie means equal, a shit” is the phonetic speech-to-text slip for Turkish <em>eşit / eşitlik</em> (equality / tie in voting).</span></li>
-<li><span class="tm">01:30:23</span> <span>“Voronoi in leaves and nature” correctly identified as natural Voronoi tessellations (dragonfly wings, giraffe spots, plant epidermis).</span></li>
-<li><span class="tm">01:35:39</span> <span>“KNN classification and KNN regression is different... average rather than majority” establishes local numeric target averaging for continuous predictions.</span></li>
-<li><span class="tm">01:40:08</span> <span>“pseudo code... What's it in Turkish? Sahte code” refers to algorithmic pseudocode (<em>sahte kod</em>).</span></li>
-<li><span class="tm">01:41:44</span> <span>“So linear regression, I'm afraid we are missing this one... we can continue at the next week” marks the deferral of OLS regression calculations to Week 6.</span></li>
+<section class="ref wrap" id="errata" style="margin-top:3rem"><h2 class="plain">Transcript clean-up</h2><p class="lede">The recording was auto-transcribed from audio, and several phonetic misrecognitions occurred. This log reads them as follows.</p><ul class="tl">
+<li><span class="tm">00:04:50</span><span>The transcript writes “Cherbyshev, Mahalonov”; correctly identified as <strong>Chebyshev distance</strong> and <strong>Mahalanobis distance</strong>.</span></li>
+<li><span class="tm">00:15:44</span><span>“Cherbyshev keeps only the largest coordinate difference” describes the Chebyshev \(L_\infty\) metric taking the maximum coordinate difference.</span></li>
+<li><span class="tm">00:21:09</span><span>“city block distance” and “city block Manhattan” refer to the <strong>Manhattan \(L_1\) norm</strong>.</span></li>
+<li><span class="tm">00:36:02</span><span>“Mahalo novice / Mahallonobis” is the phonetic speech-to-text slip for Indian statistician <strong>Prasanta Chandra Mahalanobis</strong>.</span></li>
+<li><span class="tm">00:54:24</span><span>“Friends, before we start the lesson, in Turkish... someone who has been through the paths you have taken before... Google, Microsoft, America” documents the mid-lecture 10-minute recess and tech alumni seminar announcement.</span></li>
+<li><span class="tm">00:57:47</span><span>“John Jacosos saying that tell me who your friends are” is the famous social aphorism by Genevan philosopher <strong>Jean-Jacques Rousseau</strong>.</span></li>
+<li><span class="tm">00:58:26</span><span>The Arabic religious citation is the hadith of Prophet Muhammad (PBUH): <em>“Al-Mar'u ma'a man ahabba”</em> (الْمَرْءُ مَعَ مَنْ أَحَب — A person will be with whom he loves).</span></li>
+<li><span class="tm">01:08:03</span><span>“Who will say if k is an odd number or even number” establishes the heuristic of choosing odd \(k\) values to avoid 50/50 voting deadlocks in binary classification.</span></li>
+<li><span class="tm">01:09:38</span><span>“in k and n options” is read as the <strong>k-NN (k-Nearest Neighbors)</strong> algorithm.</span></li>
+<li><span class="tm">01:20:48</span><span>“majority voting with argmax... argument maximum” is the formal mathematical classification decision rule: \(\hat{y} = \arg\max_c \sum I(y_i = c)\).</span></li>
+<li><span class="tm">01:27:02</span><span>“tie means equal, a shit” is the phonetic speech-to-text slip for Turkish <em>eşit / eşitlik</em> (equality / tie).</span></li>
+<li><span class="tm">01:30:23</span><span>“Voronoi in leaves and nature” correctly identified as natural <strong>Voronoi tessellations</strong> (dragonfly wings, plant cell walls, giraffe hide patterns).</span></li>
+<li><span class="tm">01:35:39</span><span>“KNN classification and KNN regression is different... average rather than majority” establishes continuous neighbor target averaging (\(\hat{y} = \frac{1}{k}\sum y_i\)).</span></li>
+<li><span class="tm">01:40:08</span><span>“pseudo code... Please do not say pseudo... What's it in Turkish? Sahte code” refers to algorithmic pseudocode (<em>sahte kod</em>), clarifying pronunciation.</span></li>
+<li><span class="tm">01:41:44</span><span>“So linear regression, I'm afraid we are missing this one... we can continue at the next week” confirms that full Ordinary Least Squares (OLS) linear regression was postponed to Week 6 due to lecture time limits.</span></li>
 </ul><div class="end">End of recording · 01:42:33</div></section></main>
 <!-- Interactive Scrubber JS -->
 <!-- COLLAPSIBLE LEFT NAVIGATION SIDEBAR -->

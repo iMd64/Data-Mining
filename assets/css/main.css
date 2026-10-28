@@ -2054,6 +2054,9 @@ tr.added td { color: var(--ink-2); }
   font-size: 1.05em !important;
   color: inherit !important;
 }
+.katex-mathml {
+  display: none !important;
+}
 .katex-display {
   margin: 1.15rem 0 !important;
   padding: 0.85rem 1.1rem !important;
