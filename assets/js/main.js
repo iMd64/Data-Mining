@@ -105,15 +105,26 @@
     } catch (e) {}
   }
 
-  // Restore sidebar state
+  // Restore sidebar state (desktop remembers state; mobile always starts closed for clean reading)
   var savedSidebar = null;
   try { savedSidebar = localStorage.getItem(STORAGE_KEY); } catch (e) {}
-  if (savedSidebar !== null) {
-    if (savedSidebar === '1') body.classList.add('sidebar-open');
-    else body.classList.remove('sidebar-open');
+  if (isDesktop()) {
+    if (savedSidebar === '0') body.classList.remove('sidebar-open');
+    else body.classList.add('sidebar-open'); // Default open on wide desktop screens
   } else {
-    if (isDesktop()) body.classList.add('sidebar-open');
+    body.classList.remove('sidebar-open'); // Handheld & tablet: start closed with full content visibility
   }
+
+  // Handle dynamic window resize transitions
+  var prevWasDesktop = isDesktop();
+  window.addEventListener('resize', function() {
+    var nowDesktop = isDesktop();
+    if (prevWasDesktop && !nowDesktop) {
+      // Transitioning from desktop to mobile: close drawer
+      body.classList.remove('sidebar-open');
+    }
+    prevWasDesktop = nowDesktop;
+  });
 
   if (toggleBtn) {
     toggleBtn.addEventListener('click', function(e) {
