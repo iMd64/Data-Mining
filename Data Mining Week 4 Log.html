@@ -1,90 +1,97 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Data Mining Week 4 Log</title>
-
-  <!-- Typography & Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Spline+Sans:wght@300..700&family=Spline+Sans+Mono:wght@400..600&display=swap">
-
-  <!-- KaTeX Mathematics Rendering Engine -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
-
-  <!-- Unified Application Stylesheet -->
-  <link rel="stylesheet" href="assets/css/main.css?v=2.1">
-
-  <!-- Instant Theme Initializer (prevents FOUT) -->
-  <script src="assets/js/theme-init.js"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>Data Mining Week 4 Log</title>
+<!-- Typography & Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&amp;family=JetBrains+Mono:wght@400;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Spline+Sans:wght@300..700&amp;family=Spline+Sans+Mono:wght@400..600&amp;display=swap" rel="stylesheet"/>
+<!-- KaTeX Mathematics Rendering Engine -->
+<link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script crossorigin="anonymous" defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script crossorigin="anonymous" defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<!-- Unified Application Stylesheet -->
+<link href="assets/css/main.css?v=2.1" rel="stylesheet"/>
+<!-- Instant Theme Initializer (prevents FOUT) -->
+<script src="assets/js/theme-init.js"></script>
 </head>
 <body>
 <header class="deck"><div class="wrap">
-<button id="sidebar-toggle-btn" class="deck-nav-btn" aria-label="Toggle Lecture Directory" title="Toggle Navigation Menu (Shortcut: [ or \)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg><span>LECTURES</span></button>
-<span class="clock" id="clock">00:00:00</span><span class="dpt" id="dpt">0.0 m</span><div class="tape" aria-hidden="true"><a class="seg hx1" href="#part-a" style="--d:900;--st:#A9825A" data-s="0" data-e="900" title="From Data Preparation to the Four Core Tasks"></a><a class="seg hx2" href="#part-b" style="--d:1290;--st:#D0814F" data-s="900" data-e="2190" title="Classifiers vs. Regressors and Learning Paradigms"></a><a class="seg hx3" href="#part-c" style="--d:1050;--st:#E0B04A" data-s="2190" data-e="3240" title="Lazy vs. Eager Learners and the Two Phases"></a><a class="seg hx4" href="#part-d" style="--d:1200;--st:#3FB5A5" data-s="3240" data-e="4440" title="Decision Boundaries in 2D, 3D, and Hyperplanes"></a><a class="seg hx5" href="#part-e" style="--d:720;--st:#6F9ADB" data-s="4440" data-e="5160" title="White-Box Transparency vs. Black-Box Power"></a><a class="seg hx6" href="#part-f" style="--d:480;--st:#A98BD6" data-s="5160" data-e="5640" title="The Baseline Benchmark: Zero Rule (ZeroR)"></a><a class="seg hx7" href="#part-g" style="--d:600;--st:#8FBF7A" data-s="5640" data-e="6240" title="One Rule (OneR) and Single-Feature Testing"></a><a class="seg hx8" href="#part-h" style="--d:700;--st:#D9607A" data-s="6240" data-e="6940" title="Resampling, Bootstrap, and Quantization"></a><span class="play" id="play"></span></div><span class="total">/ 01:55:40</span><div class="deck-pdf-wrap">
-  <a href="https://drive.google.com/file/d/1g0LhkhgEFmlkd7YvmeMYN-UbcfEbj0pV/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="deck-nav-btn deck-pdf-btn" id="pdf-external-btn" aria-label="Open AI PDF Notes in new tab">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-      <polyline points="14 2 14 8 20 8"></polyline>
-      <line x1="16" y1="13" x2="8" y2="13"></line>
-      <line x1="16" y1="17" x2="8" y2="17"></line>
-      <polyline points="10 9 9 9 8 9"></polyline>
-    </svg>
-    <span>AI PDF NOTES</span>
-    <svg class="deck-pdf-ext" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-      <polyline points="15 3 21 3 21 9"></polyline>
-      <line x1="10" y1="14" x2="21" y2="3"></line>
-    </svg>
-  </a>
-  <div class="deck-pdf-popover" role="tooltip">
-    <div class="pop-head">
-      <span class="pop-badge">AI STUDY SYNTHESIS</span>
-      <span class="pop-wk">WEEK 04</span>
-    </div>
-    <p class="pop-body">
-      This PDF study note was synthesized from Dr. Faruk Bulut's official <strong>Week 4 lecture notes/slides</strong> and everything discussed in the <strong>recording of that same week</strong> &mdash; detailing supervised learning, classification taxonomy, lazy vs eager learners, and baseline classifiers (ZeroR, OneR).
+<button aria-label="Toggle Lecture Directory" class="deck-nav-btn" id="sidebar-toggle-btn" title="Toggle Navigation Menu (Shortcut: [ or \)"><svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="14"><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg><span>LECTURES</span></button>
+<span class="clock" id="clock">00:00:00</span><span class="dpt" id="dpt">0.0 m</span><div aria-hidden="true" class="tape"><a class="seg hx1" data-e="1845" data-s="0" href="#part-a" style="--d:1845;--st:#A9825A" title="From Data Preparation to the Four Core Tasks"></a>
+<a class="seg hx2" data-e="2915" data-s="1845" href="#part-b" style="--d:1070;--st:#D0814F" title="Classifiers vs. Regressors and Learning Paradigms"></a>
+<a class="seg hx3" data-e="4125" data-s="2915" href="#part-c" style="--d:1210;--st:#E0B04A" title="Lazy vs. Eager Learners and the Two Phases"></a>
+<a class="seg hx4" data-e="4635" data-s="4125" href="#part-d" style="--d:510;--st:#3FB5A5" title="Decision Boundaries in 2D, 3D, and Hyperplanes"></a>
+<a class="seg hx5" data-e="5190" data-s="4635" href="#part-e" style="--d:555;--st:#6F9ADB" title="White-Box Transparency vs. Black-Box Power"></a>
+<a class="seg hx6" data-e="5640" data-s="5190" href="#part-f" style="--d:450;--st:#A98BD6" title="The Baseline Benchmark: Zero Rule (ZeroR)"></a>
+<a class="seg hx7" data-e="6260" data-s="5640" href="#part-g" style="--d:620;--st:#8FBF7A" title="One Rule (OneR) and Single-Feature Testing"></a>
+<a class="seg hx8" data-e="6940" data-s="6260" href="#part-h" style="--d:680;--st:#D9607A" title="Resampling, Bootstrap, and Quantization"></a>
+<span class="play" id="play"></span></div><span class="total">/ 01:55:40</span><div class="deck-pdf-wrap">
+<a aria-label="Open AI PDF Notes in new tab" class="deck-nav-btn deck-pdf-btn" href="https://drive.google.com/file/d/1g0LhkhgEFmlkd7YvmeMYN-UbcfEbj0pV/view?usp=drive_link" id="pdf-external-btn" rel="noopener noreferrer" target="_blank">
+<svg fill="none" height="13" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="13">
+<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+<polyline points="14 2 14 8 20 8"></polyline>
+<line x1="16" x2="8" y1="13" y2="13"></line>
+<line x1="16" x2="8" y1="17" y2="17"></line>
+<polyline points="10 9 9 9 8 9"></polyline>
+</svg>
+<span>AI PDF NOTES</span>
+<svg class="deck-pdf-ext" fill="none" height="10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24" width="10">
+<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+<polyline points="15 3 21 3 21 9"></polyline>
+<line x1="10" x2="21" y1="14" y2="3"></line>
+</svg>
+</a>
+<div class="deck-pdf-popover" role="tooltip">
+<div class="pop-head">
+<span class="pop-badge">AI STUDY SYNTHESIS</span>
+<span class="pop-wk">WEEK 04</span>
+</div>
+<p class="pop-body">
+      This PDF study note was synthesized from Dr. Faruk Bulut's official <strong>Week 4 lecture notes/slides</strong> and everything discussed in the <strong>recording of that same week</strong> — detailing supervised learning, classification taxonomy, lazy vs eager learners, and baseline classifiers (ZeroR, OneR).
     </p>
-    <div class="pop-disclaimer">
-      <span class="pop-disc-icon">&#x26A0;&#xFE0F;</span>
-      <div class="pop-disc-text">
-        <strong>Disclaimer:</strong> Generated by an AI pair-programming assistant for accelerated student revision. While rigorously cross-referenced with course slides and audio recordings, always verify critical formulas, exam dates, and course policies against official university announcements.
+<div class="pop-disclaimer">
+<span class="pop-disc-icon">⚠️</span>
+<div class="pop-disc-text">
+<strong>Disclaimer:</strong> Generated by an AI pair-programming assistant for accelerated student revision. While rigorously cross-referenced with course slides and audio recordings, always verify critical formulas, exam dates, and course policies against official university announcements.
       </div>
-    </div>
-  </div>
+</div>
+</div>
 </div></div></header>
-
 <main><section class="hero"><div class="wrap">
-<div class="eyebrow">Data mining &middot; Week 4 &middot; Recording 06.10.26 &middot; 01:55:40</div>
-<h1>mapping the<br><span class="c">learning space</span><span class="dia" aria-hidden="true"></span></h1>
+<div class="eyebrow">Data mining · Week 4 · Recording 06.10.26 · 01:55:40</div>
+<h1>mapping the<br/><span class="c">learning space</span><span aria-hidden="true" class="dia"></span></h1>
 <div class="lead"><p><span class="tm">01:27:18</span> “Before celebrating a model, beat a simple baseline.” Dr. Faruk Bulut maps the foundational landscape of machine learning tasks: the four core objectives, the eager versus lazy dilemma, geometric decision hyperplanes, white-box interpretability, ZeroR and OneR baseline mechanics, and continuous quantization.<small>Each entry displays recording timecode and exact slide references. The depth gauge at top tracks the core as you scroll: 1 minute = 1 metre of core.</small></p>
 </div>
-
-<div class="survey"><div class="corewrap"><div class="core" aria-hidden="true"><a class="seg hx1" href="#part-a" style="--d:900;--st:#A9825A" data-s="0" data-e="900" title="From Data Preparation to the Four Core Tasks">A</a><a class="seg hx2" href="#part-b" style="--d:1290;--st:#D0814F" data-s="900" data-e="2190" title="Classifiers vs. Regressors and Learning Paradigms">B</a><a class="seg hx3" href="#part-c" style="--d:1050;--st:#E0B04A" data-s="2190" data-e="3240" title="Lazy vs. Eager Learners and the Two Phases">C</a><a class="seg hx4" href="#part-d" style="--d:1200;--st:#3FB5A5" data-s="3240" data-e="4440" title="Decision Boundaries in 2D, 3D, and Hyperplanes">D</a><a class="seg hx5" href="#part-e" style="--d:720;--st:#6F9ADB" data-s="4440" data-e="5160" title="White-Box Transparency vs. Black-Box Power">E</a><a class="seg hx6" href="#part-f" style="--d:480;--st:#A98BD6" data-s="5160" data-e="5640" title="The Baseline Benchmark: Zero Rule (ZeroR)">F</a><a class="seg hx7" href="#part-g" style="--d:600;--st:#8FBF7A" data-s="5640" data-e="6240" title="One Rule (OneR) and Single-Feature Testing">G</a><a class="seg hx8" href="#part-h" style="--d:700;--st:#D9607A" data-s="6240" data-e="6940" title="Resampling, Bootstrap, and Quantization">H</a></div></div><ol class="legend">
-<li><a href="#part-a" class="hx1" style="--st:#A9825A"><span class="l">A</span><span><b>From Data Preparation to the Four Tasks</b><small>00:00:00 &ndash; 00:15:00 &middot; 15 min 00 s &middot; 0.0 m deep</small></span></a></li>
-<li><a href="#part-b" class="hx2" style="--st:#D0814F"><span class="l">B</span><span><b>Classifiers vs. Regressors and Learning</b><small>00:15:00 &ndash; 00:36:30 &middot; 21 min 30 s &middot; 15.0 m deep</small></span></a></li>
-<li><a href="#part-c" class="hx3" style="--st:#E0B04A"><span class="l">C</span><span><b>Lazy vs. Eager Learners and the Two Phases</b><small>00:36:30 &ndash; 00:54:00 &middot; 17 min 30 s &middot; 36.5 m deep</small></span></a></li>
-<li><a href="#part-d" class="hx4" style="--st:#3FB5A5"><span class="l">D</span><span><b>Decision Boundaries in 2D, 3D, and Hyperplanes</b><small>00:54:00 &ndash; 01:14:00 &middot; 20 min 00 s &middot; 54.0 m deep</small></span></a></li>
-<li><a href="#part-e" class="hx5" style="--st:#6F9ADB"><span class="l">E</span><span><b>White-Box Transparency vs. Black-Box Power</b><small>01:14:00 &ndash; 01:26:00 &middot; 12 min 00 s &middot; 74.0 m deep</small></span></a></li>
-<li><a href="#part-f" class="hx6" style="--st:#A98BD6"><span class="l">F</span><span><b>The Baseline Benchmark: Zero Rule (ZeroR)</b><small>01:26:00 &ndash; 01:34:00 &middot; 8 min 00 s &middot; 86.0 m deep</small></span></a></li>
-<li><a href="#part-g" class="hx7" style="--st:#8FBF7A"><span class="l">G</span><span><b>One Rule (OneR) and Single-Feature Testing</b><small>01:34:00 &ndash; 01:44:00 &middot; 10 min 00 s &middot; 94.0 m deep</small></span></a></li>
-<li><a href="#part-h" class="hx8" style="--st:#D9607A"><span class="l">H</span><span><b>Resampling, Bootstrap, and Quantization</b><small>01:44:00 &ndash; 01:55:40 &middot; 11 min 40 s &middot; 104.0 m deep</small></span></a></li>
+<div class="survey"><div class="corewrap"><div aria-hidden="true" class="core"><a class="seg hx1" data-e="1845" data-s="0" href="#part-a" style="--d:1845;--st:#A9825A" title="From Data Preparation to the Four Core Tasks">A</a>
+<a class="seg hx2" data-e="2915" data-s="1845" href="#part-b" style="--d:1070;--st:#D0814F" title="Classifiers vs. Regressors and Learning Paradigms">B</a>
+<a class="seg hx3" data-e="4125" data-s="2915" href="#part-c" style="--d:1210;--st:#E0B04A" title="Lazy vs. Eager Learners and the Two Phases">C</a>
+<a class="seg hx4" data-e="4635" data-s="4125" href="#part-d" style="--d:510;--st:#3FB5A5" title="Decision Boundaries in 2D, 3D, and Hyperplanes">D</a>
+<a class="seg hx5" data-e="5190" data-s="4635" href="#part-e" style="--d:555;--st:#6F9ADB" title="White-Box Transparency vs. Black-Box Power">E</a>
+<a class="seg hx6" data-e="5640" data-s="5190" href="#part-f" style="--d:450;--st:#A98BD6" title="The Baseline Benchmark: Zero Rule (ZeroR)">F</a>
+<a class="seg hx7" data-e="6260" data-s="5640" href="#part-g" style="--d:620;--st:#8FBF7A" title="One Rule (OneR) and Single-Feature Testing">G</a>
+<a class="seg hx8" data-e="6940" data-s="6260" href="#part-h" style="--d:680;--st:#D9607A" title="Resampling, Bootstrap, and Quantization">H</a>
+</div></div><ol class="legend"><li><a class="hx1" href="#part-a" style="--st:#A9825A"><span class="l">A</span><span><b>From Data Preparation to the Four Core Tasks</b><small>00:00:00 – 00:30:45 · 30 min 45 s · 0.0 m deep</small></span></a></li>
+<li><a class="hx2" href="#part-b" style="--st:#D0814F"><span class="l">B</span><span><b>Classifiers vs. Regressors and Learning Paradigms</b><small>00:30:45 – 00:48:35 · 17 min 50 s · 30.8 m deep</small></span></a></li>
+<li><a class="hx3" href="#part-c" style="--st:#E0B04A"><span class="l">C</span><span><b>Lazy vs. Eager Learners and the Two Phases</b><small>00:48:35 – 01:08:45 · 20 min 10 s · 48.6 m deep</small></span></a></li>
+<li><a class="hx4" href="#part-d" style="--st:#3FB5A5"><span class="l">D</span><span><b>Decision Boundaries in 2D, 3D, and Hyperplanes</b><small>01:08:45 – 01:17:15 · 8 min 30 s · 68.8 m deep</small></span></a></li>
+<li><a class="hx5" href="#part-e" style="--st:#6F9ADB"><span class="l">E</span><span><b>White-Box Transparency vs. Black-Box Power</b><small>01:17:15 – 01:26:30 · 9 min 15 s · 77.3 m deep</small></span></a></li>
+<li><a class="hx6" href="#part-f" style="--st:#A98BD6"><span class="l">F</span><span><b>The Baseline Benchmark: Zero Rule (ZeroR)</b><small>01:26:30 – 01:34:00 · 7 min 30 s · 86.5 m deep</small></span></a></li>
+<li><a class="hx7" href="#part-g" style="--st:#8FBF7A"><span class="l">G</span><span><b>One Rule (OneR) and Single-Feature Testing</b><small>01:34:00 – 01:44:20 · 10 min 20 s · 94.0 m deep</small></span></a></li>
+<li><a class="hx8" href="#part-h" style="--st:#D9607A"><span class="l">H</span><span><b>Resampling, Bootstrap, and Quantization</b><small>01:44:20 – 01:55:40 · 11 min 20 s · 104.3 m deep</small></span></a></li>
 </ol>
 <dl class="glance"><dt>Recording</dt><dd>06.10.26, 01:55:40</dd><dt>Course</dt><dd>SEN 431 Data Mining, Week 4</dd><dt>Slide deck</dt><dd>Week 4: 71 slides on Machine Learning &amp; Tasks</dd><dt>Core models</dt><dd>ZeroR (0-Rule), OneR (1-Rule), Decision Boundaries, KNN</dd><dt>Baselines tested</dt><dd>Student attendance dataset (1 vs 3 errors), 70% Dog baseline</dd><dt>Curated lab</dt><dd>7 assigned video lectures, Waikato Weka wiki &amp; IBM guides</dd></dl>
 </div></div></section>
-
 <!-- CHAPTER A -->
-<section class="part hx1" id="part-a" style="--st:#A9825A"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">A</div><div><div class="pr">Layer 1 of 8 &middot; 00:00:00 &ndash; 00:15:00 &middot; 15 min 00 s &middot; core depth 0.0 &ndash; 15.0 m</div><h2>From Data Preparation to the Four Core Tasks</h2><p>Course communications on UBIS, transitioning from data cleaning to algorithmic tasks, and the taxonomy of the four core data mining goals.</p></div></div></div><div class="wrap entries">
-
-<article class="e" data-t="0" data-e="490"><div class="ts">00:00:00<span>to 00:08:10</span><span class="ref-slide">Slides 1&ndash;4</span></div><div class="rail"></div><div class="b"><h3>Portal checks and the learning transition</h3>
+<section class="part hx1" id="part-a" style="--st:#A9825A"><div class="band"><div class="wrap band-in"><div aria-hidden="true" class="pl">A</div><div><div class="pr">Layer 1 of 8 · 00:00:00 – 00:15:00 · 15 min 00 s · core depth 0.0 – 15.0 m</div><h2>From Data Preparation to the Four Core Tasks</h2><p>Course communications on UBIS, transitioning from data cleaning to algorithmic tasks, and the taxonomy of the four core data mining goals.</p></div></div></div><div class="wrap entries">
+<article class="e" data-e="505" data-t="0"><div class="ts">00:00:00 <span>to 00:08:25</span><span class="ref-slide">Slides 1–4</span></div><div class="rail"></div><div class="b"><h3>Portal checks and the learning transition</h3>
 <p>Dr. Faruk Bulut begins by checking whether students regularly consult the university portal (<mark>UBIS</mark>) for weekly slide decks and reading guides. He connects last week’s data preprocessing workflows (missing value handling, outlier isolation, scaling) to this week’s focal question: once a dataset is clean, <mark>what specific task should the algorithm perform?</mark></p>
 <p>Data science is not a one-size-fits-all model. Choosing the right algorithm starts by defining the operational question you want answered.</p>
 </div></article>
-
-<article class="e" data-t="490" data-e="900"><div class="ts">00:08:10<span>to 00:15:00</span><span class="ref-slide">Slides 5&ndash;10</span></div><div class="rail"></div><div class="b"><h3>The four core data mining tasks</h3>
+<article class="e" data-e="1845" data-t="505"><div class="ts">00:08:25 <span>to 00:30:45</span><span class="ref-slide">Slides 5–10</span></div><div class="rail"></div><div class="b"><h3>The four core data mining tasks</h3>
 <p>Dr. Bulut maps out the four primary objectives that account for the vast majority of all commercial data mining and machine learning applications:</p>
 <div class="x types"><div class="grid">
 <div class="ty"><b>1. Classification</b><span>Which discrete category does this instance belong to? (Spam / Ham, Disease / Healthy).</span></div>
@@ -93,128 +100,100 @@
 <div class="ty"><b>4. Association</b><span>Which items/events tend to co-occur in transactions? (Diaper → Milk, Bread → Butter).</span></div>
 </div></div>
 <div class="x tw"><table><thead><tr><th>Business Question</th><th>Core Task</th><th>Typical Target Output</th></tr></thead><tbody><tr><td>Will this customer cancel their subscription next month?</td><td><strong>Classification</strong></td><td>Discrete class label: <em>Churn / Retained</em></td></tr><tr><td>How much total revenue will this customer generate this year?</td><td><strong>Regression</strong></td><td>Continuous dollar value: <em>$4,250.00</em></td></tr><tr><td>Can we identify distinct behavioral profiles among our users?</td><td><strong>Clustering</strong></td><td>Natural cluster segments: <em>Segment A, B, C</em></td></tr><tr><td>Which products do shoppers frequently place in the same trolley?</td><td><strong>Association</strong></td><td>Co-occurrence rule: <em>Laptop → Wireless Mouse</em></td></tr></tbody></table></div>
-<a class="yt-badge" href="https://www.youtube.com/watch?v=3fsy2oheRdg" target="_blank" rel="noopener">Curated Video: IBM Technology &mdash; Supervised vs. Unsupervised Learning</a>
+<a class="yt-badge" href="https://www.youtube.com/watch?v=3fsy2oheRdg" rel="noopener" target="_blank">Curated Video: IBM Technology — Supervised vs. Unsupervised Learning</a>
 </div></article>
-
 </div></section>
-
 <!-- CHAPTER B -->
-<section class="part hx2" id="part-b" style="--st:#D0814F"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">B</div><div><div class="pr">Layer 2 of 8 &middot; 00:15:00 &ndash; 00:36:30 &middot; 21 min 30 s &middot; core depth 15.0 &ndash; 36.5 m</div><h2>Classifiers vs. Regressors and Learning Paradigms</h2><p>Discrete boundaries vs continuous lines, learning from labeled ground truth, unsupervised clustering, and the 1,000 animal images dilemma.</p></div></div></div><div class="wrap entries">
-
-<article class="e" data-t="900" data-e="1480"><div class="ts">00:15:00<span>to 00:24:40</span><span class="ref-slide">Slides 11&ndash;14</span></div><div class="rail"></div><div class="b"><h3>Classifier vs. Regressor</h3>
+<section class="part hx2" id="part-b" style="--st:#D0814F"><div class="band"><div class="wrap band-in"><div aria-hidden="true" class="pl">B</div><div><div class="pr">Layer 2 of 8 · 00:15:00 – 00:36:30 · 21 min 30 s · core depth 15.0 – 36.5 m</div><h2>Classifiers vs. Regressors and Learning Paradigms</h2><p>Discrete boundaries vs continuous lines, learning from labeled ground truth, unsupervised clustering, and the 1,000 animal images dilemma.</p></div></div></div><div class="wrap entries">
+<article class="e" data-e="2420" data-t="1845"><div class="ts">00:30:45 <span>to 00:40:20</span><span class="ref-slide">Slides 11–14</span></div><div class="rail"></div><div class="b"><h3>Classifier vs. Regressor</h3>
 <p>Dr. Bulut emphasizes the fundamental distinction in supervised learning: <mark>classifiers predict qualitative categories</mark>, whereas <mark>regressors predict quantitative numbers</mark>. A classifier maps feature vectors \(X\) into a finite set of discrete labels \(y \in \{C_1, C_2, \dots, C_k\}\). A regressor maps feature vectors \(X\) into an infinite continuous real-valued space \(y \in \mathbb{R}\).</p>
-<div class="x cmp"><div class="col"><h4>Classifier</h4><ul class="rows"><li><span class="tm">00:18:20</span><span>Predicts Blood Type: <em>A, B, AB, O</em> (Discrete).</span></li><li><span class="tm">00:19:10</span><span>Predicts Loan Decision: <em>Approve / Reject</em>.</span></li><li><span class="tm">00:19:40</span><span>Evaluated via Accuracy, Confusion Matrix, F1-Score.</span></li></ul></div><div class="col"><h4>Regressor</h4><ul class="rows"><li><span class="tm">00:20:15</span><span>Predicts Blood Pressure: <em>124.6 mmHg</em> (Continuous).</span></li><li><span class="tm">00:20:50</span><span>Predicts House Price: <em>$385,000</em>.</span></li><li><span class="tm">00:21:20</span><span>Evaluated via Mean Squared Error (MSE), \(R^2\).</span></li></ul></div></div>
+<div class="x cmp"><div class="col"><h4>Classifier</h4><ul class="rows"><li><span class="tm">00:35:45</span><span>Predicts Blood Type: <em>A, B, AB, O</em> (Discrete).</span></li><li><span class="tm">00:36:27</span><span>Predicts Loan Decision: <em>Approve / Reject</em>.</span></li><li><span class="tm">00:31:40</span><span>Evaluated via Accuracy, Confusion Matrix, F1-Score.</span></li></ul></div><div class="col"><h4>Regressor</h4><ul class="rows"><li><span class="tm">00:36:18</span><span>Predicts Blood Pressure: <em>124.6 mmHg</em> (Continuous).</span></li><li><span class="tm">00:34:20</span><span>Predicts House Price: <em>$320,000 ± $7,500</em>.</span></li><li><span class="tm">00:34:30</span><span>Evaluated via Mean Squared Error (MSE), \(R^2\).</span></li></ul></div></div>
 </div></article>
-
-<article class="e" data-t="1480" data-e="2190"><div class="ts">00:24:40<span>to 00:36:30</span><span class="ref-slide">Slides 15&ndash;20</span></div><div class="rail"></div><div class="b"><h3>Supervised, unsupervised, and semi-supervised paradigms</h3>
+<article class="e" data-e="2915" data-t="2420"><div class="ts">00:40:20 <span>to 00:48:35</span><span class="ref-slide">Slides 15–20</span></div><div class="rail"></div><div class="b"><h3>Supervised, unsupervised, and semi-supervised paradigms</h3>
 <p>How does the algorithm learn? In <mark>Supervised Learning</mark>, every training instance is accompanied by an explicit supervisor: a ground-truth class label or numerical target \(y\). The algorithm’s task is to learn a mapping function \(f(X) \approx y\).</p>
 <p>In <mark>Unsupervised Learning</mark>, no target labels exist. The algorithm inspects the intrinsic geometric structure, density, and feature correlations of the data to discover clusters or association rules. In <mark>Semi-Supervised Learning</mark>, a small fraction of data (e.g. 5–10%) is labeled by expensive human annotators, while a massive pool (90–95%) remains unlabeled. The model uses the labeled points as anchor seeds and leverages the unlabeled distribution to refine decision boundaries.</p>
-<div class="x opts"><div class="opt"><span class="tm">00:31:40</span><b>1,000 Labeled Images</b><span>Every image marked "Cat" or "Dog". The system learns through pure supervised classification.</span><em>Supervised</em></div><div class="opt"><span class="tm">00:32:50</span><b>1,000 Unlabeled Images</b><span>No tags provided. The algorithm clusters images into visual feature similarity groups.</span><em>Unsupervised</em></div><div class="opt win"><span class="tm">00:34:10</span><b>100 Labeled + 900 Unlabeled</b><span>Seed labels guide the clustering manifold. Real-world corporate compromise between cost and accuracy.</span><em>Semi-Supervised</em></div></div>
+<div class="x opts"><div class="opt"><span class="tm">00:40:45</span><b>1,000 Labeled Images</b><span>Every image marked "Cat" or "Dog". The system learns through pure supervised classification.</span><em>Supervised</em></div><div class="opt"><span class="tm">00:43:15</span><b>1,000 Unlabeled Images</b><span>No tags provided. The algorithm clusters images into visual feature similarity groups.</span><em>Unsupervised</em></div><div class="opt win"><span class="tm">00:44:42</span><b>100 Labeled + 900 Unlabeled</b><span>Seed labels guide the clustering manifold. Real-world corporate compromise between cost and accuracy.</span><em>Semi-Supervised</em></div></div>
 </div></article>
-
 </div></section>
-
 <!-- CHAPTER C -->
-<section class="part hx3" id="part-c" style="--st:#E0B04A"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">C</div><div><div class="pr">Layer 3 of 8 &middot; 00:36:30 &ndash; 00:54:00 &middot; 17 min 30 s &middot; core depth 36.5 &ndash; 54.0 m</div><h2>Lazy vs. Eager Learners and the Two Phases</h2><p>When does the real computation happen? Fast training vs fast inference, instance-based memory, and the lifecycle of model deployment.</p></div></div></div><div class="wrap entries">
-
-<article class="e" data-t="2190" data-e="2760"><div class="ts">00:36:30<span>to 00:46:00</span><span class="ref-slide">Slides 21&ndash;25</span></div><div class="rail"></div><div class="b"><h3>Lazy vs. Eager learners: when computation happens</h3>
+<section class="part hx3" id="part-c" style="--st:#E0B04A"><div class="band"><div class="wrap band-in"><div aria-hidden="true" class="pl">C</div><div><div class="pr">Layer 3 of 8 · 00:36:30 – 00:54:00 · 17 min 30 s · core depth 36.5 – 54.0 m</div><h2>Lazy vs. Eager Learners and the Two Phases</h2><p>When does the real computation happen? Fast training vs fast inference, instance-based memory, and the lifecycle of model deployment.</p></div></div></div><div class="wrap entries">
+<article class="e" data-e="3595" data-t="2915"><div class="ts">00:48:35 <span>to 00:59:55</span><span class="ref-slide">Slides 21–25</span></div><div class="rail"></div><div class="b"><h3>Lazy vs. Eager learners: when computation happens</h3>
 <p>Dr. Bulut asks: <mark>“When does the real work happen?”</mark> Machine learning algorithms are split into two computational philosophies:</p>
-<div class="x cmp"><div class="col"><h4>Eager learners</h4><p><span class="tm">00:48:41</span> <strong>Learn first &rarr; predict instantly.</strong> Eager algorithms (Decision Trees, Naive Bayes, Neural Networks) invest heavy computational effort during training to abstract away data and compile a compact mathematical hypothesis. At test time, classifying a new query takes fractions of a millisecond: \(O(1)\) or \(O(\text{tree depth})\).</p></div><div class="col"><h4>Lazy learners</h4><p><span class="tm">00:49:15</span> <strong>Store examples &rarr; compute on query.</strong> Lazy algorithms (K-Nearest Neighbors, instance-based reasoning) do essentially zero computation during training—they simply store raw records in memory. But when a query arrives, they must compute distances against all stored points. Training is instantaneous, but prediction is computationally slow.</p></div></div>
-<div class="x dir"><div class="lane"><div class="who"><b>Eager Strategy</b><i class="ar thick"></i><b>Heavy Upfront Training</b></div><p><span class="tm">00:51:20</span> Compiles explicit mathematical model; lightweight and lightning-fast in mobile/embedded deployment.</p></div><div class="lane"><div class="who"><b>Lazy Strategy</b><i class="ar thin"></i><b>Zero Upfront Training</b></div><p><span class="tm">00:52:45</span> Stores raw instances; delays all Euclidean distance math until query time; memory heavy.</p></div></div>
+<div class="x cmp"><div class="col"><h4>Eager learners</h4><p><span class="tm">00:48:41</span> <strong>Learn first → predict instantly.</strong> Eager algorithms (Decision Trees, Naive Bayes, Neural Networks) invest heavy computational effort during training to abstract away data and compile a compact mathematical hypothesis. At test time, classifying a new query takes fractions of a millisecond: \(O(1)\) or \(O(\text{tree depth})\).</p></div><div class="col"><h4>Lazy learners</h4><p><span class="tm">00:54:40</span> <strong>Store examples → compute on query.</strong> Lazy algorithms (K-Nearest Neighbors, instance-based reasoning) do essentially zero computation during training—they simply store raw records in memory. But when a query arrives, they must compute distances against all stored points. Training is instantaneous, but prediction is computationally slow.</p></div></div>
+<div class="x dir"><div class="lane"><div class="who"><b>Eager Strategy</b><i class="ar thick"></i><b>Heavy Upfront Training</b></div><p><span class="tm">00:52:10</span> Compiles explicit mathematical model; lightweight and lightning-fast in mobile/embedded deployment.</p></div><div class="lane"><div class="who"><b>Lazy Strategy</b><i class="ar thin"></i><b>Zero Upfront Training</b></div><p><span class="tm">00:56:15</span> Stores raw instances; delays all Euclidean distance math until query time; memory heavy.</p></div></div>
 </div></article>
-
-<article class="e" data-t="2760" data-e="3240"><div class="ts">00:46:00<span>to 00:54:00</span><span class="ref-slide">Slides 26&ndash;29</span></div><div class="rail"></div><div class="b"><h3>The two distinct phases: training vs. prediction</h3>
+<article class="e" data-e="4125" data-t="3595"><div class="ts">00:59:55 <span>to 01:08:45</span><span class="ref-slide">Slides 26–29</span></div><div class="rail"></div><div class="b"><h3>The two distinct phases: training vs. prediction</h3>
 <p>Students must never conflate the two stages of supervised learning. In the <mark>Training Phase</mark>, known instances \((X_{\text{train}}, y_{\text{train}})\) are passed to an inductive algorithm to establish parameters, weights, or decision splits. In the <mark>Prediction Phase</mark>, the trained model receives fresh, previously unseen instances \(X_{\text{test}}\) with zero ground-truth labels and infers their probable class \(\hat{y}\).</p>
-<ol class="x kdd"><li style="--c:#2E9E5B"><span class="tm">00:53:10</span><b>Dataset</b><span>Raw cleaned records</span></li><li style="--c:#7FA63A"><span class="tm">00:53:25</span><b>Training Phase</b><span>Learn rule parameters</span></li><li style="--c:#DB8429"><span class="tm">00:53:40</span><b>Model / Hypothesis</b><span>Stored mathematical logic</span></li><li style="--c:#C42B45"><span class="tm">00:53:55</span><b>Prediction Phase</b><span>Infer unseen queries</span></li></ol>
+<ol class="x kdd"><li style="--c:#2E9E5B"><span class="tm">00:59:59</span><b>Dataset</b><span>Raw cleaned records</span></li><li style="--c:#7FA63A"><span class="tm">01:01:25</span><b>Training Phase</b><span>Learn rule parameters</span></li><li style="--c:#DB8429"><span class="tm">01:02:30</span><b>Model / Hypothesis</b><span>Stored mathematical logic</span></li><li style="--c:#C42B45"><span class="tm">01:05:00</span><b>Prediction Phase</b><span>Infer unseen queries</span></li></ol>
 </div></article>
-
 </div></section>
-
 <!-- CHAPTER D -->
-<section class="part hx4" id="part-d" style="--st:#3FB5A5"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">D</div><div><div class="pr">Layer 4 of 8 &middot; 00:54:00 &ndash; 01:14:00 &middot; 20 min 00 s &middot; core depth 54.0 &ndash; 74.0 m</div><h2>Decision Boundaries in 2D, 3D, and Hyperplanes</h2><p>The geometry of classification, lines, planes, hyperplanes, linear simplicity versus non-linear flexibility, and confidence near the border.</p></div></div></div><div class="wrap entries">
-
-<article class="e" data-t="3240" data-e="3840"><div class="ts">00:54:00<span>to 01:04:00</span><span class="ref-slide">Slides 30&ndash;32</span></div><div class="rail"></div><div class="b"><h3>The concept of a decision boundary</h3>
+<section class="part hx4" id="part-d" style="--st:#3FB5A5"><div class="band"><div class="wrap band-in"><div aria-hidden="true" class="pl">D</div><div><div class="pr">Layer 4 of 8 · 00:54:00 – 01:14:00 · 20 min 00 s · core depth 54.0 – 74.0 m</div><h2>Decision Boundaries in 2D, 3D, and Hyperplanes</h2><p>The geometry of classification, lines, planes, hyperplanes, linear simplicity versus non-linear flexibility, and confidence near the border.</p></div></div></div><div class="wrap entries">
+<article class="e" data-e="4410" data-t="4125"><div class="ts">01:08:45 <span>to 01:13:30</span><span class="ref-slide">Slides 30–32</span></div><div class="rail"></div><div class="b"><h3>The concept of a decision boundary</h3>
 <p>Dr. Bulut asks: <mark>“Where does one class end and another begin?”</mark> In feature space, a <mark>decision boundary</mark> is the geometric frontier partitioning instances of differing classes. In a 2D space (with two predictive features, \(x_1\) and \(x_2\)), the boundary is a line or curve separating points.</p>
 <p>He illustrates a new query point landing millimeters away from the red separating boundary: when points sit deep inside a class cluster, classification confidence is near 100%; when points hover right along the boundary, confidence drops sharply and model sensitivity is acute.</p>
 </div></article>
-
-<article class="e" data-t="3840" data-e="4440"><div class="ts">01:04:00<span>to 01:14:00</span><span class="ref-slide">Slides 33&ndash;36</span></div><div class="rail"></div><div class="b"><h3>Linear boundaries vs. non-linear manifolds</h3>
+<article class="e" data-e="4635" data-t="4410"><div class="ts">01:13:30 <span>to 01:17:15</span><span class="ref-slide">Slides 33–36</span></div><div class="rail"></div><div class="b"><h3>Linear boundaries vs. non-linear manifolds</h3>
 <p>In two dimensions, a linear boundary is a straight line (\(w_1x_1 + w_2x_2 + b = 0\)). In three dimensions, it becomes a flat 2D plane cutting through a 3D cube. In an \(n\)-dimensional feature space with dozens of attributes, it is formally termed a <mark>hyperplane</mark> of dimension \(n-1\).</p>
 <p>However, real-world data is frequently not linearly separable. If blue points surround orange points in concentric circles, a straight line cannot separate them without massive error. A <mark>non-linear boundary</mark> bends and contours to isolate complex topological regions.</p>
-<div class="x cmp"><div class="col"><h4>Linear decision boundary</h4><p><span class="tm">01:12:53</span> Straight line in 2D, flat plane in 3D, hyperplane in higher dimensions. Computationally efficient, mathematically stable, highly resistant to overfitting, but fails on complex XOR distributions.</p></div><div class="col"><h4>Non-linear decision boundary</h4><p><span class="tm">01:13:03</span> Curves, polynomials, or enclosed islands. Captures intricate interactions, but risks bending around random noise if unconstrained (overfitting).</p></div></div>
+<div class="x cmp"><div class="col"><h4>Linear decision boundary</h4><p><span class="tm">01:13:30</span> Straight line in 2D, flat plane in 3D, hyperplane in higher dimensions. Computationally efficient, mathematically stable, highly resistant to overfitting, but fails on complex XOR distributions.</p></div><div class="col"><h4>Non-linear decision boundary</h4><p><span class="tm">01:15:20</span> Curves, polynomials, or enclosed islands. Captures intricate interactions, but risks bending around random noise if unconstrained (overfitting).</p></div></div>
 </div></article>
-
 </div></section>
-
 <!-- CHAPTER E -->
-<section class="part hx5" id="part-e" style="--st:#6F9ADB"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">E</div><div><div class="pr">Layer 5 of 8 &middot; 01:14:00 &ndash; 01:26:00 &middot; 12 min 00 s &middot; core depth 74.0 &ndash; 86.0 m</div><h2>White-Box Transparency vs. Black-Box Power</h2><p>The interpretability spectrum, human-readable logic for medicine and law, and the opaque representation of deep neural networks.</p></div></div></div><div class="wrap entries">
-
-<article class="e" data-t="4440" data-e="5160"><div class="ts">01:14:00<span>to 01:26:00</span><span class="ref-slide">Slides 37&ndash;40</span></div><div class="rail"></div><div class="b"><h3>The interpretability spectrum</h3>
+<section class="part hx5" id="part-e" style="--st:#6F9ADB"><div class="band"><div class="wrap band-in"><div aria-hidden="true" class="pl">E</div><div><div class="pr">Layer 5 of 8 · 01:14:00 – 01:26:00 · 12 min 00 s · core depth 74.0 – 86.0 m</div><h2>White-Box Transparency vs. Black-Box Power</h2><p>The interpretability spectrum, human-readable logic for medicine and law, and the opaque representation of deep neural networks.</p></div></div></div><div class="wrap entries">
+<article class="e" data-e="5190" data-t="4635"><div class="ts">01:17:15 <span>to 01:26:30</span><span class="ref-slide">Slides 37–40</span></div><div class="rail"></div><div class="b"><h3>The interpretability spectrum</h3>
 <p>Dr. Bulut presents one of the most critical dilemmas in modern artificial intelligence: <mark>how easily can a human comprehend the model’s reasoning?</mark></p>
-<p>A <mark>White-Box Model</mark> (like a shallow Decision Tree or a set of IF-THEN rules) offers complete transparency. A physician or judge can follow every single branch: <em>“If Age &lt; 30 and Income &gt; $50,000 &rarr; Approve Loan.”</em> In regulated healthcare and finance, transparency is legally mandatory under right-to-explanation directives.</p>
+<p>A <mark>White-Box Model</mark> (like a shallow Decision Tree or a set of IF-THEN rules) offers complete transparency. A physician or judge can follow every single branch: <em>“If Age &lt; 30 and Income &gt; $50,000 → Approve Loan.”</em> In regulated healthcare and finance, transparency is legally mandatory under right-to-explanation directives.</p>
 <p>In contrast, a <mark>Black-Box Model</mark> (such as a Deep Convolutional Neural Network or an ensemble of 500 Random Forest trees) projects data across thousands of non-linear matrix multiplications. While its predictive accuracy may be stellar, its internal decision reasoning is completely inaccessible to direct human inspection.</p>
 <div class="x chains"><div class="chain"><h4>The Model Interpretability Spectrum</h4><div class="nodes"><span>Simple 1-Rule (High Interpretability)</span><span>Shallow Decision Tree</span><span>Linear Model</span><span>Random Forest</span><span>Deep Neural Net (High Power / Black Box)</span></div></div></div>
 </div></article>
-
 </div></section>
-
 <!-- CHAPTER F -->
-<section class="part hx6" id="part-f" style="--st:#A98BD6"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">F</div><div><div class="pr">Layer 6 of 8 &middot; 01:26:00 &ndash; 01:34:00 &middot; 8 min 00 s &middot; core depth 86.0 &ndash; 94.0 m</div><h2>The Baseline Benchmark: Zero Rule (ZeroR)</h2><p>Why every machine learning project needs a baseline, the ZeroR majority voting mechanism, and the deceptive illusion of high accuracy.</p></div></div></div><div class="wrap entries">
-
-<article class="e" data-t="5160" data-e="5640"><div class="ts">01:26:00<span>to 01:34:00</span><span class="ref-slide">Slides 41&ndash;46</span></div><div class="rail"></div><div class="b"><h3>Zero Rule (ZeroR / 0R)</h3>
+<section class="part hx6" id="part-f" style="--st:#A98BD6"><div class="band"><div class="wrap band-in"><div aria-hidden="true" class="pl">F</div><div><div class="pr">Layer 6 of 8 · 01:26:00 – 01:34:00 · 8 min 00 s · core depth 86.0 – 94.0 m</div><h2>The Baseline Benchmark: Zero Rule (ZeroR)</h2><p>Why every machine learning project needs a baseline, the ZeroR majority voting mechanism, and the deceptive illusion of high accuracy.</p></div></div></div><div class="wrap entries">
+<article class="e" data-e="5640" data-t="5190"><div class="ts">01:26:30 <span>to 01:34:00</span><span class="ref-slide">Slides 41–46</span></div><div class="rail"></div><div class="b"><h3>Zero Rule (ZeroR / 0R)</h3>
 <p>Dr. Bulut emphasizes: <mark>“Before celebrating a model, beat a simple baseline.”</mark> Beginners often train a complex model, see 72% accuracy, and assume their architecture is brilliant. But what if the simplest possible baseline achieves 70% accuracy without even looking at the features?</p>
 <p><mark>ZeroR (0-Rule)</mark> is the absolute simplest classification benchmark: <mark>it completely ignores all input features</mark> and unconditionally predicts the majority class observed in the training data for every single instance.</p>
 <div class="x stats"><div class="stat theory"><span class="tm">01:27:55</span><b>72%</b><span>fancy model accuracy</span><em>Trained model</em></div><div class="stat scale"><span class="tm">01:28:47</span><b>70%</b><span>ZeroR baseline accuracy</span><em>Zero features</em></div><div class="stat energy"><span class="tm">01:30:11</span><b>+2%</b><span>marginal real gain</span><em>True value</em></div></div>
 <p>Consider a veterinary dataset of 100 animal cases: 70 Dogs and 30 Cats. ZeroR simply outputs “Dog” every time. It achieves 70% accuracy without looking at fur color, weight, or barking sounds! If your 50-layer deep neural network achieves 72%, it only added 2% genuine predictive value over a blind guess. Always establish the ZeroR baseline first.</p>
-<a class="yt-badge" href="https://waikato.github.io/weka-wiki/zero_r/" target="_blank" rel="noopener">Weka Wiki: ZeroR Baseline Classifier Documentation</a>
+<a class="yt-badge" href="https://waikato.github.io/weka-wiki/zero_r/" rel="noopener" target="_blank">Weka Wiki: ZeroR Baseline Classifier Documentation</a>
 </div></article>
-
 </div></section>
-
 <!-- CHAPTER G -->
-<section class="part hx7" id="part-g" style="--st:#8FBF7A"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">G</div><div><div class="pr">Layer 7 of 8 &middot; 01:34:00 &ndash; 01:44:00 &middot; 10 min 00 s &middot; core depth 94.0 &ndash; 104.0 m</div><h2>One Rule (OneR) and Single-Feature Testing</h2><p>Can a single attribute make a surprisingly accurate classifier? The OneR frequency table algorithm and the student passing exam benchmark.</p></div></div></div><div class="wrap entries">
-
-<article class="e" data-t="5640" data-e="6240"><div class="ts">01:34:00<span>to 01:44:00</span><span class="ref-slide">Slides 47&ndash;55</span></div><div class="rail"></div><div class="b"><h3>The One Rule (OneR / 1R) algorithm</h3>
+<section class="part hx7" id="part-g" style="--st:#8FBF7A"><div class="band"><div class="wrap band-in"><div aria-hidden="true" class="pl">G</div><div><div class="pr">Layer 7 of 8 · 01:34:00 – 01:44:00 · 10 min 00 s · core depth 94.0 – 104.0 m</div><h2>One Rule (OneR) and Single-Feature Testing</h2><p>Can a single attribute make a surprisingly accurate classifier? The OneR frequency table algorithm and the student passing exam benchmark.</p></div></div></div><div class="wrap entries">
+<article class="e" data-e="6260" data-t="5640"><div class="ts">01:34:00 <span>to 01:44:20</span><span class="ref-slide">Slides 47–55</span></div><div class="rail"></div><div class="b"><h3>The One Rule (OneR / 1R) algorithm</h3>
 <p>Can we improve on ZeroR by inspecting just <mark>one single attribute</mark>? That is the core idea of <mark>OneR (1-Rule)</mark>, invented by Robert Holte. OneR frequently achieves 80–90% of the accuracy of complex decision trees using only the single most informative feature.</p>
 <p>The OneR algorithm operates in three straightforward steps:</p>
-<ol class="x kdd"><li style="--c:#2E9E5B"><span class="tm">01:35:10</span><b>1. For Each Feature</b><span>Group data by attribute values</span></li><li style="--c:#7FA63A"><span class="tm">01:36:20</span><b>2. Form Local Rules</b><span>Predict majority class per branch</span></li><li style="--c:#DB8429"><span class="tm">01:37:40</span><b>3. Count Errors</b><span>Sum errors across branches</span></li><li style="--c:#C42B45"><span class="tm">01:39:10</span><b>4. Select Winner</b><span>Pick feature with lowest total error</span></li></ol>
+<ol class="x kdd"><li style="--c:#2E9E5B"><span class="tm">01:35:16</span><b>1. For Each Feature</b><span>Group data by attribute values</span></li><li style="--c:#7FA63A"><span class="tm">01:36:01</span><b>2. Form Local Rules</b><span>Predict majority class per branch</span></li><li style="--c:#DB8429"><span class="tm">01:37:40</span><b>3. Count Errors</b><span>Sum errors across branches</span></li><li style="--c:#C42B45"><span class="tm">01:38:29</span><b>4. Select Winner</b><span>Pick feature with lowest total error</span></li></ol>
 <p>Dr. Bulut walks through the student pass/fail dataset (8 students, features: Attendance and Study Habit):</p>
-<div class="x tw"><table><thead><tr><th>Candidate Feature</th><th>Branch Rules</th><th>Branch Outcomes</th><th>Errors</th><th>Total Accuracy</th></tr></thead><tbody><tr><td><strong>Attendance</strong></td><td>High &rarr; Pass<br>Moderate &rarr; Pass<br>Low &rarr; Fail</td><td>3 Pass, 1 Fail<br>2 Pass, 0 Fail<br>0 Pass, 2 Fail</td><td>1 error (1/8)</td><td><strong style="color:var(--acc)">87.5% (Winner)</strong></td></tr><tr><td><strong>Study Habit</strong></td><td>Regular &rarr; Pass<br>Irregular &rarr; Fail</td><td>2 Pass, 2 Fail<br>3 Pass, 1 Fail</td><td>3 errors (3/8)</td><td><strong>62.5%</strong></td></tr></tbody></table></div>
-<div class="x opts"><div class="opt win"><span class="tm">01:40:39</span><b>OneR Model Chosen</b><span>Attendance Rule: High/Moderate &rarr; Pass, Low &rarr; Fail. Achieves 87.5% accuracy with a single 1-attribute test!</span><em>Optimal OneR</em></div></div>
+<div class="x tw"><table><thead><tr><th>Candidate Feature</th><th>Branch Rules</th><th>Branch Outcomes</th><th>Errors</th><th>Total Accuracy</th></tr></thead><tbody><tr><td><strong>Attendance</strong></td><td>High → Pass<br/>Moderate → Pass<br/>Low → Fail</td><td>3 Pass, 1 Fail<br/>2 Pass, 0 Fail<br/>0 Pass, 2 Fail</td><td>1 error (1/8)</td><td><strong style="color:var(--acc)">87.5% (Winner)</strong></td></tr><tr><td><strong>Study Habit</strong></td><td>Regular → Pass<br/>Irregular → Fail</td><td>2 Pass, 2 Fail<br/>3 Pass, 1 Fail</td><td>3 errors (3/8)</td><td><strong>62.5%</strong></td></tr></tbody></table></div>
+<div class="x opts"><div class="opt win"><span class="tm">01:40:18</span><b>OneR Model Chosen</b><span>Attendance Rule: High/Moderate → Pass, Low → Fail. Achieves 87.5% accuracy with a single 1-attribute test!</span><em>Optimal OneR</em></div></div>
 </div></article>
-
 </div></section>
-
 <!-- CHAPTER H -->
-<section class="part hx8" id="part-h" style="--st:#D9607A"><div class="band"><div class="wrap band-in"><div class="pl" aria-hidden="true">H</div><div><div class="pr">Layer 8 of 8 &middot; 01:44:00 &ndash; 01:55:40 &middot; 11 min 40 s &middot; core depth 104.0 &ndash; 115.7 m</div><h2>Resampling, Bootstrap, and Quantization</h2><p>Mathematical linear models, managing imbalanced classes via undersampling/oversampling, bootstrap replacement, and quantization versus normalization.</p></div></div></div><div class="wrap entries">
-
-<article class="e" data-t="6240" data-e="6570"><div class="ts">01:44:00<span>to 01:49:30</span><span class="ref-slide">Slides 56&ndash;63</span></div><div class="rail"></div><div class="b"><h3>Linear combinations and resampling methods</h3>
+<section class="part hx8" id="part-h" style="--st:#D9607A"><div class="band"><div class="wrap band-in"><div aria-hidden="true" class="pl">H</div><div><div class="pr">Layer 8 of 8 · 01:44:00 – 01:55:40 · 11 min 40 s · core depth 104.0 – 115.7 m</div><h2>Resampling, Bootstrap, and Quantization</h2><p>Mathematical linear models, managing imbalanced classes via undersampling/oversampling, bootstrap replacement, and quantization versus normalization.</p></div></div></div><div class="wrap entries">
+<article class="e" data-e="6595" data-t="6260"><div class="ts">01:44:20 <span>to 01:49:55</span><span class="ref-slide">Slides 56–63</span></div><div class="rail"></div><div class="b"><h3>Linear combinations and resampling methods</h3>
 <p>Dr. Bulut illustrates the general formulation of a linear classification model: \(\text{score} = w_1x_1 + w_2x_2 + \dots + w_nx_n + b\). Each input feature is scaled by an importance weight \(w_i\), offset by a bias term \(b\).</p>
 <p>He returns to the challenge of class imbalance: when a dataset has 90 Class A instances and 10 Class B instances, standard models become heavily biased toward A. To correct this, engineers use <mark>Resampling</mark>:</p>
-<div class="x cmp"><div class="col"><h4>Undersampling</h4><p><span class="tm">01:47:15</span> Randomly discard majority Class A instances down to 20 or 10, leveling the playing field. Risk: loses potentially valuable data.</p></div><div class="col"><h4>Oversampling</h4><p><span class="tm">01:48:00</span> Duplicate or synthetically generate (SMOTE) minority Class B instances up to 90. Risk: increases training time and may cause overfitting on replicated points.</p></div></div>
+<div class="x cmp"><div class="col"><h4>Undersampling</h4><p><span class="tm">01:47:50</span> Randomly discard majority Class A instances down to 20 or 10, leveling the playing field. Risk: loses potentially valuable data.</p></div><div class="col"><h4>Oversampling</h4><p><span class="tm">01:48:00</span> Duplicate or synthetically generate (SMOTE) minority Class B instances up to 90. Risk: increases training time and may cause overfitting on replicated points.</p></div></div>
 <p>He introduces <mark>Bootstrap Sampling</mark>: sampling \(n\) instances from a dataset <em>with replacement</em>. A single instance may be chosen twice or thrice in one sample, while ~36.8% of instances are omitted (out-of-bag). This is the foundational mechanism behind ensemble methods like Bagging and Random Forests.</p>
 </div></article>
-
-<article class="e" data-t="6570" data-e="6940"><div class="ts">01:49:30<span>to 01:55:40</span><span class="ref-slide">Slides 64&ndash;71</span></div><div class="rail"></div><div class="b"><h3>Quantization vs. Normalization</h3>
+<article class="e" data-e="6940" data-t="6595"><div class="ts">01:49:55 <span>to 01:55:40</span><span class="ref-slide">Slides 64–71</span></div><div class="rail"></div><div class="b"><h3>Quantization vs. Normalization</h3>
 <p>Dr. Bulut warns students never to confuse <mark>Quantization</mark> with <mark>Normalization</mark>:</p>
-<div class="x cmp"><div class="col"><h4>Normalization (Week 3)</h4><p><span class="tm">01:50:40</span> <strong>Rescaling numbers.</strong> Transforms numerical values into \([0, 1]\) or \(Z\)-scores while strictly preserving continuous resolution and proportional ratios.</p></div><div class="col"><h4>Quantization (Week 4)</h4><p><span class="tm">01:51:19</span> <strong>Grouping numbers into bins.</strong> Replaces continuous ranges with a few discrete ordinal buckets (e.g. Exam score 0–39 &rarr; <em>Low</em>, 40–69 &rarr; <em>Medium</em>, 70–100 &rarr; <em>High</em>).</p></div></div>
+<div class="x cmp"><div class="col"><h4>Normalization (Week 3)</h4><p><span class="tm">01:50:40</span> <strong>Rescaling numbers.</strong> Transforms numerical values into \([0, 1]\) or \(Z\)-scores while strictly preserving continuous resolution and proportional ratios.</p></div><div class="col"><h4>Quantization (Week 4)</h4><p><span class="tm">01:51:19</span> <strong>Grouping numbers into bins.</strong> Replaces continuous ranges with a few discrete ordinal buckets (e.g. Exam score 0–39 → <em>Low</em>, 40–69 → <em>Medium</em>, 70–100 → <em>High</em>).</p></div></div>
 <div class="x tw"><table><thead><tr><th>Original Continuous Score</th><th>Quantized Discrete Category</th><th>Class Transformation</th></tr></thead><tbody><tr><td>18</td><td><span class="lb no">Low</span></td><td>Discretized bucket 1</td></tr><tr><td>31</td><td><span class="lb no">Low</span></td><td>Discretized bucket 1</td></tr><tr><td>47</td><td><span class="lb yes">Medium</span></td><td>Discretized bucket 2</td></tr><tr><td>62</td><td><span class="lb yes">Medium</span></td><td>Discretized bucket 2</td></tr><tr><td>89</td><td><span class="lb yes">High</span></td><td>Discretized bucket 3</td></tr><tr><td>95</td><td><span class="lb yes">High</span></td><td>Discretized bucket 3</td></tr></tbody></table></div>
 <p class="cap">Dr. Bulut concludes Week 4: with task foundations in place, next week pops the hood on distance-based learning and the K-Nearest Neighbors (kNN) algorithm!</p>
 </div></article>
-
 </div></section>
-
 <!-- CURATED LAB RESOURCES (Assigned from Curriculum Guide) -->
 <section class="ref wrap" id="video-lab"><span id="recommended-lab"></span><h2 class="plain">Curated Video &amp; Exploration Lab</h2><p class="lede">Assigned study resources from the instructor’s curriculum guide (Week 4 Recommended Watching and Reading) connecting classification, decision boundaries, Weka baselines, and learning paradigms to premier tutorials.</p>
 <div class="lab-cards">
-<div class="lab-card featured"><div class="lab-badge">IBM Technology &middot; Foundations</div><h3>Machine Learning Basics: Supervised vs Unsupervised</h3><p>An accessible overview explaining supervised vs unsupervised learning, with real-world examples of classification, regression, clustering, and association.</p><a class="lab-link" href="https://www.youtube.com/watch?v=3fsy2oheRdg" target="_blank" rel="noopener">Watch on YouTube (11 min) &rarr;</a></div>
-<div class="lab-card featured"><div class="lab-badge">StatQuest &middot; Visual Intuition</div><h3>Classification &amp; Decision Boundaries</h3><p>Josh Starmer breaks down classification boundaries, linear hyperplanes, and the geometric mechanics of predicting discrete categories.</p><a class="lab-link" href="https://www.youtube.com/@statquest" target="_blank" rel="noopener">Open StatQuest Channel &rarr;</a></div>
-<div class="lab-card"><div class="lab-badge">Weka Wiki &middot; Classifier Baselines</div><h3>ZeroR Classifier Documentation</h3><p>Official Waikato documentation explaining the ZeroR baseline classifier, majority voting rules, and why fancy models must outperform ZeroR.</p><a class="lab-link" href="https://waikato.github.io/weka-wiki/zero_r/" target="_blank" rel="noopener">Read Weka Wiki &rarr;</a></div>
-<div class="lab-card"><div class="lab-badge">Weka Wiki &middot; Complete Courses</div><h3>Data Mining with Weka Resources</h3><p>Free online video courses, slides, and hands-on exercises for practical data mining applications using the Weka workbench.</p><a class="lab-link" href="https://waikato.github.io/weka-wiki/documentation/" target="_blank" rel="noopener">Explore Weka Courses &rarr;</a></div>
-<div class="lab-card"><div class="lab-badge">IBM Think &middot; Architectural Guide</div><h3>Supervised vs. Unsupervised Learning</h3><p>Comprehensive article mapping labeled target functions against autonomous clustering and market basket association discovery.</p><a class="lab-link" href="https://www.ibm.com/think/topics/supervised-vs-unsupervised-learning" target="_blank" rel="noopener">Read IBM Guide &rarr;</a></div>
-<div class="lab-card"><div class="lab-badge">IBM Think &middot; Prediction Roles</div><h3>Classification vs. Regression</h3><p>Deep dive into discrete class prediction vs continuous numerical forecasting, evaluation criteria, and algorithm suitability.</p><a class="lab-link" href="https://www.ibm.com/think/topics/classification-vs-regression" target="_blank" rel="noopener">Read IBM Article &rarr;</a></div>
+<div class="lab-card featured"><div class="lab-badge">IBM Technology · Foundations</div><h3>Machine Learning Basics: Supervised vs Unsupervised</h3><p>An accessible overview explaining supervised vs unsupervised learning, with real-world examples of classification, regression, clustering, and association.</p><a class="lab-link" href="https://www.youtube.com/watch?v=3fsy2oheRdg" rel="noopener" target="_blank">Watch on YouTube (11 min) →</a></div>
+<div class="lab-card featured"><div class="lab-badge">StatQuest · Visual Intuition</div><h3>Classification &amp; Decision Boundaries</h3><p>Josh Starmer breaks down classification boundaries, linear hyperplanes, and the geometric mechanics of predicting discrete categories.</p><a class="lab-link" href="https://www.youtube.com/@statquest" rel="noopener" target="_blank">Open StatQuest Channel →</a></div>
+<div class="lab-card"><div class="lab-badge">Weka Wiki · Classifier Baselines</div><h3>ZeroR Classifier Documentation</h3><p>Official Waikato documentation explaining the ZeroR baseline classifier, majority voting rules, and why fancy models must outperform ZeroR.</p><a class="lab-link" href="https://waikato.github.io/weka-wiki/zero_r/" rel="noopener" target="_blank">Read Weka Wiki →</a></div>
+<div class="lab-card"><div class="lab-badge">Weka Wiki · Complete Courses</div><h3>Data Mining with Weka Resources</h3><p>Free online video courses, slides, and hands-on exercises for practical data mining applications using the Weka workbench.</p><a class="lab-link" href="https://waikato.github.io/weka-wiki/documentation/" rel="noopener" target="_blank">Explore Weka Courses →</a></div>
+<div class="lab-card"><div class="lab-badge">IBM Think · Architectural Guide</div><h3>Supervised vs. Unsupervised Learning</h3><p>Comprehensive article mapping labeled target functions against autonomous clustering and market basket association discovery.</p><a class="lab-link" href="https://www.ibm.com/think/topics/supervised-vs-unsupervised-learning" rel="noopener" target="_blank">Read IBM Guide →</a></div>
+<div class="lab-card"><div class="lab-badge">IBM Think · Prediction Roles</div><h3>Classification vs. Regression</h3><p>Deep dive into discrete class prediction vs continuous numerical forecasting, evaluation criteria, and algorithm suitability.</p><a class="lab-link" href="https://www.ibm.com/think/topics/classification-vs-regression" rel="noopener" target="_blank">Read IBM Article →</a></div>
 </div></section>
-
 <!-- GLOSSARY SECTION -->
 <section class="ref wrap"><h2 class="plain">Terms, in order of appearance</h2><p class="lede">Key technical terms stamped with the exact minute and second Dr. Bulut first defined them.</p><div class="terms">
 <div class="term"><b>Classification</b><span class="tm">00:08:25</span><span>Predicting which discrete category an instance belongs to (e.g. Spam / Not Spam).</span></div>
@@ -227,153 +206,138 @@
 <div class="term"><b>Lazy Learner</b><span class="tm">00:48:41</span><span>An algorithm (e.g. kNN) that delays computation until query time, storing raw records in memory.</span></div>
 <div class="term"><b>Eager Learner</b><span class="tm">00:48:41</span><span>An algorithm (e.g. Decision Trees, NN) that builds an explicit hypothesis model during training.</span></div>
 <div class="term"><b>Decision Boundary</b><span class="tm">01:08:53</span><span>The geometric frontier or surface in feature space separating different predicted classes.</span></div>
-<div class="term"><b>Hyperplane</b><span class="tm">01:12:53</span><span>A flat affine decision subspace of dimension \(n-1\) dividing an \(n\)-dimensional feature space.</span></div>
-<div class="term"><b>White-Box Model</b><span class="tm">01:14:20</span><span>A model whose internal predictive reasoning is transparent and directly human-readable.</span></div>
-<div class="term"><b>Black-Box Model</b><span class="tm">01:15:30</span><span>A model (e.g. deep neural net) whose internal reasoning is opaque and hard to directly audit.</span></div>
+<div class="term"><b>Hyperplane</b><span class="tm">01:13:30</span><span>A flat affine decision subspace of dimension \(n-1\) dividing an \(n\)-dimensional feature space.</span></div>
+<div class="term"><b>White-Box Model</b><span class="tm">01:17:20</span><span>A model whose internal predictive reasoning is transparent and directly human-readable.</span></div>
+<div class="term"><b>Black-Box Model</b><span class="tm">01:17:20</span><span>A model (e.g. deep neural net) whose internal reasoning is opaque and hard to directly audit.</span></div>
 <div class="term"><b>ZeroR (Zero-Rule)</b><span class="tm">01:26:36</span><span>The simplest baseline classifier: ignores all features and unconditionally predicts the majority class.</span></div>
 <div class="term"><b>OneR (One-Rule)</b><span class="tm">01:34:03</span><span>A baseline classifier that selects the single attribute yielding minimum total classification error.</span></div>
 <div class="term"><b>Resampling</b><span class="tm">01:46:13</span><span>Adjusting dataset class frequencies through undersampling the majority or oversampling the minority.</span></div>
 <div class="term"><b>Bootstrap Sampling</b><span class="tm">01:48:00</span><span>Sampling instances randomly with replacement, creating variation for ensemble algorithms.</span></div>
 <div class="term"><b>Quantization</b><span class="tm">01:49:55</span><span>Discretizing continuous numerical features into a few discrete ordinal or nominal buckets.</span></div>
 </div></section>
-
 <!-- ERRATA SECTION -->
-<section class="ref wrap" id="errata" style="margin-top:3rem"><h2 class="plain">Transcript clean-up</h2><p class="lede">The recording was auto-transcribed from audio, and several phonetic misrecognitions occurred. This log reads them as follows.</p><ul class="tl">
-<li><span class="tm">00:10:14</span><span>&ldquo;UBIS? I would like to ask you, did you check?&rdquo; refers to Istanbul Aydin University's student information portal (UBIS / UBUS).</span></li>
-<li><span class="tm">01:26:36</span><span>The transcript writes &ldquo;this is not all rule zero rule&rdquo;; the lecturer is distinguishing <strong>Zero-Rule (0-Rule / ZeroR)</strong> from the letter &ldquo;O&rdquo;.</span></li>
-<li><span class="tm">01:34:14</span><span>&ldquo;one rule or one are&rdquo; is the standard baseline algorithm <strong>OneR (1-Rule)</strong> developed by Robert Holte.</span></li>
-<li><span class="tm">01:42:19</span><span>&ldquo;one r means one attribute several&rdquo; describes OneR generating single-attribute branch frequency tables.</span></li>
-<li><span class="tm">01:49:55</span><span>&ldquo;quantize quant quantize quantization&rdquo; is the formal data engineering process of feature <strong>quantization</strong> (discretization).</span></li>
-<li><span class="tm">01:54:43</span><span>&ldquo;one r means you are choosing one attribute to predict the&rdquo; verified as OneR's attribute selection rule based on minimum error.</span></li>
-</ul><div class="end">End of recording &middot; 01:55:40</div></section></main>
-
+<section class="ref wrap" id="errata" style="margin-top:3rem"><h2 class="plain">Transcript clean-up</h2><p class="lede">The recording was auto-transcribed from audio, and several phonetic misrecognitions occurred. This log reads them as follows.</p><ul class="tl"><li><span class="tm">00:10:14</span> <span>“UBIS? I would like to ask you, did you check?” refers to Istanbul Aydın University's academic student portal (UBIS).</span></li>
+<li><span class="tm">00:48:41</span> <span>Dr. Bulut translates learner paradigms into Turkish: Lazy (<em>tembel</em>) and Eager (<em>hevesli / çalışkan</em>).</span></li>
+<li><span class="tm">00:55:28</span> <span>“in weka it's called as ibk” refers to Weka's <strong>IBk</strong> (Instance-Based learning with <em>k</em>-nearest neighbors).</span></li>
+<li><span class="tm">01:01:10</span> <span>“training fast stage level” is the phonetic speech-to-text slip for Turkish <em>faz</em> (phase / stage).</span></li>
+<li><span class="tm">01:10:01</span> <span>“boy killer” is the phonetic speech-to-text slip for Turkish <em>boy / kilo</em> (height / weight) 2D feature space.</span></li>
+<li><span class="tm">01:20:05</span> <span>Dr. Bulut refers to decision tree depth in Turkish as <em>derinlik</em>.</span></li>
+<li><span class="tm">01:24:01</span> <span>“perceptrons” refers to artificial neural network computing nodes.</span></li>
+<li><span class="tm">01:26:36</span> <span>The transcript writes “this is not all rule zero rule”; the lecturer is distinguishing <strong>Zero-Rule (0-Rule / ZeroR)</strong> from the letter “O”.</span></li>
+<li><span class="tm">01:34:03</span> <span>“one rule or one are” is the standard baseline classifier algorithm <strong>OneR (1-Rule)</strong> developed by Robert Holte.</span></li>
+<li><span class="tm">01:42:19</span> <span>“one r means one attribute several” describes OneR generating single-attribute branch frequency tables.</span></li>
+<li><span class="tm">01:48:06</span> <span>Dr. Bulut notes dataset resampling in Turkish as <em>yeniden örnekleme</em>.</span></li>
+<li><span class="tm">01:49:55</span> <span>“quantize quant quantize quantization” is the formal data engineering process of feature <strong>quantization</strong> (discretization).</span></li>
+<li><span class="tm">01:54:43</span> <span>“one r means you are choosing one attribute to predict the” verified as OneR's attribute selection rule based on minimum error.</span></li>
+</ul><div class="end">End of recording · 01:55:40</div></section></main>
 <!-- Interactive Scrubber JS -->
-
-
 <!-- COLLAPSIBLE LEFT NAVIGATION SIDEBAR -->
-<aside id="core-sidebar" aria-label="Course Lecture Archive">
-  <div class="sb-head">
-    <a href="index.html" class="sb-brand">
-      <span class="sb-drill-icon">&#x2BD0;</span>
-      <div class="sb-brand-meta">
-        <span class="sb-brand-sub">SEN 431 &middot; IAU</span>
-        <span class="sb-brand-title">Study Core Log</span>
-      </div>
+<aside aria-label="Course Lecture Archive" id="core-sidebar">
+<div class="sb-head">
+<a class="sb-brand" href="index.html">
+<span class="sb-drill-icon">⯐</span>
+<div class="sb-brand-meta">
+<span class="sb-brand-sub">SEN 431 · IAU</span>
+<span class="sb-brand-title">Study Core Log</span>
+</div>
+</a>
+<button aria-label="Close Navigation" class="sb-close-btn" id="sidebar-close-btn">×</button>
+</div>
+<div class="sb-telemetry">
+<div class="sb-tele-col">
+<span class="sb-tele-lbl">CORE DRILLED</span>
+<span class="sb-tele-val">663.4 m</span>
+</div>
+<div class="sb-tele-col">
+<span class="sb-tele-lbl">STRATA INDEXED</span>
+<span class="sb-tele-val">48 Layers</span>
+</div>
+</div>
+<div class="sb-scroll">
+<div class="sb-nav-lbl">
+<span>LECTURE ARCHIVE</span>
+<span>6 / 14 WKS</span>
+</div>
+<ul class="sb-list">
+<li class="sb-item">
+<a class="sb-link" data-week="1" href="Data Mining Week 1 Log.html">
+<span class="sb-wk-badge">W01</span>
+<div class="sb-wk-body">
+<span class="sb-wk-title">Orientation, AI Dilemma &amp; Foundations</span>
+<span class="sb-wk-meta">106.7 m · 01:46:44</span>
+<div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+</div>
+</a>
+</li>
+<li class="sb-item">
+<a class="sb-link" data-week="2" href="Data Mining Week 2 Log.html">
+<span class="sb-wk-badge">W02</span>
+<div class="sb-wk-body">
+<span class="sb-wk-title">KDD Process, DIKW Hierarchy &amp; Taxonomy</span>
+<span class="sb-wk-meta">128.5 m · 02:08:32</span>
+<div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+</div>
+</a>
+</li>
+<li class="sb-item">
+<a class="sb-link" data-week="3" href="Data Mining Week 3 Log.html">
+<span class="sb-wk-badge">W03</span>
+<div class="sb-wk-body">
+<span class="sb-wk-title">Data Types, Dirty Data &amp; Normalization</span>
+<span class="sb-wk-meta">106.6 m · 01:46:36</span>
+<div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+</div>
+</a>
+</li>
+<li class="sb-item active">
+<a class="sb-link" data-week="4" href="Data Mining Week 4 Log.html">
+<span class="sb-wk-badge">W04</span>
+<div class="sb-wk-body">
+<span class="sb-wk-title">Classification, Lazy vs Eager, ZeroR &amp; OneR</span>
+<span class="sb-wk-meta">115.7 m · 01:55:40</span>
+<div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+</div>
+</a>
+<ul class="sb-sublist"><li><a class="sb-sublink" href="#part-a"><span class="sb-marker">A</span><span>From Data Preparation to the Four Core Tasks</span></a></li><li><a class="sb-sublink" href="#part-b"><span class="sb-marker">B</span><span>Classifiers vs. Regressors &amp; Learning Paradigms</span></a></li><li><a class="sb-sublink" href="#part-c"><span class="sb-marker">C</span><span>Lazy vs. Eager Learners and the Two Phases</span></a></li><li><a class="sb-sublink" href="#part-d"><span class="sb-marker">D</span><span>Decision Boundaries in 2D, 3D, and Hyperplanes</span></a></li><li><a class="sb-sublink" href="#part-e"><span class="sb-marker">E</span><span>White-Box Transparency vs. Black-Box Power</span></a></li><li><a class="sb-sublink" href="#part-f"><span class="sb-marker">F</span><span>The Baseline Benchmark: Zero Rule (ZeroR)</span></a></li><li><a class="sb-sublink" href="#part-g"><span class="sb-marker">G</span><span>One Rule (OneR) and Single-Feature Testing</span></a></li><li><a class="sb-sublink" href="#part-h"><span class="sb-marker">H</span><span>Resampling, Bootstrap, and Quantization</span></a></li><li><a class="sb-sublink" href="#errata"><span class="sb-marker">¶</span><span>Speech Errata</span></a></li><li><a class="sb-sublink" href="#video-lab"><span class="sb-marker">▶</span><span>Curated Video Lab</span></a></li></ul>
+</li>
+<li class="sb-item">
+<a class="sb-link" data-week="5" href="Data Mining Week 5 Log.html">
+<span class="sb-wk-badge">W05</span>
+<div class="sb-wk-body">
+<span class="sb-wk-title">Distance Metrics, k-NN &amp; Voronoi</span>
+<span class="sb-wk-meta">102.6 m · 01:42:33</span>
+<div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+</div>
+</a>
+</li>
+<li class="sb-item">
+<a class="sb-link" data-week="6" href="Data Mining Week 6 Log.html">
+<span class="sb-wk-badge">W06</span>
+<div class="sb-wk-body">
+<span class="sb-wk-title">Decision Trees, Purity, CART &amp; SVM</span>
+<span class="sb-wk-meta">103.3 m · 01:43:17</span>
+<div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+</div>
+</a>
+</li>
+</ul>
+</div>
+<div class="sb-footer">
+<a class="sb-portal-link" href="index.html">
+<span>◇</span> Master Portal Index
     </a>
-    <button id="sidebar-close-btn" class="sb-close-btn" aria-label="Close Navigation">&times;</button>
-  </div>
-
-  <div class="sb-telemetry">
-    <div class="sb-tele-col">
-      <span class="sb-tele-lbl">CORE DRILLED</span>
-      <span class="sb-tele-val">663.4 m</span>
+<button class="sb-theme-toggle" id="sb-theme-toggle" title="Toggle Light / Dark Mode (Shortcut: T)" type="button">
+<span class="theme-icon">◑</span>
+<span class="theme-text">Toggle Theme</span>
+</button>
+<div class="sb-keyhint">
+      Shortcut: Press <kbd>[</kbd> to toggle · <kbd>T</kbd> for theme
     </div>
-    <div class="sb-tele-col">
-      <span class="sb-tele-lbl">STRATA INDEXED</span>
-      <span class="sb-tele-val">48 Layers</span>
-    </div>
-  </div>
-
-  <div class="sb-scroll">
-    <div class="sb-nav-lbl">
-      <span>LECTURE ARCHIVE</span>
-      <span>6 / 14 WKS</span>
-    </div>
-    <ul class="sb-list">
-      
-        <li class="sb-item">
-          <a href="Data Mining Week 1 Log.html" class="sb-link" data-week="1">
-            <span class="sb-wk-badge">W01</span>
-            <div class="sb-wk-body">
-              <span class="sb-wk-title">Orientation, AI Dilemma & Foundations</span>
-              <span class="sb-wk-meta">106.7 m &middot; 01:46:44</span>
-              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
-            </div>
-          </a>
-          
-        </li>
-        
-        <li class="sb-item">
-          <a href="Data Mining Week 2 Log.html" class="sb-link" data-week="2">
-            <span class="sb-wk-badge">W02</span>
-            <div class="sb-wk-body">
-              <span class="sb-wk-title">KDD Process, DIKW Hierarchy & Taxonomy</span>
-              <span class="sb-wk-meta">128.5 m &middot; 02:08:32</span>
-              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
-            </div>
-          </a>
-          
-        </li>
-        
-        <li class="sb-item">
-          <a href="Data Mining Week 3 Log.html" class="sb-link" data-week="3">
-            <span class="sb-wk-badge">W03</span>
-            <div class="sb-wk-body">
-              <span class="sb-wk-title">Data Types, Dirty Data & Normalization</span>
-              <span class="sb-wk-meta">106.6 m &middot; 01:46:36</span>
-              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
-            </div>
-          </a>
-          
-        </li>
-        
-        <li class="sb-item active">
-          <a href="Data Mining Week 4 Log.html" class="sb-link" data-week="4">
-            <span class="sb-wk-badge">W04</span>
-            <div class="sb-wk-body">
-              <span class="sb-wk-title">Classification, Lazy vs Eager, ZeroR & OneR</span>
-              <span class="sb-wk-meta">115.7 m &middot; 01:55:40</span>
-              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
-            </div>
-          </a>
-          <ul class="sb-sublist"><li><a href="#part-a" class="sb-sublink"><span class="sb-marker">A</span><span>From Data Preparation to the Four Core Tasks</span></a></li><li><a href="#part-b" class="sb-sublink"><span class="sb-marker">B</span><span>Classifiers vs. Regressors & Learning Paradigms</span></a></li><li><a href="#part-c" class="sb-sublink"><span class="sb-marker">C</span><span>Lazy vs. Eager Learners and the Two Phases</span></a></li><li><a href="#part-d" class="sb-sublink"><span class="sb-marker">D</span><span>Decision Boundaries in 2D, 3D, and Hyperplanes</span></a></li><li><a href="#part-e" class="sb-sublink"><span class="sb-marker">E</span><span>White-Box Transparency vs. Black-Box Power</span></a></li><li><a href="#part-f" class="sb-sublink"><span class="sb-marker">F</span><span>The Baseline Benchmark: Zero Rule (ZeroR)</span></a></li><li><a href="#part-g" class="sb-sublink"><span class="sb-marker">G</span><span>One Rule (OneR) and Single-Feature Testing</span></a></li><li><a href="#part-h" class="sb-sublink"><span class="sb-marker">H</span><span>Resampling, Bootstrap, and Quantization</span></a></li><li><a href="#errata" class="sb-sublink"><span class="sb-marker">&para;</span><span>Speech Errata</span></a></li><li><a href="#video-lab" class="sb-sublink"><span class="sb-marker">&#9654;</span><span>Curated Video Lab</span></a></li></ul>
-        </li>
-        
-        <li class="sb-item">
-          <a href="Data Mining Week 5 Log.html" class="sb-link" data-week="5">
-            <span class="sb-wk-badge">W05</span>
-            <div class="sb-wk-body">
-              <span class="sb-wk-title">Distance Metrics, k-NN & Voronoi</span>
-              <span class="sb-wk-meta">102.6 m &middot; 01:42:33</span>
-              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
-            </div>
-          </a>
-          
-        </li>
-        
-                <li class="sb-item">
-          <a href="Data Mining Week 6 Log.html" class="sb-link" data-week="6">
-            <span class="sb-wk-badge">W06</span>
-            <div class="sb-wk-body">
-              <span class="sb-wk-title">Decision Trees, Purity, CART & SVM</span>
-              <span class="sb-wk-meta">103.3 m &middot; 01:43:17</span>
-              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
-            </div>
-          </a>
-        </li>
-    
-    </ul>
-  </div>
-
-  <div class="sb-footer">
-    <a href="index.html" class="sb-portal-link">
-      <span>&#x25C7;</span> Master Portal Index
-    </a>
-    <button class="sb-theme-toggle" id="sb-theme-toggle" type="button" title="Toggle Light / Dark Mode (Shortcut: T)">
-      <span class="theme-icon">&#x25D1;</span>
-      <span class="theme-text">Toggle Theme</span>
-    </button>
-    <div class="sb-keyhint">
-      Shortcut: Press <kbd>[</kbd> to toggle &middot; <kbd>T</kbd> for theme
-    </div>
-  </div>
+</div>
 </aside>
 <div id="sidebar-backdrop"></div>
-
-
 <!-- SIDEBAR INTERACTIVITY SCRIPT -->
-
-  <!-- Unified Client Application Controller -->
-  <script src="assets/js/main.js" defer></script>
+<!-- Unified Client Application Controller -->
+<script defer="" src="assets/js/main.js"></script>
 </body>
 </html>
