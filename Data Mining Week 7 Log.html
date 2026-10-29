@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/png" href="Golden Diamond Icon.png">
+<link rel="shortcut icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="Golden Diamond Icon.png">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>Data Mining Week 7 Log</title>
+<!-- Typography & Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&amp;family=JetBrains+Mono:wght@400;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Spline+Sans:wght@300..700&amp;family=Spline+Sans+Mono:wght@400..600&amp;display=swap" rel="stylesheet"/>
+<!-- KaTeX Mathematics Rendering Engine -->
+<link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script crossorigin="anonymous" defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script crossorigin="anonymous" defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<!-- Unified Application Stylesheet -->
+<link href="assets/css/main.css?v=2.2" rel="stylesheet"/>
+<!-- Instant Theme Initializer (prevents FOUT) -->
+<script src="assets/js/theme-init.js"></script>
+<style>
+/* United Calm Cyan Notice Callout */
+.notice-callout {
+  background: var(--paper-2);
+  border-left: 3.5px solid #0284C7;
+  border-radius: 0 6px 6px 0;
+  padding: 0.95rem 1.15rem;
+  margin: 1.25rem 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.notice-callout .callout-head {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.4rem;
+  flex-wrap: wrap;
+}
+.notice-callout .notice-badge {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #0284C7;
+}
+.notice-callout .callout-time {
+  font-family: var(--f-mono);
+  font-size: 0.76rem;
+  color: var(--ink-2);
+}
+.notice-callout p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+:root[data-theme="dark"] .notice-callout {
+  border-left-color: #38BDF8;
+}
+:root[data-theme="dark"] .notice-callout .notice-badge {
+  color: #38BDF8;
+}
+
+/* Foot Credit */
+.foot-credit {
+  font-family: var(--f-mono);
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  margin-top: 0.6rem;
+  letter-spacing: 0.04em;
+  opacity: 0.85;
+}
+</style>
+</head>
+<body>
+<header class="deck"><div class="wrap">
+<button aria-label="Toggle Lecture Directory" class="deck-nav-btn" id="sidebar-toggle-btn" title="Toggle Navigation Menu (Shortcut: [ or \\)"><svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="14"><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg><span>LECTURES</span></button>
+<span class="clock" id="clock">00:00:00</span><span class="dpt" id="dpt">0.0 m</span><div aria-hidden="true" class="tape"><a class="seg hx1" data-e="1576" data-s="0" href="#part-a" style="--d:1576;--st:#A9825A" title="Midterm Exam Architecture &amp; Review"></a>
+<a class="seg hx2" data-e="2070" data-s="1576" href="#part-b" style="--d:494;--st:#D0814F" title="Evaluation Philosophy &amp; Ground Truth"></a>
+<a class="seg hx3" data-e="2987" data-s="2070" href="#part-c" style="--d:917;--st:#E0B04A" title="Confusion Matrix &amp; 4 Outcomes"></a>
+<a class="seg hx4" data-e="3421" data-s="2987" href="#part-d" style="--d:434;--st:#3FB5A5" title="2x2 Matrix &amp; Core Metrics"></a>
+<a class="seg hx5" data-e="4354" data-s="3421" href="#part-e" style="--d:933;--st:#6F9ADB" title="Live Board 8-Patient COVID Benchmark"></a>
+<a class="seg hx6" data-e="5113" data-s="4354" href="#part-f" style="--d:759;--st:#A98BD6" title="Multiclass 3x3 Animal Matrix"></a>
+<a class="seg hx7" data-e="5641" data-s="5113" href="#part-g" style="--d:528;--st:#8FBF7A" title="Lion One-vs-Rest &amp; F1 Harmonic Mean"></a>
+<a class="seg hx8" data-e="6330" data-s="5641" href="#part-h" style="--d:689;--st:#D9607A" title="CIFAR-10 Diagnostics &amp; Synthesis"></a>
+<span class="play" id="play"></span></div><span class="total">/ 01:45:30</span><div class="deck-pdf-wrap">
+<a aria-label="Open AI PDF Notes in new tab" class="deck-nav-btn deck-pdf-btn" href="https://drive.google.com/file/d/1WlLpa-4pLfu4yhH3118mzu1_VO063rdc/view?usp=drive_link" id="pdf-external-btn" rel="noopener noreferrer" target="_blank">
+<svg fill="none" height="13" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="13">
+<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+<polyline points="14 2 14 8 20 8"></polyline>
+<line x1="16" x2="8" y1="13" y2="13"></line>
+<line x1="16" x2="8" y1="17" y2="17"></line>
+<polyline points="10 9 9 9 8 9"></polyline>
+</svg>
+<span>AI PDF NOTES</span>
+<svg class="deck-pdf-ext" fill="none" height="10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24" width="10">
+<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+<polyline points="15 3 21 3 21 9"></polyline>
+<line x1="10" x2="21" y1="14" y2="3"></line>
+</svg>
+</a>
+<div class="deck-pdf-popover" role="tooltip">
+<div class="pop-head">
+<span class="pop-badge">AI STUDY SYNTHESIS</span>
+<span class="pop-wk">WEEK 07</span>
+</div>
+<p class="pop-body">
+      This study synthesis was constructed from Dr. Faruk Bulut's official <strong>Week 7 lecture slides (69 slides)</strong>, the <strong>Dual-Platform Recordings (UBIS First Hour &amp; Google Meet Second Hour)</strong>, and his live classroom whiteboard (<code>Lecture_07___Confusion_Matrix_.jpg</code>) &mdash; structured chronologically across UBIS and Google Meet, covering Confusion Matrix anatomy, Accuracy, Precision, Recall, Specificity, F1 harmonic mean, 3x3 animal One-vs-Rest decomposition, CIFAR-10 vision diagnostics, and Weka.
+    </p>
+<div class="pop-disclaimer">
+<span class="pop-disc-icon">⚠️</span>
+<div class="pop-disc-text">
+<strong>Disclaimer:</strong> Generated by an AI pair-programming assistant for accelerated student revision. Always cross-reference with official course slides and university announcements.
+      </div>
+</div>
+</div>
+</div></div></header>
+<main><section class="hero"><div class="wrap">
+<div class="eyebrow">Data mining · Week 7 · Dual-Platform Masterclass (UBIS &amp; GMeet) · 01:45:30</div>
+<h1>the geometry of<br/><span class="c">evaluation</span><span aria-hidden="true" class="dia"></span></h1>
+<div class="lead"><p><span class="tm">00:26:16</span> &ldquo;Measurement is critical in our field. In Turkish we say mesura &mdash; you cannot manage, optimize, or trust what you cannot rigorously measure.&rdquo; Dr. Faruk Bulut delivers a comprehensive two-part masterclass: the <strong>First Hour</strong> covers midterm architecture, Weeks 1&ndash;6 foundational model review, evaluation philosophy, and 2x2 contingency matrix mechanics; the <strong>Second Hour</strong> transitions to the live classroom whiteboard for the 8-patient COVID-19 clinical test, 15-instance 3x3 animal classification, Lion One-vs-Rest decomposition, F1 harmonic mean proof, CIFAR-10 vision diagnostics, and Weka.<small>Timeline runs continuously from 00:00:00 to 01:45:30 with explicit reference intervals (<code>UBIS</code> / <code>GMeet</code>) and slide citations underneath each entry. 1 minute = 1 metre of core depth.</small></p>
+</div>
+<div class="survey"><div class="corewrap"><div aria-hidden="true" class="core"><a class="seg hx1" data-e="1576" data-s="0" href="#part-a" style="--d:1576;--st:#A9825A" title="Midterm Exam Architecture &amp; Review">A</a>
+<a class="seg hx2" data-e="2070" data-s="1576" href="#part-b" style="--d:494;--st:#D0814F" title="Evaluation Philosophy &amp; Ground Truth">B</a>
+<a class="seg hx3" data-e="2987" data-s="2070" href="#part-c" style="--d:917;--st:#E0B04A" title="Confusion Matrix &amp; 4 Outcomes">C</a>
+<a class="seg hx4" data-e="3421" data-s="2987" href="#part-d" style="--d:434;--st:#3FB5A5" title="2x2 Matrix &amp; Core Metrics">D</a>
+<a class="seg hx5" data-e="4354" data-s="3421" href="#part-e" style="--d:933;--st:#6F9ADB" title="Live Board 8-Patient COVID Benchmark">E</a>
+<a class="seg hx6" data-e="5113" data-s="4354" href="#part-f" style="--d:759;--st:#A98BD6" title="Multiclass 3x3 Animal Matrix">F</a>
+<a class="seg hx7" data-e="5641" data-s="5113" href="#part-g" style="--d:528;--st:#8FBF7A" title="Lion One-vs-Rest &amp; F1 Harmonic Mean">G</a>
+<a class="seg hx8" data-e="6330" data-s="5641" href="#part-h" style="--d:689;--st:#D9607A" title="CIFAR-10 Diagnostics &amp; Synthesis">H</a>
+</div></div><ol class="legend"><li><a class="hx1" href="#part-a" style="--st:#A9825A"><span class="l">A</span><span><b>Midterm Architecture &amp; Review</b><small>00:00:00 &ndash; 00:26:16 &middot; 26 min 16 s &middot; 0.0 m deep</small></span></a></li>
+<li><a class="hx2" href="#part-b" style="--st:#D0814F"><span class="l">B</span><span><b>Evaluation Philosophy &amp; Ground Truth</b><small>00:26:16 &ndash; 00:34:30 &middot; 8 min 14 s &middot; 26.3 m deep</small></span></a></li>
+<li><a class="hx3" href="#part-c" style="--st:#E0B04A"><span class="l">C</span><span><b>Confusion Matrix &amp; 4 Outcomes</b><small>00:34:30 &ndash; 00:49:47 &middot; 15 min 17 s &middot; 34.5 m deep</small></span></a></li>
+<li><a class="hx4" href="#part-d" style="--st:#3FB5A5"><span class="l">D</span><span><b>2x2 Contingency &amp; Core Metrics</b><small>00:49:47 &ndash; 00:57:01 &middot; 7 min 14 s &middot; 49.8 m deep</small></span></a></li>
+<li><a class="hx5" href="#part-e" style="--st:#6F9ADB"><span class="l">E</span><span><b>Live Board 8-Patient COVID Benchmark</b><small>00:57:01 &ndash; 01:12:34 &middot; 15 min 33 s &middot; 57.0 m deep</small></span></a></li>
+<li><a class="hx6" href="#part-f" style="--st:#A98BD6"><span class="l">F</span><span><b>Multiclass 3x3 Animal Matrix</b><small>01:12:34 &ndash; 01:25:13 &middot; 12 min 39 s &middot; 72.6 m deep</small></span></a></li>
+<li><a class="hx7" href="#part-g" style="--st:#8FBF7A"><span class="l">G</span><span><b>Lion One-vs-Rest &amp; F1 Proof</b><small>01:25:13 &ndash; 01:34:01 &middot; 8 min 48 s &middot; 85.2 m deep</small></span></a></li>
+<li><a class="hx8" href="#part-h" style="--st:#D9607A"><span class="l">H</span><span><b>CIFAR-10 Diagnostics &amp; Synthesis</b><small>01:34:01 &ndash; 01:45:30 &middot; 11 min 29 s &middot; 94.0 m deep</small></span></a></li>
+</ol>
+<dl class="glance"><dt>Recordings</dt><dd>UBIS (First Hour) &amp; Google Meet (Second Hour), 27.10.26</dd><dt>Course</dt><dd>SEN 431 Data Mining, Week 7</dd><dt>Slide deck</dt><dd>Week 7: 69 slides on Classification Performance Evaluation</dd><dt>Whiteboard</dt><dd>Classroom Board: 2x2 COVID test, 15-case animal matrix, Lion OvR, CIFAR-10</dd><dt>Core Metrics</dt><dd>Accuracy, Error Rate, Precision, Recall/Sensitivity, Specificity, F1 Harmonic Mean</dd><dt>Exam focus</dt><dd>Matrix orientation (Rows=Actual, Cols=Pred), OvR calculations, Harmonic mean proof, Asymmetric clinical costs</dd></dl>
+</div></div></section>
+
+<!-- CHAPTER A -->
+<section class="part hx1" id="part-a" style="--st:#A9825A"><div class="band"><div class="wrap band-in"><div aria-hidden="true" class="pl">A</div><div><div class="pr">Layer 1 of 8 &middot; 00:00:00 &ndash; 00:26:16 &middot; 26 min 16 s &middot; core depth 0.0 &ndash; 26.3 m</div><h2>Midterm Exam Architecture &amp; Foundational Model Review</h2><p>Addressing midterm expectations, question structures, and systematically synthesizing Decision Trees, Naive Bayes, and KNN as the foundation for quantitative evaluation.</p></div></div></div><div class="wrap entries">
+<article class="e" data-e="435" data-t="0"><div class="ts">00:00:00 <span>UBIS 00:00:00 to 00:07:15</span><span class="ref-slide">Recap W1&ndash;W6</span></div><div class="rail"></div><div class="b"><h3>Midterm Exam Blueprint &amp; Question Architecture</h3>
+<p>Dr. Faruk Bulut begins the Week 7 session by addressing student questions regarding the upcoming midterm examination. He explicitly details the exam format, duration, and thematic distribution across Weeks 1 through 7:</p>
+<div class="x tbl"><table>
+<thead><tr><th>Exam Component</th><th>Engineering Assessment Method</th><th>Operational Guideline</th></tr></thead>
+<tbody>
+<tr><td><strong>Question Count</strong></td><td>Approximately 5 substantive engineering questions.</td><td>Equal weighting balancing conceptual proofs and manual calculation problems.</td></tr>
+<tr><td><strong>Algorithmic Scope</strong></td><td>Weeks 1 through 7 comprehensive integration.</td><td>Decision Trees (ID3 / Information Gain), Naive Bayes (Laplace correction), KNN (distance metrics), and Week 7 Confusion Matrices.</td></tr>
+<tr><td><strong>Manual Arithmetic</strong></td><td>Hand construction of contingency tables and ratios.</td><td>Show full intermediate unreduced fractions (e.g. \(TP/(TP+FP) = \frac{3}{4}\)) before converting to decimal. Scientific calculators permitted.</td></tr>
+</tbody>
+</table></div>
+</div></article>
+<article class="e" data-e="990" data-t="435"><div class="ts">00:07:15 <span>UBIS 00:07:15 to 00:16:30</span><span class="ref-slide">Recap W1&ndash;W4</span></div><div class="rail"></div><div class="b"><h3>Decision Tree Synthesis: Entropy, Information Gain &amp; Overfitting</h3>
+<p>The professor conducts an in-depth review of tree-based induction to clarify why evaluation metrics are indispensable:</p>
+<div class="x-math">\[H(S) = - \sum_{i=1}^{c} p_i \log_2(p_i), \quad IG(S, A) = H(S) - \sum_{v \in \text{Values}(A)} \frac{|S_v|}{|S|} H(S_v)\]</div>
+<p>Key architectural takeaways reiterated by Dr. Bulut:</p>
+<div class="x tbl"><table>
+<thead><tr><th>Algorithmic Mechanism</th><th>Core Operational Principle</th><th>Generalisation Vulnerability</th></tr></thead>
+<tbody>
+<tr><td><strong>Recursive Splitting</strong></td><td>Partitions feature space into axis-aligned rectangular hyper-rectangles by greedily maximising Information Gain.</td><td>Favors high-cardinality attributes without gain ratio penalization.</td></tr>
+<tr><td><strong>Unbounded Growth</strong></td><td>Continues splitting nodes until every terminal leaf is pure (\(H=0\)).</td><td>Memorizes noise and outliers, resulting in severe overfitting.</td></tr>
+<tr><td><strong>Tree Pruning</strong></td><td>Collapses non-significant subtrees using validation error thresholds.</td><td>Critical for preserving test-set generalisation over training accuracy.</td></tr>
+</tbody>
+</table></div>
+<p>He underlines: An unpruned tree easily achieves 100% training accuracy. Thus, reporting training accuracy alone is scientifically invalid &mdash; proving the necessity of an independent evaluation paradigm.</p>
+</div></article>
+<article class="e" data-e="1576" data-t="990"><div class="ts">00:16:30 <span>UBIS 00:16:30 to 00:26:16</span><span class="ref-slide">Recap W5&ndash;W6</span></div><div class="rail"></div><div class="b"><h3>Probabilistic &amp; Instance-Based Foundations: Naive Bayes &amp; KNN</h3>
+<p>Continuing the midterm synthesis, Dr. Bulut contrasts the structural inductive biases of probabilistic vs instance-based models:</p>
+<div class="x cmp">
+<div class="col">
+<h4>Naive Bayes Classifier</h4>
+<ul class="rows">
+<li><span class="tm">Core Formulation</span><span>\(P(C_k \mid \mathbf{x}) \propto P(C_k) \prod_{i=1}^d P(x_i \mid C_k)\)</span></li>
+<li><span class="tm">Axiom</span><span>Conditional independence among features given the class label.</span></li>
+<li><span class="tm">Zero Prevention</span><span>Laplace estimator \(\frac{n_c + 1}{n + |V|}\) prevents probability collapse.</span></li>
+</ul>
+</div>
+<div class="col">
+<h4>K-Nearest Neighbors (KNN)</h4>
+<ul class="rows">
+<li><span class="tm">Core Formulation</span><span>\(\hat{y} = \arg\max_{c} \sum_{i \in N_k(\mathbf{x})} \mathbb{I}(y_i = c)\)</span></li>
+<li><span class="tm">Axiom</span><span>Geometric proximity in feature space determines class identity.</span></li>
+<li><span class="tm">Distance Scale</span><span>Euclidean distance \(L_2\) mandates min-max or z-score feature normalization.</span></li>
+</ul>
+</div>
+</div>
+<p><strong>From Inference to Performance Evaluation:</strong> Regardless of whether predictions originate from a recursive decision tree, a probabilistic Bayesian posterior, or a geometric KNN query, the final output on test data is a set of predicted labels \(\hat{y}\). How do we objectively judge which model performs best? This introduces Week 7: Confusion Matrix and Performance Evaluation.</p>
+</div></article>
+</div></section>
+
+<!-- CHAPTER B -->
+<section class="part hx2" id="part-b" style="--st:#D0814F"><div class="band"><div class="wrap band-in"><div aria-hidden="true" class="pl">B</div><div><div class="pr">Layer 2 of 8 &middot; 00:26:16 &ndash; 00:34:30 &middot; 8 min 14 s &middot; core depth 26.3 &ndash; 34.5 m</div><h2>Evaluation Philosophy &amp; The Ground Truth Axiom</h2><p>Why we measure performance, training generalisation traps, real-world error cost asymmetry, and the true semantic meaning of the Positive class.</p></div></div></div><div class="wrap entries">
+<article class="e" data-e="1845" data-t="1576"><div class="ts">00:26:16 <span>UBIS 00:26:16 to 00:30:45</span><span class="ref-slide">Slides 1&ndash;6</span></div><div class="rail"></div><div class="b"><h3>The Primacy of Measurement (*Mesura*) in Data Mining</h3>
+<p>Dr. Faruk Bulut formally commences the Week 7 curriculum by introducing an overarching engineering axiom: <mark>&ldquo;Measurement is critical in our field. In Turkish we say mesura &mdash; you cannot manage, optimize, or trust what you cannot rigorously measure.&rdquo;</mark></p>
+<ul class="dense">
+<li><strong>Generalisation vs Memorization:</strong> Training accuracy evaluates fit on seen examples; validation accuracy evaluates true generalization on held-out distributions.</li>
+<li><strong>Mandatory Validation Conditions:</strong> Any reported evaluation metric must document: (1) what exact metric was computed; (2) on which data split it was measured (held-out test set or stratified cross-validation); and (3) what asymmetric error costs govern the real-world domain.</li>
+</ul>
+</div></article>
+<article class="e" data-e="2070" data-t="1845"><div class="ts">00:30:45 <span>UBIS 00:30:45 to 00:34:30</span><span class="ref-slide">Slides 7&ndash;9</span></div><div class="rail"></div><div class="b"><h3>Ground Truth (\(y\)) vs Predictions (\(\hat{y}\)) &amp; The Positive Class</h3>
+<p>Evaluation begins by comparing ground truth against algorithmic inference:</p>
+<div class="x cmp">
+<div class="col">
+<h4>Actual / True Label (\(y\))</h4>
+<ul class="rows">
+<li><span class="tm">Slide 7</span><span>The verified, ground truth class supplied by expert reference or benchmark datasets.</span></li>
+<li><span class="tm">Reality</span><span>e.g., A biopsy-confirmed tumor; a verified legitimate transaction.</span></li>
+</ul>
+</div>
+<div class="col">
+<h4>Predicted Label (\(\hat{y}\))</h4>
+<ul class="rows">
+<li><span class="tm">Slide 7</span><span>The discrete class label assigned by the machine learning classifier \(f(\mathbf{x})\).</span></li>
+<li><span class="tm">Inference</span><span>e.g., The model flags a transaction as Fraudulent or Legitimate.</span></li>
+</ul>
+</div>
+</div>
+<p><strong>Semantic Definition of the Positive Class:</strong> Dr. Bulut stresses that &ldquo;Positive&rdquo; is a technical convention, not a moral judgment. It designates the <em>event of interest</em> or the rarer phenomenon being detected &mdash; such as &ldquo;Cancer Present&rdquo;, &ldquo;Network Intrusion&rdquo;, or &ldquo;Defective Component&rdquo;.</p>
+<div class="notice-callout">
+<div class="callout-head">
+<span class="notice-badge">NOTICE &middot; GROUND TRUTH CONVENTION (ROWS VS COLUMNS)</span>
+<span class="callout-time">UBIS 00:32:10 &middot; Slide 8</span>
+</div>
+<p>In our course and on Dr. Bulut's whiteboard, <strong>Rows represent Ground Truth (Actual)</strong> and <strong>Columns represent Model Predictions</strong>. Always verify the axis labels before reading any contingency table, as reversing them transposes False Positives and False Negatives!</p>
+</div>
+</div></article>
+</div></section>
+
+<!-- CHAPTER C -->
+<section class="part hx3" id="part-c" style="--st:#E0B04A"><div class="band"><div class="wrap band-in"><div aria-hidden="true" class="pl">C</div><div><div class="pr">Layer 3 of 8 &middot; 00:34:30 &ndash; 00:49:47 &middot; 15 min 17 s &middot; core depth 34.5 &ndash; 49.8 m</div><h2>Confusion Matrix Anatomy &amp; The Four Outcomes</h2><p>Contingency matrix layout, linguistic adjective-noun parsing, student clinical test walkthrough (Fatma &amp; Recep), and real-world asymmetric risk profiles.</p></div></div></div><div class="wrap entries">
+<article class="e" data-e="2535" data-t="2070"><div class="ts">00:34:30 <span>UBIS 00:34:30 to 00:42:15</span><span class="ref-slide">Slides 10&ndash;16</span></div><div class="rail"></div><div class="b"><h3>The Four Fundamental Outcomes &amp; Linguistic Decomposition</h3>
+<p>A binary classification decision over test instances yields exactly four mutually exclusive outcomes:</p>
+<div class="x tbl"><table>
+<thead><tr><th>Outcome</th><th>Adjective (Accuracy)</th><th>Noun (Prediction)</th><th>Actual (\(y\))</th><th>Predicted (\(\hat{y}\))</th><th>Statistical Alias</th></tr></thead>
+<tbody>
+<tr><td><strong>True Positive (\(TP\))</strong></td><td>True (Correct)</td><td>Positive (\(+1\))</td><td>Positive (\(+1\))</td><td>Positive (\(+1\))</td><td>Hit</td></tr>
+<tr><td><strong>True Negative (\(TN\))</strong></td><td>True (Correct)</td><td>Negative (\(0\))</td><td>Negative (\(0\))</td><td>Negative (\(0\))</td><td>Correct Rejection</td></tr>
+<tr><td><strong>False Positive (\(FP\))</strong></td><td>False (Incorrect)</td><td>Positive (\(+1\))</td><td>Negative (\(0\))</td><td>Positive (\(+1\))</td><td>Type I Error (\(\alpha\))</td></tr>
+<tr><td><strong>False Negative (\(FN\))</strong></td><td>False (Incorrect)</td><td>Negative (\(0\))</td><td>Positive (\(+1\))</td><td>Negative (\(0\))</td><td>Type II Error (\(\beta\))</td></tr>
+</tbody>
+</table></div>
+<p>Dr. Bulut provides a simple mnemonic rule: <mark>True / False is the ADJECTIVE</mark> (Did the model make the correct judgment?), while <mark>Positive / Negative is the NOUN</mark> (What did the classifier predict?). For instance, a <em>False Positive</em> means the prediction was Positive, but that prediction was False (incorrect).</p>
+</div></article>
+<article class="e" data-e="2987" data-t="2535"><div class="ts">00:42:15 <span>UBIS 00:42:15 to 00:49:47</span><span class="ref-slide">Live Clinical</span></div><div class="rail"></div><div class="b"><h3>The Classroom Clinical Test Example: Fatma, Recep &amp; Asymmetric Costs</h3>
+<p>To ensure intuitive clarity, Dr. Bulut presents a live scenario involving university students undergoing COVID-19 clinical screening:</p>
+<div class="x cmp">
+<div class="col">
+<h4>Scenario 1: Fatma (Infected Patient)</h4>
+<ul class="rows">
+<li><span class="tm">Ground Truth</span><span>Fatma actually carries the viral infection (\(y = \text{Positive}\)).</span></li>
+<li><span class="tm">If Test = Pos</span><span>Outcome is <strong>True Positive (\(TP\))</strong> &mdash; treatment is administered.</span></li>
+<li><span class="tm">If Test = Neg</span><span>Outcome is <strong>False Negative (\(FN\))</strong> &mdash; missed diagnosis!</span></li>
+</ul>
+</div>
+<div class="col">
+<h4>Scenario 2: Recep (Healthy Individual)</h4>
+<ul class="rows">
+<li><span class="tm">Ground Truth</span><span>Recep is virus-free and healthy (\(y = \text{Negative}\)).</span></li>
+<li><span class="tm">If Test = Pos</span><span>Outcome is <strong>False Positive (\(FP\))</strong> &mdash; false alarm quarantine.</span></li>
+<li><span class="tm">If Test = Neg</span><span>Outcome is <strong>True Negative (\(TN\))</strong> &mdash; cleared safely.</span></li>
+</ul>
+</div>
+</div>
+<div class="notice-callout">
+<div class="callout-head">
+<span class="notice-badge">NOTICE &middot; ASYMMETRIC CLINICAL RISK &amp; TYPE II ERROR COSTS</span>
+<span class="callout-time">UBIS 00:48:10 &middot; Real-World Trade-Off</span>
+</div>
+<p>Dr. Bulut emphasizes: In clinical diagnostics, <strong>False Negatives are exponentially more catastrophic</strong> than False Positives. An undiagnosed COVID patient returns to the community and spreads infection, whereas a False Positive merely causes inconvenience and a confirmatory re-test. This explains why high Recall is non-negotiable in medical AI.</p>
+</div>
+</div></article>
+</div></section>
+
+<!-- CHAPTER D -->
+<section class="part hx4" id="part-d" style="--st:#3FB5A5"><div class="band"><div class="wrap band-in"><div aria-hidden="true" class="pl">D</div><div><div class="pr">Layer 4 of 8 &middot; 00:49:47 &ndash; 00:57:01 &middot; 7 min 14 s &middot; core depth 49.8 &ndash; 57.0 m</div><h2>2x2 Contingency Matrix &amp; Core Metrics Formulations</h2><p>Constructing the standard 2x2 grid, marginal sums, Accuracy, Error Rate, and formal definitions of Precision, Recall, and F1 harmonic mean before transitioning to the whiteboard.</p></div></div></div><div class="wrap entries">
+<article class="e" data-e="3200" data-t="2987"><div class="ts">00:49:47 <span>UBIS 00:49:47 to 00:53:20</span><span class="ref-slide">Slides 17&ndash;24</span></div><div class="rail"></div><div class="b"><h3>The 2x2 Contingency Table Architecture</h3>
+<p>Dr. Bulut introduces the canonical 2x2 confusion matrix grid layout:</p>
+<div class="x tbl"><table>
+<thead><tr><th>Actual \ Predicted</th><th>Predicted Positive (\(\hat{y}=1\))</th><th>Predicted Negative (\(\hat{y}=0\))</th><th>Row Marginals (Ground Truth)</th></tr></thead>
+<tbody>
+<tr><td><strong>Actual Positive (\(y=1\))</strong></td><td>\(TP\) (True Positive)</td><td>\(FN\) (False Negative)</td><td>\(P = TP + FN\) (Total Actual Positives)</td></tr>
+<tr><td><strong>Actual Negative (\(y=0\))</strong></td><td>\(FP\) (False Positive)</td><td>\(TN\) (True Negative)</td><td>\(N = FP + TN\) (Total Actual Negatives)</td></tr>
+<tr><td><strong>Column Marginals</strong></td><td>\(P' = TP + FP\)</td><td>\(N' = FN + TN\)</td><td><strong>Total Instances:</strong> \(N_{\text{total}} = TP + TN + FP + FN\)</td></tr>
+</tbody>
+</table></div>
+<p>The primary diagonal contains all correct classifications (\(TP + TN\)), while the secondary off-diagonal captures all errors (\(FP + FN\)).</p>
+</div></article>
+<article class="e" data-e="3421" data-t="3200"><div class="ts">00:53:20 <span>UBIS 00:53:20 to 00:57:01</span><span class="ref-slide">Slides 25&ndash;34</span></div><div class="rail"></div><div class="b"><h3>Mathematical Formulations: Accuracy, Precision, Recall &amp; F1 Preview</h3>
+<p>Before closing the first hour, Dr. Bulut outlines the exact mathematical definitions required for the curriculum:</p>
+<div class="x-math">\[\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}, \quad \text{Error Rate} = 1 - \text{Accuracy} = \frac{FP + FN}{TP + TN + FP + FN}\]</div>
+<div class="x-math">\[\text{Precision} (P) = \frac{TP}{TP + FP}, \quad \text{Recall / Sensitivity} (R) = \frac{TP}{TP + FN}\]</div>
+<p><strong>Accuracy vs Error Rate Complementarity:</strong> Accuracy and Error Rate are strictly complementary: \(\text{Accuracy} + \text{Error Rate} = 1.0\). If a classifier achieves 75% accuracy, its error rate is mathematically guaranteed to be 25%.</p>
+<div class="x tbl"><table>
+<thead><tr><th>Metric Name</th><th>Mathematical Definition</th><th>Operational Interpretation</th></tr></thead>
+<tbody>
+<tr><td><strong>Accuracy (\(\text{Acc}\))</strong></td><td>\(\frac{TP + TN}{N_{\text{total}}}\)</td><td>Overall fraction of correct classifications across all classes.</td></tr>
+<tr><td><strong>Error Rate (\(\text{Err}\))</strong></td><td>\(\frac{FP + FN}{N_{\text{total}}} = 1 - \text{Acc}\)</td><td>Overall fraction of incorrect decisions.</td></tr>
+<tr><td><strong>Precision (\(P\))</strong></td><td>\(\frac{TP}{TP + FP}\)</td><td>Factual reliability of positive predictions (minimises false alarms).</td></tr>
+<tr><td><strong>Recall (\(R\))</strong></td><td>\(\frac{TP}{TP + FN}\)</td><td>Completeness in recovering actual positive cases (minimises missed events).</td></tr>
+<tr><td><strong>F1 Score (\(F_1\))</strong></td><td>\(2 \cdot \frac{P \cdot R}{P + R}\)</td><td>Harmonic mean balancing precision and recall under class imbalance.</td></tr>
+</tbody>
+</table></div>
+</div></article>
+</div></section>
+
+<!-- CHAPTER E -->
+<section class="part hx5" id="part-e" style="--st:#6F9ADB"><div class="band"><div class="wrap band-in"><div aria-hidden="true" class="pl">E</div><div><div class="pr">Layer 5 of 8 &middot; 00:57:01 &ndash; 01:12:34 &middot; 15 min 33 s &middot; core depth 57.0 &ndash; 72.6 m</div><h2>Live Board 8-Patient COVID-19 Clinical Benchmark</h2><p>Transitioning to the classroom whiteboard to execute a complete manual 8-patient clinical test calculation from raw data to full metrics.</p></div></div></div><div class="wrap entries">
+<article class="e" data-e="3870" data-t="3421"><div class="ts">00:57:01 <span>GMeet 00:00:00 to 00:07:30</span><span class="ref-slide">Board Pt 1</span></div><div class="rail"></div><div class="b"><h3>Whiteboard Setup: The 8-Patient Clinical Screening Dataset</h3>
+<p>Dr. Faruk Bulut resumes the lecture on Google Meet, sharing his live digital whiteboard (<a href="Notes/W7%20-%20Lecture%207/Lecture_07___Confusion_Matrix_.jpg">Lecture_07___Confusion_Matrix_.jpg</a>). He sets up an 8-patient clinical COVID-19 screening dataset:</p>
+<div class="x tbl"><table>
+<thead><tr><th>Patient ID</th><th>Actual Status (\(y\))</th><th>Model Prediction (\(\hat{y}\))</th><th>Contingency Outcome</th><th>Clinical Interpretation</th></tr></thead>
+<tbody>
+<tr><td>Patient 1</td><td>Positive</td><td>Positive</td><td>\(TP\)</td><td>Correctly diagnosed and isolated.</td></tr>
+<tr><td>Patient 2</td><td>Positive</td><td>Positive</td><td>\(TP\)</td><td>Correctly diagnosed and isolated.</td></tr>
+<tr><td>Patient 3</td><td>Positive</td><td>Positive</td><td>\(TP\)</td><td>Correctly diagnosed and isolated.</td></tr>
+<tr><td>Patient 4</td><td>Positive</td><td>Negative</td><td>\(FN\)</td><td>Missed diagnosis &mdash; patient released into public!</td></tr>
+<tr><td>Patient 5</td><td>Negative</td><td>Positive</td><td>\(FP\)</td><td>False alarm &mdash; healthy individual sent for re-test.</td></tr>
+<tr><td>Patient 6</td><td>Negative</td><td>Negative</td><td>\(TN\)</td><td>Correctly cleared as healthy.</td></tr>
+<tr><td>Patient 7</td><td>Negative</td><td>Negative</td><td>\(TN\)</td><td>Correctly cleared as healthy.</td></tr>
+<tr><td>Patient 8</td><td>Negative</td><td>Negative</td><td>\(TN\)</td><td>Correctly cleared as healthy.</td></tr>
+</tbody>
+</table></div>
+<p>Notice how the whiteboard lists exactly 4 actual positive patients and 4 actual negative patients (\(N_{\text{total}} = 8\)). Tracking instances one-by-one prevents bookkeeping mistakes when constructing the contingency matrix during exams.</p>
+</div></article>
+<article class="e" data-e="4354" data-t="3870"><div class="ts">01:04:31 <span>GMeet 00:07:30 to 00:15:33</span><span class="ref-slide">Board Pt 1</span></div><div class="rail"></div><div class="b"><h3>Whiteboard Derivations: Accuracy, Precision, Recall &amp; Specificity</h3>
+<p>On the whiteboard, Dr. Bulut constructs the corresponding 2x2 contingency matrix:</p>
+<div class="x tbl"><table>
+<thead><tr><th>Actual \ Predicted</th><th>Predicted Positive</th><th>Predicted Negative</th><th>Row Marginals</th></tr></thead>
+<tbody>
+<tr><td><strong>Actual Positive</strong></td><td>\(TP = 3\)</td><td>\(FN = 1\)</td><td>\(P = 4\)</td></tr>
+<tr><td><strong>Actual Negative</strong></td><td>\(FP = 1\)</td><td>\(TN = 3\)</td><td>\(N = 4\)</td></tr>
+<tr><td><strong>Column Marginals</strong></td><td>\(P' = 4\)</td><td>\(N' = 4\)</td><td>\(N_{\text{total}} = 8\)</td></tr>
+</tbody>
+</table></div>
+<p>He executes step-by-step arithmetic derivations live on screen:</p>
+<div class="x-math">\[\text{Accuracy} = \frac{TP + TN}{N_{\text{total}}} = \frac{3 + 3}{8} = \frac{6}{8} = 0.75 \ (75\%)\]</div>
+<div class="x-math">\[\text{Error Rate} = \frac{FP + FN}{N_{\text{total}}} = \frac{1 + 1}{8} = \frac{2}{8} = 0.25 \ (25\%)\]</div>
+<div class="x-math">\[\text{Precision} = \frac{TP}{TP + FP} = \frac{3}{3 + 1} = \frac{3}{4} = 0.75 \ (75\%)\]</div>
+<div class="x-math">\[\text{Recall / Sensitivity} = \frac{TP}{TP + FN} = \frac{3}{3 + 1} = \frac{3}{4} = 0.75 \ (75\%)\]</div>
+<div class="x-math">\[\text{Specificity} = \frac{TN}{TN + FP} = \frac{3}{3 + 1} = \frac{3}{4} = 0.75 \ (75\%)\]</div>
+<p>Dr. Bulut intentionally crafted this introductory whiteboard example so that Precision, Recall, and Specificity all equal 75% (\(\frac{3}{4}\)). This allows students to verify the mechanics before encountering asymmetric numbers in multiclass settings.</p>
+</div></article>
+</div></section>
+
+<!-- CHAPTER F -->
+<section class="part hx6" id="part-f" style="--st:#A98BD6"><div class="band"><div class="wrap band-in"><div aria-hidden="true" class="pl">F</div><div><div class="pr">Layer 6 of 8 &middot; 01:12:34 &ndash; 01:25:13 &middot; 12 min 39 s &middot; core depth 72.6 &ndash; 85.2 m</div><h2>Multiclass 3x3 Animal Matrix (Cats, Dogs &amp; Lions)</h2><p>Extending beyond binary classification to a 15-instance 3-class animal benchmark. Constructing the 3x3 table, evaluating the primary diagonal, and calculating global multiclass accuracy.</p></div></div></div><div class="wrap entries">
+<article class="e" data-e="4720" data-t="4354"><div class="ts">01:12:34 <span>GMeet 00:15:33 to 00:21:40</span><span class="ref-slide">Board Pt 2</span></div><div class="rail"></div><div class="b"><h3>Multiclass Problem Setup: 15 Animals Across 3 Classes</h3>
+<p>Dr. Bulut transitions from binary classification to multiclass evaluation by introducing a real-world scenario with 15 animals distributed across three species:</p>
+<ul class="dense">
+<li><strong>Cat (\(C_1\)):</strong> 5 actual instances.</li>
+<li><strong>Dog (\(C_2\)):</strong> 6 actual instances.</li>
+<li><strong>Lion (\(C_3\)):</strong> 4 actual instances.</li>
+<li><strong>Total Population:</strong> \(5 + 6 + 4 = 15\) animals.</li>
+</ul>
+<p>He asks the students: How do we construct and evaluate a matrix when there are more than two classes? The answer is a \(K \times K\) square matrix where \(K = 3\).</p>
+</div></article>
+<article class="e" data-e="5113" data-t="4720"><div class="ts">01:18:41 <span>GMeet 00:21:40 to 00:28:12</span><span class="ref-slide">Board Pt 2</span></div><div class="rail"></div><div class="b"><h3>Constructing the 3x3 Confusion Matrix &amp; Global Accuracy</h3>
+<p>Dr. Bulut draws the complete 3x3 matrix on the whiteboard (<a href="Notes/W7%20-%20Lecture%207/Lecture_07___Confusion_Matrix_.jpg">Lecture_07___Confusion_Matrix_.jpg</a>):</p>
+<div class="x tbl"><table>
+<thead><tr><th>Actual \ Predicted</th><th>Cat (\(\hat{y}=1\))</th><th>Dog (\(\hat{y}=2\))</th><th>Lion (\(\hat{y}=3\))</th><th>Actual Totals (Row Sums)</th></tr></thead>
+<tbody>
+<tr><td><strong>Cat (\(y=1\))</strong></td><td><strong style="color:var(--acc)">3</strong></td><td>1</td><td>1</td><td><strong>5</strong></td></tr>
+<tr><td><strong>Dog (\(y=2\))</strong></td><td>1</td><td><strong style="color:var(--acc)">4</strong></td><td>1</td><td><strong>6</strong></td></tr>
+<tr><td><strong>Lion (\(y=3\))</strong></td><td>1</td><td>1</td><td><strong style="color:var(--acc)">2</strong></td><td><strong>4</strong></td></tr>
+<tr><td><strong>Predicted Totals (Col Sums)</strong></td><td><strong>5</strong></td><td><strong>6</strong></td><td><strong>4</strong></td><td><strong>Total: 15</strong></td></tr>
+</tbody>
+</table></div>
+<p>He highlights the <strong>Primary Diagonal</strong> containing all correct classifications:</p>
+<div class="x-math">\[\sum \text{Diagonal} = 3 \text{ (Cats)} + 4 \text{ (Dogs)} + 2 \text{ (Lions)} = 9 \text{ correct predictions}\]</div>
+<div class="x-math">\[\text{Overall Accuracy} = \frac{\sum \text{Diagonal}}{\text{Total Instances}} = \frac{9}{15} = 0.60 \ (60\%)\]</div>
+<div class="x-math">\[\text{Overall Error Rate} = 1 - \text{Accuracy} = \frac{15 - 9}{15} = \frac{6}{15} = 0.40 \ (40\%)\]</div>
+<div class="x cmp">
+<div class="col">
+<h4>Row Sums (Ground Truth Totals)</h4>
+<ul class="rows">
+<li><span class="tm">Cat Row</span><span>\(3 + 1 + 1 = 5\) true cats in dataset.</span></li>
+<li><span class="tm">Dog Row</span><span>\(1 + 4 + 1 = 6\) true dogs in dataset.</span></li>
+<li><span class="tm">Lion Row</span><span>\(1 + 1 + 2 = 4\) true lions in dataset.</span></li>
+</ul>
+</div>
+<div class="col">
+<h4>Column Sums (Model Predictions)</h4>
+<ul class="rows">
+<li><span class="tm">Cat Col</span><span>\(3 + 1 + 1 = 5\) predictions for Cat.</span></li>
+<li><span class="tm">Dog Col</span><span>\(1 + 4 + 1 = 6\) predictions for Dog.</span></li>
+<li><span class="tm">Lion Col</span><span>\(1 + 1 + 2 = 4\) predictions for Lion.</span></li>
+</ul>
+</div>
+</div>
+<p>In any \(K \times K\) confusion matrix, global accuracy is always the trace of the matrix (sum of main diagonal elements) divided by the total sum of all cells. All non-diagonal entries represent misclassifications between specific class pairs.</p>
+</div></article>
+</div></section>
+
+<!-- CHAPTER G -->
+<section class="part hx7" id="part-g" style="--st:#8FBF7A"><div class="band"><div class="wrap band-in"><div aria-hidden="true" class="pl">G</div><div><div class="pr">Layer 7 of 8 &middot; 01:25:13 &ndash; 01:34:01 &middot; 8 min 48 s &middot; core depth 85.2 &ndash; 94.0 m</div><h2>Lion One-vs-Rest (OvR) &amp; F1 Harmonic Mean Proof</h2><p>Decomposing multiclass into One-vs-Rest for the &ldquo;Lion&rdquo; class, isolating TP, FP, FN, TN, calculating Lion Precision and Recall, and mathematically proving the F1 harmonic mean penalty.</p></div></div></div><div class="wrap entries">
+<article class="e" data-e="5380" data-t="5113"><div class="ts">01:25:13 <span>GMeet 00:28:12 to 00:32:45</span><span class="ref-slide">Board Pt 3</span></div><div class="rail"></div><div class="b"><h3>Decomposing Multiclass via One-vs-Rest (OvR) for Class &ldquo;Lion&rdquo;</h3>
+<p>To evaluate individual class performance, Dr. Bulut asks the class to pick a target animal: they choose <strong>Lion</strong>. He demonstrates how to collapse the 3x3 matrix into a 2x2 binary problem for Lion vs Non-Lion:</p>
+<div class="x tbl"><table>
+<thead><tr><th>Contingency Metric</th><th>Extraction from 3x3 Table</th><th>Calculated Value</th><th>Physical Meaning</th></tr></thead>
+<tbody>
+<tr><td><strong>True Positive (\(TP_{\text{Lion}}\))</strong></td><td>Intersection of Lion Row &amp; Lion Col: \(M[3,3]\)</td><td><strong>2</strong></td><td>Actual Lions correctly predicted as Lion.</td></tr>
+<tr><td><strong>False Negative (\(FN_{\text{Lion}}\))</strong></td><td>Lion Row excluding diagonal: \(1 \text{ (Cat)} + 1 \text{ (Dog)}\)</td><td><strong>2</strong></td><td>Actual Lions mistakenly predicted as Cat or Dog.</td></tr>
+<tr><td><strong>False Positive (\(FP_{\text{Lion}}\))</strong></td><td>Lion Col excluding diagonal: \(1 \text{ (Cat)} + 1 \text{ (Dog)}\)</td><td><strong>2</strong></td><td>Non-Lions mistakenly predicted as Lion.</td></tr>
+<tr><td><strong>True Negative (\(TN_{\text{Lion}}\))</strong></td><td>All remaining cells: \(3 + 1 + 1 + 4\)</td><td><strong>9</strong></td><td>Non-Lions correctly predicted as Non-Lion.</td></tr>
+</tbody>
+</table></div>
+<p>A quick verification rule for exams: \(TN = N_{\text{total}} - (TP + FP + FN) = 15 - (2 + 2 + 2) = 9\). Always check that \(TP + FP + FN + TN = N_{\text{total}}\)!</p>
+</div></article>
+<article class="e" data-e="5641" data-t="5380"><div class="ts">01:29:41 <span>GMeet 00:32:45 to 00:37:00</span><span class="ref-slide">Board Pt 3</span></div><div class="rail"></div><div class="b"><h3>Lion Precision, Recall &amp; F1 Harmonic Mean Mathematical Proof</h3>
+<p>Using the isolated values, Dr. Bulut computes class-specific metrics for Lion:</p>
+<div class="x-math">\[\text{Precision}_{\text{Lion}} = \frac{TP}{TP + FP} = \frac{2}{2 + 2} = \frac{2}{4} = 0.50 \ (50\%)\]</div>
+<div class="x-math">\[\text{Recall}_{\text{Lion}} = \frac{TP}{TP + FN} = \frac{2}{2 + 2} = \frac{2}{4} = 0.50 \ (50\%)\]</div>
+<p>He then derives the <strong>F1 Score Harmonic Mean</strong> on the whiteboard:</p>
+<div class="x-math">\[F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}} = \frac{2 \cdot 0.50 \cdot 0.50}{0.50 + 0.50} = \frac{0.50}{1.00} = 0.50\]</div>
+<div class="notice-callout">
+<div class="callout-head">
+<span class="notice-badge">NOTICE &middot; WHY HARMONIC MEAN IS PENALIZING</span>
+<span class="callout-time">GMeet 00:36:39 &middot; Mathematical Proof</span>
+</div>
+<p>Dr. Bulut asks: Why don't we just take the simple arithmetic mean \(\frac{P + R}{2}\)? Because the arithmetic mean hides severe failures! If a model predicts everything as positive, it could achieve \(Recall = 1.0\) and \(Precision = 0.05\); its arithmetic mean would be \(\approx 0.525\), masking complete failure. The harmonic mean is governed by reciprocals: \(\frac{1}{F_1} = \frac{1}{2}(\frac{1}{P} + \frac{1}{R})\). If either metric approaches zero, \(F_1\) crashes to zero!</p>
+</div>
+</div></article>
+</div></section>
+
+<!-- CHAPTER H -->
+<section class="part hx8" id="part-h" style="--st:#D9607A"><div class="band"><div class="wrap band-in"><div aria-hidden="true" class="pl">H</div><div><div class="pr">Layer 8 of 8 &middot; 01:34:01 &ndash; 01:45:30 &middot; 11 min 29 s &middot; core depth 94.0 &ndash; 105.5 m</div><h2>CIFAR-10 Vision Diagnostics &amp; Midterm Synthesis</h2><p>Analyzing the real-world 10-class CIFAR-10 vision benchmark, tracing visual confusion clusters (birds vs airplanes), Weka evaluation diagnostics, and final midterm exam guidance.</p></div></div></div><div class="wrap entries">
+<article class="e" data-e="6010" data-t="5641"><div class="ts">01:34:01 <span>GMeet 00:37:00 to 00:43:10</span><span class="ref-slide">Slides 52 &amp; 67</span></div><div class="rail"></div><div class="b"><h3>Real-World Scale: CIFAR-10 Vision Benchmark Analysis</h3>
+<p>Dr. Bulut transitions from whiteboard sketches to official slides (Slide 52 / 67), displaying a real-world 10-class confusion matrix trained on the CIFAR-10 computer vision dataset (10,000 test images; 1,000 per class: airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck):</p>
+<div class="x tbl"><table>
+<thead><tr><th>Observed Confusion Pair</th><th>Quantified Misclassifications</th><th>Root Feature Cause</th></tr></thead>
+<tbody>
+<tr><td><strong>Birds predicted as Airplanes</strong></td><td>26 instances (Slide 52 / 67)</td><td>Color histograms of open blue sky backgrounds shared by flying birds and aircraft.</td></tr>
+<tr><td><strong>Dogs predicted as Cats</strong></td><td>Substantial mutual confusion</td><td>Similar domestic fur textures, quadruped body shapes, and indoor lighting conditions.</td></tr>
+<tr><td><strong>Automobiles vs Trucks</strong></td><td>High inter-class confusion</td><td>Shared wheel geometry, metallic reflections, and asphalt road context.</td></tr>
+</tbody>
+</table></div>
+<p>This demonstrates to students why examining individual off-diagonal cells is essential for root-cause error debugging in production machine learning systems.</p>
+</div></article>
+<article class="e" data-e="6330" data-t="6010"><div class="ts">01:40:11 <span>GMeet 00:43:10 to 01:45:30</span><span class="ref-slide">Weka Lab</span></div><div class="rail"></div><div class="b"><h3>Weka Evaluation Diagnostics &amp; Midterm Defense Master Checklist</h3>
+<p>Dr. Bulut demonstrates the Weka machine learning workbench output console, showing students where each metric appears in automated software tools:</p>
+<div class="x tbl"><table>
+<thead><tr><th>Weka Console Metric</th><th>Standard Scientific Term</th><th>Mathematical Expression</th><th>Exam Interpretation</th></tr></thead>
+<tbody>
+<tr><td><strong>TP Rate</strong></td><td>Recall / Sensitivity</td><td>\(\frac{TP}{TP + FN}\)</td><td>Fraction of actual class members detected.</td></tr>
+<tr><td><strong>FP Rate</strong></td><td>False Alarm Rate (\(1 - \text{Specificity}\))</td><td>\(\frac{FP}{FP + TN}\)</td><td>Fraction of negative instances incorrectly flagged.</td></tr>
+<tr><td><strong>Precision</strong></td><td>Positive Predictive Value</td><td>\(\frac{TP}{TP + FP}\)</td><td>Reliability of positive alarm flags.</td></tr>
+<tr><td><strong>F-Measure</strong></td><td>F1 Score</td><td>\(\frac{2 \cdot P \cdot R}{P + R}\)</td><td>Harmonic balance penalizing extreme skew.</td></tr>
+<tr><td><strong>MCC</strong></td><td>Matthews Correlation Coefficient</td><td>\(\frac{TP \cdot TN - FP \cdot FN}{\sqrt{(TP+FP)(TP+FN)(TN+FP)(TN+FN)}}\)</td><td>Robust metric invariant to class imbalance (\(-1\) to \(+1\)).</td></tr>
+<tr><td><strong>ROC Area</strong></td><td>Area Under ROC Curve (AUC)</td><td>\(\int_0^1 \text{TPR}(t) \, dt\)</td><td>Discriminative capacity across all decision thresholds.</td></tr>
+</tbody>
+</table></div>
+<div class="notice-callout">
+<div class="callout-head">
+<span class="notice-badge">NOTICE &middot; WEKA OUTPUT ALIASES &amp; EXAM DEFENSE</span>
+<span class="callout-time">GMeet 00:46:29 &middot; Closing Review</span>
+</div>
+<p>In the midterm exam: (1) Always verify whether rows are actuals and columns are predictions; (2) Calculate the primary diagonal for overall accuracy; (3) When calculating One-vs-Rest, isolate the target row and column to find TP, FP, FN, and TN; (4) Use the harmonic mean for F1. Dr. Bulut closes the lecture wishing everyone success in the midterm and a Happy Republic Day (29 October)!</p>
+</div>
+</div></article>
+</div></section>
+
+<!-- CURATED LAB RESOURCES -->
+<section class="ref wrap" id="video-lab"><span id="recommended-lab"></span>
+<h2 class="plain">Curated Video &amp; Exploration Lab</h2>
+<p class="lede">Assigned study resources from the instructor’s curriculum guide connecting classification performance evaluation, contingency matrices, and diagnostic metrics to visual tutorials.</p>
+<div class="lab-cards">
+<div class="lab-card featured">
+<div class="lab-badge">StatQuest · Core Evaluation</div>
+<h3>Confusion Matrix &amp; 4 Outcomes Clearly Explained</h3>
+<p>Josh Starmer’s visual masterclass breaking down True Positives, True Negatives, False Positives, and False Negatives.</p>
+<a class="lab-link" href="https://www.youtube.com/watch?v=Kdsp6soqA7o" rel="noopener" target="_blank">Watch on YouTube (7 min) &rarr;</a>
+</div>
+<div class="lab-card featured">
+<div class="lab-badge">StatQuest · Advanced Metrics</div>
+<h3>ROC and AUC Clearly Explained</h3>
+<p>How varying the decision threshold generates Receiver Operating Characteristic curves and Area Under Curve.</p>
+<a class="lab-link" href="https://www.youtube.com/watch?v=4jRBRDbJemM" rel="noopener" target="_blank">Watch on YouTube (16 min) &rarr;</a>
+</div>
+<div class="lab-card">
+<div class="lab-badge">StatQuest · Metric Balance</div>
+<h3>Precision, Recall &amp; F1-Score: Intuitive Derivation</h3>
+<p>Why accuracy fails on imbalanced data and why the harmonic mean is mathematically chosen for F1.</p>
+<a class="lab-link" href="https://www.youtube.com/watch?v=j-EB6Rsq42o" rel="noopener" target="_blank">Watch on YouTube (9 min) &rarr;</a>
+</div>
+<div class="lab-card">
+<div class="lab-badge">Machine Learning Mastery · Multiclass</div>
+<h3>Multiclass Confusion Matrix &amp; One-vs-Rest</h3>
+<p>Decomposing NxN confusion matrices into class-specific Precision, Recall, and Micro/Macro averages.</p>
+<a class="lab-link" href="https://www.youtube.com/watch?v=FAr2GmWNbT0" rel="noopener" target="_blank">Watch on YouTube (11 min) &rarr;</a>
+</div>
+<div class="lab-card">
+<div class="lab-badge">Weka Machine Learning · GUI Lab</div>
+<h3>Weka Classifier Evaluation &amp; Detailed Accuracy</h3>
+<p>Step-by-step walkthrough of interpreting Weka's Confusion Matrix, TP/FP rates, ROC area, and cross-validation summaries.</p>
+<a class="lab-link" href="https://www.youtube.com/watch?v=kR2C_uT7EHY" rel="noopener" target="_blank">Watch on YouTube (8 min) &rarr;</a>
+</div>
+<div class="lab-card">
+<div class="lab-badge">scikit-learn · Python Diagnostics</div>
+<h3>scikit-learn Metrics User Guide</h3>
+<p>Official guide on confusion_matrix, classification_report, precision_recall_fscore_support, and roc_auc_score.</p>
+<a class="lab-link" href="https://scikit-learn.org/stable/modules/model_evaluation.html" rel="noopener" target="_blank">Read Scikit-Learn Docs &rarr;</a>
+</div>
+</div>
+</section>
+
+<!-- GLOSSARY SECTION -->
+<section class="ref wrap" id="terms">
+<h2 class="plain">Terms, in order of appearance</h2>
+<p class="lede">Key technical terms stamped with the exact minute and second Dr. Bulut first defined them.</p>
+<div class="terms">
+<div class="term"><b>Mesura (Measurement)</b><span class="tm">00:26:16</span><span>Engineering principle: you cannot manage, optimize, or trust an algorithm that you cannot rigorously measure.</span></div>
+<div class="term"><b>Ground Truth (y)</b><span class="tm">00:30:45</span><span>The empirically verified, authoritative reference label for a dataset instance.</span></div>
+<div class="term"><b>Positive Class</b><span class="tm">00:32:10</span><span>The target event of interest or rare phenomenon under evaluation (e.g. disease present, fraud).</span></div>
+<div class="term"><b>True Positive (TP)</b><span class="tm">00:34:30</span><span>Correct model judgment: instance is actually positive and model infers positive.</span></div>
+<div class="term"><b>True Negative (TN)</b><span class="tm">00:36:15</span><span>Correct model judgment: instance is actually negative and model infers negative.</span></div>
+<div class="term"><b>False Positive (FP)</b><span class="tm">00:38:20</span><span>Type I error (false alarm): instance is actually negative but model infers positive.</span></div>
+<div class="term"><b>False Negative (FN)</b><span class="tm">00:40:10</span><span>Type II error (missed event): instance is actually positive but model infers negative.</span></div>
+<div class="term"><b>Accuracy</b><span class="tm">00:53:20</span><span>Fraction of total decisions that are correct: \((TP + TN) / N_{\text{total}}\).</span></div>
+<div class="term"><b>Error Rate</b><span class="tm">00:54:10</span><span>Complement of accuracy: \((FP + FN) / N_{\text{total}} = 1 - \text{Accuracy}\).</span></div>
+<div class="term"><b>Precision</b><span class="tm">00:55:05</span><span>Fraction of positive predictions that are truly positive: \(TP / (TP + FP)\).</span></div>
+<div class="term"><b>Recall / Sensitivity</b><span class="tm">00:55:40</span><span>Fraction of actual positive cases retrieved: \(TP / (TP + FN)\).</span></div>
+<div class="term"><b>Specificity</b><span class="tm">01:04:31</span><span>Fraction of actual negative cases correctly rejected: \(TN / (TN + FP)\).</span></div>
+<div class="term"><b>Primary Diagonal</b><span class="tm">01:18:41</span><span>The diagonal line of a confusion matrix \(\sum M[i,i]\) representing all correct classifications.</span></div>
+<div class="term"><b>One-vs-Rest (OvR)</b><span class="tm">01:25:13</span><span>Decomposition technique isolating a single multiclass category as positive against all others as negative.</span></div>
+<div class="term"><b>F1 Score</b><span class="tm">01:29:41</span><span>Harmonic mean of Precision and Recall: \(2 \cdot (P \cdot R) / (P + R)\).</span></div>
+<div class="term"><b>CIFAR-10</b><span class="tm">01:34:01</span><span>Standard 10-class computer vision benchmark dataset comprising 60,000 32x32 color images.</span></div>
+</div>
+</section>
+
+<!-- TRANSCRIPT CLEAN-UP -->
+<section class="ref wrap" id="errata">
+<h2 class="plain">Transcript clean-up</h2>
+<p class="lede">Critical auditory transcription fixes for Dr. Faruk Bulut’s Week 7 lecture recordings across UBIS and Google Meet.</p>
+<div class="x tbl"><table>
+<thead><tr><th>Lecture Timecode &amp; Source</th><th>Spoken Transcript Phrasing</th><th>Rigorous Academic Terminology</th><th>Contextual Significance</th></tr></thead>
+<tbody>
+<tr><td>UBIS 00:26:16</td><td>&ldquo;In Turkish we say mesura... you cannot manage what you cannot measure&rdquo;</td><td><strong>Measurement &amp; Quantitative Performance Evaluation</strong></td><td>Engineering axiom (*mesura*) establishing empirical testing over training heuristics.</td></tr>
+<tr><td>UBIS 00:47:29</td><td>&ldquo;True and false are adjectives, positives and nouns&rdquo;</td><td><strong>Adjective-Noun Nomenclature Decomposition</strong></td><td>Mnemonic for parsing contingency cells: Adjective = Accuracy; Noun = Predicted state.</td></tr>
+<tr><td>UBIS 00:54:10</td><td>&ldquo;Error rate is the inverse form of accuracy&rdquo;</td><td><strong>Complementary Classification Metrics</strong></td><td>\(\text{Error Rate} = 1 - \text{Accuracy}\); sum is strictly 1.0.</td></tr>
+<tr><td>GMeet 00:24:55</td><td>&ldquo;Lines have been detected as cats&rdquo;</td><td><strong>Lions classified as Cats (Multiclass Off-Diagonal)</strong></td><td>Speech recognition error transcribing animal class &ldquo;Lion&rdquo; as &ldquo;Line&rdquo;.</td></tr>
+<tr><td>GMeet 00:28:12</td><td>&ldquo;Rather than the diagonal one, 1 minus 10 over 15&rdquo;</td><td><strong>Trace-Based Accuracy vs Complementary Error Rate</strong></td><td>Computing multiclass accuracy from diagonal trace (\(9/15 = 60\%\)) vs error sum (\(6/15 = 40\%\)).</td></tr>
+<tr><td>GMeet 00:44:20</td><td>&ldquo;This is the precision, not prediction&rdquo;</td><td><strong>Precision (Positive Predictive Value) Formulation</strong></td><td>Clarifying that precision is a quantitative ratio (\(\frac{TP}{TP+FP}\)), not the qualitative prediction itself.</td></tr>
+</tbody>
+</table></div>
+</section>
+</main>
+
+<!-- COLLAPSIBLE LEFT NAVIGATION SIDEBAR -->
+<aside aria-label="Course Lecture Archive" id="core-sidebar">
+<div class="sb-head">
+<a class="sb-brand" href="index.html">
+<span class="sb-drill-icon">💎</span>
+<div class="sb-brand-meta">
+<span class="sb-brand-sub">SEN 431 · IAU</span>
+<span class="sb-brand-title">Study Core Log</span>
+</div>
+</a>
+<button aria-label="Close Navigation" class="sb-close-btn" id="sidebar-close-btn">×</button>
+</div>
+<div class="sb-telemetry">
+<div class="sb-tele-col">
+<span class="sb-tele-lbl">CORE DRILLED</span>
+<span class="sb-tele-val">768.9 m</span>
+</div>
+<div class="sb-tele-col">
+<span class="sb-tele-lbl">STRATA INDEXED</span>
+<span class="sb-tele-val">56 Layers</span>
+</div>
+</div>
+<div class="sb-scroll">
+<div class="sb-nav-lbl">
+<span>LECTURE ARCHIVE</span>
+<span>7 / 14 WKS</span>
+</div>
+<ul class="sb-list">
+<li class="sb-item">
+<a class="sb-link" data-week="1" href="Data Mining Week 1 Log.html">
+<span class="sb-wk-badge">W01</span>
+<div class="sb-wk-body">
+<span class="sb-wk-title">Orientation, AI Dilemma &amp; Foundations</span>
+<span class="sb-wk-meta">106.7 m · 01:46:44</span>
+<div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+</div>
+</a>
+</li>
+<li class="sb-item">
+<a class="sb-link" data-week="2" href="Data Mining Week 2 Log.html">
+<span class="sb-wk-badge">W02</span>
+<div class="sb-wk-body">
+<span class="sb-wk-title">Data Preprocessing &amp; Feature Engineering</span>
+<span class="sb-wk-meta">107.5 m · 01:47:32</span>
+<div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+</div>
+</a>
+</li>
+<li class="sb-item">
+<a class="sb-link" data-week="3" href="Data Mining Week 3 Log.html">
+<span class="sb-wk-badge">W03</span>
+<div class="sb-wk-body">
+<span class="sb-wk-title">Data Warehousing, OLAP &amp; Aggregations</span>
+<span class="sb-wk-meta">111.4 m · 01:51:24</span>
+<div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+</div>
+</a>
+</li>
+<li class="sb-item">
+<a class="sb-link" data-week="4" href="Data Mining Week 4 Log.html">
+<span class="sb-wk-badge">W04</span>
+<div class="sb-wk-body">
+<span class="sb-wk-title">Decision Trees &amp; Classification Paradigms</span>
+<span class="sb-wk-meta">116.7 m · 01:56:44</span>
+<div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+</div>
+</a>
+</li>
+<li class="sb-item">
+<a class="sb-link" data-week="5" href="Data Mining Week 5 Log.html">
+<span class="sb-wk-badge">W05</span>
+<div class="sb-wk-body">
+<span class="sb-wk-title">Bayesian Learning, Naive Bayes &amp; KNN</span>
+<span class="sb-wk-meta">115.5 m · 01:55:31</span>
+<div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+</div>
+</a>
+</li>
+<li class="sb-item">
+<a class="sb-link" data-week="6" href="Data Mining Week 6 Log.html">
+<span class="sb-wk-badge">W06</span>
+<div class="sb-wk-body">
+<span class="sb-wk-title">Linear Regression &amp; Statistical Modeling</span>
+<span class="sb-wk-meta">105.7 m · 01:45:41</span>
+<div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+</div>
+</a>
+</li>
+<li class="sb-item active">
+<a class="sb-link" data-week="7" href="Data Mining Week 7 Log.html">
+<span class="sb-wk-badge">W07</span>
+<div class="sb-wk-body">
+<span class="sb-wk-title">Performance Evaluation &amp; Confusion Matrix</span>
+<span class="sb-wk-meta">105.5 m · 01:45:30</span>
+<div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
+</div>
+</a>
+<ul class="sb-sublist">
+<li><a class="sb-sublink" href="#part-a"><span class="sb-marker">A</span><span>Midterm Architecture &amp; Review</span></a></li>
+<li><a class="sb-sublink" href="#part-b"><span class="sb-marker">B</span><span>Evaluation Philosophy &amp; Ground Truth</span></a></li>
+<li><a class="sb-sublink" href="#part-c"><span class="sb-marker">C</span><span>Confusion Matrix &amp; 4 Outcomes</span></a></li>
+<li><a class="sb-sublink" href="#part-d"><span class="sb-marker">D</span><span>2x2 Contingency &amp; Core Metrics</span></a></li>
+<li><a class="sb-sublink" href="#part-e"><span class="sb-marker">E</span><span>Live Board 8-Patient COVID Benchmark</span></a></li>
+<li><a class="sb-sublink" href="#part-f"><span class="sb-marker">F</span><span>Multiclass 3x3 Animal Matrix</span></a></li>
+<li><a class="sb-sublink" href="#part-g"><span class="sb-marker">G</span><span>Lion One-vs-Rest &amp; F1 Proof</span></a></li>
+<li><a class="sb-sublink" href="#part-h"><span class="sb-marker">H</span><span>CIFAR-10 Diagnostics &amp; Synthesis</span></a></li>
+<li><a class="sb-sublink" href="#video-lab"><span class="sb-marker">&#9654;</span><span>Curated Video Lab</span></a></li>
+<li><a class="sb-sublink" href="#terms"><span class="sb-marker">&sect;</span><span>Key Terms</span></a></li>
+<li><a class="sb-sublink" href="#errata"><span class="sb-marker">&para;</span><span>Speech Errata</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="sb-footer">
+<a class="sb-portal-link" href="index.html">
+<span>&#x25C7;</span> Master Portal Index
+</a>
+<button class="sb-theme-toggle" id="sb-theme-toggle" title="Toggle Light / Dark Mode (Shortcut: T)" type="button">
+<span class="theme-icon">&#x25D1;</span>
+<span class="theme-text">Toggle Theme</span>
+</button>
+<div class="sb-keyhint">
+Shortcut: Press <kbd>[</kbd> to toggle &middot; <kbd>T</kbd> for theme
+</div>
+</div>
+</aside>
+<div id="sidebar-backdrop"></div>
+
+<footer class="deck-foot wrap">
+<p class="foot-credit">created by an IAU student</p>
+</footer>
+
+<!-- Application Scripts -->
+<script src="assets/js/main.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (typeof renderMathInElement === "function") {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false},
+        {left: "$", right: "$", display: false}
+      ],
+      throwOnError: false
+    });
+  }
+});
+</script>
+</body>
+</html>
