@@ -20,6 +20,7 @@
 <link href="assets/css/main.css?v=2.2" rel="stylesheet"/>
 <!-- Instant Theme Initializer (prevents FOUT) -->
 <script src="assets/js/theme-init.js"></script>
+  <script src="components/navbar.js" defer></script>
 </head>
 <body>
 <header class="deck"><div class="wrap">
@@ -236,122 +237,7 @@
 <footer class="footer-note" style="margin-top:0.5rem;font-size:0.72rem;text-transform:none;letter-spacing:normal;font-weight:400;color:var(--ink-2);opacity:0.85">Created by an IAU student</footer>
 </div></section></main>
 <!-- Interactive Scrubber JS -->
-<!-- COLLAPSIBLE LEFT NAVIGATION SIDEBAR -->
-<aside aria-label="Course Lecture Archive" id="core-sidebar">
-<div class="sb-head">
-<a class="sb-brand" href="index.html">
-<span class="sb-drill-icon">⯐</span>
-<div class="sb-brand-meta">
-<span class="sb-brand-sub">SEN 431 · IAU</span>
-<span class="sb-brand-title">Study Core Log</span>
-</div>
-</a>
-<button aria-label="Close Navigation" class="sb-close-btn" id="sidebar-close-btn">×</button>
-</div>
-<div class="sb-telemetry">
-<div class="sb-tele-col">
-<span class="sb-tele-lbl">CORE DRILLED</span>
-<span class="sb-tele-val">768.9 m</span>
-</div>
-<div class="sb-tele-col">
-<span class="sb-tele-lbl">STRATA INDEXED</span>
-<span class="sb-tele-val">56 Layers</span>
-</div>
-</div>
-<div class="sb-scroll">
-<div class="sb-nav-lbl">
-<span>LECTURE ARCHIVE</span>
-<span>7 / 14 WKS</span>
-</div>
-<ul class="sb-list">
-<li class="sb-item">
-<a class="sb-link" data-week="1" href="Data Mining Week 1 Log.html">
-<span class="sb-wk-badge">W01</span>
-<div class="sb-wk-body">
-<span class="sb-wk-title">Orientation, AI Dilemma &amp; Foundations</span>
-<span class="sb-wk-meta">106.7 m · 01:46:44</span>
-<div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
-</div>
-</a>
-</li>
-<li class="sb-item">
-<a class="sb-link" data-week="2" href="Data Mining Week 2 Log.html">
-<span class="sb-wk-badge">W02</span>
-<div class="sb-wk-body">
-<span class="sb-wk-title">KDD Process, DIKW Hierarchy &amp; Taxonomy</span>
-<span class="sb-wk-meta">128.5 m · 02:08:32</span>
-<div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
-</div>
-</a>
-</li>
-<li class="sb-item">
-<a class="sb-link" data-week="3" href="Data Mining Week 3 Log.html">
-<span class="sb-wk-badge">W03</span>
-<div class="sb-wk-body">
-<span class="sb-wk-title">Data Types, Dirty Data &amp; Normalization</span>
-<span class="sb-wk-meta">106.6 m · 01:46:36</span>
-<div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
-</div>
-</a>
-</li>
-<li class="sb-item active">
-<a class="sb-link" data-week="4" href="Data Mining Week 4 Log.html">
-<span class="sb-wk-badge">W04</span>
-<div class="sb-wk-body">
-<span class="sb-wk-title">Classification, Lazy vs Eager, ZeroR &amp; OneR</span>
-<span class="sb-wk-meta">115.7 m · 01:55:40</span>
-<div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
-</div>
-</a>
-<ul class="sb-sublist"><li><a class="sb-sublink" href="#part-a"><span class="sb-marker">A</span><span>From Data Preparation to the Four Core Tasks</span></a></li><li><a class="sb-sublink" href="#part-b"><span class="sb-marker">B</span><span>Classifiers vs. Regressors &amp; Learning Paradigms</span></a></li><li><a class="sb-sublink" href="#part-c"><span class="sb-marker">C</span><span>Lazy vs. Eager Learners and the Two Phases</span></a></li><li><a class="sb-sublink" href="#part-d"><span class="sb-marker">D</span><span>Decision Boundaries in 2D, 3D, and Hyperplanes</span></a></li><li><a class="sb-sublink" href="#part-e"><span class="sb-marker">E</span><span>White-Box Transparency vs. Black-Box Power</span></a></li><li><a class="sb-sublink" href="#part-f"><span class="sb-marker">F</span><span>The Baseline Benchmark: Zero Rule (ZeroR)</span></a></li><li><a class="sb-sublink" href="#part-g"><span class="sb-marker">G</span><span>One Rule (OneR) and Single-Feature Testing</span></a></li><li><a class="sb-sublink" href="#part-h"><span class="sb-marker">H</span><span>Resampling, Bootstrap, and Quantization</span></a></li><li><a class="sb-sublink" href="#errata"><span class="sb-marker">¶</span><span>Speech Errata</span></a></li><li><a class="sb-sublink" href="#video-lab"><span class="sb-marker">▶</span><span>Curated Video Lab</span></a></li>
-          </ul>
-        </li>
-<li class="sb-item">
-<a class="sb-link" data-week="5" href="Data Mining Week 5 Log.html">
-<span class="sb-wk-badge">W05</span>
-<div class="sb-wk-body">
-<span class="sb-wk-title">Distance Metrics, k-NN &amp; Voronoi</span>
-<span class="sb-wk-meta">102.6 m · 01:42:33</span>
-<div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
-</div>
-</a>
-</li>
-<li class="sb-item">
-<a class="sb-link" data-week="6" href="Data Mining Week 6 Log.html">
-<span class="sb-wk-badge">W06</span>
-<div class="sb-wk-body">
-<span class="sb-wk-title">Decision Trees, Purity, CART &amp; SVM</span>
-<span class="sb-wk-meta">103.3 m · 01:43:17</span>
-<div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
-</div>
-</a>
-</li>
-        <li class="sb-item">
-          <a href="Data Mining Week 7 Log.html" class="sb-link" data-week="7">
-            <span class="sb-wk-badge">W07</span>
-            <div class="sb-wk-body">
-              <span class="sb-wk-title">Performance Evaluation & Confusion Matrix</span>
-              <span class="sb-wk-meta">105.5 m &middot; 01:45:30</span>
-              <div class="sb-strata-bar"><span class="sb-seg" style="background:#A9825A"></span><span class="sb-seg" style="background:#D0814F"></span><span class="sb-seg" style="background:#E0B04A"></span><span class="sb-seg" style="background:#3FB5A5"></span><span class="sb-seg" style="background:#6F9ADB"></span><span class="sb-seg" style="background:#A98BD6"></span><span class="sb-seg" style="background:#8FBF7A"></span><span class="sb-seg" style="background:#D9607A"></span></div>
-            </div>
-          </a>
-        </li>
-</ul>
-</div>
-<div class="sb-footer">
-<a class="sb-portal-link" href="index.html">
-<span>◇</span> Master Portal Index
-    </a>
-<button class="sb-theme-toggle" id="sb-theme-toggle" title="Toggle Light / Dark Mode (Shortcut: T)" type="button">
-<span class="theme-icon">◑</span>
-<span class="theme-text">Toggle Theme</span>
-</button>
-<div class="sb-keyhint">
-      Shortcut: Press <kbd>[</kbd> to toggle · <kbd>T</kbd> for theme
-    </div>
-</div>
-</aside>
-<div id="sidebar-backdrop"></div>
+<site-nav></site-nav>
 <!-- SIDEBAR INTERACTIVITY SCRIPT -->
 <!-- Unified Client Application Controller -->
 <script defer="" src="assets/js/main.js"></script>

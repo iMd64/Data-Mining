@@ -196,6 +196,10 @@ mark {
 /* --------------------------------------------------------------------------
    4. Collapsible Left Navigation System (#core-sidebar)
    -------------------------------------------------------------------------- */
+site-nav {
+  display: contents;
+}
+
 #core-sidebar {
   position: fixed;
   top: 0;
